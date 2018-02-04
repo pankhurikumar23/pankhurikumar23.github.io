@@ -1,9 +1,10 @@
 function setup() {
-  createCanvas(1500, 700);
+  createCanvas(1907, 957);
 }
 
 function draw() {
   background('#F4F4F4');
+  noStroke();
 
   var sec = second();
   var min = minute();
