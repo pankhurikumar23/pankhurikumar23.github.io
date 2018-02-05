@@ -92,11 +92,11 @@ function drawLights() {
 //Time on the Top
 function drawTime(h, m, s) {
   textFont(timeFont);
-  textSize(60);
+  textSize(80);
   stroke('#FF0D13');
   strokeWeight(7);
   fill('#403025');
-  text(+h+':'+m+':'+s, 800, 60);  
+  text(+h+':'+m+':'+s, 740, 100);  
 }
 
 function drawWires() {}
