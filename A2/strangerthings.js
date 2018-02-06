@@ -10,14 +10,14 @@ function preload(){
 function setup() {
   createCanvas(1907, 957);
   frameRate(1);  
-  background('#302720');
+  background('#563E2C');
 
   //Display text while preload() runs
   textFont(timeFont);
   textSize(60);
   stroke('#FF0D13');
   strokeWeight(7);
-  fill('#302720');
+  fill('#563E2C');
   text("LOADING...", 780, 450);
 
   //calculating distance between light bulbs
@@ -58,17 +58,17 @@ function draw() {
   //adding Time
   strokeWeight(4);
 
-  stroke('#d63939');
-  fill('red');
-  ellipse(x_second[s], y_second[s], 20, 25);
+  stroke('#CBCE40');
+  fill('#FFE74F');
+  ellipse(x_second[s], y_second[s], 30, 35);
 
-  stroke('#14d114');
-  fill('green');
-  ellipse(x_minute[m], y_minute[m], 20, 25);
+  stroke('#FDD02D');
+  fill('#FFBB16');
+  ellipse(x_minute[m], y_minute[m], 30, 35);
 
-  stroke('#5353ef');
-  fill('blue');
-  ellipse(x_hour[h], y_hour[h], 20, 25);
+  fill('#FF7B00');
+  stroke('#FF9E00');
+  ellipse(x_hour[h], y_hour[h], 30, 35);
 
 }
 
@@ -79,13 +79,13 @@ function drawLights() {
   noFill();
 
   for(var i = 0; i < 24; i++) {
-    ellipse(x_hour[i], y_hour[i], 20, 25);
+    ellipse(x_hour[i], y_hour[i], 30, 35);
   }
 
   for (var i = 0; i < 60; i++) {
     // text("H", 110, 175);
-    ellipse(x_minute[i], y_minute[i], 20, 25);
-    ellipse(x_second[i], y_second[i], 20, 25);
+    ellipse(x_minute[i], y_minute[i], 30, 35);
+    ellipse(x_second[i], y_second[i], 30, 35);
   }
 }
 
@@ -95,7 +95,7 @@ function drawTime(h, m, s) {
   textSize(80);
   stroke('#FF0D13');
   strokeWeight(7);
-  fill('#403025');
+  fill('#62442F');
   text(+h+':'+m+':'+s, 740, 100);  
 }
 
@@ -125,7 +125,7 @@ function drawGradient() {
 
   colorMode(RGB);
   var c1 = color(163, 107, 68);
-  var c2 = color(48, 39, 32);
+  var c2 = color(86, 62, 44);
   jump = 1;
   var colour = lerpColor(c1, c2, jump);
 
