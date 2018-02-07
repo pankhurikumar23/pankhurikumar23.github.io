@@ -4,7 +4,7 @@ function setup() {
 }
 
 function draw() {
-	background('#D8A0AE');
+	background('#1A1A1D');
 	reset(60, 800);
 	reset(60, 450);
 	reset(24, 100);
@@ -13,7 +13,7 @@ function draw() {
 	var m = minute();
 	var h = hour();
 
-	fill('#F2F1ED');
+	fill('#6B6B6D');
 	noStroke();
 	textSize(45);
 	text(s, 720, 45);
@@ -26,15 +26,15 @@ function draw() {
 	text('hours', 20, 75);
 
 	for (var i = 0; i < s; i++) {
-		drawTime(i, '#EE4C7C', 60, 800, height/60);
+		drawTime(i, '#C3073F', 60, 800, height/60);
 	}
 
 	for (var i = 0; i < m; i++) {
-		drawTime(i, '#9A1750', 60, 450, height/60);
+		drawTime(i, '#950740', 60, 450, height/60);
 	}
 
 	for (var i = 0; i < h; i++) {
-		drawTime(i, '#5D001E', 24, 100, height/24);
+		drawTime(i, '#6F2232', 24, 100, height/24);
 	}
 
 	if (s == 0) {reset(60, 800);}
@@ -46,12 +46,12 @@ function draw() {
 function drawTime(i, color, original_max, starting_point, s_dist) {
 	stroke(color);
 	strokeWeight(5);
-  line(starting_point, (i+1)*s_dist, starting_point+100, (i+1)*s_dist);
+  	line(starting_point, (i+1)*s_dist, starting_point+100, (i+1)*s_dist);
 }
 
 function reset(max_value, starting_point) {
   var s_dist = height/max_value;
-  stroke('#E3E2DF');
+  stroke('#6B6B6D');
   strokeWeight(2);
   for (var i = 0; i < max_value; i++) {
   	line(starting_point, (i+1)*s_dist, starting_point+100, (i+1)*s_dist);

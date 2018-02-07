@@ -49,13 +49,13 @@ function draw() {
   var m = minute();
   var h = hour();
 
+  //setting up background
   drawGradient();
   drawWords();
-  drawWires();
   drawTime(h, m, s);
   drawLights();
 
-  //adding Time
+  //adding time animation
   strokeWeight(4);
 
   stroke('#CBCE40');
@@ -98,8 +98,6 @@ function drawTime(h, m, s) {
   fill('#62442F');
   text(+h+':'+m+':'+s, 740, 100);  
 }
-
-function drawWires() {}
 
 //Wall Numbers
 function drawWords() {
