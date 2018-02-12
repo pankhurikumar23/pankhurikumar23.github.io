@@ -13,10 +13,12 @@ function preload() {
   for (var i = 0; i < sections.length; i++) {
     url = baseURL + sections[i] + ".json?api-key=" + apikey;
     response.push(loadJSON(url));
+    // time loop to prevent hitting API rate limits
     for (var x= 0; x < 1100000000; x++);
+    // keeping track of number of queries in console
     console.log("Querying " + (i+1) + " out of " + (sections.length) + " resources.");
   }
-  console.log(response);
+  // console.log(response);
 }
 
 function setup() {

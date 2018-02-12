@@ -124,9 +124,12 @@ function drawGradient() {
   colorMode(RGB);
   var c1 = color(163, 107, 68);
   var c2 = color(86, 62, 44);
+
+  //set colour to c2
   jump = 1;
   var colour = lerpColor(c1, c2, jump);
 
+  //loop through all colours till you hit c1, draw ellipses with each colour creating a gradient
   while(c1['_array'][0] != colour['_array'][0] && c1['_array'][1] != colour['_array'][1] && c1['_array'][2] != colour['_array'][2]) {
     fill(colour, 50);
     ellipse(953, 478, x_radius, y_radius);
