@@ -26,7 +26,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(1907, 2100);
+  createCanvas(1907, 950);
   background('#282726');
 
   textSize(defaultTextSize);
@@ -47,7 +47,7 @@ function draw() {
 
   textSize(30);
   fill('white');
-  text("Top 20 Topics Showing up on NY Times Today", width/2, 50);
+  text("Top 8 Topics Showing up on NY Times Today", width/2, 50);
 
   for (key in topK) {
     rem = i % 4;
