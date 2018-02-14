@@ -13,9 +13,10 @@ function preload() {
     // keeping track of number of queries in console - to see progress
     console.log("Querying " + (i+1) + " out of " + (sections.length) + " resources.");
   }
+
+  //custom NYT (as close as I can get) fonts
   headFont = loadFont('assets/English.TTF');
   byFont = loadFont('assets/franklin-small-normal-500.ttf')
-  // console.log(response);
 }
 
 function setup() {
@@ -30,11 +31,11 @@ function setup() {
   textSize(20);
   fill('#333333');
   textFont(byFont);
-  text("across the Home, Opinion, World, National, and Politics sections", width/2, 150);
+  text("...across the Home, Opinion, World, National, and Politics sections", width/2, 150);
   
   noLoop(); 
 
-  //organize articles into topics and find the top 10 repeated headlines
+  //organize articles into topics and find the repeated headlines
   extractFeatures();
 }
 
@@ -43,12 +44,10 @@ function draw() {
 
   textAlign(LEFT, TOP);
   textFont('Georgia');
-  textSize(25);
   textStyle(ITALIC);
 
   x = 50;
   y = 200;
-  lines = "";
 
   for (h in hCount) {
     if ((x + textWidth(h)) > (width - 20)){
