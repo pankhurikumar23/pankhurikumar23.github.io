@@ -15,6 +15,7 @@ function preload() {
   }
   headFont = loadFont('assets/English.TTF');
   byFont = loadFont('assets/franklin-small-normal-500.ttf')
+  // console.log(response);
 }
 
 function setup() {
@@ -30,6 +31,7 @@ function setup() {
   fill('#333333');
   textFont(byFont);
   text("across the Home, Opinion, World, National, and Politics sections", width/2, 150);
+  
   noLoop(); 
 
   //organize articles into topics and find the top 10 repeated headlines
@@ -61,7 +63,7 @@ function draw() {
   pop();
 }
 
-//adjust the size of display based on count of repeat
+//calculate size based on count
 function setTextSize(count) {
   size = map(count, 2, 5, 20, 35);
   textSize(size);
@@ -69,14 +71,17 @@ function setTextSize(count) {
 
 //Rearranging JSON response from API into usable format
 function extractFeatures() {
-  //store lines and their count
+  var sections = ["home", "opinion", "world", "national", "politics"];
+  //store headline and no. of times repeated, also note the section where it repeats
   for (var i = 0; i < response.length; i++) {
     for (var j = 0; j < response[i].results.length; j++) {
       var h = response[i].results[j].title;
       if (!(h in hCount)) {
         hCount[h] = 0;
+        topics[h] = "";
       }
       hCount[h] += 1;
+      topics[h] += sections[i] + ",";
     }
   }
 
@@ -84,6 +89,7 @@ function extractFeatures() {
   for (h in hCount) {
     if (hCount[h] < 2) {
       delete hCount[h];
+      delete topics[h];
     }
   }
   console.log(hCount);
