@@ -1,7 +1,8 @@
 var response = [];
 var topics = {};
 var hCount = {};
-var radius = 130;
+var diameter = 130;
+var roman = ["0", "I", "II", "III", "IV", "V"];
 
 function preload() {
   var baseURL = "https://api.nytimes.com/svc/topstories/v2/";
@@ -22,8 +23,16 @@ function preload() {
 
 function setup() {
   createCanvas(1907, 950);
-  background('#1A1A1A');
+  // noLoop(); 
 
+  //organize articles into topics and find the repeated headlines
+  extractFeatures();
+}
+
+function draw() {
+  noStroke(); 
+
+  background('#1A1A1A');
   textFont(headFont);
   textAlign(CENTER);
   textSize(90);
@@ -33,42 +42,43 @@ function setup() {
   fill('#999999');
   textFont(byFont);
   text("...across the Home, Opinion, World, National, and Politics sections", width/2, 150);
-  
-  noLoop(); 
 
-  //organize articles into topics and find the repeated headlines
-  extractFeatures();
-}
-
-function draw() {
-  noStroke();
-  textFont('Georgia');
-  textSize(25);
-
-  push();
-  textAlign(LEFT, TOP);
 
   x = 200;
   y = 300;
   for (h in hCount) {
-    if ((x + radius) > (width - 200 + radius)) {
+    if ((x + diameter) > (width - 200 + diameter)) {
       x = 200;
       y += 150;
     }
-    setTextColour(hCount[h]);
-    ellipse(x, y, radius, radius);
+    if (dist(mouseX, mouseY, x, y) < diameter/2) {
+      drawEllipse(hCount[h], 1);
+      fill('#999999');
+      textFont('Georgia');
+      textSize(25);
+      text("\"" + h + "\"", width/2, 750);
+      text(topics[h].slice(0, -2), width/2, 785);
+    } else {
+      drawEllipse(hCount[h]);
+
+    }
     fill(255, 200, 40);
-    text(hCount[h], x-6, y-10);
+    textSize(20);
+    textFont("Times New Roman");
+    text(roman[hCount[h]], x, y+10);
     x += 150;
   }
-
-  pop();
 }
 
 //caculating colour transparency based on count
-function setTextColour(count) {
+function drawEllipse(count, factor = 2) {
   transparency = map(count, 2, 5, 100, 255);
-  fill(255, 0, 0, transparency);
+  if (factor == 1) {
+    fill(0, 0, transparency);
+  } else {
+    fill(transparency, 0, 0);
+  }
+  ellipse(x, y, diameter, diameter);
 }
 
 //Rearranging JSON response from API into usable format
@@ -80,10 +90,10 @@ function extractFeatures() {
       var h = response[i].results[j].title;
       if (!(h in hCount)) {
         hCount[h] = 0;
-        topics[h] = "";
+        topics[h] = "Repeats in ";
       }
       hCount[h] += 1;
-      topics[h] += sections[i] + ",";
+      topics[h] += sections[i].charAt(0).toUpperCase() + sections[i].slice(1) + ", ";
     }
   }
 
@@ -92,6 +102,8 @@ function extractFeatures() {
     if (hCount[h] < 2) {
       delete hCount[h];
       delete topics[h];
+    } else {
+
     }
   }
   console.log(hCount);
