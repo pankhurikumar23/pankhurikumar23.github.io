@@ -102,6 +102,7 @@ function extractFeatures() {
     if (hCount[h] < 2) {
       delete hCount[h];
       delete topics[h];
+    }
   }
   console.log(hCount);
 }
