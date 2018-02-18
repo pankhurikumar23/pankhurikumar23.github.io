@@ -83,7 +83,7 @@ function drawEllipse(count, factor = 2) {
 
 //Rearranging JSON response from API into usable format
 function extractFeatures() {
-  var sections = ["home", "opinion", "world", "national", "politics"];
+  var sections = ["Home", "Opinion", "World", "National", "Politics"];
   //store headline and no. of times repeated, also note the section where it repeats
   for (var i = 0; i < response.length; i++) {
     for (var j = 0; j < response[i].results.length; j++) {
@@ -93,7 +93,7 @@ function extractFeatures() {
         topics[h] = "Repeats in ";
       }
       hCount[h] += 1;
-      topics[h] += sections[i].charAt(0).toUpperCase() + sections[i].slice(1) + ", ";
+      topics[h] += sections[i] + ", ";
     }
   }
 
@@ -102,9 +102,6 @@ function extractFeatures() {
     if (hCount[h] < 2) {
       delete hCount[h];
       delete topics[h];
-    } else {
-
-    }
   }
   console.log(hCount);
 }
