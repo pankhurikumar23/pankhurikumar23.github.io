@@ -4,7 +4,6 @@ function setup() {
   createCanvas(1907, 950);
   systems = [];
   prevX = 200;
-  frameRate(120);
 }
 
 function draw() {
@@ -29,6 +28,10 @@ function draw() {
   }
   y = (h < 6) ? Y : (Y + 450);
   x = (h < 6) ? X + (h * 300) : X + ((h - 6) * 300);
+  boxY1 = (h < 6) ? b[0] : (b[0] + 450);
+  boxY2 = boxY1 + 450;
+  boxX1 = (h < 6) ? a[0] + (h * 300) : a[0] + ((h - 6) * 300);
+  boxX2 = boxX1 + 300;
 
   if (prevX != x) {
     systems = [];
@@ -38,6 +41,16 @@ function draw() {
 
   systems[0].run();
   systems[0].addParticle();
+
+  if (mouseX > boxX1 && mouseX < boxX2 && mouseY > boxY1 && mouseY < boxY2) {
+    t = str(hour()) + " : " + str(minute());
+    push()
+    noStroke();
+    fill('#5CDB95');
+    text(t, mouseX+20, mouseY+20);
+    pop();
+  }
+  
   prevX = x;
 }
 
