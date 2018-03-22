@@ -1,10 +1,10 @@
 body {
-	background-color: #7A776A;
+	background-color: #161616;
 }
 
 h2 {
 	margin-top: 100px;
-	color: #2A0672;
+	color: #FD442A;
 	text-align: center;
 	font-family: Trebuchet MS;
 	font-size: 50px;
@@ -13,7 +13,7 @@ h2 {
 h3 {
 	margin-top: 20px;
 	margin-bottom: 10px;
-	color: #2A0672;
+	color: #5CDB95;
 	text-align: center;
 	font-family: Trebuchet MS;
 	font-size: 25px;
@@ -21,7 +21,7 @@ h3 {
 }
 
 a:link, a:visited {
-	color: #FFFF19;
+	color: #C7493A;
 	text-align: center;
 	font-family: Trebuchet MS;
 	font-size: 20px;
@@ -29,7 +29,7 @@ a:link, a:visited {
 }
 
 a:hover {
-	color: #FFD119;
+	color: #FBEEC1;
 }
 
 div {
