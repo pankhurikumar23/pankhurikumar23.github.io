@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+		<style> body {padding: 0; margin: 0;} </style>
+		<script src='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js'></script>
+		<link href='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet'/>
+	    <script src="../js/p5.min.js"></script>
+	    <script src="../js/p5.dom.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/style1.css">
+	</head>
+
+	<body>
+		<div id="p5">
+			Hello
+		</div>
+
+		<div id="sketch-holder">
+	    	<!-- Our sketch will go here! -->
+	    </div>
+
+		<div id='map' class="mapstyle"></div>
+		<div class='map-overlay' id='features'><h2>State Population Density</h2>
+		<div id='pd'><p>Hover over a state!</p></div></div>
+		<div class='map-overlay' id='legend'>Legend:</div>
+
+		<script src="js/mapbox1.js"></script>
+		<!-- <script src="js/interactive1.js"></script> -->
+	</body>
+</html>
