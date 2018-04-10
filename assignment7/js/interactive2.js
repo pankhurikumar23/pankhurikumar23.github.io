@@ -1,9 +1,10 @@
 stateLabels = []; imr= []; noMethod = []; otherMethod = []; femaleSter = []; iud = []; pill = []; condom = []; relStart = [];
 textColours = ['#82672A','#8E732F','#9A7F35','#A68C3A','#B29940','#C8C8C8','#BEA646','#C9B44C','#D4C252','#DFD059','#EADE60'];
-barColours = ['#1B6055','#287078','#507E98','#8587B0','#BF8CBB','#F590B6'];
+barColours = ['#1A9850','#91CF60','#D9EF8B','#FEE08B','#FC8D59','#D73027'];
 finalX = 50; initialX = []; finalY = []; initialY = 600;
 maxAnim = 40; currAnim = 0; fl = -10;
-totalCount = 11;
+stateCount = 11;
+methodCount = 6;
 barStart = 330; barEnd = 1820; barWidth = barEnd - barStart;
 
 function preload() {
@@ -40,7 +41,7 @@ function loadData() {
 	pill = view2Data.getColumn("Pill");
 	condom = view2Data.getColumn("Condom");
 
-	for (var i = 0; i < totalCount; i++) {
+	for (var i = 0; i < stateCount; i++) {
 		noMethod[i] = map(noMethod[i], 0, 100, 0, barWidth - 3);
 		otherMethod[i] = map(otherMethod[i], 0, 100, 0, barWidth - 3);
 		femaleSter[i] = map(femaleSter[i], 0, 100, 0, barWidth - 3);
@@ -51,7 +52,7 @@ function loadData() {
 }
 
 function createAnimation() {
-	for(var i = 0; i < totalCount; i++) {
+	for(var i = 0; i < stateCount; i++) {
 		fill(textColours[i]);
 		finalY[i] = map(i, 0, 11, 50, 600);
 		if (isAnimating()) {
@@ -61,7 +62,7 @@ function createAnimation() {
 			text(imr[i], x, y + 20);
 		} else {
 			if (fl <= 0) {
-				x = map(i, 0, 11, 30, 920);
+				x = map(i, 0, 11, 30, 1820);
 				initialX[i] = x;
 				text(stateLabels[i], initialX[i], initialY);
 				text(imr[i], initialX[i], initialY + 20);
@@ -95,7 +96,7 @@ function percAnim() {
 
 function drawBars() {
 	stroke('#1A1A1A');
-	for (var i = 0; i < totalCount; i++) {
+	for (var i = 0; i < stateCount; i++) {
 		k = 0;
 		relStart[i] = barStart;
 		addInfoBar(k, femaleSter[i], i);
