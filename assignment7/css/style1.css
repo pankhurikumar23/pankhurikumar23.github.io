@@ -20,9 +20,6 @@ p {
   text-align: left;
 }
 
-/**
-* Create a position for the map
-* on the page */
 #map {
   position: absolute;
   top: 0;
@@ -31,10 +28,6 @@ p {
   width: 50%;
 }
 
-/**
-* Set rules for how the map overlays
-* (info box and legend) will be displayed
-* on the page. */
 .map-overlay {
   position: absolute;
   bottom: 0;
@@ -67,4 +60,18 @@ p {
   width: 10px;
   height: 10px;
   margin-right: 5px;
+}
+
+#graphs {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+}
+
+.state-title {
+  color: white;
+  font-size: 30px;
+  margin-left: 100px;
+  margin-top: 40px;
 }

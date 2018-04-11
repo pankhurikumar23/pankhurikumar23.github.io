@@ -11,20 +11,26 @@
 	</head>
 
 	<body>
-		<div id="p5">
-			Hello
+		<div id="page">
+			<div id="graphs">
+				<div>
+					<p id="stateName" class="state-title"></p>
+					<canvas id="literacy"></canvas>
+					<canvas id="health"></canvas>
+					<canvas id="imr"></canvas>
+				</div>
+			</div>
+
+			<div id="sketch-holder">
+		    	<!-- Our sketch will go here! -->
+		    </div>
+
+			<div id='map' class="mapstyle"></div>
+			<div class='map-overlay' id='features'><h2>State Population Density</h2>
+			<div id='pd'><p>Hover over a state!</p></div></div>
+			<div class='map-overlay' id='legend'>Legend:</div>
 		</div>
 
-		<div id="sketch-holder">
-	    	<!-- Our sketch will go here! -->
-	    </div>
-
-		<div id='map' class="mapstyle"></div>
-		<div class='map-overlay' id='features'><h2>State Population Density</h2>
-		<div id='pd'><p>Hover over a state!</p></div></div>
-		<div class='map-overlay' id='legend'>Legend:</div>
-
-		<script src="js/mapbox1.js"></script>
-		<!-- <script src="js/interactive1.js"></script> -->
+		<script src="js/interactive1.js"></script>
 	</body>
 </html>
