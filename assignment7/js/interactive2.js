@@ -2,7 +2,7 @@ stateLabels = []; aCare= []; noMethod = []; otherMethod = []; femaleSter = []; i
 textColour = ['#e572b1', '#f7f7f7', '#8fd14d'];
 barColours = ['#f7f1e3','#706fd3','#40407a','#2c2c54','#ff5252','#b33939'];
 finalX = 310; initialX = []; finalY = []; initialY = 600;
-maxAnim = 40; currAnim = 0; fl = -10;
+maxAnim = 40; currAnim = 0; fl = -30;
 stateCount = 7;
 methodCount = 6;
 barStart = 330; barEnd = 1820; barWidth = barEnd - barStart;
