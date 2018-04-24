@@ -3,9 +3,9 @@ paramCount = 6;
 maxDisplay = 3;
 xParams = [100, 350, 600, 600, 350, 100];
 yParams = [180, 80, 180, 480, 600, 480];
-rC = [132, 251, 255];
-gC = [185, 228, 93];
-bC = [239, 201, 93];
+rC = [8, 255, 234];
+gC = [217, 46, 234];
+bC = [214, 99, 234];
 displayCount = 0;
 currentDisplay = 0;
 stateLabels = [];
@@ -53,6 +53,8 @@ function loadData() {
 
 function drawGrid() {
 	push();
+	fill('#494646');
+	rect(840, 270, 990, 60);
 	stroke('white');
 	strokeWeight(2);
 	line(100, 180, 600, 480);
@@ -171,8 +173,8 @@ function draw() {
 
 function drawPolygon() {
 	for (var i = 0; i < currentDisplay; i++) {
-		fill(rC[i], gC[i], bC[i], 150);
-		stroke(rC[i], gC[i], bC[i], 150);
+		fill(rC[i], gC[i], bC[i], 200);
+		stroke(rC[i], gC[i], bC[i], 200);
 		beginShape();
 		for (var j = 0; j < paramCount; j++) {
 			vertex(xPoly[i][j], yPoly[i][j]);
@@ -184,8 +186,8 @@ function drawPolygon() {
 function drawTable() {
 	for (var i = 0; i < currentDisplay; i++) {
 		noStroke();
-		fill(rC[i], gC[i], bC[i], 150);
-		rect(800, 330 + i*40, 40, 40);
+		fill(rC[i], gC[i], bC[i], 200);
+		rect(801, 331 + i*40, 38, 38);
 		fill('white');
 		text(tableData[i][0], 850, 355 + i*40);
 		text(tableData[i][1]+'%', 1090, 355 + i*40);

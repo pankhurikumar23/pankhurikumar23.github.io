@@ -16,7 +16,15 @@ function setup() {
 	createCanvas(1920, 1080);
 	frameRate(20);
 
+	button = createButton('Next');
+	button.position(960, 980);
+	button.mousePressed(changeState);
+
 	loadData();
+}
+
+function changeState() {
+  window.location.href = "view3.html";
 }
 
 function draw() {
