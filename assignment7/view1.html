@@ -3,10 +3,9 @@
 	<head>
 		<meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
 		<style> body {padding: 0; margin: 0;} </style>
+	    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js'></script>
 		<link href='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet'/>
-	    <script src="../js/p5.min.js"></script>
-	    <script src="../js/p5.dom.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/style1.css">
 	</head>
 
@@ -15,9 +14,33 @@
 			<div id="graphs">
 				<div>
 					<p id="stateName" class="state-title"></p>
-					<canvas id="literacy"></canvas>
-					<canvas id="health"></canvas>
-					<canvas id="imr"></canvas>
+					<p id="price" class="price-display"></p>
+					<svg class="chart" id="literacy" width="500" height="230">
+						<line x1="40" y1="40" x2="40" y2="180" style="stroke:rgb(255,255,255);stroke-width:2" />
+						<line x1="40" y1="180" x2="450" y2="180" style="stroke:rgb(255,255,255);stroke-width:2" />
+						<line x1="36" y1="80" x2="44" y2="80" style="stroke:rgb(255,255,255);stroke-width:2" 	/>
+						<text x=6 y=85 fill="white">100</text>
+						<text x="250" y="20" fill="white"> Literacy Statistics</text>
+						<text x="65" y="195" fill="white"> Women</text>
+						<text x="205" y="195" fill="white">Men</text>
+						<text x="275" y="195" fill="white">Women(>= 10 years)</text>
+					</svg>
+					<svg class="chart" id="health" width="500" height="230">
+						<line x1="40" y1="40" x2="40" y2="180" style="stroke:rgb(255,255,255);stroke-width:2" />
+						<line x1="40" y1="180" x2="450" y2="180" style="stroke:rgb(255,255,255);stroke-width:2" />
+						<line x1="36" y1="80" x2="44" y2="80" style="stroke:rgb(255,255,255);stroke-width:2" 	/>
+						<text x=6 y=85 fill="white">100</text>
+						<text x="250" y="20" fill="white"> Health Statistics </text>
+						<text x=50 y=195 fill="white">>=4 Antenatal</text>
+						<text x=80 y=210 fill="white">Care</text>
+						<text x=200 y=195 fill="white">Anemic</text>
+						<text x=200 y=210 fill="white">Women</text>
+						<text x=300 y=195 fill="white">Institutional</text>
+						<text x=320 y=210 fill="white">Births</text>
+					</svg>
+					<svg class="chart" id="imr" width="770" height="400">
+						<text x="250" y="20" fill="white"> Infant Mortality </text>
+					</svg>
 				</div>
 			</div>
 
@@ -31,6 +54,7 @@
 			<div class='map-overlay' id='legend'>Legend:</div>
 		</div>
 
+	    <script src="js/mapbox.js"></script>
 		<script src="js/interactive1.js"></script>
 	</body>
 </html>

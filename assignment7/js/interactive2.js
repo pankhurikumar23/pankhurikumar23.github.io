@@ -1,9 +1,9 @@
 stateLabels = []; aCare= []; noMethod = []; otherMethod = []; femaleSter = []; iud = []; pill = []; condom = []; relStart = [];
 textColour = ['#e572b1', '#f7f7f7', '#8fd14d'];
-barColours = ['#1A9850','#91CF60','#D9EF8B','#FEE08B','#FC8D59','#D73027'];
-finalX = 50; initialX = []; finalY = []; initialY = 600;
+barColours = ['#f7f1e3','#706fd3','#40407a','#2c2c54','#ff5252','#b33939'];
+finalX = 310; initialX = []; finalY = []; initialY = 600;
 maxAnim = 40; currAnim = 0; fl = -10;
-stateCount = 11;
+stateCount = 7;
 methodCount = 6;
 barStart = 330; barEnd = 1820; barWidth = barEnd - barStart;
 stateData = [];
@@ -13,7 +13,7 @@ function preload() {
 }
 
 function setup() {
-	createCanvas(1907, 950);
+	createCanvas(1920, 1080);
 	frameRate(20);
 
 	loadData();
@@ -36,22 +36,22 @@ function draw() {
 		if (fl < 140) {
 			text('The relationship between antenatal care and infant mortality rate is clear', 330, 650);
 			text('... but what factors determine if a mother will get antenatal care?', 380, 690);
-		} else if (fl < 260) {
+		} else if (fl < 240) {
 			text('Awareness about Health Practices could be one indicator...', 450, 670);
-		} else if (fl < 320) {
+		} else if (fl < 300) {
 			text('Here we compare Family Planning Methods and Antenatal Care in rural India', 350, 670);
 		} else {
 			fill('#C8C8C8');
 			text('It\'s quite clear that states where women are more aware about safe sex', 380, 670);
 			text('are states where women are willing to receive better health care during pregnancy', 310, 710);
 		}
-		if (fl > 380) {
+		if (fl > 360) {
 			fill('white');
 			textSize(20);
-			text('Hover over the bars to explore the data', 650, 770);
+			text('Hover over the bars to explore the data', 700, 770);
 		}
 	}
-	if (fl > 400) {
+	if (fl > 380) {
 		createLegend();
 	}
 }
@@ -68,22 +68,29 @@ function loadData() {
 
 	for (var i = 0; i < stateCount; i++) {
 		stateData[i] = [];
-		stateData[i][0] = map(femaleSter[i], 0, 100, 0, barWidth - 3);
-		stateData[i][1] = map(iud[i], 0, 100, 0, barWidth - 3);
-		stateData[i][2] = map(pill[i], 0, 100, 0, barWidth - 3);
-		stateData[i][3] = map(condom[i], 0, 100, 0, barWidth - 3);
-		stateData[i][4] = map(otherMethod[i], 0, 100, 0, barWidth - 3);
-		stateData[i][5] = map(noMethod[i], 0, 100, 0, barWidth - 3);
+		stateData[i][0] = map(femaleSter[i], 0, 100, 0, barWidth - 10);
+		stateData[i][1] = map(iud[i], 0, 100, 0, barWidth - 10);
+		stateData[i][2] = map(pill[i], 0, 100, 0, barWidth - 10);
+		stateData[i][3] = map(condom[i], 0, 100, 0, barWidth - 10);
+		stateData[i][4] = map(otherMethod[i], 0, 100, 0, barWidth - 10);
+		stateData[i][5] = map(noMethod[i], 0, 100, 0, barWidth - 10);
 	}
 }
 
 function createAnimation() {
+	push();
+	textAlign(RIGHT);
 	for(var i = 0; i < stateCount; i++) {
-		finalY[i] = map(i, 0, 11, 50, 600);
-		if (i < 5) {
+		textSize(15);
+		finalY[i] = map(i, 0, 7, 50, 500);
+		if (i == 3) { finalY[i] += 19; }
+		if (i == 4) { finalY[i] += 40; }
+		if (i > 4) { finalY[i] += 40; }
+		if (i < 3) {
 			fill(textColour[0]);
-		} else if (i == 5) {
+		} else if (i == 3) {
 			fill(textColour[1]);
+			textSize(23);
 		} else {
 			fill(textColour[2]);
 		}
@@ -105,6 +112,7 @@ function createAnimation() {
 			}
 		}
 	}
+	pop();
 
 	if (isAnimating()) {
 		currAnim--;
@@ -129,56 +137,47 @@ function percAnim() {
 function drawBars() {
 	stroke('#1A1A1A');
 	for (var i = 0; i < stateCount; i++) {
-		relStart[i] = [];
-		
 		k = 0;
-		relStart[i][k] = barStart;
+		relStart[i] = [];
+		relStart[i][0] = barStart;
 		addInfoBar(k, relStart[i][k], stateData[i][k], i);
 		addBlackBar(i, relStart[i][k] + stateData[i][k]);
-		
 		k++;
+		for (; k < methodCount - 1; k++) {
+			relStart[i][k] = relStart[i][k-1] + stateData[i][k-1];
+			relStart[i][k] += 2;
+			addInfoBar(k, relStart[i][k], stateData[i][k], i);
+			addBlackBar(i, relStart[i][k] + stateData[i][k]);
+		}
+		k = methodCount - 1;
 		relStart[i][k] = relStart[i][k-1] + stateData[i][k-1];
-		relStart[i][k] += 0.5;
-		addInfoBar(k, relStart[i][k], stateData[i][k], i);
-		addBlackBar(i, relStart[i][k] + stateData[i][k]);
-
-		k++;
-		relStart[i][k] = relStart[i][k-1] + stateData[i][k-1];
-		relStart[i][k] += 0.5;
-		addInfoBar(k, relStart[i][k], stateData[i][k], i);
-		addBlackBar(i, relStart[i][k] + stateData[i][k]);
-
-		k++;
-		relStart[i][k] = relStart[i][k-1] + stateData[i][k-1];
-		relStart[i][k] += 0.5;
-		addInfoBar(k, relStart[i][k], stateData[i][k], i);
-		addBlackBar(i, relStart[i][k] + stateData[i][k]);
-
-		k++;
-		relStart[i][k] = relStart[i][k-1] + stateData[i][k-1];
-		relStart[i][k] += 0.5;
-		addInfoBar(k, relStart[i][k], stateData[i][k], i);
-		addBlackBar(i, relStart[i][k] + stateData[i][k]);
-		
-		k++;
-		relStart[i][k] = relStart[i][k-1] + stateData[i][k-1];
-		relStart[i][k] += 0.5;
+		relStart[i][k] += 2;
 		fill(barColours[k]);
-		rect(relStart[i][k], finalY[i] - 15, barEnd - relStart[i][k], 30, 3);
-		relStart[i][k] = relStart[i][k-1] + stateData[i][k-1];
+		if (i == 3) {
+			rect(relStart[i][k], finalY[i] - 15, barEnd - relStart[i][k], 45);
+		} else {
+			rect(relStart[i][k], finalY[i] - 15, barEnd - relStart[i][k], 35);
+		}
 	}
-
 	checkBubble();
 }
 
 function addInfoBar(k, start, info, i) {
 	fill(barColours[k]);
-	rect(start, finalY[i] - 15, start + info, 30, 3);
+	if (i == 3) {
+		rect(start, finalY[i] - 15, start + info, 45);
+	} else {
+		rect(start, finalY[i] - 15, start + info, 35);
+	}
 }
 
 function addBlackBar(i, start) {
 	fill('#1A1A1A');
-	rect(start, finalY[i] - 15, start + 0.5, 30, 3);
+	if (i == 3) {
+		rect(start, finalY[i] - 15, start + 2, 45);
+	} else {
+		rect(start, finalY[i] - 15, start + 2, 35);
+	}
 }
 
 function checkBubble() {
@@ -211,9 +210,10 @@ function createBubble(textType, info) {
 function createLegend() {
 	textSize(15);
 	fill(textColour[0]);
-	text('States with lowest antenatal care', 450, 800);
-	text('% of women that had at least 4 antenatal care visits', 450, 820);
+	text('States with lowest antenatal care', finalX, 800);
+	text('% of women that had at least 4 antenatal care visits', finalX, 820);
+	
 	fill(textColour[2]);
-	text('States with highest antenatal care', 920, 800);
-	text('% of women that had at least 4 antenatal care visits', 920, 820);
+	text('States with highest antenatal care', finalX, 860);
+	text('% of women that had at least 4 antenatal care visits', finalX, 880);
 }
