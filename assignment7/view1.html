@@ -11,38 +11,81 @@
 
 	<body>
 		<div id="page">
-			<div id="graphs">
-				<div>
+			<div id="content-matter">
+				<div class="written">
+					<p class="title1">India's Case for</p>
+					<p class="title2">Women Empowerment</p>
+					<!-- <p class="title2">in India</p> -->
+					<p class="subtitle">(and how it affects our children)</p>
+					<p class="text">
+						Malnutrition in India has dropped from 43.5% in 2005 to 29.4% in 2015. This can be attributed to 
+						a decrease in open defecation, and an increase in institutional births and Vitamin A supplements for children.
+					</p>
+					<p class="text">
+						However, rural India has a long way to go in improving malnutrition and infant mortality rates
+						in the country. Most solutions aim to improve the health and nutrition of children in the first five years
+						of their lives, but overlook one critical stage: the quality of the mother's life prior to, and during, pregnancy.
+					</p>
+					<p class="text">
+						This project aims to visualize various aspects of the mother's life, which could play a role in
+						improving the life of her children. The factors are juxtaposed against the Infant Mortality Rate (IMR)
+						and Literacy Rate in the state.
+					</p>
+					<p class="text">
+						All the data is taken from the National Family Health Survey (2015-16) at the state level, and only rural regions of
+						states are taken into consideration.
+					</p>
+					<svg width="500" height="80">
+						<rect x="30" y="10" height="10" width="10" style="fill:#56B1BF" />
+						<text x="50" y="20" fill="white" font-family="Open Sans" font-size="13px">
+							Infant Mortality Rate (within 1 year of birth)
+						</text>
+						<rect x="30" y="40" height="10" width="10" style="fill:#08708A" />
+						<text x="50" y="50" fill="white" font-family="Open Sans" font-size="13px">
+							Under 5 Mortality Rate (within 5 years of birth)
+						</text>
+						<rect x="30" y="70" height="10" width="10" style="fill:#24473a" />
+						<text x="50" y="80" fill="white" font-family="Open Sans" font-size="13px">
+							Children that Live after Birth
+						</text>
+					</svg>
+					<p class="text">
+						Hover over and drag the map around different states to compare their statistics on literacy, antenatal care and IMR.
+					</p>
+					<p class="text">
+						When done, press Next.
+					</p>
+					<button id="myButton" class="submit-button">Next</button>
+				</div>
+				<div class="graphs">
 					<p id="stateName" class="state-title"></p>
 					<p id="price" class="price-display"></p>
-					<svg class="chart" id="literacy" width="500" height="230">
-						<line x1="40" y1="40" x2="40" y2="180" style="stroke:rgb(255,255,255);stroke-width:2" />
-						<line x1="40" y1="180" x2="450" y2="180" style="stroke:rgb(255,255,255);stroke-width:2" />
-						<line x1="36" y1="80" x2="44" y2="80" style="stroke:rgb(255,255,255);stroke-width:2" 	/>
+					<svg class="chart1" id="literacy" width="500" height="230">
+						<line x1="40" y1="40" x2="40" y2="180" style="stroke:rgb(153,153,153);stroke-width:2" />
+						<line x1="40" y1="180" x2="450" y2="180" style="stroke:rgb(153,153,153);stroke-width:2" />
+						<line x1="36" y1="80" x2="44" y2="80" style="stroke:rgb(153,153,153);stroke-width:2" 	/>
 						<text x=6 y=85 fill="white">100</text>
-						<text x="250" y="20" fill="white"> Literacy Statistics</text>
-						<text x="65" y="195" fill="white"> Women</text>
-						<text x="205" y="195" fill="white">Men</text>
-						<text x="275" y="195" fill="white">Women(>= 10 years)</text>
+						<text x="20" y="20" fill="#7B895B" font-family="Open Sans" font-size="22"> Literacy Statistics</text>
+						<text x="65" y="195" fill="white" font-family="Open Sans"> Women</text>
+						<text x="205" y="195" fill="white" font-family="Open Sans">Men</text>
+						<text x="275" y="195" fill="white" font-family="Open Sans">Women(>= 10 years)</text>
 					</svg>
-					<svg class="chart" id="health" width="500" height="230">
-						<line x1="40" y1="40" x2="40" y2="180" style="stroke:rgb(255,255,255);stroke-width:2" />
-						<line x1="40" y1="180" x2="450" y2="180" style="stroke:rgb(255,255,255);stroke-width:2" />
-						<line x1="36" y1="80" x2="44" y2="80" style="stroke:rgb(255,255,255);stroke-width:2" 	/>
+					<svg class="chart1" id="health" width="500" height="230">
+						<line x1="40" y1="40" x2="40" y2="180" style="stroke:rgb(153,153,153);stroke-width:2" />
+						<line x1="40" y1="180" x2="450" y2="180" style="stroke:rgb(153,153,153);stroke-width:2" />
+						<line x1="36" y1="80" x2="44" y2="80" style="stroke:rgb(153,153,153);stroke-width:2" 	/>
 						<text x=6 y=85 fill="white">100</text>
-						<text x="250" y="20" fill="white"> Health Statistics </text>
-						<text x=50 y=195 fill="white">>=4 Antenatal</text>
-						<text x=80 y=210 fill="white">Care</text>
-						<text x=200 y=195 fill="white">Anemic</text>
-						<text x=200 y=210 fill="white">Women</text>
-						<text x=300 y=195 fill="white">Institutional</text>
-						<text x=320 y=210 fill="white">Births</text>
+						<text x="20" y="20" fill="#7B895B" font-family="Open Sans" font-size="22"> Health Statistics </text>
+						<text x=50 y=195 fill="white" font-family="Open Sans">>=4 Antenatal</text>
+						<text x=80 y=210 fill="white" font-family="Open Sans">Care</text>
+						<text x=200 y=195 fill="white" font-family="Open Sans">Anemic</text>
+						<text x=200 y=210 fill="white" font-family="Open Sans">Women</text>
+						<text x=307 y=195 fill="white" font-family="Open Sans">Institutional</text>
+						<text x=327 y=210 fill="white" font-family="Open Sans">Births</text>
 					</svg>
-					<svg class="chart" id="imr" width="770" height="400">
-						<text x="250" y="20" fill="white"> Infant Mortality </text>
+					<svg class="chart2" id="imr" width="700" height="440">
+						<text x="20" y="20" fill="#7B895B" font-family="Open Sans" font-size="22"> Infant Mortality </text>
 					</svg>
-					<button id="myButton" class="float-left submit-button">Next</button>
-
 					<script type="text/javascript">
 					    document.getElementById("myButton").onclick = function () {
 					        location.href = "view2.html";

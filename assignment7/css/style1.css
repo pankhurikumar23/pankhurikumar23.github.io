@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  background: #1A1A1A;
+  background: #001612;
 }
 
 h2,
@@ -62,31 +62,83 @@ p {
   margin-right: 5px;
 }
 
-#graphs {
+#content-matter {
   position: absolute;
   top: 0;
   bottom: 0;
   width: 50%;
 }
 
-.state-title {
-  color: white;
+.title1 {
+  color: #BEA42E;
+  font-family: "Trebuchet MS";
+  font-size: 35px;
+  text-align: center;
+  margin-top: 65px;
+  margin-bottom: 0px;
+}
+
+.title2 {
+  color: #BEA42E;
+  font-family: "Trebuchet MS";
   font-size: 30px;
-  margin-left: 100px;
-  margin-top: 40px;
+  text-align: center;
+  margin: 0px;
+}
+
+.subtitle {
+  color: #BEA42E;
+  font-family: "Trebuchet MS";
+  font-size: 18px;
+  text-align: center;
+  margin: 0px;
+}
+
+.graphs {
+  width: 62%;
+  float: right;
+}
+
+.written {
+  width: 38%;
+  float: left;
+}
+
+.text {
+  font-family: "Open Sans";
+  font-size: 16px;
+  color: white;
+  text-align: justify;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.submit-button {
+  margin-top: 20px;
+  margin-left: 150px;
+}
+
+.state-title {
+  color: #BEA42E;
+  font-size: 40px;
+  margin-top: 25px;
+  margin-bottom: 25px;
   height:30px;
+  font-family: "Trebuchet MS";
 }
 
 .price-display {
-  color: cyan;
-  font-size: 15px;
-  margin-left: 120px;
-  margin-top: 10px;
+  color: #7B895B;
+  font-size: 20px;
+  margin-top: 30px;
+  margin-left: 20px;
   height: 15px;
+  font-family: "Open Sans";
 }
 
-.chart {
+.chart2,
+.chart1 {
   padding-top: 5px;
-  padding-left: 5px;
+  padding-right: 5px;
   margin-top: 10px;
 }

@@ -70,7 +70,7 @@ function changeLiteracy(stateFlag) {
 		rect.setAttributeNS(null, 'height', stateData[stateFlag][i + 2]);
 		rect.setAttributeNS(null, 'width', '50');
 		rect.setAttributeNS(null, 'id', labels[i]);
-		rect.setAttributeNS(null, 'style', 'fill:rgb(0,0,255)');
+		rect.setAttributeNS(null, 'style', 'fill:#7BD4CC');
 
 		literacy.appendChild(rect);
 	}
@@ -79,7 +79,7 @@ function changeLiteracy(stateFlag) {
 		var t = document.createElementNS(svgns, 'text');
 		t.setAttributeNS(null, 'x', 72 + 130*i);
 		t.setAttributeNS(null, 'y', 169 - (stateData[stateFlag][i + 2]));
-		t.setAttributeNS(null, 'style', 'fill:rgb(255,0,0)');
+		t.setAttributeNS(null, 'style', 'fill:#037367; font-family: Open Sans');
 		t.setAttributeNS(null, 'id', labels[i + 3]);
 		t.innerHTML = stateData[stateFlag][i + 2] + '%';
 
@@ -107,7 +107,7 @@ function changeHealth(stateFlag) {
 		rect.setAttributeNS(null, 'height', stateData[stateFlag][i + 5]);
 		rect.setAttributeNS(null, 'width', '50');
 		rect.setAttributeNS(null, 'id', labels[i]);
-		rect.setAttributeNS(null, 'style', 'fill:rgb(0,0,255)');
+		rect.setAttributeNS(null, 'style', 'fill:#7BD4CC');
 
 		health.appendChild(rect);
 	}
@@ -116,7 +116,7 @@ function changeHealth(stateFlag) {
 		var t = document.createElementNS(svgns, 'text');
 		t.setAttributeNS(null, 'x', 72 + 130*i);
 		t.setAttributeNS(null, 'y', 169 - (stateData[stateFlag][i + 5]));
-		t.setAttributeNS(null, 'style', 'fill:rgb(255,0,0)');
+		t.setAttributeNS(null, 'style', 'fill:#037367; font-family: Open Sans');
 		t.setAttributeNS(null, 'id', labels[i + 3]);
 		t.innerHTML = stateData[stateFlag][i + 5] + '%';
 
@@ -130,7 +130,7 @@ function changeIMR(stateFlag) {
 	var svgns = "http://www.w3.org/2000/svg";
 
 	x = 20;
-	y = 25;
+	y = 35;
 	for (var i = 0; i < 1000; i++) {
 		var rect = document.createElementNS(svgns, 'rect');
 		rect.setAttributeNS(null, 'x', x);
@@ -138,15 +138,15 @@ function changeIMR(stateFlag) {
 		rect.setAttributeNS(null, 'height', 10);
 		rect.setAttributeNS(null, 'width', 10);
 		if (i < stateData[stateFlag][0])
-			rect.setAttributeNS(null, 'style', 'fill:rgb(255,0,0)');
+			rect.setAttributeNS(null, 'style', 'fill:#7BD4CC');
 		else if (i < stateData[stateFlag][1])
-			rect.setAttributeNS(null, 'style', 'fill:rgb(0, 0, 255');
+			rect.setAttributeNS(null, 'style', 'fill:#037367');
 		else
-			rect.setAttributeNS(null, 'style', 'fill:rgb(20, 60, 45)');
+			rect.setAttributeNS(null, 'style', 'fill:#24473a');
 
 		imr.appendChild(rect);
 		x += 15;
-		if (x > 760) {	
+		if (x > 580) {	
 			y += 15;
 			x = 20;
 		}

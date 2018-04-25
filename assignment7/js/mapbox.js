@@ -8,7 +8,7 @@ var map = new mapboxgl.Map({
 map.on('load', function() {
 
 	var layers = ['0-100', '100-300', '300-500', '500-1000', '1000-9000', '9000+'];
-	var colors = ['#feebe2', '#fcc5c0', '#fa9fb5', '#f768a1', '#c51b8a', '#7a0177'];
+	var colors = ['#f1eef6','#d0d1e6','#a6bddb','#74a9cf','#2b8cbe','#045a8d'];
 
 	for (i = 0; i < layers.length; i++) {
 		var layer = layers[i];
