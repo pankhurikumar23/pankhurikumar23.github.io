@@ -32,10 +32,10 @@ function setup() {
 	loadData();
 }
 
-
 function backState() {
 	window.location.href = "view1.html";
 }
+
 function nextState() {
   window.location.href = "view3.html";
 }

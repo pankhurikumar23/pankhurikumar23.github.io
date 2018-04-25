@@ -24,9 +24,19 @@ function setup() {
 	background('#1A1A1A');
 	noLoop();
 
+	button2 = createButton('Back');
+	button2.position(width/2 - 30, 1010);
+	button2.mousePressed(backState);
+
 	loadData();
 	createDropdown();
 	drawGrid();
+
+	createContent();
+}
+
+function backState() {
+	window.location.href = "view2.html";
 }
 
 function loadData() {
@@ -176,6 +186,7 @@ function draw() {
 
 	drawPolygon();
 	drawTable();
+	createContent();
 }
 
 function drawPolygon() {
@@ -205,4 +216,22 @@ function drawTable() {
 		text(tableData[i][6]+'%', 1650, 355 + i*40);
 		text(tableData[i][7]+'%', 1790, 355 + i*40);
 	}
+}
+
+function createContent() {
+	defY = 760;
+	defY2 = defY + 120;
+	push();
+	textFont('Roboto');
+	textSize(20);
+	fill('white');
+	textAlign(CENTER);
+	text("Access to healthcare has increased tremendously in the last decade, but in many states, cultural practices and corruption still prevent mothers from reaching", width/2, defY);
+	text("out to hospitals. The NFHS also surveys women on factors that it terms 'Women Empowerment' - ways that allow women to make autonomous decisions about their", width/2, defY + 25);
+	text("lives. Here, by visualizing some of these factors, and weighing them against the IMR rates in those states, it's easy to see that when we enable women in", width/2, defY + 50);
+	text("tangible ways, they choose to make decisions that will improve their health, and the health of their families.", width/2, defY + 75);
+	fill('#ff4844');
+	textSize(40);
+	text("India's Case for Women Empowerment", width/2, 960);
+	pop();
 }
