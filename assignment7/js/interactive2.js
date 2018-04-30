@@ -1,6 +1,5 @@
 stateLabels = []; aCare= []; noMethod = []; otherMethod = []; femaleSter = []; iud = []; pill = []; condom = []; relStart = [];
 textColour = ['#DAD24F', '#FEFEFE', '#DAD24F'];
-// barColours = ['#238A6C','#39A073','#51B578','#6DCB7B','#8CE07B','#AEF57B'];
 barColours = ['#48546D','#397688','#2B9893','#4CB88D','#8BD47B','#D8EA6A']
 finalX = 390; initialX = []; initialY = 600;
 finalY = [50, 114, 178, 263, 388, 452, 516];
@@ -57,7 +56,7 @@ function draw() {
 	textSize(40);
 	text('India\'s Case for Women Empowerment', width/2, 950);
 	if (fl > 60){
-		fill('white');
+		fill('#DAD24F');
 		textSize(30);
 		if (fl < 140) {
 			text('The relationship between antenatal care and infant mortality rate is clear', width/2, 670);

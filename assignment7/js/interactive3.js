@@ -3,9 +3,9 @@ paramCount = 7;
 maxDisplay = 3;
 xParams = [100, 350, 600, 600, 350, 100];
 yParams = [180, 80, 180, 480, 600, 480];
-rC = [8, 255, 234];
-gC = [217, 46, 234];
-bC = [214, 99, 234];
+rC = [72, 76, 216];
+gC = [84, 184, 234];
+bC = [109, 141, 106];
 displayCount = 0;
 currentDisplay = 0;
 stateLabels = [];
@@ -21,7 +21,7 @@ function preload() {
 
 function setup() {
 	createCanvas(1920, 1080);
-	background('#1A1A1A');
+	background('#3A3A3A');
 	noLoop();
 
 	button2 = createButton('Back');
@@ -66,7 +66,7 @@ function loadData() {
 
 function drawGrid() {
 	push();
-	fill('#494646');
+	fill('#2A2A2A');
 	rect(840, 270, 1040, 60);
 	stroke('white');
 	strokeWeight(2);
@@ -92,7 +92,7 @@ function drawGrid() {
 	line(1880, 270, 1880, 450);
 
 	noStroke();
-	fill('white');
+	fill('#DAD24F');
 	text('Participate in Household', 20, 150);
 	text('Decisions', 70, 170);
 	text('Experience Spousal', 295, 50);
@@ -106,6 +106,7 @@ function drawGrid() {
 	text('Use Hygienic Products', 30, 500);
 	text('During Menstruation', 35, 520);
 
+	fill('white');
 	text('State', 920, 305);
 	text('IMR', 1055, 305);
 	text('Participate in', 1120, 295);
@@ -181,7 +182,7 @@ function calculateDisplay(stateFlag) {
 }
 
 function draw() {
-	background('#1A1A1A');
+	background('#3A3A3A');
 	drawGrid();
 
 	drawPolygon();
@@ -206,7 +207,7 @@ function drawTable() {
 		noStroke();
 		fill(rC[i], gC[i], bC[i], 200);
 		rect(801, 331 + i*40, 38, 38);
-		fill('white');
+		fill('#DAD24F');
 		text(tableData[i][0], 850, 355 + i*40);
 		text(tableData[i][1], 1050, 355 + i*40);
 		text(tableData[i][2]+'%', 1140, 355 + i*40);
@@ -224,7 +225,7 @@ function createContent() {
 	push();
 	textFont('Roboto');
 	textSize(20);
-	fill('white');
+	fill('#DAD24F');
 	textAlign(CENTER);
 	text("Access to healthcare has increased tremendously in the last decade, but in many states, cultural practices and corruption still prevent mothers from reaching", width/2, defY);
 	text("out to hospitals. The NFHS also surveys women on factors that it terms 'Women Empowerment' - ways that allow women to make autonomous decisions about their", width/2, defY + 25);

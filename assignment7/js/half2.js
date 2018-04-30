@@ -1,13 +1,31 @@
-// imr = []; health = []; literacy = [];
-// colours = [];
-// initialY = []; initialX = 50; finalY = 600; finalX = [];
-// maxAnim = 40; currAnim = 0; fl = -10;
-// totalCount = 31;
-// minAxis = finalY - 20; maxAxis = 40;
-// backgroundTransparency = 0; initialTransparency = 50; foregroundTransparency = 255;
-// labelX = [1760, 1760, 1760];
-// labelY = [230, 260, 290];
-// headings = ["IMR", "Health", "Literacy"];
+stateLabels = []; imr = []; health = []; literacy = [];
+colours = [];
+initialY = []; initialX = 50; finalY = 600; finalX = [];
+maxAnim = 40; currAnim = 0; fl = -10;
+totalCount = 30;
+minAxis = finalY - 20; maxAxis = 40;
+backgroundTransparency = 0; initialTransparency = 50; foregroundTransparency = 255;
+labelX = [1760, 1760, 1760];
+labelY = [230, 260, 290];
+headings = ["IMR", "Health", "Literacy"];
+
+function preload() {
+	view2Data = loadTable('assets/View1.csv', 'csv', 'header');
+}
+
+function setup() {
+	createCanvas(1920, 1080);
+	background('#1A1A1A');
+
+	loadData();
+}
+
+function loadData() {
+	stateLabels = view2Data.getColumn("State");
+	imr = view2Data.getColumn("IMR");
+	health = view2Data.getColumn("4 Antenatal Care");
+	literacy = view2Data.getColumn("Women Literacy");
+}
 
 function draw() {
 	textSize(15);
@@ -29,11 +47,6 @@ function createAnimation() {
 		colours[i] = map(imr[i], 5, 67, 100, 255);
 		fill(colours[i], 0, 100);
 		finalX[i] = map(i, 0, 32, 1680, -80);
-		if (stateLabels[i] == 'India') {
-			colours[i] = 200;
-			fill(colours[i], colours[i], colours[i]);
-			finalX[i]-= 10;
-		}
 		if (isAnimating()) {
 			x = finalX[i] + (initialX - finalX[i]) * percAnim();
 			y = finalY + (initialY[i] - finalY) * percAnim();
