@@ -272,7 +272,7 @@ ul,ol{
 	content: '';
 }
 
-ol li {
+ol li, p {
 	font-size: 17px;
 }
 
