@@ -219,9 +219,9 @@ h1{
 	margin-bottom:1rem
 }
 
-@media (min-width: 10rem){
+@media (min-width: 12rem){
 	h1{
-		font-size:3.7rem;
+		font-size:6rem;
 		margin-bottom:0.5rem
 	}
 }
@@ -246,7 +246,7 @@ h2{
 
 h3,h4,h5,h6{
 	margin-top:1rem;
-	font-size:1rem;
+	font-size:2rem;
 	text-transform:uppercase
 }
 
@@ -272,8 +272,20 @@ ul,ol{
 	content: '';
 }
 
-ol li, p {
-	font-size: 17px;
+.site-nav li{
+	vertical-align:top;
+	display:inline;
+	height:100px;
+	margin-left:0.5rem;
+	margin-right:0.5rem
+}
+
+.site-nav a{
+	font-size: 1rem;
+}
+
+ol li, p, a {
+	font-size: 1.1rem;
 }
 
 p {
@@ -363,14 +375,6 @@ pre>code{
 	vertical-align:top;
 	display:inline;
 	height:100px
-}
-
-.site-nav li{
-	vertical-align:top;
-	display:inline;
-	height:100px;
-	margin-left:0.5rem;
-	margin-right:0.5rem
 }
 
 .social-icons a{
