@@ -1,0 +1,79 @@
+body {
+	font-family: 'Montserrat', sans-serif;
+	margin: 100px;
+	font-size: 2.5em;
+	color: #5A5A5A;
+}
+
+.intro-text {
+	width: 900px;
+}
+
+.introduction {
+	font-size: 0.8em;
+	text-align: justify;
+}
+
+.information {
+	font-size: 0.5em;
+	margin-right: 400px;
+	text-align: justify;
+}
+
+#container{
+  position: relative;
+}
+
+#sections > div{
+  width: 900px;
+  background: white;
+  opacity: .2;
+  margin-bottom: 100px;
+  text-align: justify;
+}
+#sections > div:last-child{
+  padding-bottom: 300px;
+}
+#sections > div.graph-scroll-active{
+  opacity: 1;
+}
+
+#graph{
+  margin-left: 100px;
+  width: 800px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  float: right;
+}
+
+@media (max-width: 925px)  {
+  #graph{
+    width: 100%;
+    margin-left: 0px;
+    float: none;
+  }
+
+  #sections{
+    width: auto;
+    position: relative;
+    margin: 0px auto;
+  }
+
+  #sections > div{
+    background: rgba(255,255,255,.5);
+    padding: 10px;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    margin-bottom: 80vh;
+  }
+
+  h1{
+    margin: 10px;
+  }
+}
+
+svg{
+  background-color: #eee;
+  margin-top: 100px;
+}
