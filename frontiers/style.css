@@ -45,6 +45,24 @@ body {
   position: sticky;
   top: 0px;
   float: right;
+  background-color: #eee;
+  margin-top: 100px;
+}
+
+table {
+  font-size: smaller;
+  margin: 100px;
+}
+
+.upper {
+  margin: 0px;
+  color: #CDCDCD;
+}
+
+.lower {
+  margin: 0px;
+  margin-top: 1px;
+  color: #323232;
 }
 
 @media (max-width: 925px)  {
@@ -71,9 +89,4 @@ body {
   h1{
     margin: 10px;
   }
-}
-
-svg{
-  background-color: #eee;
-  margin-top: 100px;
 }
