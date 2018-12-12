@@ -5,6 +5,29 @@ body {
 	color: #5A5A5A;
 }
 
+#graph1{
+  margin-left: 100px;
+  width: 800px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  float: right;
+  background-color: #EEEEEE;
+  padding: 20px 0px 20px 0px;
+  text-align: center;
+}
+
+#graph{
+  margin-left: 100px;
+  width: 800px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  float: right;
+  background-color: #EEEEEE;
+  padding: 100px 0px 100px 0px;
+}
+
 .intro-text {
 	width: 900px;
 }
@@ -16,7 +39,6 @@ body {
 
 .information {
 	font-size: 0.5em;
-	margin-right: 400px;
 	text-align: justify;
 }
 
@@ -25,11 +47,14 @@ body {
 }
 
 #sections > div{
-  width: 900px;
+  width: 800px;
   background: white;
   opacity: .2;
   margin-bottom: 100px;
   text-align: justify;
+}
+#sections > div:first-child{
+  padding-top: 300px;
 }
 #sections > div:last-child{
   padding-bottom: 300px;
@@ -38,21 +63,15 @@ body {
   opacity: 1;
 }
 
-#graph{
-  margin-left: 100px;
-  width: 800px;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0px;
-  float: right;
-  background-color: #eee;
-  margin-top: 100px;
+table {
+  font-size: large;
+  margin: 50px;
 }
 
-table {
-  font-size: smaller;
-  margin: 100px;
+th {
+  background-color: #BDB8B8;
 }
+
 
 .upper {
   margin: 0px;

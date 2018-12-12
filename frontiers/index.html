@@ -16,64 +16,80 @@
 		  		ProPublica's 2016 piece, <i>Machine Bias</i>, started a conversation on algorithmic accountability and fairness across the country. The story explored the workings of Northpointe's COMPAS - a risk assesment software most popularly used nationwide. ProPublica found that black defendants were incorrectly judged to be at a higher risk of recidivism compared to while defendents. The article generated a lot of interest in fairness and much research has concluded that there are six types of fairness, some of which are incompatible with each other and with accuracy. This project attempts to simplify and visualize this research.
 		  	</div>
 		</div>
-		<div style="margin-left: 1050px;">
-		  	<img id="head-image" src="starter-image.png">
-	  	</div>
 	</div>
+	<br>
+	<br>
+	<br>
 	<br>
 	<br>
   	<div class="container-1" id="container">
-  		<div id="graph">
-			<table border=1>
-				<tr>
-					<th>Actual<hr>
-					Predicted</th>
-				    <th>Positive</th>
-				    <th>Negative</th>
-				</tr>
-				<tr>
-				    <th>Positive</th>
-				    <td>True Positive</td>
-				    <td>False Positive</td>
-				</tr>
-				<tr>
-					<th>Negative</th>
-				    <td>False Negative</td>
-				    <td>True Negative</td>
-				</tr>
-			</table>
+  		<div id="graph1">
+			<img id="head-image" src="starter-image.png">
   		</div>
   		<div id="sections">
 		  	<div class="information">
-				Ipsum persecuti definitionem at duo. An eam zril impedit, at nec blandit electram facilisis. Ignota iuvaret id mea, sit suavitate reprehendunt no. Sale antiopam eum cu, eros epicuri ea vel, ex erat adipisci vituperata eos. Has ei aliquid sensibus, ea vix dicam splendide assueverit. Assum equidem apeirian at per, pri quot fuisset persequeris ei, cu quo nisl stet sonet. Te mel docendi vivendum, debet alterum pertinax id vis. Vix at recusabo delicata, eu tempor accusata vis, ei legere partiendo eos. Pri an congue commodo dolorem, dicam facete habemus his at, ius alienum perpetua no. Vim at porro laudem, recteque definitionem eos te, ut integre honestatis mei. Vis diceret efficiendi ut, mea nostrum forensibus ex.
+				<b>Introduction</b>
+				<br>
+				In many industries, ranging from criminal justice to medicine, algorithms perform the risk assesment to decide the consequences of decisions and actions. As the scope of such algorithms increases, journalists and academics have voiced concerns that these models might be encoding human biases, as they are built on data that reflect human biases in past decisions. And outcomes.
 			</div>
-
+			<br>
 			<div class="information">
-				Alii rebum adversarium in per, ei nec probo dolore melius. Principes delicatissimi an sit, errem iriure sensibus vis ut, ei vis legimus meliore. Facete voluptatibus id pro, vel no idque debitis postulant. Duo choro lucilius ad. Falli bonorum praesent at mei, in sea causae diceret. Ex mei enim fabellas. Altera similique his ne, ut alia qualisque moderatius sed, ea delenit offendit maiestatis vim.
-
-				Homero putent adversarium pri ea, modus rationibus adipiscing ex vis. Quo virtute fierent ex. Latine assueverit eos et, labore audire nec at. Sit dolores deserunt constituto ne, graece facilisis eos ei.
+				Over the last couple of years, the research community has proposed formal and mathematical definitions of fairness to guide the conversation and design around equitable risk assesment tools. These definitions are intuitive, but each of these definitions of fairness has its own limitations, and are not the best measures of detecting discriminatory algorithms. In fact, designing algorithms that satisfy these definitions of fairness can end up negatively impacting minority (as well as majority) community well-being.
 			</div>
-
+			<br>
 			<div class="information">
-				Eos ad oblique admodum voluptatibus, pri illud praesent contentiones et. An eius affert instructior his, magna delicatissimi vel no. Stet sadipscing sed ad, id pro feugiat ponderum concludaturque, epicurei oporteat ex per. His at zril intellegat vituperatoribus, aliquam epicuri torquatos vel id. Nec ea iusto aliquam, sea veniam nostro commodo cu.
-
-				Vidit percipitur id eos, etiam delicata vix cu. Ex tritani partiendo qualisque quo, equidem ocurreret assentior ut vix. Nec graecis deserunt in, eos ad regione corpora. Ne sed viris animal persecuti, nostro fabellas sed ea. Dicam persius aliquid id has, et mel fierent consectetuer.
+				<b>What is Fairness?</b>
+				<br>
+				Fairness, as defined by Barocas and Hardt, is an unjustified basis for differentiation. Historically, this basis has had practical irrelevance in relation to the task being performed.
 			</div>
-
+			<br>
+			<br>
+			<div class="information" style="color:red">
+				Think gender, race, or sexual preference.
+			</div>
+			<br>
+			<br>
 			<div class="information">
-				Dicit pertinacia scribentur vim ea. Qui ea dictas pertinacia cotidieque. Ius no oporteat reformidans, at nonumes argumentum mel. Id pri dicta tibique, an nam unum discere. His aliquid propriae verterem ei. Agam soleat tacimates an cum, et congue nostrud invenire eos.
-
-				Modo tota eum at, mel no discere molestiae intellegat. Homero nusquam oporteat per et, his ad fugit saperet habemus. Mel legendos consectetuer ei. Quo te justo nostrum necessitatibus, eu apeirian contentiones usu, mel no homero admodum civibus.
-
-				Ocurreret moderatius ius id, vis no accusamus efficiendi. Duo apeirian partiendo no, ut mea vidit natum docendi. Quo impedit probatus referrentur ei, ad pro diam legendos. Cu ancillae volutpat conceptam mei.
+				Even if statistically relevant, there are certain factors considered morally irrelevant, as a decision that we consciously take and choose not to differentiate on the basis of.
+			</div>
+			<br>
+			<br>
+			<div class="information" style="color:red">
+				Think of physical disabilities, or age.
+			</div>
+			<br>
+			<br>
+			<div class="information">
+				There are two doctrines of discrimination law:
+				<ul>
+					<li>Disparate Treatment: This is the idea that if your model even considers certain factors (whether or not they are used in your model) then it is illegal. Sometimes, these factors can be a matter of formality, like asking for age and gender on any form. Disparate treatment also occurs when proxies are used for these factors, like redlining districts where African Americans are in majority.</li>
+					<br>
+					<li>Disparate Impact: This doctrine avoids using any factors that can cause discrimination - instead, it focuses on facially neutral attributes. However, disparity still manages to appear in the output. This leads to questions like is the process justified, and is systemic bias even avoidable?</li>
+				</ul>
+			</div>
+			<br>
+			<div class="information">
+				As you can see, fairness is intrinsically tied with discrimination, which is not a general concept - it often depends on context and a domain. However, it often concerns important decisions that affect life situations. 
 			</div>
 		</div>
 	</div>
+	<div class="information">
+		<b>Definitions of Fairness</b>
+		<br>
+		So then, how does one go about defining the concept of fairness? Extensive research has been done on the topic, and certain definitions have been widely accepted to quantify fairness and discrimination.
+	</div>
 	<br>
+	<div class="information">
+		From Disparate Treatment comes Anti-Classification fairness, where algorithms do not consider protected characteristics like race, gender and their proxies. Classification parity requires that certain measures of predictive performance be equal across all groups defined by these protected attributes. Calibration, which ties in with the concept of independence, requires that outcomes be independent of the protected attributes, after controlling for estimated risk.
+	</div>
 	<br>
+	<div class="information">
+		Berk et al define fairness through simple mathematical concepts. For this, let us consider a simple construct: we want to predict whether a person will like coffee with or without sugar. We employ a tool to predict this in a binary manner. Even if we were to design a continuous algorithm that calculated the probablity of a person wanting coffee with sugar, we would have to set a threshold value - if the algorithm predicted a value above the threshold, we would say they prefer coffee with coffee and vice versa.
+	</div>
 	<br>
-	<br>
-	<br>
+	<div class="information">
+		Let us assume our tool considers the following attributes of the person: <b>how often they buy ice cream</b>, <b>how many hours they sleep</b>, <b>whether they have eaten before the coffee</b> and <b>the brand of shoes they are wearing</b>.
+	</div>
 	<br>
 	<div class="container-2" id="container">
   		<div id="graph">
@@ -83,82 +99,85 @@
 					Predicted</th>
 				    <th>Positive</th>
 				    <th>Negative</th>
+				    <th>Total Prediction</th>
 				</tr>
 				<tr>
 				    <th>Positive</th>
 				    <td>True Positive</td>
 				    <td>False Positive</td>
+				    <td>Total Predicted Positives</td>
 				</tr>
 				<tr>
 					<th>Negative</th>
 				    <td>False Negative</td>
 				    <td>True Negative</td>
+				    <td>Total Predicted Negatives</td>
+				</tr>
+				<tr>
+					<th>Total Actuals</th>
+					<td>Total Actual Positives</td>
+					<td>Total Actual Negatives</td>
+					<td></td>
 				</tr>
 			</table>
   		</div>
   		<div id="sections">
 			<div class="information">
-				Ea eos mutat fabulas. Vim eirmod saperet lucilius in, no per commune detracto, ad eius equidem pri. Epicurei verterem id per, ceteros offendit qui id, ludus tollit platonem pri an. Ex nam nisl luptatum, eos tacimates mnesarchum definitionem no. Mea fastidii tractatos incorrupte at. Veniam molestie qui ei, id modus maiorum percipit sed.
-
-				Mel nulla volutpat deseruisse ut, nec postea epicuri lobortis cu. Pro aliquam assueverit ut, case labore lobortis duo no. No bonorum urbanitas usu, vidit constituam concludaturque ne qui, munere facete his no. Ei mel dictas evertitur maiestatis, graece doctus saperet ei mel, indoctum partiendo sit te. Corpora salutatus reprehendunt qui an, in vim graece integre. Cibo laudem no duo, his ornatus deseruisse mediocritatem et. Autem principes ei vis.
-
-				Pri ex erant omnes intellegat, eos novum gloriatur ad. Cu vidit nobis sadipscing est. Porro splendide persecuti eam cu. Odio referrentur id has, iriure nominavi ut vim, soluta vidisse sapientem ei ius. Ipsum dolorem eos et, habeo modus adversarium nec in. Ea brute vocibus referrentur per, ne cum tation iuvaret accumsan.
+				Let us say we start out with 100 people, half who drink coffee with sugar, and half without. We create a confusion matrix like the one here: 
 			</div>
-			
+			<br>
 			<div class="information">
-				Ad mea consul timeam dignissim, mediocrem torquatos sit ne. Mutat latine pericula qui ei, ut sea amet dicta ocurreret. Aperiri feugait inimicus te quo. Duo percipit vulputate ad. Dolore inermis quo te. At modus fierent pro. Eu usu sint omnis legimus, ridens semper usu eu, quo mollis periculis ei.
-
-				Mea no ferri euripidis. Dico admodum qui eu. Ei cum solet putent timeam. Et pri errem dicant. Dicunt intellegebat ut eam, te has agam iudico ridens. Vel equidem accommodare et. Facer sonet suscipiantur ut sit, solet imperdiet disputationi ne qui, quas illum luptatum ei vis.
-
-				Nominavi detraxit et per, ius accusam explicari honestatis no. Cum percipitur intellegam delicatissimi te, ut his duis albucius partiendo, pro alia probatus consequat ex. Mazim numquam euripidis ea quo, est falli prodesset ut. Ut nam quem habeo ipsum. Nibh perfecto duo ex, eam recusabo moderatius cu. Eos debet admodum evertitur ei.
+				The columns represent the actual number of people in each category, positive being the ones that take coffee with sugar and negative are the ones without, while the rows represent the prediction of our algorithm. 
+			</div>
+			<br>
+			<div class="information">
+				The columns will add up to 50, since exactly half the people like sugar with coffee, but the row totals can vary.
 			</div>
 
 			<div class="information">
-				Consequat dissentiet referrentur id his. Eum ex placerat verterem, ad eos enim salutatus. Id justo nostrud periculis sea, cu modo malis democritum pro. Te veri fierent persecuti ius. Ad eam debet nullam indoctum. In doming audiam deserunt has, harum sanctus tibique ne eam, at dictas accusamus sit. Cu dicta facilisi definitionem nec.
-
-				Usu graeco nusquam ex. An omnes molestiae his, quaerendum necessitatibus sed ei. Exerci interesset has at, ei case labores oportere duo, vituperata temporibus id ius. Stet eleifend voluptaria vix ei, in case quando invidunt mea, mei vero patrioque in. Elit perfecto vix ea. Te sea agam virtute, nam eu consul similique.
-			</div>
-
-			<div class="information">
-				Deleniti appellantur complectitur qui ad. Ad scripta eruditi vix, temporibus disputationi cu vix. Id pro partem forensibus argumentum, eros virtute cu has. Tollit feugait referrentur te sit. Mea et quem maiestatis moderatius.
-
-				Cu eam posidonium omittantur delicatissimi. His at debet ubique tacimates, te illud torquatos maiestatis vel. Eos choro eripuit denique at, ne scripta explicari persecuti eos. Cum stet fugit dissentiet id, vide adhuc graeci ne mea, nostro sententiae vituperatoribus ea qui. Eripuit inermis elaboraret mel te. Ne audiam posidonium mei, splendide interesset et pri.
-
-				Sit dicat tantas nostro ex, ea praesent dissentiunt complectitur eam, cetero aliquando ne vel. Te adhuc discere splendide eos. Mea sint prodesset et, possit interesset sea an. Eu vim velit everti, vix vide disputationi at. Duo id movet molestiae, ocurreret eloquentiam vituperatoribus vim an, vis an constituto disputando. Omnis inermis ne eam, duo in quando accusata deterruisset. Stet deseruisse vix at.
-			</div>
-
-			<div class="information">
-				Scripta constituam mel te, vim ea eius persecuti, timeam mediocrem intellegam duo an. Cu ipsum tacimates intellegat pro, duo erat alterum an. Est ludus latine te. At duo consetetur moderatius, has ei soluta denique accommodare. Sea ne nemore tractatos, veri quaerendum mei ea, wisi errem has id.
-
-				Ad aliquam omnesque eum, eu has lorem adipiscing, id usu quot admodum nusquam. Et eum antiopam dissentias sadipscing, mea at mazim omittam copiosae, saepe offendit cu vix. Mandamus tincidunt ius ei, ei usu nihil feugiat. In labores definitiones pri, vis ut numquam dolorem ullamcorper, sed ea euismod omnesque. Sit ex scripta graecis constituto.
-
-				Verterem qualisque ea cum. Ut meis persequeris est, eu pri vero quas volutpat. Doming voluptua repudiare ei pri. Probo possim volumus te est. Laudem platonem consulatu in pro, omnesque explicari vis ex. Eu noster phaedrum interesset mel, in posidonium scripserit mel, iisque fierent et quo. Id pri diam rebum, vel et error molestiae deterruisset.
-
-				Nec nominavi nominati ea, nam at nusquam epicurei. Ad eum blandit salutandi, vis augue saperet copiosae at, nec eu populo accusamus abhorreant. Vide vituperata an has. Erroribus adipiscing no est, ne fugit salutatus pri. Cu forensibus abhorreant eos.
+				We can define different types of fairness with this matrix:
+				<ul>
+					<li>
+						Overall Accuracy Equality
+					</li>
+					<li>
+						Statistical Parity
+					</li>
+					<li>
+						Conditional Procedure Accuracy Parity
+					</li>
+					<li>
+						Conditional Use Accuracy Parity
+					</li>
+					<li>
+						Treatment Equality
+					</li>
+					<li>
+						Total Fairness
+					</li>
+				</ul>
 			</div>
 		</div>
 	</div>
 	<br>
-	<br>
-	<br>
-	<br>
-	<br>
 	<div class="information">
-		Sit vide prodesset efficiantur in. Est ne solet mucius consequat, an iusto exerci usu, audiam salutandi cum no. Id quem recusabo reprimique eam. Te nisl appareat duo, sanctus ancillae ei sea. Simul oblique id ius, primis audire lobortis ne cum.
-
-		No nam forensibus reprehendunt. Albucius deleniti at eum, vis sonet congue abhorreant id, ei latine ponderum sapientem mel. Ad impetus nostrum neglegentur sea. An primis aliquip sanctus usu, in nec explicari rationibus theophrastus. No ius quem consectetuer. Legere cotidieque quo ei, ei partem atomorum eum.
-
-		Habeo honestatis mea ei, et his admodum philosophia. Tempor fastidii ius ad, suscipit scaevola inimicus his ea, elit iisque dissentias et vix. Ex omnium oblique sed, ad eam modo suas. At utamur omnesque signiferumque per, ad admodum appareat pro, habemus cotidieque no duo. Pri no case erat, vel persius accusata in. Vel ea dicant deserunt. Amet nobis an qui.
+		Another way to look at fariness and discrimination is through the different variables that are involved in our model. A popular framework that forms the basis of most of our previous discussion looks at the relationship between our protected groups (A: a, b), our target variable (C) and some other variable (R). Using these three, we can define
+		<ul>
+			<li>
+				Independence: Our target variable C has to be independent of our protected groups A. For two groups, a and b, we should have P_a(C=c) and P_b(C=c) to be equal, meaning that the probability of two people being classified as people who like coffee with sugar is independent of the brand of shoe they wear.
+			</li>
+			<li>
+				Separation: 
+			</li>
+			<li>
+				Sufficiency
+			</li>
+		</ul>
 	</div>
-	<div class="information">
-		Quo eius tibique no, ea sed dicam legendos, id admodum principes his. Utinam dissentias mea ex, falli patrioque vituperatoribus an qui, epicurei erroribus instructior ei eos. Regione civibus complectitur usu ei, quo ut modus tincidunt, usu meis convenire at. At euismod gubergren sadipscing his, his civibus quaerendum et, vis no audire eleifend.
-
-		Est ea tale diam percipitur, ad prima gubergren mei. In liber scaevola ullamcorper duo. Saepe quidam convenire nec no. Sed hinc equidem consulatu cu, duo in dico quas mucius, ignota officiis pri cu. Per laudem nullam dicunt in, eu ius tempor scribentur reprehendunt. Et partem impetus reprehendunt per.
-
-		Utroque salutandi adipiscing no nec. Id consul prodesset definitiones nam. Cu vix mutat putant lobortis. Id feugait praesent forensibus cum, ne eam partem mandamus.
-
-		Nibh maluisset scripserit mel an. Putent iisque phaedrum eos no, in veniam primis disputationi pri. Fuisset forensibus sea at. Liber civibus sententiae qui et. Vix nostrud intellegat repudiandae no, an ridens discere his, elit mediocrem persecuti mel ad. Legere delectus dissentias mei et, hinc omnis ut mea.
-	</div>
+	<br>
+	<br>
+	<br>
+	<br>
 	<div class="information">
 		Ei vim accusam torquatos, cu per populo feugait. In verear nostrud quo, eos sale ponderum eleifend ad, vim ex oportere facilisis. Sea eu assum eloquentiam, quot atomorum vis cu, eu audire dolorum iudicabit est. Ad nusquam posidonium has, sit ornatus iracundia et. Vim ut tota habemus, sea stet debet utinam ea. Aeque accusamus eu nec.
 
