@@ -12,19 +12,18 @@ body {
   position: sticky;
   top: 0px;
   float: right;
-  background-color: #EEEEEE;
   padding: 20px 0px 20px 0px;
   text-align: center;
 }
 
-#graph{
+#graph2{
   margin-left: 100px;
   width: 800px;
   position: -webkit-sticky;
   position: sticky;
   top: 0px;
   float: right;
-  background-color: #EEEEEE;
+  /*background-color: #EEEEEE;*/
   padding: 100px 0px 100px 0px;
 }
 
@@ -63,15 +62,11 @@ body {
   opacity: 1;
 }
 
-table {
-  font-size: large;
-  margin: 50px;
+.cm-header {
+  font-size: 30px;
+  font-family: 'Lato', sans-serif;
+  /*text-anchor: 'middle';*/
 }
-
-th {
-  background-color: #BDB8B8;
-}
-
 
 .upper {
   margin: 0px;

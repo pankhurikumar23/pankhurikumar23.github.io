@@ -92,34 +92,7 @@
 	</div>
 	<br>
 	<div class="container-2" id="container">
-  		<div id="graph">
-  			<table border=1>
-				<tr>
-					<th>Actual<hr class="upper"><hr class="lower">
-					Predicted</th>
-				    <th>Positive</th>
-				    <th>Negative</th>
-				    <th>Total Prediction</th>
-				</tr>
-				<tr>
-				    <th>Positive</th>
-				    <td>True Positive</td>
-				    <td>False Positive</td>
-				    <td>Total Predicted Positives</td>
-				</tr>
-				<tr>
-					<th>Negative</th>
-				    <td>False Negative</td>
-				    <td>True Negative</td>
-				    <td>Total Predicted Negatives</td>
-				</tr>
-				<tr>
-					<th>Total Actuals</th>
-					<td>Total Actual Positives</td>
-					<td>Total Actual Negatives</td>
-					<td></td>
-				</tr>
-			</table>
+  		<div id="graph2">
   		</div>
   		<div id="sections">
 			<div class="information">
@@ -131,11 +104,11 @@
 			</div>
 			<br>
 			<div class="information">
-				The columns will add up to 50, since exactly half the people like sugar with coffee, but the row totals can vary.
+				The columns will add up to 50, since exactly half the people like sugar with coffee, but the row totals can vary. The total of all columns (or all rows), however, will always add up to 100.
 			</div>
-
+			<br>
 			<div class="information">
-				We can define different types of fairness with this matrix:
+				We shorten the true positives, false positives, false negatives and true negatives to TP, FP, FN and TN respectively. Using these abbreviations, we now define the different types of fairness with this matrix:
 				<ul>
 					<li>
 						Overall Accuracy Equality
