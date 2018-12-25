@@ -64,7 +64,7 @@ var tot = svg.append('text')
   .attrs({x: 680, y: 300, 'class': 'cm-header', 'text-anchor': 'middle'});
 
 var actTots = ["", "", "50", "50"];
-var tots = ["", "", "100", "100"];
+var tots = ["", "", "N=100", "N=100"];
 var totColor = ['pink', 'pink', '#DD9090', '#DD9090'];
 var tp = ["True Positive", "True Positive", "TP", "TP"];
 var fp = ["False Positive", "False Positive", "FP", "FP"];
