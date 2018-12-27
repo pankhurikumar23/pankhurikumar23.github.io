@@ -82,6 +82,11 @@ body {
   color: #323232;
 }
 
+.interactive {
+  margin-top: 50px;
+  text-align: center;
+}
+
 @media (max-width: 925px)  {
   #graph{
     width: 100%;

@@ -88,9 +88,9 @@ var gs2 = d3.graphScroll()
       actPosTot.text(actTots[k]);
       actNegTot.text(actTots[k]);
       tot.text(tots[k]);
-      grid[3][1].attr('fill', totColor[k])
-      grid[3][2].attr('fill', totColor[k])
-      grid[3][3].attr('fill', totColor[k])
-      grid[1][3].attr('fill', totColor[k])
+      grid[3][1].attr('fill', totColor[k]);
+      grid[3][2].attr('fill', totColor[k]);
+      grid[3][3].attr('fill', totColor[k]);
+      grid[1][3].attr('fill', totColor[k]);
       grid[2][3].attr('fill', totColor[k]);
-})
+});
