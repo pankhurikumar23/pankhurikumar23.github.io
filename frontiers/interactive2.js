@@ -165,11 +165,14 @@ var line = g4.append('line')
     .style('stroke', '#594F4F')
     .style('stroke-width', 1);
 
-var rect = g4.append('rect')
+var g4a = svg.append('g');
+var rect = g4a.append('rect')
     .attrs({x: 295, y: 370, width: 460, height: 230, 'fill': '#E5FCC2'})
     .style('stroke', '#594F4F')
     .style('stroke-width', 1);
-var rect = g4.append('rect')
+
+var g4b = svg.append('g');
+var rect = g4b.append('rect')
     .attrs({x: 295, y: 640, width: 460, height: 230, 'fill': '#E5FCC2'})
     .style('stroke', '#594F4F')
     .style('stroke-width', 1);
@@ -328,54 +331,132 @@ var category = "Race";
 var fairness = 0;
 
 function drawGraph() {
-    var caucasian_data =
-    var afAm_data =
-    var male_data =
-    var female_data =
+    var caucasian_data = [0, 605, 321, 243, 238, 200, 160, 113, 96, 77, 50];
+    var afAm_data = [0, 365, 346, 343, 337, 323, 318, 317, 301, 298, 227];
+    var male_data = [0, 1025, 647, 543, 507, 455, 415, 412, 367, 364, 262];
+    var female_data = [0, 261, 175, 140, 127, 123, 114, 84, 56, 53, 42];
     var data1 = [];
     var data2 = [];
 
     if(category == "Race") {
         data1 = caucasian_data;
         data2 = afAm_data;
+        factor = 23/70;
     } else {
         data1 = male_data;
         data2 = female_data;
+        factor = 23/120;
     }
 
-    var chart1 = g5.selectAll('rect')
+    g4a.selectAll('rect').remove();
+    g4b.selectAll('rect').remove();
+    g4a.selectAll('line').remove();
+    g4b.selectAll('line').remove();
+    g4a.selectAll('#barlabel1').remove();
+    g4b.selectAll('#barlabel2').remove();
+
+    var rect = g4a.append('rect')
+        .attrs({x: 295, y: 370, width: 460, height: 230, 'fill': '#E5FCC2'})
+        .style('stroke', '#594F4F')
+        .style('stroke-width', 1);
+
+    var rect = g4b.append('rect')
+        .attrs({x: 295, y: 640, width: 460, height: 230, 'fill': '#E5FCC2'})
+        .style('stroke', '#594F4F')
+        .style('stroke-width', 1);
+
+    var chart1 = g4a.selectAll('rect')
         .data(data1)
         .enter()
         .append('rect')
         .attr('x', function (d, i) {
-            return 295 + (46 * i);
+            return 298 + (46 * (i-1));
         })
         .attr('y', function(d) {
-            return 600 - d - 1;
+            return 599 - (d*factor);
         })
-        .attr('height', function(d) {
-            return d;
+        .attr('height', function(d, i) {
+            if (i == 0) return 0;
+            return (d*factor);
         })
-        .attr('width', 41)
-    	.attr('fill', '#547980');
+        .attr('width', 39)
+    	.attr('fill', '#9DE0AD');
 
-
-    var chart2 = g5.selectAll('rect')
+    var chart2 = g4b.selectAll('rect')
         .data(data2)
         .enter()
         .append('rect')
         .attr('x', function (d, i) {
-            return 295 + (46 * i);
+            return 298 + (46 * (i-1));
         })
         .attr('y', function(d) {
-            return 830 - d - 1;
+            return 869 - (d*factor);
         })
-        .attr('height', function(d) {
+        .attr('height', function(d, i) {
+            if (i == 0) return 0;
+            return (d*factor);
+        })
+        .attr('width', 39)
+    	.attr('fill', '#9DE0AD');
+
+    var line1 = g4a.append('line')
+        .attr('x1', function() {
+            return 295 + (46 * ((selectedData.ThresholdA*10)-1));
+        })
+        .attr('x2', function() {
+            return 295 + (46 * ((selectedData.ThresholdA*10)-1));
+        })
+        .attrs({y1: 370, y2: 600})
+        .style('stroke', '#547980')
+        .style('stroke-width', 2);
+
+    var line2 = g4b.append('line')
+        .attr('x1', function() {
+            return 295 + (46 * ((selectedData.ThresholdB*10)-1));
+        })
+        .attr('x2', function() {
+            return 295 + (46 * ((selectedData.ThresholdB*10)-1));
+        })
+        .attrs({y1: 640, y2: 870})
+        .style('stroke', '#547980')
+        .style('stroke-width', 2);
+
+    var text = g4a.selectAll('text')
+        .data(data1)
+        .enter()
+        .append('text')
+        .attr('id', 'barlabel1')
+        .attr('x', function(d, i) {
+            return 298 + (46 * (i-1)) + 39/2;
+        })
+        .attr('y', function(d) {
+            return 594 - (d*factor);
+        })
+        .attr('fill', '#547980')
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '18')
+        .text(function(d, i) {
+            if(i == 0) return "";
             return d;
+        });
+    var text = g4b.selectAll('text')
+        .data(data2)
+        .enter()
+        .append('text')
+        .attr('id', 'barlabel2')
+        .attr('x', function(d, i) {
+            return 298 + (46 * (i-1)) + 39/2;
         })
-        .attr('width', 41)
-    	.attr('fill', '#547980');
-    console.log(chart2);
+        .attr('y', function(d) {
+            return 864 - (d*factor);
+        })
+        .attr('fill', '#547980')
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '18')
+        .text(function(d, i) {
+            if(i == 0) return "";
+            return d;
+        });
 }
 
 function populateData() {
@@ -491,7 +572,7 @@ var toggleCatColor = (function() {
 		d3.select(this).style('fill', '#9DE0AD');
 		category = this.id;
 		changeData();
-		// drawGraph();
+		drawGraph();
 	}
 })();
 
@@ -590,16 +671,6 @@ var threshold1 = g4.append('text').text('')
 var threshold2 = g4.append('text').text('')
     .attrs({x: 525, y: 630, 'font-size': 30, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-
-var group1Rect = g4.append('rect')
-    .attrs({x: 295, y: 370, width: 460, height: 230, 'fill': '#E5FCC2', 'class': 'group1Rect'})
-    .style('stroke', '#594F4F')
-    .style('stroke-width', 1);
-
-var group2Rect = g4.append('rect')
-    .attrs({x: 295, y: 640, width: 460, height: 230, 'fill': '#E5FCC2', 'class': 'group2Rect'})
-    .style('stroke', '#594F4F')
-    .style('stroke-width', 1);
 //=============================================================================
 //                        SECTION 5
 //=============================================================================

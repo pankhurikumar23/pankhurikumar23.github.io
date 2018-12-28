@@ -415,12 +415,12 @@ var currentData = [];
 var selectedData = [];
 var countRaceDict = {};
 var countGenderDict = {};
-var category = "Race";
-var fairness = 0;
+var category1 = "Race";
+var fairness1 = 0;
 
-function populateData() {
+function populateData1() {
 	// console.log(selectedData);
-	if(category == "Gender") {
+	if(category1 == "Gender") {
     	group1.text("Male");
     	group2.text("Female");
 	} else {
@@ -428,19 +428,19 @@ function populateData() {
     	group2.text("African-American");
 	}
 
-	total_accuracy.text(selectedData.Accuracy);
-	total_ppv.text(selectedData.PPV);
-	total_fpr.text(selectedData.FPR);
-	total_fnr.text(selectedData.FNR);
+	total_accuracy1.text(selectedData.Accuracy);
+	total_ppv1.text(selectedData.PPV);
+	total_fpr1.text(selectedData.FPR);
+	total_fnr1.text(selectedData.FNR);
 
-	tpa.text(selectedData.Tpa);
-	fna.text(selectedData.Fna);
-	fpa.text(selectedData.Fpa);
-	tna.text(selectedData.Tna);
-	tpb.text(selectedData.Tpb);
-	fnb.text(selectedData.Fnb);
-	fpb.text(selectedData.Fpb);
-	tnb.text(selectedData.Tnb);
+	tpa1.text(selectedData.Tpa);
+	fna1.text(selectedData.Fna);
+	fpa1.text(selectedData.Fpa);
+	tna1.text(selectedData.Tna);
+	tpb1.text(selectedData.Tpb);
+	fnb1.text(selectedData.Fnb);
+	fpb1.text(selectedData.Fpb);
+	tnb1.text(selectedData.Tnb);
 
 	f1atext.text(selectedData.F1a);
 	f1btext.text(selectedData.F1b);
@@ -456,7 +456,7 @@ function populateData() {
 	threshold1.text(selectedData.ThresholdA);
 	threshold2.text(selectedData.ThresholdB);
 	var tuple = "(" + selectedData.ThresholdA + "," + selectedData.ThresholdB + ")";
-	if(category == "Race") {
+	if(category1 == "Race") {
 		var fairness = countRaceDict[tuple];
 	} else {
 		var fairness = countGenderDict[tuple];
@@ -468,42 +468,42 @@ function populateData() {
 	}
 
 	var sum = parseInt(selectedData.Tpa, 10) + parseInt(selectedData.Fna, 10);
-	col1TotA.text(sum);
+	col1TotA1.text(sum);
 	var sum = parseInt(selectedData.Fpa, 10) + parseInt(selectedData.Tna, 10);
-	col2TotA.text(sum);
+	col2TotA1.text(sum);
 	var sum1 = parseInt(selectedData.Tpa, 10) + parseInt(selectedData.Fpa, 10);
-	row1TotA.text(sum1);
+	row1TotA1.text(sum1);
 	var sum2 = parseInt(selectedData.Tna, 10) + parseInt(selectedData.Fna, 10);
-	row2TotA.text(sum2);
+	row2TotA1.text(sum2);
 	var sum = sum1 + sum2;
-	totA.text(sum);
+	totA1.text(sum);
 
 	var sum = parseInt(selectedData.Tpb, 10) + parseInt(selectedData.Fnb, 10);
-	col1TotB.text(sum);
+	col1TotB1.text(sum);
 	var sum = parseInt(selectedData.Fpb, 10) + parseInt(selectedData.Tnb, 10);
-	col2TotB.text(sum);
+	col2TotB1.text(sum);
 	var sum1 = parseInt(selectedData.Tpb, 10) + parseInt(selectedData.Fpb, 10);
-	row1TotB.text(sum1);
+	row1TotB1.text(sum1);
 	var sum2 = parseInt(selectedData.Tnb, 10) + parseInt(selectedData.Fnb, 10);
-	row2TotB.text(sum2);
+	row2TotB1.text(sum2);
 	var sum = sum1 + sum2;
-	totB.text(sum);
+	totB1.text(sum);
 }
 
-function filterFairness() {
-    currentData = categoryData.filter(element => element.Optimized == fairness);
+function filterFairness1() {
+    currentData = categoryData.filter(element => element.Optimized == fairness1);
     var len = currentData.length;
     var selectIndex = Math.floor(Math.random() * (len));
     selectedData = currentData[selectIndex];
-    populateData();
+    populateData1();
 }
 
-function changeData() {
-    categoryData = data.filter(element => element.Group == category);
-    filterFairness();
+function changeData1() {
+    categoryData = data.filter(element => element.Group == category1);
+    filterFairness1();
 }
 
-function createCountDict() {
+function createCountDict1() {
 	data1 = data.filter(element => element.Group == "Race");
 	data2 = data.filter(element => element.Group == "Gender");
 	var len = data1.length;
@@ -533,24 +533,24 @@ function createCountDict() {
 d3.csv("results.csv", function(readdata) {
     data = readdata;
     // console.log(data);
-	createCountDict();
+	createCountDict1();
 });
 
-var toggleCatColor = (function() {
+var toggleCatColor1 = (function() {
 	return function() {
-		d3.selectAll('.category').style('fill', '#E5FCC2');
+		d3.selectAll('.category1').style('fill', '#E5FCC2');
 		d3.select(this).style('fill', '#9DE0AD');
-		category = this.id;
-		changeData();
+		category1 = this.id;
+		changeData1();
 	}
 })();
 
-var toggleFairColor = (function() {
+var toggleFairColor1 = (function() {
 	return function() {
-		d3.selectAll('.fairness').style('fill', '#E5FCC2');
+		d3.selectAll('.fairness1').style('fill', '#E5FCC2');
 		d3.select(this).style('fill', '#9DE0AD');
-		fairness = this.id;
-		changeData();
+		fairness1 = this.id;
+		changeData1();
 	}
 })();
 
@@ -558,68 +558,68 @@ var toggleFairColor = (function() {
 //                        SECTION 1
 //=============================================================================
 var raceButton = svg.append('rect')
-	.attrs({x: 350, y: 190, width: 100, height: 40, 'fill': '#9DE0AD', 'class': 'category', 'id': 'Race'})
+	.attrs({x: 350, y: 190, width: 100, height: 40, 'fill': '#9DE0AD', 'class': 'category1', 'id': 'Race'})
 	.style('stroke', '#594F4F')
-	.on('click', toggleCatColor);
+	.on('click', toggleCatColor1);
 var text = svg.append('text').text('RACE')
 	.attrs({x: 400, y: 215, 'text-anchor': 'middle', 'font-size': 15})
     .style('fill', '#594F4F');
 
 var genderButton = svg.append('rect')
-	.attrs({x: 500, y: 190, width: 100, height: 40, 'fill': '#E5FCC2', 'class': 'category', 'id': 'Gender'})
+	.attrs({x: 500, y: 190, width: 100, height: 40, 'fill': '#E5FCC2', 'class': 'category1', 'id': 'Gender'})
 	.style('stroke', '#594F4F')
-	.on('click', toggleCatColor);
+	.on('click', toggleCatColor1);
 var text = svg.append('text').text('GENDER')
 	.attrs({x: 550, y: 215, 'text-anchor': 'middle', 'font-size': 15})
     .style('fill', '#594F4F');
 //=============================================================================
 //                        SECTION 2
 //=============================================================================
-var f1button = svg.append('rect')
-    .attrs({x: 190, y: 330, width: 30, height: 30, 'fill': '#E5FCC2', 'class': 'fairness', 'id': '1'})
+var f1button1 = svg.append('rect')
+    .attrs({x: 190, y: 330, width: 30, height: 30, 'fill': '#E5FCC2', 'class': 'fairness1', 'id': '1'})
 	.style('stroke', '#594F4F')
-	.on('click', toggleFairColor);
+	.on('click', toggleFairColor1);
 
-var f2button = svg.append('rect')
-    .attrs({x: 190, y: 370, width: 30, height: 30, 'fill': '#E5FCC2', 'class': 'fairness', 'id': '2'})
+var f2button1 = svg.append('rect')
+    .attrs({x: 190, y: 370, width: 30, height: 30, 'fill': '#E5FCC2', 'class': 'fairness1', 'id': '2'})
 	.style('stroke', '#594F4F')
-	.on('click', toggleFairColor);
+	.on('click', toggleFairColor1);
 
-var f3button = svg.append('rect')
-    .attrs({x: 190, y: 410, width: 30, height: 30, 'fill': '#E5FCC2', 'class': 'fairness', 'id': '3'})
+var f3button1 = svg.append('rect')
+    .attrs({x: 190, y: 410, width: 30, height: 30, 'fill': '#E5FCC2', 'class': 'fairness1', 'id': '3'})
 	.style('stroke', '#594F4F')
-	.on('click', toggleFairColor);
+	.on('click', toggleFairColor1);
 
-var f4button = svg.append('rect')
-    .attrs({x: 190, y: 450, width: 30, height: 30, 'fill': '#E5FCC2', 'class': 'fairness', 'id': '4'})
+var f4button1 = svg.append('rect')
+    .attrs({x: 190, y: 450, width: 30, height: 30, 'fill': '#E5FCC2', 'class': 'fairness1', 'id': '4'})
 	.style('stroke', '#594F4F')
-	.on('click', toggleFairColor);
+	.on('click', toggleFairColor1);
 
-var f5button = svg.append('rect')
-    .attrs({x: 190, y: 490, width: 30, height: 30, 'fill': '#E5FCC2', 'class': 'fairness', 'id': '5'})
+var f5button1 = svg.append('rect')
+    .attrs({x: 190, y: 490, width: 30, height: 30, 'fill': '#E5FCC2', 'class': 'fairness1', 'id': '5'})
 	.style('stroke', '#594F4F')
-	.on('click', toggleFairColor);
+	.on('click', toggleFairColor1);
 
-var f6button = svg.append('rect')
-    .attrs({x: 190, y: 530, width: 30, height: 30, 'fill': '#E5FCC2', 'class': 'fairness', 'id': '6'})
+var f6button1 = svg.append('rect')
+    .attrs({x: 190, y: 530, width: 30, height: 30, 'fill': '#E5FCC2', 'class': 'fairness1', 'id': '6'})
 	.style('stroke', '#594F4F')
-	.on('click', toggleFairColor);
+	.on('click', toggleFairColor1);
 //=============================================================================
 //                        SECTION 3
 //=============================================================================
-var total_accuracy = svg.append('text').text('')
+var total_accuracy1 = svg.append('text').text('')
     .attrs({x: 205, y: 680, 'font-size': 28, 'text-anchor': 'middle'})
     .style('fill', '#547980');
 
-var total_ppv = svg.append('text').text('')
+var total_ppv1 = svg.append('text').text('')
     .attrs({x: 205, y: 730, 'font-size': 28, 'text-anchor': 'middle'})
     .style('fill', '#547980');
 
-var total_fpr = svg.append('text').text('')
+var total_fpr1 = svg.append('text').text('')
     .attrs({x: 205, y: 780, 'font-size': 28, 'text-anchor': 'middle'})
     .style('fill', '#547980');
 
-var total_fnr = svg.append('text').text('')
+var total_fnr1 = svg.append('text').text('')
     .attrs({x: 205, y: 830, 'font-size': 28, 'text-anchor': 'middle'})
     .style('fill', '#547980');
 //=============================================================================
@@ -633,59 +633,59 @@ var group2 = svg.append('text').text('African-American')
     .attrs({x: 305, y: 630, 'font-size': 20})
     .style('fill', '#547980');
 
-var tpa = svg.append('text').text('TP')
+var tpa1 = svg.append('text').text('TP')
     .attrs({x: 429, y: 453, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var fna = svg.append('text').text('FN')
+var fna1 = svg.append('text').text('FN')
     .attrs({x: 429, y: 530, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var fpa = svg.append('text').text('FP')
+var fpa1 = svg.append('text').text('FP')
     .attrs({x: 554, y: 453, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var tna = svg.append('text').text('TN')
+var tna1 = svg.append('text').text('TN')
     .attrs({x: 554, y: 530, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var tpb = svg.append('text').text('TP')
+var tpb1 = svg.append('text').text('TP')
     .attrs({x: 429, y: 723, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var fnb = svg.append('text').text('FN')
+var fnb1 = svg.append('text').text('FN')
     .attrs({x: 429, y: 800, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var fpb = svg.append('text').text('FP')
+var fpb1 = svg.append('text').text('FP')
     .attrs({x: 554, y: 723, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var tnb = svg.append('text').text('TN')
+var tnb1 = svg.append('text').text('TN')
     .attrs({x: 554, y: 800, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
 
-var col1TotA = svg.append('text').text('')
+var col1TotA1 = svg.append('text').text('')
     .attrs({x: 429, y: 590, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var col2TotA = svg.append('text').text('')
+var col2TotA1 = svg.append('text').text('')
     .attrs({x: 554, y: 590, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var col1TotB = svg.append('text').text('')
+var col1TotB1 = svg.append('text').text('')
     .attrs({x: 429, y: 860, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var col2TotB = svg.append('text').text('')
+var col2TotB1 = svg.append('text').text('')
     .attrs({x: 554, y: 860, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var row1TotA = svg.append('text').text('')
+var row1TotA1 = svg.append('text').text('')
     .attrs({x: 650, y: 453, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var row2TotA = svg.append('text').text('')
+var row2TotA1 = svg.append('text').text('')
     .attrs({x: 650, y: 530, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var row1TotB = svg.append('text').text('')
+var row1TotB1 = svg.append('text').text('')
     .attrs({x: 650, y: 723, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var row2TotB = svg.append('text').text('')
+var row2TotB1 = svg.append('text').text('')
     .attrs({x: 650, y: 800, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var totA = svg.append('text').text('')
+var totA1 = svg.append('text').text('')
 	.attrs({x: 650, y: 590, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var totB = svg.append('text').text('')
+var totB1 = svg.append('text').text('')
 	.attrs({x: 650, y: 860, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
 //=============================================================================
