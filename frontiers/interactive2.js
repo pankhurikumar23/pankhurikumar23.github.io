@@ -16,293 +16,299 @@ var svg = d3.select('#interactive2').html('')
 //=============================================================================
 //                        HEADING
 //=============================================================================
-var text = svg.append('text').text('FAIRNESS IN MACHINE LEARNING')
+var gheading = svg.append('g');
+var text = gheading.append('text').text('FAIRNESS IN MACHINE LEARNING')
     .attrs({x: 20, y: 53, 'font-size': 33})
     .style('fill', '#594F4F');
-var text = svg.append('text').text("You're an algorithm designer with a quest:")
+var text = gheading.append('text').text("You're an algorithm designer with a quest:")
     .attrs({x: 20, y: 85, 'font-size': 14})
     .style('fill', '#594F4F');
-var text = svg.append('text').text("Testing an algorithm to find what definitions of fairness")
+var text = gheading.append('text').text("Testing an algorithm to find what definitions of fairness")
     .attrs({x: 320, y: 85, 'font-size': 14, 'font-weight': 'bold'})
     .style('fill', '#594F4F');
-var text = svg.append('text').text("you can satisfy simultaneously.")
+var text = gheading.append('text').text("you can satisfy simultaneously.")
     .attrs({x: 20, y: 105, 'font-size': 14, 'font-weight': 'bold'})
     .style('fill', '#594F4F');
-var text = svg.append('text').text("Try to optimize fairness, using real crime-risk assessment data from the")
+var text = gheading.append('text').text("Try to optimize fairness, using real crime-risk assessment data from the")
     .attrs({x: 270, y: 105, 'font-size': 14})
     .style('fill', '#594F4F');
-var text = svg.append('text').text("ProPublica investigation 'Machine Bias.' Some thresholds may satisfy other kinds of fairness, while others")
+var text = gheading.append('text').text("ProPublica investigation 'Machine Bias.' Some thresholds may satisfy other kinds of fairness, while others")
     .attrs({x: 20, y: 125, 'font-size': 14})
     .style('fill', '#594F4F');
-var text = svg.append('text').text("won't. Some kinds of fairness may not be achievable in certain protected groups.")
+var text = gheading.append('text').text("won't. Some kinds of fairness may not be achievable in certain protected groups.")
     .attrs({x: 20, y: 145, 'font-size': 14})
     .style('fill', '#594F4F');
-var line = svg.append('line')
+var line = gheading.append('line')
     .attrs({x1: 20, y1: 170, x2: 1180, y2: 170})
     .style('stroke', '#594F4F')
     .style('stroke-width', 2);
-var line = svg.append('line')
+var line = gheading.append('line')
     .attrs({x1: 20, y1: 250, x2: 1180, y2: 250})
     .style('stroke', '#594F4F')
     .style('stroke-width', 2);
 //=============================================================================
 //                        SECTION 1
 //=============================================================================
-var text = svg.append('text').text('1.')
+var g1 = svg.append('g');
+var text = g1.append('text').text('1.')
     .attrs({x: 40, y: 215, 'font-size': 25})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('CHOOSE A')
+var text = g1.append('text').text('CHOOSE A')
     .attrs({x: 70, y: 205, 'font-size': 15})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('PROTECTED CATEGORY')
+var text = g1.append('text').text('PROTECTED CATEGORY')
     .attrs({x: 70, y: 225, 'font-size': 15})
     .style('fill', '#594F4F');
 //=============================================================================
 //                        SECTION 2
 //=============================================================================
-var text = svg.append('text').text('2.')
+var g2 = svg.append('g');
+var text = g2.append('text').text('2.')
     .attrs({x: 35, y: 295, 'font-size': 25})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('SELECT A FAIRNESS')
+var text = g2.append('text').text('SELECT A FAIRNESS')
     .attrs({x: 70, y: 280, 'font-size': 15})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('TO OPTIMIZE')
+var text = g2.append('text').text('TO OPTIMIZE')
     .attrs({x: 70, y: 300, 'font-size': 15})
     .style('fill', '#594F4F');
-var line = svg.append('line')
+var line = g2.append('line')
     .attrs({x1: 20, y1: 315, x2: 250, y2: 315})
     .style('stroke', '#594F4F')
     .style('stroke-width', 1);
 
-var text = svg.append('text').text('Overall Accuracy')
+var text = g2.append('text').text('Overall Accuracy')
     .attrs({x: 20, y: 345, 'font-size': 14})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Equality')
+var text = g2.append('text').text('Equality')
     .attrs({x: 20, y: 360, 'font-size': 14})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Statistical Parity')
+var text = g2.append('text').text('Statistical Parity')
     .attrs({x: 20, y: 390, 'font-size': 14})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Conditional Procedure')
+var text = g2.append('text').text('Conditional Procedure')
     .attrs({x: 20, y: 425, 'font-size': 14})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Accuracy Equality')
+var text = g2.append('text').text('Accuracy Equality')
     .attrs({x: 20, y: 440, 'font-size': 14})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Conditional Use')
+var text = g2.append('text').text('Conditional Use')
     .attrs({x: 20, y: 465, 'font-size': 14})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Accuracy Equality')
+var text = g2.append('text').text('Accuracy Equality')
     .attrs({x: 20, y: 480, 'font-size': 14})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Treatment Equality')
+var text = g2.append('text').text('Treatment Equality')
     .attrs({x: 20, y: 510, 'font-size': 14})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Total Fairness')
+var text = g2.append('text').text('Total Fairness')
     .attrs({x: 20, y: 550, 'font-size': 14})
     .style('fill', '#594F4F');
-var line = svg.append('line')
+var line = g2.append('line')
     .attrs({x1: 20, y1: 575, x2: 250, y2: 575})
     .style('stroke', '#594F4F')
     .style('stroke-width', 2);
 //=============================================================================
 //                        SECTION 3
 //=============================================================================
-var text = svg.append('text').text('3.')
+var g3 = svg.append('g');
+var text = g3.append('text').text('3.')
     .attrs({x: 35, y: 615, 'font-size': 25})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('CHECK OVERALL')
+var text = g3.append('text').text('CHECK OVERALL')
     .attrs({x: 70, y: 600, 'font-size': 15})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('STATISTICS')
+var text = g3.append('text').text('STATISTICS')
     .attrs({x: 70, y: 620, 'font-size': 15})
     .style('fill', '#594F4F');
-var line = svg.append('line')
+var line = g3.append('line')
     .attrs({x1: 20, y1: 635, x2: 250, y2: 635})
     .style('stroke', '#594F4F')
     .style('stroke-width', 1);
 
-var text = svg.append('text').text('Overall Accuracy: ')
+var text = g3.append('text').text('Overall Accuracy: ')
     .attrs({x: 20, y: 675, 'font-size': 14})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Overall Positive')
+var text = g3.append('text').text('Overall Positive')
     .attrs({x: 20, y: 715, 'font-size': 14})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Predictive Power:')
+var text = g3.append('text').text('Predictive Power:')
     .attrs({x: 20, y: 730, 'font-size': 14})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Overall False')
+var text = g3.append('text').text('Overall False')
     .attrs({x: 20, y: 765, 'font-size': 14})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Positive Rate:')
+var text = g3.append('text').text('Positive Rate:')
     .attrs({x: 20, y: 780, 'font-size': 14})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Overall False')
+var text = g3.append('text').text('Overall False')
     .attrs({x: 20, y: 815, 'font-size': 14})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Negative Rate:')
+var text = g3.append('text').text('Negative Rate:')
     .attrs({x: 20, y: 830, 'font-size': 14})
     .style('fill', '#594F4F');
 //=============================================================================
 //                        SECTION 4
 //=============================================================================
-var text = svg.append('text').text('4.')
+var g4 = svg.append('g');
+var text = g4.append('text').text('4.')
     .attrs({x: 310, y: 295, 'font-size': 25})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('EXAMINE AND COMPARE')
+var text = g4.append('text').text('EXAMINE AND COMPARE')
     .attrs({x: 345, y: 280, 'font-size': 15})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('THRESHOLDS FOR BOTH GROUPS')
+var text = g4.append('text').text('THRESHOLDS FOR BOTH GROUPS')
     .attrs({x: 345, y: 300, 'font-size': 15})
     .style('fill', '#594F4F');
-var line = svg.append('line')
+var line = g4.append('line')
     .attrs({x1: 295, y1: 315, x2: 755, y2: 315})
     .style('stroke', '#594F4F')
     .style('stroke-width', 1);
 
-var rect = svg.append('rect')
+var rect = g4.append('rect')
     .attrs({x: 295, y: 370, width: 460, height: 230, 'fill': '#E5FCC2'})
     .style('stroke', '#594F4F')
     .style('stroke-width', 1);
-var rect = svg.append('rect')
+var rect = g4.append('rect')
     .attrs({x: 295, y: 640, width: 460, height: 230, 'fill': '#E5FCC2'})
     .style('stroke', '#594F4F')
     .style('stroke-width', 1);
 //=============================================================================
 //                        SECTION 5
 //=============================================================================
-var text = svg.append('text').text('5.')
+var g5 = svg.append('g');
+var text = g5.append('text').text('5.')
     .attrs({x: 805, y: 295, 'font-size': 25})
     .style('fill', '#594F4F');
-var text = svg.append('text').text("CHECK THE MATH")
+var text = g5.append('text').text("CHECK THE MATH")
     .attrs({x: 840, y: 290, 'font-size': 15})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Here are the confusion matrices for your choice')
+var text = g5.append('text').text('Here are the confusion matrices for your choice')
     .attrs({x: 805, y: 315, 'font-size': 14})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('of optimized fairness, where difference between')
+var text = g5.append('text').text('of optimized fairness, where difference between')
     .attrs({x: 805, y: 332, 'font-size': 14})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('fairness is less than 0.01.')
+var text = g5.append('text').text('fairness is less than 0.01.')
     .attrs({x: 805, y: 349, 'font-size': 14})
     .style('fill', '#594F4F');
 
-var rect = svg.append('rect')
+var rect = g5.append('rect')
     .attrs({x: 805, y: 370, width: 375, height: 230, 'fill': '#E5FCC2'})
     .style('stroke', '#594F4F')
     .style('stroke-width', 1);
-var rect = svg.append('rect')
+var rect = g5.append('rect')
     .attrs({x: 805, y: 640, width: 375, height: 230, 'fill': '#E5FCC2'})
     .style('stroke', '#594F4F')
     .style('stroke-width', 1);
 
-var line = svg.append('line')
+var line = g5.append('line')
     .attrs({x1: 867, y1: 370, x2: 867, y2: 600})
     .style('stroke', '#594F4F')
     .style('stroke-width', 1);
-var line = svg.append('line')
+var line = g5.append('line')
     .attrs({x1: 867, y1: 640, x2: 867, y2: 870})
     .style('stroke', '#594F4F')
     .style('stroke-width', 1);
-var line = svg.append('line')
+var line = g5.append('line')
     .attrs({x1: 992, y1: 370, x2: 992, y2: 600})
     .style('stroke', '#594F4F')
     .style('stroke-width', 1);
-var line = svg.append('line')
+var line = g5.append('line')
     .attrs({x1: 992, y1: 640, x2: 992, y2: 870})
     .style('stroke', '#594F4F')
     .style('stroke-width', 1);
-var line = svg.append('line')
+var line = g5.append('line')
     .attrs({x1: 1117, y1: 370, x2: 1117, y2: 600})
     .style('stroke', '#594F4F')
     .style('stroke-width', 1);
-var line = svg.append('line')
+var line = g5.append('line')
     .attrs({x1: 1117, y1: 640, x2: 1117, y2: 870})
     .style('stroke', '#594F4F')
     .style('stroke-width', 1);
-var line = svg.append('line')
+var line = g5.append('line')
     .attrs({x1: 805, y1: 408, x2: 1180, y2: 408})
     .style('stroke', '#594F4F')
     .style('stroke-width', 1);
-var line = svg.append('line')
+var line = g5.append('line')
     .attrs({x1: 805, y1: 678, x2: 1180, y2: 678})
     .style('stroke', '#594F4F')
     .style('stroke-width', 1);
-var line = svg.append('line')
+var line = g5.append('line')
     .attrs({x1: 805, y1: 485, x2: 1180, y2: 485})
     .style('stroke', '#594F4F')
     .style('stroke-width', 1);
-var line = svg.append('line')
+var line = g5.append('line')
     .attrs({x1: 805, y1: 755, x2: 1180, y2: 755})
     .style('stroke', '#594F4F')
     .style('stroke-width', 1);
-var line = svg.append('line')
+var line = g5.append('line')
     .attrs({x1: 805, y1: 562, x2: 1180, y2: 562})
     .style('stroke', '#594F4F')
     .style('stroke-width', 1);
-var line = svg.append('line')
+var line = g5.append('line')
     .attrs({x1: 805, y1: 832, x2: 1180, y2: 832})
     .style('stroke', '#594F4F')
     .style('stroke-width', 1);
 
-var text = svg.append('text').text('Actual')
+var text = g5.append('text').text('Actual')
     .attrs({x: 930, y: 385, 'font-size': 14, 'text-anchor': 'middle'})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Positives')
+var text = g5.append('text').text('Positives')
     .attrs({x: 930, y: 403, 'font-size': 14, 'text-anchor': 'middle'})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Actual')
+var text = g5.append('text').text('Actual')
     .attrs({x: 1055, y: 385, 'font-size': 14, 'text-anchor': 'middle'})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Negatives')
+var text = g5.append('text').text('Negatives')
     .attrs({x: 1055, y: 403, 'font-size': 14, 'text-anchor': 'middle'})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Pred.')
+var text = g5.append('text').text('Pred.')
     .attrs({x: 836, y: 433, 'font-size': 14, 'text-anchor': 'middle'})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Posi-')
+var text = g5.append('text').text('Posi-')
     .attrs({x: 836, y: 453, 'font-size': 14, 'text-anchor': 'middle'})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('tive')
+var text = g5.append('text').text('tive')
     .attrs({x: 836, y: 469, 'font-size': 14, 'text-anchor': 'middle'})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Pred.')
+var text = g5.append('text').text('Pred.')
     .attrs({x: 836, y: 510, 'font-size': 14, 'text-anchor': 'middle'})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Nega-')
+var text = g5.append('text').text('Nega-')
     .attrs({x: 836, y: 530, 'font-size': 14, 'text-anchor': 'middle'})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('tive')
+var text = g5.append('text').text('tive')
     .attrs({x: 836, y: 546, 'font-size': 14, 'text-anchor': 'middle'})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Actual')
+var text = g5.append('text').text('Actual')
     .attrs({x: 930, y: 655, 'font-size': 14, 'text-anchor': 'middle'})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Positives')
+var text = g5.append('text').text('Positives')
     .attrs({x: 930, y: 673, 'font-size': 14, 'text-anchor': 'middle'})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Actual')
+var text = g5.append('text').text('Actual')
     .attrs({x: 1055, y: 655, 'font-size': 14, 'text-anchor': 'middle'})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Negatives')
+var text = g5.append('text').text('Negatives')
     .attrs({x: 1055, y: 673, 'font-size': 14, 'text-anchor': 'middle'})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Pred.')
+var text = g5.append('text').text('Pred.')
     .attrs({x: 836, y: 703, 'font-size': 14, 'text-anchor': 'middle'})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Posi-')
+var text = g5.append('text').text('Posi-')
     .attrs({x: 836, y: 723, 'font-size': 14, 'text-anchor': 'middle'})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('tive')
+var text = g5.append('text').text('tive')
     .attrs({x: 836, y: 739, 'font-size': 14, 'text-anchor': 'middle'})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Pred.')
+var text = g5.append('text').text('Pred.')
     .attrs({x: 836, y: 780, 'font-size': 14, 'text-anchor': 'middle'})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('Nega-')
+var text = g5.append('text').text('Nega-')
     .attrs({x: 836, y: 800, 'font-size': 14, 'text-anchor': 'middle'})
     .style('fill', '#594F4F');
-var text = svg.append('text').text('tive')
+var text = g5.append('text').text('tive')
     .attrs({x: 836, y: 816, 'font-size': 14, 'text-anchor': 'middle'})
     .style('fill', '#594F4F');
 //=============================================================================
@@ -320,6 +326,57 @@ var countRaceDict = {};
 var countGenderDict = {};
 var category = "Race";
 var fairness = 0;
+
+function drawGraph() {
+    var caucasian_data =
+    var afAm_data =
+    var male_data =
+    var female_data =
+    var data1 = [];
+    var data2 = [];
+
+    if(category == "Race") {
+        data1 = caucasian_data;
+        data2 = afAm_data;
+    } else {
+        data1 = male_data;
+        data2 = female_data;
+    }
+
+    var chart1 = g5.selectAll('rect')
+        .data(data1)
+        .enter()
+        .append('rect')
+        .attr('x', function (d, i) {
+            return 295 + (46 * i);
+        })
+        .attr('y', function(d) {
+            return 600 - d - 1;
+        })
+        .attr('height', function(d) {
+            return d;
+        })
+        .attr('width', 41)
+    	.attr('fill', '#547980');
+
+
+    var chart2 = g5.selectAll('rect')
+        .data(data2)
+        .enter()
+        .append('rect')
+        .attr('x', function (d, i) {
+            return 295 + (46 * i);
+        })
+        .attr('y', function(d) {
+            return 830 - d - 1;
+        })
+        .attr('height', function(d) {
+            return d;
+        })
+        .attr('width', 41)
+    	.attr('fill', '#547980');
+    console.log(chart2);
+}
 
 function populateData() {
 	if(category == "Gender") {
@@ -379,6 +436,7 @@ function populateData() {
 	row2TotB.text(sum2);
 	var sum = sum1 + sum2;
 	totB.text(sum);
+	drawGraph();
 }
 
 function filterFairness() {
@@ -433,6 +491,7 @@ var toggleCatColor = (function() {
 		d3.select(this).style('fill', '#9DE0AD');
 		category = this.id;
 		changeData();
+		// drawGraph();
 	}
 })();
 
@@ -448,154 +507,154 @@ var toggleFairColor = (function() {
 //=============================================================================
 //                        SECTION 1
 //=============================================================================
-var raceButton = svg.append('rect')
+var raceButton = g1.append('rect')
 	.attrs({x: 350, y: 190, width: 100, height: 40, 'fill': '#9DE0AD', 'class': 'category', 'id': 'Race'})
 	.style('stroke', '#594F4F')
 	.on('click', toggleCatColor);
-var text = svg.append('text').text('RACE')
+var text = g1.append('text').text('RACE')
 	.attrs({x: 400, y: 215, 'text-anchor': 'middle', 'font-size': 15})
     .style('fill', '#594F4F');
 
-var genderButton = svg.append('rect')
+var genderButton = g1.append('rect')
 	.attrs({x: 500, y: 190, width: 100, height: 40, 'fill': '#E5FCC2', 'class': 'category', 'id': 'Gender'})
 	.style('stroke', '#594F4F')
 	.on('click', toggleCatColor);
-var text = svg.append('text').text('GENDER')
+var text = g1.append('text').text('GENDER')
 	.attrs({x: 550, y: 215, 'text-anchor': 'middle', 'font-size': 15})
     .style('fill', '#594F4F');
 //=============================================================================
 //                        SECTION 2
 //=============================================================================
-var f1button = svg.append('rect')
+var f1button = g2.append('rect')
     .attrs({x: 190, y: 330, width: 30, height: 30, 'fill': '#E5FCC2', 'class': 'fairness', 'id': '1'})
 	.style('stroke', '#594F4F')
 	.on('click', toggleFairColor);
 
-var f2button = svg.append('rect')
+var f2button = g2.append('rect')
     .attrs({x: 190, y: 370, width: 30, height: 30, 'fill': '#E5FCC2', 'class': 'fairness', 'id': '2'})
 	.style('stroke', '#594F4F')
 	.on('click', toggleFairColor);
 
-var f3button = svg.append('rect')
+var f3button = g2.append('rect')
     .attrs({x: 190, y: 410, width: 30, height: 30, 'fill': '#E5FCC2', 'class': 'fairness', 'id': '3'})
 	.style('stroke', '#594F4F')
 	.on('click', toggleFairColor);
 
-var f4button = svg.append('rect')
+var f4button = g2.append('rect')
     .attrs({x: 190, y: 450, width: 30, height: 30, 'fill': '#E5FCC2', 'class': 'fairness', 'id': '4'})
 	.style('stroke', '#594F4F')
 	.on('click', toggleFairColor);
 
-var f5button = svg.append('rect')
+var f5button = g2.append('rect')
     .attrs({x: 190, y: 490, width: 30, height: 30, 'fill': '#E5FCC2', 'class': 'fairness', 'id': '5'})
 	.style('stroke', '#594F4F')
 	.on('click', toggleFairColor);
 
-var f6button = svg.append('rect')
+var f6button = g2.append('rect')
     .attrs({x: 190, y: 530, width: 30, height: 30, 'fill': '#E5FCC2', 'class': 'fairness', 'id': '6'})
 	.style('stroke', '#594F4F')
 	.on('click', toggleFairColor);
 //=============================================================================
 //                        SECTION 3
 //=============================================================================
-var total_accuracy = svg.append('text').text('')
+var total_accuracy = g3.append('text').text('')
     .attrs({x: 205, y: 680, 'font-size': 28, 'text-anchor': 'middle'})
     .style('fill', '#547980');
 
-var total_ppv = svg.append('text').text('')
+var total_ppv = g3.append('text').text('')
     .attrs({x: 205, y: 730, 'font-size': 28, 'text-anchor': 'middle'})
     .style('fill', '#547980');
 
-var total_fpr = svg.append('text').text('')
+var total_fpr = g3.append('text').text('')
     .attrs({x: 205, y: 780, 'font-size': 28, 'text-anchor': 'middle'})
     .style('fill', '#547980');
 
-var total_fnr = svg.append('text').text('')
+var total_fnr = g3.append('text').text('')
     .attrs({x: 205, y: 830, 'font-size': 28, 'text-anchor': 'middle'})
     .style('fill', '#547980');
 //=============================================================================
 //                        SECTION 4
 //=============================================================================
-var group1 = svg.append('text').text('Caucasian')
+var group1 = g4.append('text').text('Caucasian')
     .attrs({x: 295, y: 360, 'font-size': 20})
     .style('fill', '#547980');
 
-var group2 = svg.append('text').text('African-American')
+var group2 = g4.append('text').text('African-American')
     .attrs({x: 295, y: 630, 'font-size': 20})
     .style('fill', '#547980');
 
-var threshold1 = svg.append('text').text('')
+var threshold1 = g4.append('text').text('')
     .attrs({x: 525, y: 360, 'font-size': 30, 'text-anchor': 'middle'})
     .style('fill', '#547980');
 
-var threshold2 = svg.append('text').text('')
+var threshold2 = g4.append('text').text('')
     .attrs({x: 525, y: 630, 'font-size': 30, 'text-anchor': 'middle'})
     .style('fill', '#547980');
 
-var group1Rect = svg.append('rect')
-    .attrs({x: 295, y: 370, width: 460, height: 230, 'fill': '#E5FCC2'})
+var group1Rect = g4.append('rect')
+    .attrs({x: 295, y: 370, width: 460, height: 230, 'fill': '#E5FCC2', 'class': 'group1Rect'})
     .style('stroke', '#594F4F')
     .style('stroke-width', 1);
 
-var group2Rect = svg.append('rect')
-    .attrs({x: 295, y: 640, width: 460, height: 230, 'fill': '#E5FCC2'})
+var group2Rect = g4.append('rect')
+    .attrs({x: 295, y: 640, width: 460, height: 230, 'fill': '#E5FCC2', 'class': 'group2Rect'})
     .style('stroke', '#594F4F')
     .style('stroke-width', 1);
 //=============================================================================
 //                        SECTION 5
 //=============================================================================
-var tpa = svg.append('text').text('TP')
+var tpa = g5.append('text').text('TP')
     .attrs({x: 929, y: 453, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var fna = svg.append('text').text('FN')
+var fna = g5.append('text').text('FN')
     .attrs({x: 929, y: 530, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var fpa = svg.append('text').text('FP')
+var fpa = g5.append('text').text('FP')
     .attrs({x: 1054, y: 453, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var tna = svg.append('text').text('TN')
+var tna = g5.append('text').text('TN')
     .attrs({x: 1054, y: 530, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var tpb = svg.append('text').text('TP')
+var tpb = g5.append('text').text('TP')
     .attrs({x: 929, y: 723, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var fnb = svg.append('text').text('FN')
+var fnb = g5.append('text').text('FN')
     .attrs({x: 929, y: 800, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var fpb = svg.append('text').text('FP')
+var fpb = g5.append('text').text('FP')
     .attrs({x: 1054, y: 723, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var tnb = svg.append('text').text('TN')
+var tnb = g5.append('text').text('TN')
     .attrs({x: 1054, y: 800, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
 
-var col1TotA = svg.append('text').text('')
+var col1TotA = g5.append('text').text('')
     .attrs({x: 929, y: 590, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var col2TotA = svg.append('text').text('')
+var col2TotA = g5.append('text').text('')
     .attrs({x: 1054, y: 590, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var col1TotB = svg.append('text').text('')
+var col1TotB = g5.append('text').text('')
     .attrs({x: 929, y: 860, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var col2TotB = svg.append('text').text('')
+var col2TotB = g5.append('text').text('')
     .attrs({x: 1054, y: 860, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var row1TotA = svg.append('text').text('')
+var row1TotA = g5.append('text').text('')
     .attrs({x: 1150, y: 453, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var row2TotA = svg.append('text').text('')
+var row2TotA = g5.append('text').text('')
     .attrs({x: 1150, y: 530, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var row1TotB = svg.append('text').text('')
+var row1TotB = g5.append('text').text('')
     .attrs({x: 1150, y: 723, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var row2TotB = svg.append('text').text('')
+var row2TotB = g5.append('text').text('')
     .attrs({x: 1150, y: 800, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var totA = svg.append('text').text('')
+var totA = g5.append('text').text('')
 	.attrs({x: 1150, y: 590, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
-var totB = svg.append('text').text('')
+var totB = g5.append('text').text('')
 	.attrs({x: 1150, y: 860, 'font-size': 20, 'text-anchor': 'middle'})
     .style('fill', '#547980');
