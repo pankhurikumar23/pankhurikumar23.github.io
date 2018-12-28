@@ -6,6 +6,7 @@ var data = [];
 d3.csv("transposed.csv", function(readdata) {
     data = readdata;
     console.log("Data Read!");
+    console.log(data.length);
 });
 
 const map = new mapboxgl.Map({
