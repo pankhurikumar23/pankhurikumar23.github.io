@@ -28,6 +28,28 @@ body {
   padding: 250px 0px 250px 0px;
 }
 
+#graph3{
+  margin-left: 100px;
+  width: 800px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  float: right;
+  /*background-color: #EEEEEE;*/
+  padding: 250px 0px 250px 0px;
+}
+
+#graph4{
+  margin-left: 100px;
+  width: 800px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  float: right;
+  /*background-color: #EEEEEE;*/
+  padding: 120px 0px 120px 0px;
+}
+
 .intro-text {
 	width: 900px;
 }
@@ -68,6 +90,7 @@ body {
 .cm-header {
   font-size: 30px;
   font-family: 'Lato', sans-serif;
+  color: #080E28;
   /*text-anchor: 'middle';*/
 }
 

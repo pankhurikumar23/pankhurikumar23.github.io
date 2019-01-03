@@ -102,7 +102,10 @@
 			</div>
 			<br>
 			<div class="information">
-				The columns represent the actual number of people in each category, positive being the ones that take coffee with sugar and negative are the ones without, while the rows represent the prediction of our algorithm. 
+				The columns represent the actual number of people in each category, positive being the ones that take coffee with sugar and negative are the ones without.
+			</div>
+			<div class="information">
+				On the other hand, the rows represent the predictions of the algorithm about the number of people in each category, positive being the ones that take coffee with sugar and negative are the ones without.
 			</div>
 			<br>
 			<div class="information">
@@ -172,7 +175,7 @@
 				Statistical Parity is achieved when the prediction distribution is the same across all protected groups. From our previous example, this implies that if sleep patterns was a protected class, the proportion of people predicted to have coffee with (or without) sugar should be equal for people who get less than five hours of sleep, and for people who get more than five hours of sleep.
 				<br>
 				<br>
-				Statistical parity, also known as demographic parity, has been criticized as it can lead to highly undesirable outcomes. 
+				Statistical parity, also known as demographic parity, has been criticized as it can lead to highly undesirable outcomes. It is defined as (TP + FP)/<i>N</i> or (FN + TN)/<i>N</i>.
 				<br>
 				<br>
 				By simply sampling more (or less) people from these predicted groups, we could modify the proportions for prediction distribution and achieve statistical parity by changing our population, rather than modifying our algorithm, to equalize the proportion of predictions based on sleep patterns.
@@ -197,7 +200,10 @@
 			<div class="information">
 				Treatment Equality
 				<br>
-				Treatment equality is achieved when the ratio of false negatives to false positives (or vice versa) is the same across protected groups. This equality is considered a "lever with which to achieve other kinds of fairness." We could treat people who get more sleep differently than people who get lesser sleep to achieve conditional use accuracy equality, by weighing their false negatives for heavily. This would change the treatment ratio, and would be an indicator of unfair treatment of people who get more seep.
+				Treatment equality is achieved when the ratio of false negatives to false positives (or vice versa) is the same across protected groups. This equality is considered a "lever with which to achieve other kinds of fairness." It is defined as FN/FP or FP/FN.
+				<br>
+				<br>
+				We could treat people who get more sleep differently than people who get lesser sleep to achieve conditional use accuracy equality, by weighing their false negatives for heavily. This would change the treatment ratio, and would be an indicator of unfair treatment of people who get more seep.
 			</div>
 			<div class="information">
 				Total Fairness
@@ -212,77 +218,69 @@
 			</div>
 		</div>
 	</div>
-
-	<div class="information">
-		Another way to look at fairness and discrimination is through the different variables that are involved in our model. A popular framework that forms the basis of most of our previous discussion looks at the relationship between our protected groups (A: a, b), our target variable (C) and some other variable (R). Using these three, we can define
-		<ul>
-			<li>
-				Independence: Our target variable C has to be independent of our protected groups A. For two groups, a and b, we should have P_a(C=c) and P_b(C=c) to be equal, meaning that the probability of two people being classified as people who like coffee with sugar is independent of the brand of shoe they wear.
-			</li>
-			<li>
-				Separation: 
-			</li>
-			<li>
-				Sufficiency
-			</li>
-		</ul>
+	<div class="container-4" id="container">
+  		<div id="graph4">
+  		</div>
+  		<div id="sections">
+			<div class="information">
+				Let us say we start out with 100 people, half who drink coffee with sugar, and half without. We create a confusion matrix like the one to the right.
+			</div>
+			<br>
+			<div class="information">
+				The columns represent the actual number of people in each category, positive being the ones that take coffee with sugar and negative are the ones without.
+			</div>
+			<div class="information">
+				On the other hand, the rows represent the predictions of the algorithm about the number of people in each category, positive being the ones that take coffee with sugar and negative are the ones without.
+			</div>
+			<br>
+			<div class="information">
+				We shorten the true positives, false positives, false negatives and true negatives to TP, FP, FN and TN respectively. The confusion matrix makes it very easy to record certain simple statistics:
+				<ul>
+					<li>
+						Sample size: This is the total number of observations, denoted by <i>N</i>, and is the sum of all four cells in the confusion matrix. So, <i>N</i> = TP + FP + FN + TN
+					</li>
+					<br>
+					<li>
+						Base Rate: This is the proportion of actual successes, or actual failures, from the total sample. The choice between success and failure depends on the experimenter. This is defined as (TP + FN)/<i>N</i> or (TP + FN)/(TP + FP + FN + TN), or (TP + FN)/<i>N</i>.
+					</li>
+					<br>
+					<li>
+						Prediction Distribution: The proportion of predictions predicted to fail, and the proportion predicted to succeed. This translates to (FN + TN)/<i>N</i> and (TP + FP)/<i>N</i> respectively.
+					</li>
+					<br>
+					<li>
+						Overall Procedure Error: This is the proportion of cases that are misclassified by our algorithm, (FP + FN)/(TP + FP + FN + TN). The complement to this is overall procedure accuracy, defined as (TP + TN)/(TP + FP + FN + TN).
+					</li>
+					<br>
+					<li>
+						Conditional Procedure Error: This is the proportion of cases misclassified <i>conditional on one of the two actual outcomes</i>. This gives us the <i> false positive rate</i>, FP/(FP + TN) or the <i>false negative rate</i>, FN/(TP + FN).
+					</li>
+					<br>
+					<li>
+						Conditional Use Error: This is the proportion of cases misclassified <i> conditional on one of the two predicted outcomes</i>. The incorrect failure predictions is FN/(TN + FN) and the incorrect success prediction proportion is FP/(TP + FP).
+					</li>
+				</ul>
+			</div>
+			<br>
+			<div class="information">
+				Fairness can be defined in <i>six</i> different ways, according to the State of the Art paper on Fairness Criminal Risk Assesments. Each of these definitions can further be represented using features of the confusion matrix, and the above defined concepts. The exact features that we use, however, will change depending on the type of fairness under consideration.
+			</div>
+			<br>
+			<div class="information">
+				The confusion matrix, however, makes it easy to see that different kinds of fairness are not only related to each other, but also with accuracy. It also simplifies the notion that total fairness cannot be achieved simultaneously.
+			</div>
+			<div class="information">
+				Coming back to our example of classifying people who like their sugar with coffee, we can see that the columns should add upto 50, since our population is split between people who like coffee with and without sugar. The sum of the rows, however, cannot be fixed within the population, and will depend on how our classifier algorithm is defined.
+			</div>
+			<div class="information">
+				Keep in mind, a confusion matrix can also be created for a subset of our sample. For example, we can have a confusion matrix for people who sleep less than five hours a day, and another for people who sleep more. We now define the different types of fairness, trying to balance fairness of our algorithm across both these (or any other) groups created on the basis of sleeping patterns.
+			</div>
+		</div>
 	</div>
 	<br>
 	<br>
 	<br>
 	<br>
-	<div class="information">
-		Ei vim accusam torquatos, cu per populo feugait. In verear nostrud quo, eos sale ponderum eleifend ad, vim ex oportere facilisis. Sea eu assum eloquentiam, quot atomorum vis cu, eu audire dolorum iudicabit est. Ad nusquam posidonium has, sit ornatus iracundia et. Vim ut tota habemus, sea stet debet utinam ea. Aeque accusamus eu nec.
-
-		Vidit aeterno scripserit has ne. No per vocent integre molestie, id duo magna electram pertinacia, ne pri dicam partem probatus. Vel eu ignota possit periculis, mea graece singulis no. Odio vero disputationi vim cu. Ad porro delicata sit, cu has detracto vituperata repudiandae.
-
-		Legimus recusabo usu ad, adipisci sensibus ad ius. Animal adipisci et eos. No graeci aperiri consetetur eos. Ubique ignota honestatis his cu, ad his dolore persius epicurei, inani minimum per id. Sit ut hendrerit neglegentur, in ignota tincidunt eum, per denique salutatus referrentur at. Vim debet vivendum te, perpetua adipiscing adversarium nec eu.
-
-		Et voluptua partiendo sit, mel mucius tibique antiopam ex. Harum gloriatur intellegam id per, ne alia stet vivendum mea, ne putant invidunt inciderint vel. Est causae dissentiunt et, ex antiopam consectetuer cum. No volumus nostrum pro, at stet quaeque sed. Prompta dolorem ut vis, possit apeirian scripserit no mea.
-	</div>
-	<br>
-	<div class="information">
-		Equidem pertinacia argumentum cu per, ei elit clita vel. Eum cu dicam assentior. Option tritani definitiones te mea. Sanctus labores id has, diam liber vis eu, imperdiet molestiae at ius. His te stet adolescens, pri fuisset referrentur ut. At est idque suscipit adolescens, cum ut tollit salutandi voluptatum.
-
-		An mea illum fabellas, in nec equidem ponderum. Quem contentiones ei sed. Eos ea eruditi imperdiet, deleniti hendrerit scriptorem vel in. Et modus nominati mel, ei his aperiri conceptam. Est adhuc cetero ea, vel ea inani placerat voluptaria. Brute error pri cu, eos ad soluta tamquam nominati.
-
-		Ei volumus detracto nam, ex detracto constituto pri. Clita ridens vix cu, possim eruditi reprimique nam ad. Ius ad unum semper minimum, iudico numquam ius et. Ut eos tota rationibus, ius id eirmod accommodare. Te vix accusam facilisi.
-	</div>
-	<div class="information">
-		Vix elit meliore in. Vix facete nostrud ad, duo putent abhorreant cu. An eius vulputate sea. Ea postulant referrentur eum, et vim libris dolorem quaerendum, sed eu debet adipiscing definitiones. Aperiam dissentiet te mea, ut duo minim errem iracundia, magna abhorreant vis ut. Has eius meliore percipitur ei, ut choro laboramus quo, ea viderer vivendo vix. Pri ut modus aeterno tacimates, brute prompta ex usu.
-
-		Sit nominavi probatus vituperatoribus ad, ea mei veri aperiam. Cetero percipit sed in, vis mucius ancillae assentior et, cum option aliquip singulis id. An rebum denique eam, vel an tempor aeterno. Ullum labores volumus ei has, at vim sint mutat, postea platonem et ius. Ea movet democritum theophrastus mea, no possit audire ocurreret sea.
-
-		His ut dictas delicata, vivendum consulatu eam at. An mel quem vide voluptatibus, an pri minimum consequat. At eius paulo has. Ius no brute docendi. Vix sensibus perpetua urbanitas cu. No est admodum deseruisse.
-	</div>
-	<div class="information">
-		Ut quo impedit tractatos consulatu, et nam quis euripidis. Iusto iudico mnesarchum duo ad. Docendi mediocrem disputationi an sea, illud ullum his ea. Qui mundi nihil euismod eu, at aliquid delectus dissentias est, tantas euripidis per ne.
-
-		An sanctus delectus perpetua sed. Referrentur instructior eos at. Simul propriae platonem ut quo, et vim primis civibus, no movet simul mea. Vide expetenda no sea, ei brute partem prompta vix. Ne viris tempor atomorum cum, id qui purto interesset.
-
-		Epicuri explicari ex mel, homero cotidieque complectitur vix ad. Sit iisque fabellas eu. Ex nam everti moderatius, est mucius insolens recusabo ad. Ad liber senserit efficiantur mel. Ei per illum viris.
-	</div>
-	<div class="information">
-		Duo quando numquam ei. Ei sed debet iuvaret salutatus, sonet accusamus cu vel. Nostro postulant hendrerit nam ex. Cu feugait percipit instructior has, qui diam veri eu. Eum ad malorum electram iracundia, ex doctus patrioque comprehensam mea. Posse clita incorrupte ne per, per te aliquando instructior.
-
-		Lorem minim et est, adhuc adversarium ullamcorper vis et, fuisset honestatis appellantur has id. Dicta tractatos ei his, epicurei intellegam no nam, eos facer menandri in. Te euismod dissentias quaerendum sit, principes interpretaris in cum, nam ad nonumes pericula qualisque. Qui augue eirmod an, et pro dolorem insolens erroribus.
-
-		Sed mnesarchum posidonium eu, partem tibique disputando an pri, mei fabellas voluptatum et. No aeterno minimum deleniti has, iusto albucius pro at. Ut dicta evertitur conceptam vim. Ut quo dolor accusam, dicta nusquam concludaturque ad his. Esse diceret eu vix, mel augue labore sententiae ex.
-	</div>
-	<div class="information">
-		Deleniti postulant democritum vim cu, detraxit invenire sed id, augue similique cu vim. Cum an errem laoreet veritus, vis iriure eloquentiam ex. Et quo omnium persequeris. Eu has novum mucius disputando, eos te modo sententiae.
-
-		Utinam option convenire et usu, civibus vituperata ut has, ne his facete delicata. Nam in nostrum propriae. No eos laoreet mentitum disputando, in cum erroribus signiferumque. Vel in quem propriae, ea his minimum theophrastus. Mei at vide tamquam, et nec ipsum persecuti reformidans, eum facer movet erroribus id.
-
-		Vim omnis albucius adolescens ei. Has electram suscipiantur delicatissimi et, referrentur definitionem vel in. At alii movet nam. Ad eos mucius legimus, vim facer putant an.
-	</div>
-	<div class="information">
-		Ius reque detracto petentium in, mei an tollit deterruisset. Mea ei natum volutpat persecuti. Debet nobis alienum no vis, ne nobis iuvaret mei, qui adhuc percipitur eu. Erant labitur scriptorem per ne.
-
-		Natum possim no est. Stet vero tritani ea nec, soleat viderer complectitur nec in, qui eu veritus vivendo consequuntur. Mea alii habeo theophrastus at, sed velit constituam te, noster quodsi vis ex. Ut vero maiorum ocurreret vel, virtute maiestatis accommodare eam ut. Veritus insolens et est.
-
-		Malis cotidieque est ne, et vis choro maiorum accusata. Quot praesent pertinacia et eum, ei illum homero pertinacia qui. Cu qui omnes iuvaret molestiae, quot ridens inimicus cu sit, eum mollis similique in. Et qui primis option. Ad vis vidisse adversarium.
-	</div>
 	<div id="interactive" class="interactive">
 	</div>
 	<div id="interactive2" class="interactive">
