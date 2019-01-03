@@ -4,7 +4,7 @@
 //=============================================================================
 //=============================================================================
 //=============================================================================
-//                       IMMOVABILITY
+//                       STATIC
 //=============================================================================
 //=============================================================================
 //=============================================================================
@@ -421,11 +421,11 @@ var fairness1 = 0;
 function populateData1() {
 	// console.log(selectedData);
 	if(category1 == "Gender") {
-    	group1.text("Male");
-    	group2.text("Female");
+    	group11.text("Male");
+    	group12.text("Female");
 	} else {
-    	group1.text("Caucasian");
-    	group2.text("African-American");
+    	group11.text("Caucasian");
+    	group12.text("African-American");
 	}
 
 	total_accuracy1.text(selectedData.Accuracy);
@@ -457,13 +457,13 @@ function populateData1() {
 	threshold2.text(selectedData.ThresholdB);
 	var tuple = "(" + selectedData.ThresholdA + "," + selectedData.ThresholdB + ")";
 	if(category1 == "Race") {
-		var fairness = countRaceDict[tuple];
+		fairness1 = countRaceDict[tuple];
 	} else {
-		var fairness = countGenderDict[tuple];
+		fairness1 = countGenderDict[tuple];
 	}
 	// console.log(fairness);
-	for(i = 0; i < fairness.length; i++) {
-		var thing = '[id="' + fairness[i] + '"]';
+	for(i = 0; i < fairness1.length; i++) {
+		var thing = '[id="' + fairness1[i] + '"]';
 		d3.selectAll(thing).style('fill', '#9DE0AD');
 	}
 
@@ -625,11 +625,11 @@ var total_fnr1 = svg.append('text').text('')
 //=============================================================================
 //                        SECTION 4
 //=============================================================================
-var group1 = svg.append('text').text('Caucasian')
+var group11 = svg.append('text').text('Caucasian')
     .attrs({x: 305, y: 360, 'font-size': 20})
     .style('fill', '#547980');
 
-var group2 = svg.append('text').text('African-American')
+var group12 = svg.append('text').text('African-American')
     .attrs({x: 305, y: 630, 'font-size': 20})
     .style('fill', '#547980');
 
