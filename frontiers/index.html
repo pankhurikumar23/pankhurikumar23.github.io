@@ -98,7 +98,7 @@
   		</div>
   		<div id="sections">
 			<div class="information">
-				Let us say we start out with 100 people, half who drink coffee with sugar, and half without. We create a confusion matrix like the one to the right.
+				Let us say we start out with 1000 people, half who drink coffee with sugar, and half without. We create a confusion matrix like the one to the right.
 			</div>
 			<br>
 			<div class="information">
@@ -145,7 +145,7 @@
 				The confusion matrix, however, makes it easy to see that different kinds of fairness are not only related to each other, but also with accuracy. It also simplifies the notion that total fairness cannot be achieved simultaneously.
 			</div>
 			<div class="information">
-				Coming back to our example of classifying people who like their sugar with coffee, we can see that the columns should add upto 50, since our population is split between people who like coffee with and without sugar. The sum of the rows, however, cannot be fixed within the population, and will depend on how our classifier algorithm is defined. 
+				Coming back to our example of classifying people who like their sugar with coffee, we can see that the columns should add upto 500, since our population is split between people who like coffee with and without sugar. The sum of the rows, however, cannot be fixed within the population, and will depend on how our classifier algorithm is defined. 
 			</div>
 			<div class="information">
 				Keep in mind, a confusion matrix can also be created for a subset of our sample. For example, we can have a confusion matrix for people who sleep less than five hours a day, and another for people who sleep more. We now define the different types of fairness, trying to balance fairness of our algorithm across both these (or any other) groups created on the basis of sleeping patterns.
@@ -158,7 +158,7 @@
 		</div>
 		<div id="sections">
 			<div class="information">
-				Overall Accuracy Equality
+				1. Overall Accuracy Equality
 				<br>
 				When the overall procedure accuracy is the same for each group, overall accuracy equality is achieved. Overall procedure accuracy, as previously mentioned, is the total correct number of predictions made by the algorithm, and is defined as (TP + TN)/<i>N</i>.
 				<br>
@@ -170,7 +170,7 @@
 			</div>
 			<br>
 			<div class="information">
-				Statistical Parity
+				2. Statistical Parity
 				<br>
 				Statistical Parity is achieved when the prediction distribution is the same across all protected groups. From our previous example, this implies that if sleep patterns was a protected class, the proportion of people predicted to have coffee with (or without) sugar should be equal for people who get less than five hours of sleep, and for people who get more than five hours of sleep.
 				<br>
@@ -181,7 +181,7 @@
 				By simply sampling more (or less) people from these predicted groups, we could modify the proportions for prediction distribution and achieve statistical parity by changing our population, rather than modifying our algorithm, to equalize the proportion of predictions based on sleep patterns.
 			</div>
 			<div class="information">
-				Conditional Procedure Accuracy Equality
+				3. Conditional Procedure Accuracy Equality
 				<br>
 				As the name suggests, this fairness is achieved when the conditional procedure accuracy is the same across all protected groups. Simply put, the accuracy of predicting positives (and negatives) from all actual positives (and negatives) should be equal across groups. Thus, the value for TP/(TP + FN) and TN/(TN + FP) should be the same. 
 				This is similar to considering that the false positive and false negative rates are the same across groups. 
@@ -190,7 +190,7 @@
 				A closely similar definition of conditional procedure accuracy equality is also referred to as "equalized odds," and "equality of opportunity" is the same as this, for the more desirable outcome only.
 			</div>
 			<div class="information">
-				Conditional Use Accuracy Equality
+				4. Conditional Use Accuracy Equality
 				<br>
 				This differs from the previous fairness in that it depends on the ratio of a predicted outcome among all predictions. The proportion of each prediction should remain the same across groups. This fairness asks that conditional on the prediction of success (or failure), is the probability of success (or failure) the same across groups? Thus, the ratios TP/(TP + FP) and TN/(FN + TN) should be equal across all groups.
 				<br>
@@ -198,7 +198,7 @@
 				Both conditional procedure and conditional use accuracy equality are concerns in criminal justive risk assesments (more on this later). Chouldechova refers to conditional use accuracy equality as positive predictive value (PPV) and corresponds to TP/(TP + FN).
 			</div>
 			<div class="information">
-				Treatment Equality
+				5. Treatment Equality
 				<br>
 				Treatment equality is achieved when the ratio of false negatives to false positives (or vice versa) is the same across protected groups. This equality is considered a "lever with which to achieve other kinds of fairness." It is defined as FN/FP or FP/FN.
 				<br>
@@ -206,7 +206,7 @@
 				We could treat people who get more sleep differently than people who get lesser sleep to achieve conditional use accuracy equality, by weighing their false negatives for heavily. This would change the treatment ratio, and would be an indicator of unfair treatment of people who get more seep.
 			</div>
 			<div class="information">
-				Total Fairness
+				6. Total Fairness
 				<br>
 				Total fairness is achieved when all the above fairness, overall accuracy equality, statistical parity, conditional procedure accuracy equality, conditional use accuracy equality and treatment equality are achieved. 
 				<br>
@@ -218,72 +218,105 @@
 			</div>
 		</div>
 	</div>
+
 	<div class="container-4" id="container">
   		<div id="graph4">
   		</div>
   		<div id="sections">
 			<div class="information">
-				Let us say we start out with 100 people, half who drink coffee with sugar, and half without. We create a confusion matrix like the one to the right.
+				Now that we have some idea of how different kinds of fairness is defined, let's continue with our algorithm. 
+				<br>
+				One of the attributes our algorithm uses in the prediction of sugar in coffee is the brand of shoes a person is wearing. It seems pretty pointless to consider shoe brand in coffee preferences, but please humor our whimsical algorithm. On the right are two confusion matrices, each one for a different shoe brand. Out of the 1000 people, let's assume that 500 people wear Nike shoes, while 200 wear Adidas.
+				<br>
+				<br>
+				We will now go through a scenario where the confusion matrices are populated based on our algorithm's predictions and the actual coffee preferences of users, and I hope you can more easily understand how different fairness are often at odds with each other, and accuracy.
 			</div>
 			<br>
 			<div class="information">
-				The columns represent the actual number of people in each category, positive being the ones that take coffee with sugar and negative are the ones without.
+				Scenario 1
+				<br>
+				Let's consider that we want to maintain Conditional Procedure Accuracy (CPA) across both groups at 0.40. 
+				<br>
+				The confusion matrices will be populated accordingly. CPA is defined as TP/(TP + FN), or the number of correct positive predictions over the total positive outcomes.
+				<br>
+				<br>
+				As you can see, this ratio is the same for both groups. Also, notice that the accuracy (TP + TN)/<i>N</i> is the same for both, at 0.44.
 			</div>
 			<div class="information">
-				On the other hand, the rows represent the predictions of the algorithm about the number of people in each category, positive being the ones that take coffee with sugar and negative are the ones without.
-			</div>
-			<br>
-			<div class="information">
-				We shorten the true positives, false positives, false negatives and true negatives to TP, FP, FN and TN respectively. The confusion matrix makes it very easy to record certain simple statistics:
-				<ul>
-					<li>
-						Sample size: This is the total number of observations, denoted by <i>N</i>, and is the sum of all four cells in the confusion matrix. So, <i>N</i> = TP + FP + FN + TN
-					</li>
-					<br>
-					<li>
-						Base Rate: This is the proportion of actual successes, or actual failures, from the total sample. The choice between success and failure depends on the experimenter. This is defined as (TP + FN)/<i>N</i> or (TP + FN)/(TP + FP + FN + TN), or (TP + FN)/<i>N</i>.
-					</li>
-					<br>
-					<li>
-						Prediction Distribution: The proportion of predictions predicted to fail, and the proportion predicted to succeed. This translates to (FN + TN)/<i>N</i> and (TP + FP)/<i>N</i> respectively.
-					</li>
-					<br>
-					<li>
-						Overall Procedure Error: This is the proportion of cases that are misclassified by our algorithm, (FP + FN)/(TP + FP + FN + TN). The complement to this is overall procedure accuracy, defined as (TP + TN)/(TP + FP + FN + TN).
-					</li>
-					<br>
-					<li>
-						Conditional Procedure Error: This is the proportion of cases misclassified <i>conditional on one of the two actual outcomes</i>. This gives us the <i> false positive rate</i>, FP/(FP + TN) or the <i>false negative rate</i>, FN/(TP + FN).
-					</li>
-					<br>
-					<li>
-						Conditional Use Error: This is the proportion of cases misclassified <i> conditional on one of the two predicted outcomes</i>. The incorrect failure predictions is FN/(TN + FN) and the incorrect success prediction proportion is FP/(TP + FP).
-					</li>
-				</ul>
+				Let's also take a look at Conditional Use Accuracy (CUA) across both groups, which is defined as TP/(TP + FP), or the number of correct positive predictions over the total positive predictions.
+				<br>
+				<br>
+				For now, this ratio is also the same, at 0.8. There doesn't seem to be a problem.
 			</div>
 			<br>
 			<div class="information">
-				Fairness can be defined in <i>six</i> different ways, according to the State of the Art paper on Fairness Criminal Risk Assesments. Each of these definitions can further be represented using features of the confusion matrix, and the above defined concepts. The exact features that we use, however, will change depending on the type of fairness under consideration.
+				Now, let's say we we alter the way our algorithm predicts for Adidas to increase accuracy, while keeping CPA constant. Let our new confusion matrix for Adidas change. As you can see, CPA remains 0.40.
+				<br>
+				<br>
+				The accuracy for Adidas, (TP + TN)/<i>N</i>, is now increased to 0.50.
 			</div>
 			<br>
 			<div class="information">
-				The confusion matrix, however, makes it easy to see that different kinds of fairness are not only related to each other, but also with accuracy. It also simplifies the notion that total fairness cannot be achieved simultaneously.
+				However, when we consider CUA now, we can see that they are no longer the same. Nike's CUA remains at 0.80, while Adidas' has dropped to 0.50.
 			</div>
+			<br>
 			<div class="information">
-				Coming back to our example of classifying people who like their sugar with coffee, we can see that the columns should add upto 50, since our population is split between people who like coffee with and without sugar. The sum of the rows, however, cannot be fixed within the population, and will depend on how our classifier algorithm is defined.
-			</div>
-			<div class="information">
-				Keep in mind, a confusion matrix can also be created for a subset of our sample. For example, we can have a confusion matrix for people who sleep less than five hours a day, and another for people who sleep more. We now define the different types of fairness, trying to balance fairness of our algorithm across both these (or any other) groups created on the basis of sleeping patterns.
+				It's easy to see here, that if we want to increase accuracy, while maintaining at least one form of fairness (CPA), we will invariably lose out on another form of fairness (CUA).
 			</div>
 		</div>
 	</div>
-	<br>
-	<br>
-	<br>
-	<br>
-	<div id="interactive" class="interactive">
+
+    <div class="information">
+		Let us now consider a real-world case: The COMPAS algorithm that was scrutinized by ProPublica, and criticized for being unfair.
+        <br>
+        <br>
+        Though Northpointe, the developers of COMPAS, argued that they had achieved Overall Accuracy Equality, ProPublica reported that the Conditional Procedural Accuracy Equality was missing. ProPublica proved
+        that the false negative rates were disproportionately higher for African-American males, in comparison to Caucasian males, which violated some form of fairness as well.
+        <br>
+        <br>
+        Below are two interactive visualizations, built using the same data as ProPublica used, and a very similar methodology as theirs to evaluate the COMPAS algorithm.
 	</div>
+    <br>
+    <div class="information">
+		The first interactive is more mathematical - once you choose a category and fairness definition, it creates confusions matrices which achieve that fairness across your chosen category.
+        You can also see the overall accuracy, PPV, FPR and FNR for the algorithm across all the people, and also compare the values of other definitions of fairness.
+        <br>
+        You can also see the threshold created by the algorithm, which is the threshold score used by judges to decide whether a prisoner can or cannot be released on bail.
+        <br>
+        <br>
+        In some cases, multiple definitions of fairness can be achieved, and the interactive shows this by highlighting multiple fairness definitions.
+        <br>
+        <br>
+        However, total fairness cannot be achieved in the case (and rarely in any other), and thus, choosing the last fairness option does not yield any change.
+	</div>
+    <div id="interactive" class="interactive">
+	</div>
+    <br>
+    <div class="information">
+		The second interactive tries to emphasize on the effect of the thresholds. Again, a choice of category and fairness displays results. The graphs under section 4 display the number of people who received a particular
+        COMPAS score. So, 605 Caucasian males are rated at score 0 by COMPAS, while only 365 African-Americans receive the same score. On the other hand, only 50 Caucasian males get a score of 10, while
+        227 African-Americans are given the high-risk score of 10.
+        <br>
+        <br>
+        The threshold line indicates the number of people who will not be granted bail. Thus, the number of people with scores higher than the threshold are not granted bail, as shown by the bars
+        to the right of the threshold lines.
+        <br>
+        <br>
+        As you can see, in some cases, African-Americans are affected in much larger numbers than Caucasians, even if their threshold is higher. On the other hand, men are affected a lot more than women, who in general are considered
+        low-risk by the COMPAS algorithm.
+        <br>
+        <br>
+        In some cases, multiple definitions of fairness can be achieved, and the interactive shows this by highlighting multiple fairness definitions.
+        <br>
+        <br>
+        Again, total fairness cannot be achieved in this case (and rarely in any other), and thus, choosing the last fairness option does not yield any change.
+	</div>
+	<br>
 	<div id="interactive2" class="interactive">
+	</div>
+    <br>
+    <div class="information">
+		Thank you for going through this explainer on Fairness in Machine Learning! For more details on my methodology, and research, head over <a href="https://github.com/pankhurikumar23/computational-journalism/blob/master/Report%20-%20Fairness%20in%20Machine%20Learning.pdf">here.</a>
 	</div>
 	<script src="animation.js"></script>
 	<script src="interactive.js"></script>

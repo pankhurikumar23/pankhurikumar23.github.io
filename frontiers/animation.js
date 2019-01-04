@@ -3,7 +3,7 @@
 //=============================================================================
 //                        STICKY 1
 //=============================================================================
-var gs = d3.graphScroll()
+var gs0 = d3.graphScroll()
     .container(d3.select('.container-1'))
     .graph(d3.selectAll('container-1 #graph1'))
     .eventId('uniqueId1')  // namespace for scroll and resize events
@@ -73,16 +73,16 @@ var predNegTot = svg.append('text')
 var tot = svg.append('text')
   .attrs({x: 680, y: 300, 'class': 'cm-header', 'text-anchor': 'middle'});
 
-var actTots = ["", "", "", "", "", "", "50", "50"];
+var actTots = ["", "", "", "", "", "", "500", "500"];
 var predTots = ["", "", "", "", "", "", "?", "?"];
-var tots = ["", "", "", "", "", "", "N=100", "N=100"];
+var tots = ["", "", "", "", "", "", "N=1000", "N=1000"];
 var actTotColor = ["#22949F", '#DAB239', "#22949F", '#22949F', '#22949F', '#22949F', '#22949F', '#22949F'];
 var predTotColor = ["#22949F", "#22949F", '#DAB239', "#22949F", "#22949F", "#22949F", "#22949F", "#22949F"];
 var tp = ["True Positive", "True Positive", "True Positive", "TP", "TP", "TP", "TP", "TP"];
 var fp = ["False Positive", "False Positive", "False Positive", "FP", "FP", "FP", "FP", "FP"];
 var fn = ["False Negative", "False Negative", "False Negative", "FN", "FN", "FN", "FN", "FN"];
 var tn = ["True Negative", "True Negative", "True Negative", "TN", "TN", "TN", "TN", "TN"];
-var gs2 = d3.graphScroll()
+var gs = d3.graphScroll()
     .container(d3.select('.container-2'))
     .graph(d3.selectAll('container-2 #graph2'))
     .eventId('uniqueId2')  // namespace for scroll and resize events
@@ -255,23 +255,23 @@ var text = svg3.append('text').text('Positive')
   .attrs({x: 60, y: 150, 'class': 'cm-header'});
 var text = svg3.append('text').text('Negative')
   .attrs({x: 50, y: 230, 'class': 'cm-header'});
-var tpText2 = svg3.append('text')
+var tpText31 = svg3.append('text')
   .attrs({x: 305, y: 150, 'class': 'cm-header', 'text-anchor': 'middle'});
-var fpText2 = svg3.append('text')
+var fpText31 = svg3.append('text')
   .attrs({x: 495, y: 150, 'class': 'cm-header', 'text-anchor': 'middle'});
-var fnText2 = svg3.append('text')
+var fnText31 = svg3.append('text')
   .attrs({x: 305, y: 230, 'class': 'cm-header', 'text-anchor': 'middle'});
-var tnText2 = svg3.append('text')
+var tnText31 = svg3.append('text')
   .attrs({x: 495, y: 230, 'class': 'cm-header', 'text-anchor': 'middle'});
-var actPosTot2 = svg3.append('text')
+var actPosTot31 = svg3.append('text')
   .attrs({x: 305, y: 310, 'class': 'cm-header', 'text-anchor': 'middle'});
-var actNegTot2 = svg3.append('text')
+var actNegTot31 = svg3.append('text')
   .attrs({x: 490, y: 310, 'class': 'cm-header', 'text-anchor': 'middle'});
-var predPosTot2 = svg3.append('text')
+var predPosTot31 = svg3.append('text')
   .attrs({x: 680, y: 150, 'class': 'cm-header', 'text-anchor': 'middle'});
-var predNegTot2 = svg3.append('text')
+var predNegTot31 = svg3.append('text')
   .attrs({x: 680, y: 230, 'class': 'cm-header', 'text-anchor': 'middle'});
-var tot2 = svg3.append('text')
+var tot31 = svg3.append('text').text('N=500')
   .attrs({x: 680, y: 310, 'class': 'cm-header', 'text-anchor': 'middle'});
 
 var line = svg3.append('line')
@@ -290,21 +290,76 @@ var text = svg3.append('text').text('Positive')
   .attrs({x: 60, y: 500, 'class': 'cm-header'});
 var text = svg3.append('text').text('Negative')
   .attrs({x: 50, y: 580, 'class': 'cm-header'});
-var tpText2 = svg3.append('text')
+var tpText32 = svg3.append('text')
   .attrs({x: 305, y: 500, 'class': 'cm-header', 'text-anchor': 'middle'});
-var fpText2 = svg3.append('text')
+var fpText32 = svg3.append('text')
   .attrs({x: 495, y: 500, 'class': 'cm-header', 'text-anchor': 'middle'});
-var fnText2 = svg3.append('text')
+var fnText32 = svg3.append('text')
   .attrs({x: 305, y: 580, 'class': 'cm-header', 'text-anchor': 'middle'});
-var tnText2 = svg3.append('text')
+var tnText32 = svg3.append('text')
   .attrs({x: 495, y: 580, 'class': 'cm-header', 'text-anchor': 'middle'});
-var actPosTot2 = svg3.append('text')
+var actPosTot32 = svg3.append('text')
   .attrs({x: 305, y: 660, 'class': 'cm-header', 'text-anchor': 'middle'});
-var actNegTot2 = svg3.append('text')
+var actNegTot32 = svg3.append('text')
   .attrs({x: 490, y: 660, 'class': 'cm-header', 'text-anchor': 'middle'});
-var predPosTot2 = svg3.append('text')
+var predPosTot32 = svg3.append('text')
   .attrs({x: 680, y: 500, 'class': 'cm-header', 'text-anchor': 'middle'});
-var predNegTot2 = svg3.append('text')
+var predNegTot32 = svg3.append('text')
   .attrs({x: 680, y: 580, 'class': 'cm-header', 'text-anchor': 'middle'});
-var tot2 = svg3.append('text')
+var tot32 = svg3.append('text').text('N=200')
   .attrs({x: 680, y: 660, 'class': 'cm-header', 'text-anchor': 'middle'});
+
+var tp31 = ["", "160", "160", "160", "160", "160"];
+var fn31 = ["", "240", "240", "240", "240", "240"];
+var fp31 = ["", "40", "40", "40", "40", "40"];
+var tn31 = ["", "60", "60", "60", "60", "60"];
+var actPos31 = ["", "400", "400", "400", "400", "400"];
+var actNeg31 = ["", "100", "100", "100", "100", "100"];
+var predPos31 = ["", "200", "200", "200", "200", "200"];
+var predNeg31 = ["", "300", "300", "300", "300", "300"];
+
+var tp32 = ["", "64", "64", "40", "40", "40"];
+var fn32 = ["", "96", "96", "60", "60", "60"];
+var fp32 = ["", "16", "16", "40", "40", "40"];
+var tn32 = ["", "24", "24", "60", "60", "60"];
+var actPos32 = ["", "160", "160", "100", "100", "100"];
+var actNeg32 = ["", "40", "40", "100", "100", "100"];
+var predPos32 = ["", "80", "80", "80", "80", "80"];
+var predNeg32 = ["", "120", "120", "120", "120", "120"];
+
+var tpC3 = ['#54BD9F', '#DAB239', '#DAB239', '#DAB239', '#DAB239', '#54BD9F'];
+var aPosC3 = ['#22949F', '#2D3258', '#22949F', '#2D3258', '#22949F', '#22949F'];
+var pPosC3 = ['#22949F', '#22949F', '#2D3258', '#22949F', '#2D3258', '#22949F'];
+
+var gs3 = d3.graphScroll()
+    .container(d3.select('.container-4'))
+    .graph(d3.selectAll('container-4 #graph4'))
+    .eventId('uniqueId4')  // namespace for scroll and resize events
+    .sections(d3.selectAll('.container-4 #sections > div'))
+    // .offset(innerWidth < 900 ? innerHeight - 30 : 200)
+    .on('active', function(k) {
+      tpText31.text(tp31[k]);
+      tnText31.text(tn31[k]);
+      fpText31.text(fp31[k]);
+      fnText31.text(fn31[k]);
+      actPosTot31.text(actPos31[k]);
+      actNegTot31.text(actNeg31[k]);
+      predPosTot31.text(predPos31[k]);
+      predNegTot31.text(predNeg31[k]);
+
+      tpText32.text(tp32[k]);
+      tnText32.text(tn32[k]);
+      fpText32.text(fp32[k]);
+      fnText32.text(fn32[k]);
+      actPosTot32.text(actPos32[k]);
+      actNegTot32.text(actNeg32[k]);
+      predPosTot32.text(predPos32[k]);
+      predNegTot32.text(predNeg32[k]);
+
+      grid3[1][1].attr('fill', tpC3[k]);
+      grid4[1][1].attr('fill', tpC3[k]);
+      grid3[1][3].attr('fill', aPosC3[k]);
+      grid4[1][3].attr('fill', aPosC3[k]);
+      grid3[3][1].attr('fill', pPosC3[k]);
+      grid4[3][1].attr('fill', pPosC3[k]);
+});

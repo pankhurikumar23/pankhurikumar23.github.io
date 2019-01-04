@@ -453,8 +453,8 @@ function populateData1() {
 	f5atext.text(selectedData.F5a);
 	f5btext.text(selectedData.F5b);
 
-	threshold1.text(selectedData.ThresholdA);
-	threshold2.text(selectedData.ThresholdB);
+	threshold11.text(selectedData.ThresholdA);
+	threshold12.text(selectedData.ThresholdB);
 	var tuple = "(" + selectedData.ThresholdA + "," + selectedData.ThresholdB + ")";
 	if(category1 == "Race") {
 		fairness1 = countRaceDict[tuple];
@@ -731,11 +731,11 @@ var f5btext = svg.append('text').text('')
     .attrs({x: 1107, y: 512, 'font-size': 20, 'text-anchor': 'middle'})
 	.style('fill', '#547980');
 
-var threshold1 = svg.append('text').text('')
+var threshold11 = svg.append('text').text('')
     .attrs({x: 1050, y: 565, 'font-size': 30, 'text-anchor': 'middle'})
     .style('fill', '#547980');
 
-var threshold2 = svg.append('text').text('')
+var threshold12 = svg.append('text').text('')
     .attrs({x: 1050, y: 605, 'font-size': 30, 'text-anchor': 'middle'})
     .style('fill', '#547980');
 
