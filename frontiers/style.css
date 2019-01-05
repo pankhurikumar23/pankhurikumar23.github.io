@@ -1,14 +1,14 @@
 body {
-	font-family: 'Montserrat', sans-serif;
-	margin: 100px;
-	font-size: 2.5em;
-	color: #5A5A5A;
+  font-family: 'Montserrat', sans-serif;
+  margin: 100px;
+  font-size: 2.5em;
+  color: #5A5A5A;
   background-color: #F8F8FF;
 }
 
-#graph1{
+#graph1 {
   margin-left: 100px;
-  width: 800px;
+  width: 50%;
   position: -webkit-sticky;
   position: sticky;
   top: 0px;
@@ -17,41 +17,29 @@ body {
   text-align: center;
 }
 
-#graph2{
+#graph2,
+#graph3 {
   margin-left: 100px;
-  width: 800px;
+  width: 50%;
   position: -webkit-sticky;
   position: sticky;
   top: 0px;
   float: right;
-  /*background-color: #EEEEEE;*/
   padding: 250px 0px 250px 0px;
 }
 
-#graph3{
+#graph4 {
   margin-left: 100px;
-  width: 800px;
+  width: 50%;
   position: -webkit-sticky;
   position: sticky;
   top: 0px;
   float: right;
-  /*background-color: #EEEEEE;*/
-  padding: 250px 0px 250px 0px;
-}
-
-#graph4{
-  margin-left: 100px;
-  width: 800px;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0px;
-  float: right;
-  /*background-color: #EEEEEE;*/
   padding: 120px 0px 120px 0px;
 }
 
 .intro-text {
-	width: 900px;
+	width: 72%;
 }
 
 .introduction {
@@ -60,8 +48,7 @@ body {
 }
 
 .information {
-	font-size: 0.5em;
-	text-align: justify;
+  font-size: 0.5em;
   padding: 25px;
   background: #EEEEEE;
 }
@@ -71,17 +58,21 @@ body {
   padding: 20px;
 }
 
+
+#sections {
+	width: 50%;
+}
+
 #sections > div{
-  width: 800px;
+  width: 85%;
   opacity: .2;
-  margin-bottom: 300px;
-  text-align: justify;
+  margin-bottom: 30%;
 }
 #sections > div:first-child{
-  margin-top: 300px;
+  margin-top: 30%;
 }
 #sections > div:last-child{
-  margin-bottom: 300px;
+  margin-bottom: 30%;
 }
 #sections > div.graph-scroll-active{
   opacity: 1;
@@ -91,7 +82,6 @@ body {
   font-size: 30px;
   font-family: 'Lato', sans-serif;
   color: #080E28;
-  /*text-anchor: 'middle';*/
 }
 
 .upper {
@@ -108,30 +98,4 @@ body {
 .interactive {
   margin-top: 50px;
   text-align: center;
-}
-
-@media (max-width: 925px)  {
-  #graph{
-    width: 100%;
-    margin-left: 0px;
-    float: none;
-  }
-
-  #sections{
-    width: auto;
-    position: relative;
-    margin: 0px auto;
-  }
-
-  #sections > div{
-    background: rgba(255,255,255,.5);
-    padding: 10px;
-    border-top: 1px solid;
-    border-bottom: 1px solid;
-    margin-bottom: 80vh;
-  }
-
-  h1{
-    margin: 10px;
-  }
 }
