@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+		<style> body {padding: 0; margin: 0;} </style>
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+		<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+	</head>
+
+	<body>
+		<div id='map' class="mapstyle"></div>
+		<div class='map-overlay' id='features'><h2>State Population Density</h2>
+		<div id='pd'><p>Hover over a constituency!</p></div></div>
+		<div class='map-overlay' id='legend'>Legend:</div>
+
+		<script src="js/interactive.js"></script>
+	</body>
+</html>
