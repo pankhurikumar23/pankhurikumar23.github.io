@@ -1,6 +1,6 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoicGFua2h1cmlrdW1hciIsImEiOiJjamZwbnV2OTcxdXB1MzBudnViY2p3aDEzIn0.Zf9ZkY05gz_Zsyen1W1FbA';
 lineCount = 539;
-parameterCount = 2;
+parameterCount = 7;
 pcLabels = [];
 pcData = [];
 
@@ -36,7 +36,7 @@ function processData(allText) {
         	pcData[i][k] = data[k+1];
         }
     }
-    // console.log(pcLabels);
+    // console.log(pcData);
 }
 
 function getFlag(name) {
@@ -60,7 +60,11 @@ map.on('load', function() {
 		var flag = getFlag(pc[0].properties.PC_NAME);
 
 		if (flag > -1) {
-			document.getElementById('pd').innerHTML = '<h3><strong>' + pc[0].properties.PC_NAME + '</strong></h3><p><strong> IMR: ' + pcData[flag][0] + '</strong></p><p><strong> Sex Ratio: ' + pcData[flag][1] + '</strong></p>';
+			document.getElementById('pd').innerHTML = '<h3><strong>' + pc[0].properties.PC_NAME + '</strong></h3>' +
+			'<p><strong> IMR: ' + pcData[flag][0] + '</strong></p>' + '<p><strong> Sex ratio (Females per 1,000 males): ' + pcData[flag][1] + '</strong></p>' + 
+			'<p><strong> Women with 10 or more years of schooling (In %): ' + pcData[flag][2] + '</strong></p>' + '<p><strong> Average out of pocket expenditure per delivery in public health facility (In Rs): ' + pcData[flag][3] + '</strong></p>' +
+			'<p><strong> Institutional births (In %): ' + pcData[flag][4] + '</strong></p>' + '<p><strong> Diarrhoea prevalence (reported) among children aged 0-5 years in the last 2 weeks preceding the survey (In %): ' + pcData[flag][5] + '</strong></p>' +
+			'<p><strong> Stunting among children under 5 (In %): ' + pcData[flag][6] + '</strong></p>';
 			// displayName(states[0].properties.NAME);
 		} else {
 			document.getElementById('pd').innerHTML = '<p>Hover over a constituency!</p>';
