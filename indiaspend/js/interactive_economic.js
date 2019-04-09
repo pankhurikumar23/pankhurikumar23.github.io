@@ -1,6 +1,7 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoicGFua2h1cmlrdW1hciIsImEiOiJjamZwbnV2OTcxdXB1MzBudnViY2p3aDEzIn0.Zf9ZkY05gz_Zsyen1W1FbA';
 lineCount = 543;
-parameterCount = 20;
+parameterCount = 6;
+skipCount = 14;
 pcLabels = [];
 pcData = [];
 headers = []
@@ -30,7 +31,7 @@ function processData(allText) {
         pcLabels[i] = data[0];
         pcData[i] = [];
         for (var k = 0; k < parameterCount; k++) {
-        	pcData[i][k] = data[k+1];
+        	pcData[i][k] = data[k + 1 + skipCount];
         }
     }
     // console.log(headers);
@@ -60,7 +61,7 @@ map.on('load', function() {
 		if (flag > -1) {
 			displayText = '<h3>' + pc[0].properties.PC_NAME + '</h3>';
 			for(i = 0; i < parameterCount; i++) {
-				displayText += '<p>' + headers[i + 1] + ': ' + pcData[flag][i] + '</p>';
+				displayText += '<p>' + headers[i + 1 + skipCount] + ': ' + pcData[flag][i] + '</p>';
 			}
 			// console.log(displayText);
 			document.getElementById('pd').innerHTML = displayText

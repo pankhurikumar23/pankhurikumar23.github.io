@@ -1,6 +1,6 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoicGFua2h1cmlrdW1hciIsImEiOiJjamZwbnV2OTcxdXB1MzBudnViY2p3aDEzIn0.Zf9ZkY05gz_Zsyen1W1FbA';
 lineCount = 543;
-parameterCount = 20;
+parameterCount = 10;
 pcLabels = [];
 pcData = [];
 headers = []
