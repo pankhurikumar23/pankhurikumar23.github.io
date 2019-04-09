@@ -10,23 +10,16 @@
 	</head>
 
 	<body>
+		<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.0.0/mapbox-gl-geocoder.min.js'></script>
+		<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.0.0/mapbox-gl-geocoder.css' type='text/css' />
 		<div id='map' class="mapstyle"></div>
+		<div id='geocoder' class='geocoder'></div>
+		<button id="zoomButton" class="map-overlay">Zoom Out</button>
+
 		<a href="index.html"><div class='map-overlay' id='fulldata' style="background: rgba(102, 255, 51, 0.8)">All</div></a>
 		<a href="health"><div class='map-overlay' id='health'>Health</div></a>
 		<a href="education"><div class='map-overlay' id='education'>Education</div></a>
 		<a href="economic"><div class='map-overlay' id='economic'>Economic</div></a>
-
-		<div class="map-overlay" id="state-options">
-			<select id="state">
-				<option value="" selected disabled hidden>State</option>
-			</select>
-		</div>
-
-		<div class="map-overlay" id="pc-options">
-			<select id="constituency">
-				<option value="" selected disabled hidden>Constituency</option>
-			</select>
-		</div>
 
 		<div class='map-overlay' id='features'><h2>Parliamentary Constituency Details</h2>
 		<div id='pd'><p>Hover over a constituency!</p></div></div>

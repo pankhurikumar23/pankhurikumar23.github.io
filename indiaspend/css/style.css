@@ -26,6 +26,32 @@ p {
 	width:100%; 
 }
 
+.geocoder {
+	position:absolute;
+	z-index:1;
+	width:50%;
+	left:60%;
+	margin-left:-25%;
+	top:20px;
+}
+
+.mapboxgl-ctrl-geocoder { 
+	min-width:100%; 
+}
+
+#zoomButton {
+  border: none;
+  padding:10px;
+  line-height:15px;
+  width:120px;
+  left: 500px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: #000;
+  background: rgba(255, 255, 255, 0.8);
+  z-index:1;
+}
+
 .map-overlay {
   position: absolute;
   background: rgba(255, 255, 255, 0.8);
