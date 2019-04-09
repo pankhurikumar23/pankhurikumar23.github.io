@@ -3,7 +3,8 @@ lineCount = 543;
 parameterCount = 20;
 pcLabels = [];
 pcData = [];
-headers = []
+headers = [];
+stateDict = {};
 
 var map = new mapboxgl.Map({
 	container: 'map',
@@ -18,6 +19,12 @@ $(document).ready(function() {
         url: "assets/Dev Indicators - 543 - FINAL.csv",
         dataType: "text",
         success: function(data) {processData(data);}
+     });
+    $.ajax({
+        type: "GET",
+        url: "assets/dropdown.csv",
+        dataType: "text",
+        success: function(data) {processDropdown(data);}
      });
 });
 
@@ -37,6 +44,38 @@ function processData(allText) {
     // console.log(pcData);
 }
 
+function processDropdown(data) {
+	var allTextLines = data.split(/\r\n|\n/);
+	for (i = 0; i < 35; i++) {
+		state = allTextLines[i].split(',')[0];
+		pc = allTextLines[i].split(',')[1].split(':');
+		stateDict[state] = pc;
+	}
+	populateDropdown();
+}
+
+function populateDropdown() {
+	for (key in stateDict) {
+	    // value = dict[key];
+	    $('#state').append('<option value=' + key + '>' + key + '</option>');
+	}
+}
+
+$("#state").change(function(){
+	var sel = $(this).val();
+    values = stateDict[sel];
+    $("#constituency").empty();
+    $('#constituency').append('<option value="" selected disabled hidden>Constituency</option>');
+    for (i in values) {
+    	$('#constituency').append('<option value=' + values[i] + '>' + values[i] + '</option>');
+    }
+});
+
+$("#constituency").change(function(){
+	var sel = $(this).val();
+    
+});
+
 function getFlag(name) {
 	stateFlag = -1;
 	// console.log(name);
@@ -55,9 +94,9 @@ map.on('load', function() {
     map.on('mousemove', function(e) {
 		var pc = map.queryRenderedFeatures(e.point, {layers: ['india-pc-20141-74ck9p']});
 		// console.log(pc);
-		var flag = getFlag(pc[0].properties.PC_NAME);
 
-		if (flag > -1) {
+		if (pc.length > 0) {
+			var flag = getFlag(pc[0].properties.PC_NAME);
 			displayText = '<h3>' + pc[0].properties.PC_NAME + '</h3>';
 			for(i = 0; i < parameterCount; i++) {
 				displayText += '<p>' + headers[i + 1] + ': ' + pcData[flag][i] + '</p>';

@@ -73,6 +73,16 @@ a {
   right: 0;
 }
 
+#state-options {
+  top: 10px;
+  left: 200px;
+}
+
+#pc-options {
+  top: 10px;
+  left: 300px;
+}
+
 #legend {
   bottom: 0;
   right: 0;
