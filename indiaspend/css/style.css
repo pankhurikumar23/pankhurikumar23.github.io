@@ -39,19 +39,6 @@ p {
 	min-width:100%; 
 }
 
-#zoomButton {
-  border: none;
-  padding:10px;
-  line-height:15px;
-  width:120px;
-  left: 500px;
-  font-family: Arial, sans-serif;
-  text-align: center;
-  color: #000;
-  background: rgba(255, 255, 255, 0.8);
-  z-index:1;
-}
-
 .map-overlay {
   position: absolute;
   background: rgba(255, 255, 255, 0.8);
@@ -68,7 +55,7 @@ a {
 }
 
 #features {
-  top: 0;
+  top: 100px;
   height: 630px;
   margin-top: 20px;
   width: 500px;
@@ -76,7 +63,7 @@ a {
 }
 
 #features_health {
-  top: 0;
+  top: 100px;
   height: 300px;
   margin-top: 20px;
   width: 500px;
@@ -84,15 +71,15 @@ a {
 }
 
 #features_education {
-  top: 0;
-  height: 160px;
+  top: 100px;
+  height: 150px;
   margin-top: 20px;
   width: 500px;
   right: 0;
 }
 
 #features_economic {
-  top: 0;
+  top: 100px;
   height: 330px;
   margin-top: 20px;
   width: 500px;
@@ -118,39 +105,66 @@ a {
   width: 100px;
 }
 
-#fulldata {
+#zoomButton {
+  border: none;
   padding:10px;
   line-height:18px;
-  width:150px;
+  width:170px;
   top:100px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: #000;
+  background: rgba(255, 255, 255, 0.8);
+  z-index:1;
 }
 
-#economic {
+#fulldata {
+  text-align: center;
   padding:10px;
   line-height:18px;
   width:150px;
   top:150px;
 }
 
+#economic {
+  padding:10px;
+  line-height:18px;
+  width:150px;
+  top:200px;
+  text-align: center;
+}
+
 #health {
   padding:10px;
   line-height:18px;
   width:150px;
-  top:220px;
+  top:270px;
+  text-align: center;
 }
 
 #education {
   padding:10px;
   line-height:18px;
   width:150px;
-  top:270px;
+  top:320px;
+  text-align: center;
 }
 
 #about {
   padding:10px;
   line-height:18px;
   width:150px;
-  top:320px;
+  top:370px;
+  text-align: center;
+}
+
+#indicator {
+  padding:10px;
+  line-height:18px;
+  width:150px;
+  top:0;
+  text-align: center;
+  right:330px;
 }
 
 .text {
@@ -160,25 +174,28 @@ a {
   margin-top:50px;
   line-height:18px;
   /*width:150px;*/
-  top:30px;
+  top:70px;
 }
 
 #dd-economic {
-  top: 165px;
-  left: 200px;
+  top: 50px;
+  font-size: 18px;
+  right:0;
   width: 500px;
 }
 
 #dd-health {
-  top: 225px;
-  left: 200px;
-  width: 350px;
+  top: 50px;
+  font-size: 18px;
+  right:0;
+  width: 500px;
 }
 
 #dd-education {
-  top: 275px;
-  left: 200px;
-  width: 300px;
+  top: 50px;
+  font-size: 18px;
+  right:0;
+  width: 500px;
 }
 
 .legend-key {

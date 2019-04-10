@@ -10,7 +10,12 @@ stateDict = {};
 mapDict = {
 	'0': 'mapbox://styles/pankhurikumar/cjuavnus01j861fo3ss3mb7s1',
 	'1': 'mapbox://styles/pankhurikumar/cjuaw0zfv0mc21flg097789ok',
-	'2': 'mapbox://styles/pankhurikumar/cjuaweuvq7dty1fnyqvb3zmqr'
+	'2': 'mapbox://styles/pankhurikumar/cjuaweuvq7dty1fnyqvb3zmqr',
+	'3': 'mapbox://styles/pankhurikumar/cjuaxs3pw0nx91flgtt7albjw',
+	'4': 'mapbox://styles/pankhurikumar/cjuaxwj2074hf1fp49uqjtly7',
+	'5': 'mapbox://styles/pankhurikumar/cjuay0bex1ldl1fn2cpwqz0ah',
+	'6': 'mapbox://styles/pankhurikumar/cjuay44s804cy1glyhso2y2c1',
+	'7': 'mapbox://styles/pankhurikumar/cjuaybals74v41fp49yn23py1'
 }
 
 map = new mapboxgl.Map({
