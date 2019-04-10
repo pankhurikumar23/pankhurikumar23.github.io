@@ -17,12 +17,24 @@
 		<button id="zoomButton" class="map-overlay">Zoom Out</button>
 		
 		<a href="/indiaspend"><div class='map-overlay' id='fulldata'>All</div></a>
-		<a href=""><div class='map-overlay' id='health' style="background: rgba(102, 255, 51, 0.8)">Health</div></a>
-		<a href="education"><div class='map-overlay' id='education'>Education</div></a>
-		<a href="economic"><div class='map-overlay' id='economic'>Economic</div></a>
+		<a href=""><div class='map-overlay' id='health' style="background: rgba(102, 255, 51, 0.8)">Health Indicators</div></a>
+		<a href="education"><div class='map-overlay' id='education'>Education Indicators</div></a>
+		<a href="economic"><div class='map-overlay' id='economic'>Demographics & Economic Indicators</div></a>
+		<a href="about"><div class='map-overlay' id='about'>About</div></a>
+
+		<select id="dd-health" class="map-overlay">
+			<option value="0" selected>Institutional Births</option>
+			<option value="1">Infant Mortality Rate</option>
+			<option value="2">Diarrhoea Prevalence Among Children Aged 0-5</option>
+			<option value="3">Stunting Among Children under 5</option>
+			<option value="4">Wasting Among Children under 5</option>
+			<option value="5">Underweight Among Children under 5</option>
+			<option value="6">Anaemia Prevalence Among Children Aged 6-59 months</option>
+			<option value="7">Anaemia Prevalence Among Women</option>
+		</select>
 
 		<div class='map-overlay' id='features_health'><h2>Parliamentary Constituency Details</h2>
-		<div id='pd'><p>Hover over a constituency!</p></div></div>
+		<div id='pd'><p>Drag the map to find your constituency!</p></div></div>
 
 		<div class='map-overlay' id='legend'>Legend:</div>
 

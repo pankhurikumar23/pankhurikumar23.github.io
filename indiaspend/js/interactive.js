@@ -1,6 +1,6 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoicGFua2h1cmlrdW1hciIsImEiOiJjamZwbnV2OTcxdXB1MzBudnViY2p3aDEzIn0.Zf9ZkY05gz_Zsyen1W1FbA';
 lineCount = 543;
-parameterCount = 20;
+parameterCount = 19;
 pcLabels = [];
 pcData = [];
 headers = [];
@@ -8,7 +8,7 @@ stateDict = {};
 
 var map = new mapboxgl.Map({
 	container: 'map',
-	style: 'mapbox://styles/pankhurikumar/cjua34vzg756s1flgqry54zwd'
+	style: 'mapbox://styles/pankhurikumar/cjuarckpd0hz31flgrykopmsv'
 });
 var nav = new mapboxgl.NavigationControl();
 map.addControl(nav, 'top-left');
@@ -55,7 +55,7 @@ function getFlag(name) {
 
 map.on('load', function() {
     map.on('mousemove', function(e) {
-		var pc = map.queryRenderedFeatures(e.point, {layers: ['india-pc-20141-74ck9p']});
+		var pc = map.queryRenderedFeatures(e.point, {layers: ['india_pc_2014_data-2p6jty']});
 
 		if (pc.length > 0) {
 			var flag = getFlag(pc[0].properties.PC_NAME);
@@ -65,7 +65,7 @@ map.on('load', function() {
 			}
 			document.getElementById('pd').innerHTML = displayText
 		} else {
-			document.getElementById('pd').innerHTML = '<p>Hover over a constituency!</p>';
+			document.getElementById('pd').innerHTML = '<p>Drag the map to find your constituency!</p>';
 		}
 	});
 });

@@ -17,12 +17,19 @@
 		<button id="zoomButton" class="map-overlay">Zoom Out</button>
 		
 		<a href="/indiaspend"><div class='map-overlay' id='fulldata'>All</div></a>
-		<a href="health"><div class='map-overlay' id='health'>Health</div></a>
-		<a href=""><div class='map-overlay' id='education' style="background: rgba(102, 255, 51, 0.8)">Education</div></a>
-		<a href="economic"><div class='map-overlay' id='economic'>Economic</div></a>
+		<a href="health"><div class='map-overlay' id='health'>Health Indicators</div></a>
+		<a href=""><div class='map-overlay' id='education' style="background: rgba(102, 255, 51, 0.8)">Education Indicators</div></a>
+		<a href="economic"><div class='map-overlay' id='economic'>Demographic & Economic Indicators</div></a>
+		<a href="about"><div class='map-overlay' id='about'>About</div></a>
+
+		<select id="dd-education" class="map-overlay">=
+			<option value="0" selected>Net Enrollment Ratio at Upper Primary</option>
+			<option value="1">Dropout Rate at Grade V</option>
+			<option value="2">Women with 10 or more years of Schooling</option>
+		</select>
 
 		<div class='map-overlay' id='features_education'><h2>Parliamentary Constituency Details</h2>
-		<div id='pd'><p>Hover over a constituency!</p></div></div>
+		<div id='pd'><p>Drag the map to find your constituency!</p></div></div>
 
 		<div class='map-overlay' id='legend'>Legend:</div>
 
