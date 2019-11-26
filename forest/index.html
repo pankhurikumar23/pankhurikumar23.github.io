@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="canonical" href="https://html5-templates.com/" />
+    <title>IndiaSpend: Forest Clearance Project</title>
+    <meta name="description" content="Demo for Forest Clearance Project">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/sticky-menu.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="js/catiline.js"></script>
+    <script src="js/leaflet.shpfile.js"></script>
+
+</head>
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+	            <div class="page-title">
+	        		Forest Clearance
+	        	</div>
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a class="page-scroll" href="#page-top">Home</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#maps">Map</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#stories">Reporting</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#about">About Us</a>
+                    </li>
+                </ul>
+            </div>	<!-- .navbar-collapse -->
+        </div>		<!-- .container -->
+    </nav>
+
+    <!-- Welcome   -->
+    <section id="welcome" class="welcome-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Home</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map -->
+    <section id="maps" class="map-section">
+        <div class="flex-container">
+            <div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>Map</h1>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="row-dropdown">
+                    <select class="selectpicker" multiple data-live-search="true">
+    					<option>Mustard</option>
+    					<option>Ketchup</option>
+    					<option>Relish</option>
+    				</select>
+    				<select class="selectpicker" multiple data-live-search="true">
+    					<option>Mustard</option>
+    					<option>Ketchup</option>
+    					<option>Relish</option>
+    				</select>
+    				<select class="selectpicker" multiple data-live-search="true">
+    					<option>Mustard</option>
+    					<option>Ketchup</option>
+    					<option>Relish</option>
+    				</select>
+    			</div>
+            </div>
+            <div>
+                <div id="map">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stories -->
+    <section id="stories" class="stories-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Reporting</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>About Us</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+	
+	<a id="back2Top" title="Back to top" href="#">&#10148;</a>
+	
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Scrolling Nav JavaScript -->
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/sticky-menu.js"></script>
+
+    <!-- Leaflet Script -->
+    <script>
+		var m = L.map('map').setView([22.59, 82.22], 5);
+		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+			attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+			maxZoom: 18,
+			id: 'mapbox.light',
+			accessToken: 'pk.eyJ1IjoicGFua2h1cmlrdW1hciIsImEiOiJjamZwbnV2OTcxdXB1MzBudnViY2p3aDEzIn0.Zf9ZkY05gz_Zsyen1W1FbA'
+		}).addTo(m);
+
+		function getColor(d) {
+		    return d > 1 ? "rgb(109, 158, 94)" :
+                "rgb(121, 167, 244)";
+        }
+
+        var legend = L.control({position: 'topright'});
+        legend.onAdd = function (m) {
+            var div = L.DomUtil.create('div', 'info legend'),
+                grades = [0, 10],
+                labels = ["Protected Land", "Projects"];
+
+            // loop through our density intervals and generate a label with a colored square for each interval
+            for (var i = 0; i < grades.length; i++) {
+                div.innerHTML +=
+                    '<i style="background:' + getColor(grades[i]) + '"></i> ' + labels[i] + '<br>';
+            }
+            return div;
+        };
+        legend.addTo(m);
+
+		var shpfile = new L.Shapefile('data/WDPA_Nov2019_IND-shapefile.zip', {
+			onEachFeature: function(feature, layer) {
+				if (feature.properties) {
+					layer.bindPopup(Object.keys(feature.properties).map(function(k) {
+						return k + ": " + feature.properties[k];
+					}).join("<br />"), {
+						maxHeight: 200
+					});
+                    layer._popup._content = "<strong>PROTECTED LAND</strong><br />" + layer._popup._content;
+				}
+			},
+			style: function() {
+	            return {
+	                opacity: 1,
+	                fillOpacity: 0.7,
+	                weight: 0
+	            }
+	        },
+			pointToLayer: function(feature, latlng) {
+	            return L.circleMarker(latlng, {
+	                opacity: 1,
+	                fillOpacity: 0.7,
+	                radius: 7,
+	                weight: 0
+	            });
+	        }
+		});
+		shpfile.addTo(m);
+		shpfile.once("data:loaded", function() {
+			console.log("finished loaded shapefile");
+		});
+
+        var jsonFeatures = [];
+        $.getJSON("data/data_coords.json", function(data) {
+            data.forEach(function(item){
+                let feature;
+                var t = item.type;
+                if (t === 'District' || !item.hasOwnProperty('type')) {
+                    return
+                }
+
+                if (t === 'Point') {
+                    feature = {type: 'Feature',
+                        properties: item,
+                        geometry: {
+                            type: t,
+                            coordinates: [parseFloat(item.lng), parseFloat(item.lat)]
+                        }
+                    };
+                } else if (t === 'Polygon') {
+                    let c1 = L.latLng(parseFloat(item.corner1[1]), parseFloat(item.corner1[0]));
+                    let c2 = L.latLng(parseFloat(item.corner2[1]), parseFloat(item.corner2[0]));
+                    let b = L.latLngBounds(c1, c2);
+                    let arr = [[b.getSouthWest().lat, b.getSouthWest().lng],
+                        [b.getSouthEast().lat, b.getSouthEast().lng],
+                        [b.getNorthEast().lat, b.getNorthEast().lng],
+                        [b.getNorthWest().lat, b.getNorthWest().lng]];
+                    feature = {
+                        type: 'Feature',
+                        properties: item,
+                        geometry: {
+                            type: t,
+                            coordinates: [arr]
+                        }
+                    };
+                }
+
+                jsonFeatures.push(feature);
+            });
+            const geo = {type: "FeatureCollection", features: jsonFeatures};
+            // console.log(geo);
+            try {
+                var geojsonLayer = L.geoJson(geo, {
+                    onEachFeature: function (feature, latlng) {
+                        if (feature.properties) {
+                            latlng.bindPopup(Object.keys(feature.properties).map(function (k) {
+                                return k + ": " + feature.properties[k];
+                            }).join("<br />"), {
+                                maxHeight: 200
+                            });
+                        }
+                        latlng._popup._content = "<strong>PROJECT</strong><br />" + latlng._popup._content;
+                    },
+                    style: function () {
+                        return {
+                            opacity: 1,
+                            fillOpacity: 0.7,
+                            weight: 0,
+                            color: "green"
+                        }
+                    },
+                    pointToLayer: function (feature, latlng) {
+                        return new L.CircleMarker(latlng, {
+                            radius: 7,
+                            fillOpacity: 0.7,
+                            color: "green"
+                        });
+                    }
+                });
+            } catch (error) {
+                console.log(error);
+            }
+            // console.log(geojsonLayer);
+            geojsonLayer.addTo(m);
+        });
+	</script>
+
+</body>
+
+</html>
