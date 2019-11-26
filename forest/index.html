@@ -51,7 +51,7 @@
     <!-- Welcome   -->
     <section id="welcome" class="welcome-section">
         <div class="container">
-            <div class="row">
+            <div class="heading">
                 <div class="col-lg-12">
                     <h1>Home</h1>
                 </div>
@@ -63,33 +63,41 @@
     <section id="maps" class="map-section">
         <div class="flex-container">
             <div>
-                <div class="row">
+                <div class="heading">
                     <div class="col-lg-12">
                         <h1>Map</h1>
                     </div>
                 </div>
             </div>
-            <div>
+            <div class="inner-flex">
                 <div class="row-dropdown">
-                    <select class="selectpicker" multiple data-live-search="true">
-    					<option>Mustard</option>
-    					<option>Ketchup</option>
-    					<option>Relish</option>
-    				</select>
-    				<select class="selectpicker" multiple data-live-search="true">
-    					<option>Mustard</option>
-    					<option>Ketchup</option>
-    					<option>Relish</option>
-    				</select>
-    				<select class="selectpicker" multiple data-live-search="true">
-    					<option>Mustard</option>
-    					<option>Ketchup</option>
-    					<option>Relish</option>
-    				</select>
+                    <div class="dropdown-prop">
+                        <select class="selectpicker" multiple data-live-search="true">
+        					<option>Mustard</option>
+        					<option>Ketchup</option>
+        					<option>Relish</option>
+                            <option>Ket</option>
+                            <option>ish</option>
+        				</select>
+                    </div>
+                    <div class="dropdown-prop">
+        				<select class="selectpicker" multiple data-live-search="true">
+        					<option>Mustard</option>
+        					<option>Ketchup</option>
+        					<option>Relish</option>
+        				</select>
+                    </div>
+                    <div class="dropdown-prop">
+                        <select class="selectpicker" multiple data-live-search="true">
+                            <option>Mustard</option>
+                            <option>Ketchup</option>
+                            <option>Relish</option>
+                        </select>
+                    </div>
     			</div>
-            </div>
-            <div>
-                <div id="map">
+                <div>
+                    <div id="map">
+                    </div>
                 </div>
             </div>
         </div>
@@ -98,7 +106,7 @@
     <!-- Stories -->
     <section id="stories" class="stories-section">
         <div class="container">
-            <div class="row">
+            <div class="heading">
                 <div class="col-lg-12">
                     <h1>Reporting</h1>
                 </div>
@@ -109,7 +117,7 @@
     <!-- About -->
     <section id="about" class="about-section">
         <div class="container">
-            <div class="row">
+            <div class="heading">
                 <div class="col-lg-12">
                     <h1>About Us</h1>
                 </div>
@@ -128,29 +136,27 @@
     <!-- Scrolling Nav JavaScript -->
     <script src="js/jquery.easing.min.js"></script>
     <script src="js/sticky-menu.js"></script>
-
-    <!-- Leaflet Script -->
+    <!-- <script src="js/main.js"</script> -->
     <script>
-		var m = L.map('map').setView([22.59, 82.22], 5);
-		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-			attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-			maxZoom: 18,
-			id: 'mapbox.light',
-			accessToken: 'pk.eyJ1IjoicGFua2h1cmlrdW1hciIsImEiOiJjamZwbnV2OTcxdXB1MzBudnViY2p3aDEzIn0.Zf9ZkY05gz_Zsyen1W1FbA'
-		}).addTo(m);
+        colors = ["#006834", "#040719"];
+        var m = L.map('map').setView([22.59, 82.22], 5);
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox.light',
+            accessToken: 'pk.eyJ1IjoicGFua2h1cmlrdW1hciIsImEiOiJjamZwbnV2OTcxdXB1MzBudnViY2p3aDEzIn0.Zf9ZkY05gz_Zsyen1W1FbA'
+        }).addTo(m);
 
-		function getColor(d) {
-		    return d > 1 ? "rgb(109, 158, 94)" :
-                "rgb(121, 167, 244)";
+        function getColor(i) {
+            return colors[i];
         }
 
         var legend = L.control({position: 'topright'});
         legend.onAdd = function (m) {
             var div = L.DomUtil.create('div', 'info legend'),
-                grades = [0, 10],
+                grades = [0, 1],
                 labels = ["Protected Land", "Projects"];
 
-            // loop through our density intervals and generate a label with a colored square for each interval
             for (var i = 0; i < grades.length; i++) {
                 div.innerHTML +=
                     '<i style="background:' + getColor(grades[i]) + '"></i> ' + labels[i] + '<br>';
@@ -159,37 +165,39 @@
         };
         legend.addTo(m);
 
-		var shpfile = new L.Shapefile('data/WDPA_Nov2019_IND-shapefile.zip', {
-			onEachFeature: function(feature, layer) {
-				if (feature.properties) {
-					layer.bindPopup(Object.keys(feature.properties).map(function(k) {
-						return k + ": " + feature.properties[k];
-					}).join("<br />"), {
-						maxHeight: 200
-					});
+        var shpfile = new L.Shapefile('data/WDPA_Nov2019_IND-shapefile.zip', {
+            onEachFeature: function(feature, layer) {
+                if (feature.properties) {
+                    layer.bindPopup(Object.keys(feature.properties).map(function(k) {
+                        return k + ": " + feature.properties[k];
+                    }).join("<br />"), {
+                        maxHeight: 200
+                    });
                     layer._popup._content = "<strong>PROTECTED LAND</strong><br />" + layer._popup._content;
-				}
-			},
-			style: function() {
-	            return {
-	                opacity: 1,
-	                fillOpacity: 0.7,
-	                weight: 0
-	            }
-	        },
-			pointToLayer: function(feature, latlng) {
-	            return L.circleMarker(latlng, {
-	                opacity: 1,
-	                fillOpacity: 0.7,
-	                radius: 7,
-	                weight: 0
-	            });
-	        }
-		});
-		shpfile.addTo(m);
-		shpfile.once("data:loaded", function() {
-			console.log("finished loaded shapefile");
-		});
+                }
+            },
+            style: function() {
+                return {
+                    opacity: 1,
+                    fillOpacity: 0.7,
+                    weight: 0,
+                    color: colors[0]
+                }
+            },
+            pointToLayer: function(feature, latlng) {
+                return L.circleMarker(latlng, {
+                    opacity: 1,
+                    fillOpacity: 0.7,
+                    radius: 5,
+                    weight: 0,
+                    color: colors[0]
+                });
+            }
+        });
+        shpfile.addTo(m);
+        shpfile.once("data:loaded", function() {
+            console.log("finished loaded shapefile");
+        });
 
         var jsonFeatures = [];
         $.getJSON("data/data_coords.json", function(data) {
@@ -247,14 +255,14 @@
                             opacity: 1,
                             fillOpacity: 0.7,
                             weight: 0,
-                            color: "green"
+                            color: colors[1]
                         }
                     },
                     pointToLayer: function (feature, latlng) {
                         return new L.CircleMarker(latlng, {
-                            radius: 7,
+                            radius: 5,
                             fillOpacity: 0.7,
-                            color: "green"
+                            color: colors[1]
                         });
                     }
                 });
@@ -264,8 +272,7 @@
             // console.log(geojsonLayer);
             geojsonLayer.addTo(m);
         });
-	</script>
-
+    </script>
 </body>
 
 </html>
