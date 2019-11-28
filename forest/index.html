@@ -9,13 +9,13 @@
     <meta name="description" content="Demo for Forest Clearance Project">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/sticky-menu.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
@@ -34,7 +34,7 @@
                     <li>
                         <a class="page-scroll" href="#page-top">Home</a>
                     </li>
-                    <li>
+                    <li> 
                         <a class="page-scroll" href="#maps">Map</a>
                     </li>
                     <li>
@@ -71,27 +71,20 @@
             </div>
             <div class="inner-flex">
                 <div class="row-dropdown">
+                    <h4>Filter projects by:</h4>
                     <div class="dropdown-prop">
-                        <select class="selectpicker" multiple data-live-search="true">
-        					<option>Mustard</option>
-        					<option>Ketchup</option>
-        					<option>Relish</option>
-                            <option>Ket</option>
-                            <option>ish</option>
+                        <h5>Project Category</h5>
+                        <select id="cat" class="selectpicker" multiple data-live-search="true" data-actions-box="true" data-size="3" data-width="auto">
         				</select>
                     </div>
                     <div class="dropdown-prop">
-        				<select class="selectpicker" multiple data-live-search="true">
-        					<option>Mustard</option>
-        					<option>Ketchup</option>
-        					<option>Relish</option>
+                        <h5>Project State</h5>
+        				<select id="state" class="selectpicker" multiple data-live-search="true" data-actions-box="true" data-size="3">
         				</select>
                     </div>
                     <div class="dropdown-prop">
-                        <select class="selectpicker" multiple data-live-search="true">
-                            <option>Mustard</option>
-                            <option>Ketchup</option>
-                            <option>Relish</option>
+                        <h5>Project Acceptance Date</h5>
+                        <select id="acc" class="selectpicker" multiple data-live-search="true" data-actions-box="true" data-size="3">
                         </select>
                     </div>
     			</div>
@@ -136,9 +129,9 @@
     <!-- Scrolling Nav JavaScript -->
     <script src="js/jquery.easing.min.js"></script>
     <script src="js/sticky-menu.js"></script>
-    <!-- <script src="js/main.js"</script> -->
     <script>
         colors = ["#006834", "#040719"];
+        labels = ["Protected Land", "Projects"];
         var m = L.map('map').setView([22.59, 82.22], 5);
         L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -154,8 +147,7 @@
         var legend = L.control({position: 'topright'});
         legend.onAdd = function (m) {
             var div = L.DomUtil.create('div', 'info legend'),
-                grades = [0, 1],
-                labels = ["Protected Land", "Projects"];
+                grades = [0, 1];
 
             for (var i = 0; i < grades.length; i++) {
                 div.innerHTML +=
@@ -194,12 +186,16 @@
                 });
             }
         });
-        shpfile.addTo(m);
-        shpfile.once("data:loaded", function() {
-            console.log("finished loaded shapefile");
-        });
 
-        var jsonFeatures = [];
+
+        var filters = ['Category', 'Location: State']; 
+        let allLayers = [];
+        let jsonFeatures = [];
+        let geojsonLayer;
+        let mapCatGroups = [];
+        let mapStateGroups = [];
+        // let allCategories = [];
+        let allStates = [];
         $.getJSON("data/data_coords.json", function(data) {
             data.forEach(function(item){
                 let feature;
@@ -216,6 +212,12 @@
                             coordinates: [parseFloat(item.lng), parseFloat(item.lat)]
                         }
                     };
+                    // if (!categories.includes(feature.properties[filters[0]])) {
+                    //     categories.push(feature.properties[filters[0]]);
+                    // }
+                    if (!allStates.includes(feature.properties[filters[1]])) {
+                        allStates.push(feature.properties[filters[1]]);
+                    }
                 } else if (t === 'Polygon') {
                     let c1 = L.latLng(parseFloat(item.corner1[1]), parseFloat(item.corner1[0]));
                     let c2 = L.latLng(parseFloat(item.corner2[1]), parseFloat(item.corner2[0]));
@@ -232,47 +234,100 @@
                             coordinates: [arr]
                         }
                     };
+                    // if (!categories.includes(feature.properties[filters[0]])) {
+                    //     categories.push(feature.properties[filters[0]]);
+                    // }
+                    if (!allStates.includes(feature.properties[filters[1]])) {
+                        allStates.push(feature.properties[filters[1]]);
+                    }
                 }
 
                 jsonFeatures.push(feature);
             });
+
             const geo = {type: "FeatureCollection", features: jsonFeatures};
-            // console.log(geo);
-            try {
-                var geojsonLayer = L.geoJson(geo, {
-                    onEachFeature: function (feature, latlng) {
-                        if (feature.properties) {
-                            latlng.bindPopup(Object.keys(feature.properties).map(function (k) {
-                                return k + ": " + feature.properties[k];
-                            }).join("<br />"), {
-                                maxHeight: 200
-                            });
-                        }
-                        latlng._popup._content = "<strong>PROJECT</strong><br />" + latlng._popup._content;
-                    },
-                    style: function () {
-                        return {
-                            opacity: 1,
-                            fillOpacity: 0.7,
-                            weight: 0,
-                            color: colors[1]
-                        }
-                    },
-                    pointToLayer: function (feature, latlng) {
-                        return new L.CircleMarker(latlng, {
-                            radius: 5,
-                            fillOpacity: 0.7,
-                            color: colors[1]
+            L.geoJson(geo, {
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties) {
+                        layer.bindPopup(Object.keys(feature.properties).map(function (k) {
+                            return k + ": " + feature.properties[k];
+                        }).join("<br />"), {
+                            maxHeight: 200
                         });
                     }
-                });
-            } catch (error) {
-                console.log(error);
+                    layer._popup._content = "<strong>PROJECT</strong><br />" + layer._popup._content;
+                    allLayers.push(layer);
+                    m.addLayer(layer);
+                },
+                style: function() {
+                    return {
+                        opacity: 1,
+                        fillOpacity: 0.7,
+                        weight: 0,
+                        color: colors[1]
+                    }
+                },
+                pointToLayer: function (feature, latlng) {
+                    return new L.CircleMarker(latlng, {
+                        radius: 5,
+                        fillOpacity: 0.7,
+                        color: colors[1]
+                    });
+                }
+            })
+        });
+
+        function showLayer() {
+            allLayers.forEach(function(layer) {
+                var properties = layer.feature.properties;
+                if (selected_features[0].includes(properties[filters[0]]) && selected_features[1].includes(properties[filters[1]])) {
+                    m.addLayer(layer);
+                } else {
+                    m.removeLayer(layer);
+                }
+            });
+        }
+
+        var categories = ["Coal Mining", "Industrial Projects - 1", "Industrial Projects - 2", "Industrial Projects - 3", 
+          "Infrastructure and Miscellaneous Projects + CRZ", "New Construction Projects and Industrial Estates",
+          "Non-Coal Mining", "River Valley and Hydroelectric Projects", "Thermal Projects"];
+        var states = ["Jammu and Kashmir", "Tripura", "Rajasthan", "Tamil Nadu", "Telangana", "Maharashtra", "Punjab", "Uttar Pradesh", "Andhra Pradesh", "Delhi",
+        "Karnataka", "Himachal Pradesh", "Gujarat", "Orissa", "West Bengal", "Chhattisgarh", "Mizoram", "Jharkhand", "Assam", "Haryana", "Kerala", "Dadar and Nagar Haveli",
+        "Jharkhand\n", "Uttar Pradesh\n", "Arunachal Pradesh", "Uttar PradeshDistrict", "Uttarakhand", "Andaman and Nicobar", "MAharashtra", "Goa", "Kerla", "Madhya Pradesh",
+        "Bihar", "Meghalaya", "Sikkim"];
+        let selected_features = [categories, states];
+
+        $(document).ready(function() {
+            m.addLayer(shpfile);
+            
+            var cat = document.getElementById("cat");
+            for (i in categories) {
+                cat.innerHTML += "<option>" + categories[i] + "</option>";
             }
-            // console.log(geojsonLayer);
-            geojsonLayer.addTo(m);
+
+            var st = document.getElementById("state");
+            for (i in states) {
+                st.innerHTML += "<option>" + states[i] + "</option>";
+            }
+
+            $('#cat').on('change', function () {
+                selected_features[0] = $(this).val();
+                if (!selected_features[0]) {
+                    selected_features[0] = categories;
+                }
+                showLayer();
+            });
+
+            $('#state').on('change', function () {
+                selected_features[1] = $(this).val();
+                if (!selected_features[1]) {
+                    selected_features[1] = states;
+                }
+                showLayer();
+            });
         });
     </script>
+    <!-- <script src="js /trial.js"</script> -->
 </body>
 
 </html>

@@ -144,23 +144,30 @@ for item in data:
         if substring.strip() == '' or substring.strip() == ' ':
             m = loc.find(u'\u2019')
             continue
-        # try:
-        num = float(substring)
-        numInMin = round(num / 60, 2)
-        loc = loc.replace(substring, str(numInMin)[1:])
-        # print(loc)
-        # except:
-        #     print(substring)
-        #     print(item)
+        try:
+            num = float(substring)
+            numInMin = round(num / 60, 2)
+            loc = loc.replace(substring, str(numInMin)[1:])
+            # print(loc)
+        except:
+            print(substring)
+            print(item)
 
         m = loc.find(u'\u2019')
     loc = loc.replace(u'\u2019', '')
     loc = loc.replace(u'\u201d', '')
     loc = loc.replace(' . ', '')
+
     # if ':' not in loc:
     #     print(loc)
     #     print(item)
-    print(loc)
+
+    p1 = loc.find(':')
+    n = loc.replace(':', ' ', 1)
+    p2 = n.find(':')
+    mid = loc[p1+1:p2].strip()
+    s1 = mid.find(' ')
+
     item['Location Coordinates'] = loc
 
     # print(loc)
