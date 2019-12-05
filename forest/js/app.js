@@ -8,11 +8,12 @@ function mapFunction() {
     colors = ["#006834", "#040719"];
     labels = ["Protected Land", "Projects"];
     var m = L.map('map').setView([22.59, 82.22], 5);
-    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.{ext}', {
+        attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        subdomains: 'abcd',
+        minZoom: 0,
         maxZoom: 18,
-        id: 'mapbox.light',
-        accessToken: 'pk.eyJ1IjoicGFua2h1cmlrdW1hciIsImEiOiJjamZwbnV2OTcxdXB1MzBudnViY2p3aDEzIn0.Zf9ZkY05gz_Zsyen1W1FbA'
+        ext: 'png'
     }).addTo(m);
 
     function getColor(i) {
@@ -75,11 +76,12 @@ function mapFunction() {
 //  PROJECTS JSON PROCESSING
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    var filters = ['Category', 'Location: State']; 
+    var filters = ['Category', 'State', 'Grant Year']; 
     let allLayers = [];
     let jsonFeatures = [];
     // let allCategories = [];
     // let allStates = [];
+    // let allYears = [];
     $.getJSON("data/dated_data.json", function(data) {
         data.forEach(function(item){
             let feature;
@@ -101,6 +103,9 @@ function mapFunction() {
                 // }
                 // if (!allStates.includes(feature.properties[filters[1]])) {
                 //     allStates.push(feature.properties[filters[1]]);
+                // }
+                // if (!allYears.includes(feature.properties[filters[2]])) {
+                //     allYears.push(feature.properties[filters[2]]);
                 // }
             } else if (t === 'Polygon') {
                 let c1 = L.latLng(parseFloat(item.corner1[1]), parseFloat(item.corner1[0]));
@@ -124,8 +129,11 @@ function mapFunction() {
                 // if (!allStates.includes(feature.properties[filters[1]])) {
                 //     allStates.push(feature.properties[filters[1]]);
                 // }
+                // if (!allYears.includes(feature.properties[filters[2]])) {
+                //     allYears.push(feature.properties[filters[2]]);
+                // }
             }
-
+            
             jsonFeatures.push(feature);
         });
 
@@ -143,6 +151,7 @@ function mapFunction() {
                 }
                 layer._popup._content = "<strong>PROJECT</strong><br />" + layer._popup._content;
                 layer._popup._content = layer._popup._content.replace(/,/g, '');
+                layer._popup._content = layer._popup._content.replace(/;/g, ',');
                 allLayers.push(layer);
                 m.addLayer(layer);
             },
@@ -172,10 +181,12 @@ function mapFunction() {
     function showLayer() {
         allLayers.forEach(function(layer) {
             var properties = layer.feature.properties;
-            if (selected_features[0].includes(properties[filters[0]]) && selected_features[1].includes(properties[filters[1]])) {
-                m.addLayer(layer);
+            if (selected_features[0].includes(properties[filters[0]]) 
+                && selected_features[1].includes(properties[filters[1]])
+                && selected_features[2].includes(properties[filters[2]])) {
+                    m.addLayer(layer);
             } else {
-                m.removeLayer(layer);
+                    m.removeLayer(layer);
             }
         });
     }
@@ -184,10 +195,10 @@ function mapFunction() {
       "Infrastructure and Miscellaneous Projects + CRZ", "New Construction Projects and Industrial Estates",
       "Non-Coal Mining", "River Valley and Hydroelectric Projects", "Thermal Projects"];
     var states = ["Jammu and Kashmir", "Tripura", "Rajasthan", "Tamil Nadu", "Telangana", "Maharashtra", "Punjab", "Uttar Pradesh", "Andhra Pradesh", "Delhi",
-    "Karnataka", "Himachal Pradesh", "Gujarat", "Orissa", "West Bengal", "Chhattisgarh", "Mizoram", "Jharkhand", "Assam", "Haryana", "Kerala", "Dadar and Nagar Haveli",
-    "Jharkhand\n", "Uttar Pradesh\n", "Arunachal Pradesh", "Uttar PradeshDistrict", "Uttarakhand", "Andaman and Nicobar", "MAharashtra", "Goa", "Kerla", "Madhya Pradesh",
-    "Bihar", "Meghalaya", "Sikkim"];
-    let selected_features = [categories, states];
+      "Karnataka", "Himachal Pradesh", "Gujarat", "Orissa", "West Bengal", "Chhattisgarh", "Mizoram", "Jharkhand", "Assam", "Haryana", "Kerala", "Dadar and Nagar Haveli",
+      "Arunachal Pradesh", "Uttarakhand", "Andaman and Nicobar", "Goa", "Madhya Pradesh", "Bihar", "Meghalaya", "Sikkim"];
+    var years = ["2006", "2014", "2015", "2016", "2017", "2018", "2019", "Unavailable"];
+    let selected_features = [categories, states, years];
 
     $(document).ready(function() {
         m.addLayer(shpfile);
@@ -202,6 +213,11 @@ function mapFunction() {
             st.innerHTML += "<option>" + states[i] + "</option>";
         }
 
+        var yr = document.getElementById("year");
+        for (i in years) {
+            yr.innerHTML += "<option>" + years[i] + "</option>";
+        }
+
         $('#cat').on('change', function () {
             selected_features[0] = $(this).val();
             if (!selected_features[0]) {
@@ -214,6 +230,14 @@ function mapFunction() {
             selected_features[1] = $(this).val();
             if (!selected_features[1]) {
                 selected_features[1] = states;
+            }
+            showLayer();
+        });
+
+        $('#year').on('change', function () {
+            selected_features[2] = $(this).val();
+            if (!selected_features[2]) {
+                selected_features[2] = years;
             }
             showLayer();
         });

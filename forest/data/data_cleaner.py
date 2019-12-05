@@ -26,15 +26,18 @@ with open('final_data.json') as json_file:
 	data = json.load(json_file)
 
 for item in data:
+	item['State'] = item['Location'].split(',')[-1].strip()
+	item['Location'] = item['Location'].replace(',', ';')
 	if item['EC Grant Date'] is None:
 		item['EC Grant Date'] = 'Unavailable'
+		item['Grant Year'] = 'Unavailable'
 		continue
 	date = datetime.fromtimestamp(float(item['EC Grant Date'])/1000.0)
 	date += timedelta(days=1)
-	# add modified time format
-	item['EC Grant Date'] = date.date().__str__()
-
-	# print(item)
+	# print(date.strftime("%d %b, %Y"))
+	dateString = date.strftime("%d %b; %Y")
+	item['EC Grant Date'] = dateString
+	item['Grant Year'] = dateString.split('; ')[-1].strip()
 
 with open('dated_data.json', 'w') as outfile:
     json.dump(data, outfile)
