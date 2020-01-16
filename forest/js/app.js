@@ -38,18 +38,25 @@ function mapFunction() {
 //  PROTECTED AREAS SHAPEFILE PROCESSING
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    var protectedPopupFeatures = ["NAME", "DESIG_ENG", "DESIG_TYPE", "REP_AREA", "STATUS_YR", "WDPAID"]
+    var protectedPopupFeatures = ["NAME", "DESIG_ENG", "DESIG_TYPE", "REP_AREA", "STATUS_YR", "WDPAID", "STATUS"]
     var shpfile = new L.Shapefile('data/WDPA_Nov2019_IND-shapefile.zip', {
         onEachFeature: function(feature, layer) {
             if (feature.properties) {
                 layer.bindPopup(Object.keys(feature.properties).map(function(k) {
                     if (protectedPopupFeatures.includes(k)) {
-                        return (k + ": " + feature.properties[k]
+                        return ("<strong>"+ k + "</strong>: " + feature.properties[k]
                             + "<br />");
                     }
                 }));
                 layer._popup._content = "<strong>PROTECTED LAND</strong><br />" + layer._popup._content;
                 layer._popup._content = layer._popup._content.replace(/,/g, '');
+                layer._popup._content = layer._popup._content.replace('WDPAID', 'WDPA ID');
+                layer._popup._content = layer._popup._content.replace('NAME', 'Name');
+                layer._popup._content = layer._popup._content.replace('DESIG_ENG', 'Designation');
+                layer._popup._content = layer._popup._content.replace('DESIG_TYPE', 'Level');
+                layer._popup._content = layer._popup._content.replace('REP_AREA', 'Reported Area (sq. km)');
+                layer._popup._content = layer._popup._content.replace('STATUS', 'Status');
+                layer._popup._content = layer._popup._content.replace('STATUS_YR', 'Status Grant Year');
             }
         },
         style: function() {
@@ -164,7 +171,7 @@ function mapFunction() {
                 if (feature.properties) {
                     layer.bindPopup(Object.keys(feature.properties).map(function (k) {
                         if (projectPopupFeatures.includes(k)) {
-                            return (k + ": " + feature.properties[k]
+                            return ("<strong>" + k + "</strong>: " + feature.properties[k]
                                 + "<br />");
                         }
                     }));
