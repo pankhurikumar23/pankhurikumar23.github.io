@@ -7,7 +7,7 @@ import json
 df1 = pd.read_excel('Environmental Clearances.xlsx', 0)
 df2 = pd.read_excel('Environmental Clearances.xlsx', 6)
 df = pd.concat([df1, df2])
-print(df.shape)
+# print(df.shape)
 
 json_data = df.to_json(orient='records')
 data = json.loads(json_data)
@@ -76,6 +76,9 @@ for item in data:
     loc = loc.replace('east', 'E')
     loc = loc.replace('west', 'W')
 
+    loc = loc.replace('W', '')
+    loc = loc.replace('S', '')
+
     loc = loc.replace('o', ':')
     loc = loc.replace('O', ':')
     loc = loc.replace(' 0 ', ' : ')
@@ -106,17 +109,8 @@ for item in data:
     loc = loc.replace('and', ' ')
 
     loc = loc.strip()
-    item['Location Coordinates'] = loc
 
-for item in data:
-    loc = item['Location Coordinates']
-    if loc is None:
-        continue
-
-    s = loc.split('\n')
-    if len(s) < 3:
-        continue
-
+    # loc = loc.replace('\n', ' ')
     m = loc.find(u'\u2019')
     while m > -1:
         # print("m " + str(m))
@@ -157,6 +151,9 @@ for item in data:
     loc = loc.replace(u'\u2019', '')
     loc = loc.replace(u'\u201d', '')
     loc = loc.replace(' . ', '')
+    loc = loc.replace('N,', 'N')
+    loc = loc.replace('E,', 'E')
+    loc = loc.replace(' , ', '')
 
     # if ':' not in loc:
     #     print(loc)
@@ -168,6 +165,8 @@ for item in data:
     mid = loc[p1+1:p2].strip()
     s1 = mid.find(' ')
 
-    item['Location Coordinates'] = loc
+    item['Clean Loc'] = loc
+    new_data.append(item)
 
-    # print(loc)
+with open('multiple.json', 'w') as outfile:
+  json.dump(new_data, outfile)

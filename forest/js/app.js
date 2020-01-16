@@ -5,7 +5,7 @@ function mapFunction() {
 //  BASIC MAP SETUP
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    colors = ["#006834", "#040719"];
+    colors = ["#fa9fb5", "#C51B8A"];
     labels = ["Protected Land", "Projects"];
     var m = L.map('map').setView([22.59, 82.22], 5);
     L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.{ext}', {
@@ -70,6 +70,7 @@ function mapFunction() {
             });
         }
     });
+    m.addLayer(shpfile);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -82,11 +83,11 @@ function mapFunction() {
     // let allCategories = [];
     // let allStates = [];
     // let allYears = [];
-    $.getJSON("data/dated_data.json", function(data) {
+    $.getJSON("data/final_dated_data.json", function(data) {
         data.forEach(function(item){
             let feature;
             var t = item.type;
-            if (t === 'District' || !item.hasOwnProperty('type')) {
+            if (t === 'District' || t === null || !item.hasOwnProperty('type')) {
                 return
             }
 
@@ -98,8 +99,8 @@ function mapFunction() {
                         coordinates: [parseFloat(item.lng), parseFloat(item.lat)]
                     }
                 };
-                // if (!categories.includes(feature.properties[filters[0]])) {
-                //     categories.push(feature.properties[filters[0]]);
+                // if (!allCategories.includes(feature.properties[filters[0]])) {
+                //     allCategories.push(feature.properties[filters[0]]);
                 // }
                 // if (!allStates.includes(feature.properties[filters[1]])) {
                 //     allStates.push(feature.properties[filters[1]]);
@@ -123,8 +124,25 @@ function mapFunction() {
                         coordinates: [arr]
                     }
                 };
-                // if (!categories.includes(feature.properties[filters[0]])) {
-                //     categories.push(feature.properties[filters[0]]);
+                // if (!allCategories.includes(feature.properties[filters[0]])) {
+                //     allCategories.push(feature.properties[filters[0]]);
+                // }
+                // if (!allStates.includes(feature.properties[filters[1]])) {
+                //     allStates.push(feature.properties[filters[1]]);
+                // }
+                // if (!allYears.includes(feature.properties[filters[2]])) {
+                //     allYears.push(feature.properties[filters[2]]);
+                // }
+            } else if (t === 'Mpoint') {
+                feature = {type: 'Feature',
+                    properties: item,
+                    geometry: {
+                        type: 'Point',
+                        coordinates: [parseFloat(item.lng), parseFloat(item.lat)]
+                    }
+                };
+                // if (!allCategories.includes(feature.properties[filters[0]])) {
+                //     allCategories.push(feature.properties[filters[0]]);
                 // }
                 // if (!allStates.includes(feature.properties[filters[1]])) {
                 //     allStates.push(feature.properties[filters[1]]);
@@ -133,10 +151,12 @@ function mapFunction() {
                 //     allYears.push(feature.properties[filters[2]]);
                 // }
             }
-            
+
             jsonFeatures.push(feature);
         });
-
+        // console.log(allCategories);
+        // console.log(allStates);
+        // console.log(allYears);
         var projectPopupFeatures = ["Category", "Proposal Name", "EC Grant Date", "Location", "Company Name", "Project Type"];
         const geo = {type: "FeatureCollection", features: jsonFeatures};
         L.geoJson(geo, {
@@ -196,13 +216,11 @@ function mapFunction() {
       "Non-Coal Mining", "River Valley and Hydroelectric Projects", "Thermal Projects"];
     var states = ["Jammu and Kashmir", "Tripura", "Rajasthan", "Tamil Nadu", "Telangana", "Maharashtra", "Punjab", "Uttar Pradesh", "Andhra Pradesh", "Delhi",
       "Karnataka", "Himachal Pradesh", "Gujarat", "Orissa", "West Bengal", "Chhattisgarh", "Mizoram", "Jharkhand", "Assam", "Haryana", "Kerala", "Dadar and Nagar Haveli",
-      "Arunachal Pradesh", "Uttarakhand", "Andaman and Nicobar", "Goa", "Madhya Pradesh", "Bihar", "Meghalaya", "Sikkim"];
+      "Arunachal Pradesh", "Uttarakhand", "Andaman and Nicobar", "Goa", "Madhya Pradesh", "Bihar", "Meghalaya", "Sikkim", "Puducherry"];
     var years = ["2006", "2014", "2015", "2016", "2017", "2018", "2019", "Unavailable"];
     let selected_features = [categories, states, years];
 
-    $(document).ready(function() {
-        m.addLayer(shpfile);
-        
+    $(document).ready(function() {        
         var cat = document.getElementById("cat");
         for (i in categories) {
             cat.innerHTML += "<option>" + categories[i] + "</option>";

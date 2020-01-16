@@ -108,54 +108,54 @@ import json
 # 	item['Latitude'] = lat
 # 	item['Longitude'] = lng
 
-# for item in data:
-# # item = data[-3]
-# 	lat = item['Longitude'].strip()
-# 	# lng = item['Longitude'].strip()
-# 	# print(lat)
+for item in data:
+# item = data[-3]
+	lat = item['Longitude'].strip()
+	# lng = item['Longitude'].strip()
+	# print(lat)
 
-# 	m = lat.find(u'\u2019')
-# 	while m > -1:
-# 		# print("m " + str(m))
-# 		s = lat.find(u'\u201d')
-# 		# print("s " + str(s))
-# 		if s == -1:
-# 			break
-# 		# remove first min marker
-# 		lat = lat.replace(u'\u2019', ' ', 1)
-# 		# and then check if the next min marker is before/after
-# 		# the current sec marker
-# 		m2 = lat.find(u'\u2019')
-# 		# print("m2 " + str(m2))
-# 		# s was found of second time, then ignore for now
-# 		# will be covered in next loop
-# 		if m2 != -1 and s > m2:
-# 			m = lat.find(u'\u2019')
-# 			continue
-# 		substring = lat[m:s]
-# 		# remove first sec marker
-# 		# to facilitate next loop
-# 		lat = lat.replace(u'\u201d', ' ', 1)
-# 		# print("replaced " + lat)
-# 		# print("subs:" + substring)
-# 		if substring.strip() == '' or substring.strip() == ' ':
-# 			m = lat.find(u'\u2019')
-# 			continue
-# 		try:
-# 			num = float(substring)
-# 			numInMin = round(num / 60, 2)
-# 			lat = lat.replace(substring, str(numInMin)[1:])
-# 			# print(lat)
-# 		except:
-# 			print(substring)
-# 			print(item)
+	m = lat.find(u'\u2019')
+	while m > -1:
+		# print("m " + str(m))
+		s = lat.find(u'\u201d')
+		# print("s " + str(s))
+		if s == -1:
+			break
+		# remove first min marker
+		lat = lat.replace(u'\u2019', ' ', 1)
+		# and then check if the next min marker is before/after
+		# the current sec marker
+		m2 = lat.find(u'\u2019')
+		# print("m2 " + str(m2))
+		# s was found of second time, then ignore for now
+		# will be covered in next loop
+		if m2 != -1 and s > m2:
+			m = lat.find(u'\u2019')
+			continue
+		substring = lat[m:s]
+		# remove first sec marker
+		# to facilitate next loop
+		lat = lat.replace(u'\u201d', ' ', 1)
+		# print("replaced " + lat)
+		# print("subs:" + substring)
+		if substring.strip() == '' or substring.strip() == ' ':
+			m = lat.find(u'\u2019')
+			continue
+		try:
+			num = float(substring)
+			numInMin = round(num / 60, 2)
+			lat = lat.replace(substring, str(numInMin)[1:])
+			# print(lat)
+		except:
+			print(substring)
+			print(item)
 
-# 		m = lat.find(u'\u2019')
-# 	lat = lat.replace(u'\u2019', '')
-# 	lat = lat.replace(u'\u201d', '')
-# 	lat = lat.replace(' . ', '')
-# 	print(lat)
-# 	item['Longitude'] = lat
+		m = lat.find(u'\u2019')
+	lat = lat.replace(u'\u2019', '')
+	lat = lat.replace(u'\u201d', '')
+	lat = lat.replace(' . ', '')
+	print(lat)
+	item['Longitude'] = lat
 
 # with open('processed_data.json', 'w') as outfile:
 # 	json.dump(data, outfile)
