@@ -87,14 +87,21 @@ function mapFunction() {
     var filters = ['Category', 'State', 'Grant Year']; 
     let allLayers = [];
     let jsonFeatures = [];
+    let count = [0, 0];
     // let allCategories = [];
     // let allStates = [];
     // let allYears = [];
-    $.getJSON("data/final_dated_data.json", function(data) {
+    $.getJSON("data/district_added.json", function(data) {
         data.forEach(function(item){
             let feature;
             var t = item.type;
-            if (t === 'District' || t === null || !item.hasOwnProperty('type')) {
+            if (t === null) {
+                // || t === 'Point' || t === 'Polygon') {
+                count[0] = count[0] + 1;
+                return
+            }
+            if (t === 'Resolve') {
+                count[1] = count[1] + 1;
                 return
             }
 
@@ -102,7 +109,7 @@ function mapFunction() {
                 feature = {type: 'Feature',
                     properties: item,
                     geometry: {
-                        type: t,
+                        type: 'Point',
                         coordinates: [parseFloat(item.lng), parseFloat(item.lat)]
                     }
                 };
@@ -127,7 +134,7 @@ function mapFunction() {
                     type: 'Feature',
                     properties: item,
                     geometry: {
-                        type: t,
+                        type: 'Polygon',
                         coordinates: [arr]
                     }
                 };
@@ -140,31 +147,18 @@ function mapFunction() {
                 // if (!allYears.includes(feature.properties[filters[2]])) {
                 //     allYears.push(feature.properties[filters[2]]);
                 // }
-            } else if (t === 'Mpoint') {
-                feature = {type: 'Feature',
-                    properties: item,
-                    geometry: {
-                        type: 'Point',
-                        coordinates: [parseFloat(item.lng), parseFloat(item.lat)]
-                    }
-                };
-                // if (!allCategories.includes(feature.properties[filters[0]])) {
-                //     allCategories.push(feature.properties[filters[0]]);
-                // }
-                // if (!allStates.includes(feature.properties[filters[1]])) {
-                //     allStates.push(feature.properties[filters[1]]);
-                // }
-                // if (!allYears.includes(feature.properties[filters[2]])) {
-                //     allYears.push(feature.properties[filters[2]]);
-                // }
+            } 
+            if (typeof feature === 'undefined') {
+                console.log(item);
+                return
             }
-
             jsonFeatures.push(feature);
         });
         // console.log(allCategories);
         // console.log(allStates);
         // console.log(allYears);
-        var projectPopupFeatures = ["Category", "Proposal Name", "EC Grant Date", "Location", "Company Name", "Project Type"];
+        console.log(count);
+        var projectPopupFeatures = ["Category", "Proposal Name", "EC Grant Date", "Location", "Company Name", "Project Type", "Location Coordinates", "type", "corner1", "corner2", "lat", "lng"];
         const geo = {type: "FeatureCollection", features: jsonFeatures};
         L.geoJson(geo, {
             onEachFeature: function (feature, layer) {
