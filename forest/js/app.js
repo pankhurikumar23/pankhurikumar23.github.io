@@ -158,7 +158,7 @@ function mapFunction() {
         // console.log(allStates);
         // console.log(allYears);
         console.log(count);
-        var projectPopupFeatures = ["Category", "Proposal Name", "EC Grant Date", "Location", "Company Name", "Project Type", "Location Coordinates", "type", "corner1", "corner2", "lat", "lng"];
+        var projectPopupFeatures = ["Category", "Proposal Name", "EC Grant Date", "Location", "Company Name", "Project Type"];
         const geo = {type: "FeatureCollection", features: jsonFeatures};
         L.geoJson(geo, {
             onEachFeature: function (feature, layer) {
