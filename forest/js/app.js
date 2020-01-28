@@ -5,16 +5,13 @@ function mapFunction() {
 //  BASIC MAP SETUP
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    colors = ["#fa9fb5", "#C51B8A"];
+    colors = ["#8CC739", "#192B5E", "#99B3CC"];
     labels = ["Protected Land", "Projects"];
     var m = L.map('map').setView([22.59, 82.22], 5);
-    L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.{ext}', {
-        attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        subdomains: 'abcd',
-        minZoom: 0,
-        maxZoom: 18,
-        ext: 'png'
-    }).addTo(m);
+    L.tileLayer('https://api.mapbox.com/styles/v1/pankhurikumar/cjuni6e1k2xlm1fo61xw8tdv5/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicGFua2h1cmlrdW1hciIsImEiOiJjamZwbnV2OTcxdXB1MzBudnViY2p3aDEzIn0.Zf9ZkY05gz_Zsyen1W1FbA', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18
+        }).addTo(m);
 
     function getColor(i) {
         return colors[i];
@@ -91,7 +88,7 @@ function mapFunction() {
     // let allCategories = [];
     // let allStates = [];
     // let allYears = [];
-    $.getJSON("data/district_added.json", function(data) {
+    $.getJSON("data/AmAustCorrect.json", function(data) {
         data.forEach(function(item){
             let feature;
             var t = item.type;
@@ -147,10 +144,6 @@ function mapFunction() {
                 // if (!allYears.includes(feature.properties[filters[2]])) {
                 //     allYears.push(feature.properties[filters[2]]);
                 // }
-            } 
-            if (typeof feature === 'undefined') {
-                console.log(item);
-                return
             }
             jsonFeatures.push(feature);
         });
@@ -215,9 +208,10 @@ function mapFunction() {
     var categories = ["Coal Mining", "Industrial Projects - 1", "Industrial Projects - 2", "Industrial Projects - 3", 
       "Infrastructure and Miscellaneous Projects + CRZ", "New Construction Projects and Industrial Estates",
       "Non-Coal Mining", "River Valley and Hydroelectric Projects", "Thermal Projects"];
-    var states = ["Jammu and Kashmir", "Tripura", "Rajasthan", "Tamil Nadu", "Telangana", "Maharashtra", "Punjab", "Uttar Pradesh", "Andhra Pradesh", "Delhi",
-      "Karnataka", "Himachal Pradesh", "Gujarat", "Orissa", "West Bengal", "Chhattisgarh", "Mizoram", "Jharkhand", "Assam", "Haryana", "Kerala", "Dadar and Nagar Haveli",
-      "Arunachal Pradesh", "Uttarakhand", "Andaman and Nicobar", "Goa", "Madhya Pradesh", "Bihar", "Meghalaya", "Sikkim", "Puducherry"];
+    var states = ["Jammu and Kashmir", "Tripura", "Rajasthan", "Tamil Nadu", "Telangana", "Maharashtra", "Himachal Pradesh", "Kerala", 
+      "Punjab", "Orissa", "Uttar Pradesh", "Andhra Pradesh", "Delhi", "Karnataka", "Gujarat", "West Bengal", "Chhattisgarh", "Mizoram",
+      "Jharkhand", "Assam", "Haryana", "Madhya Pradesh", "Manipur", "Bihar", "Andaman and Nicobar", "Dadra and Nagar Haveli", "Arunachal Pradesh",
+      "Puducherry", "Uttarakhand", "Goa", "Daman and Diu", "Meghalaya", "Sikkim"];
     var years = ["2006", "2014", "2015", "2016", "2017", "2018", "2019", "Unavailable"];
     let selected_features = [categories, states, years];
 

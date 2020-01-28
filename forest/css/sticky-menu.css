@@ -58,7 +58,11 @@ html {
 }
 
 .welcome-section {
-    height: 40%;
+    height: 44.5%;
+}
+
+.stories-section {
+    height: 255%;
 }
 
 .navbar-default .navbar-nav > li > a:hover {

@@ -29,7 +29,7 @@
         <div class="container">
             <div class="collapse navbar-collapse navbar-ex1-collapse">
 	            <div class="page-title">
-	        		Forest Clearance
+	        		Environmental Clearances
 	        	</div>
                 <ul class="nav navbar-nav">
                     <li>
@@ -54,7 +54,25 @@
         <div class="container">
             <div class="heading">
                 <div class="col-lg-12">
-                    <h1>Home</h1>
+                    <h1>Environmental Clearances in India</h1>
+                    <div style="text-align:left">
+                    	<br>
+                    	<br>
+	                    ECs are required for certain categories of development and infrastructure projects. The aim of an EC is to assess what impact a project will have and suggest ways to minimize the damage. Depending on the type of the project, the clearance is either granted by the centre or the state.
+	                    <br>
+	                    <br>
+	                    Over the past few years, clearances for environmental projects have increased, this project by Indiaspend seeks to highlight the...<b> need to complete this.</b>
+	                    <br>
+	                    <br>
+	                    The data displayed below has been manually collected between August and October 2019 for projects approved between 2014 and 2019. Out of the 2139 projects that were collected, 49 of them could not be represented on the map due to lack of location data. For approximately 680 projects, coordinates were not explicitly available, so they have been mapped by the tehsil provided in the data. <b> more info about data TK </b>
+	                    <br>
+	                    <br>
+	                    The project data was collected from the <a href="http://environmentclearance.nic.in/onlinesearch_parivesh.aspx">Parivesh</a> portal maintained by the Ministry of Environment, Forest and Climate Change, while the 672 protected areas in India were obtained from data available on the <a href="https://www.protectedplanet.net/search?q=India">Protected Planet</a> website.
+	                    <br>
+	                    <br>
+	                    <br>
+	                    <i>Note: All efforts have been made to collect and map the data accurately. However, these efforts are manual and there could be errors. Kindly reach out to us know if you see a datapoint in the wrong place - please clearly mention the <b>Proposal Name</b> as mentioned in the popup box to help us identify the project.</i>
+	                </div>
                 </div>
             </div>
         </div>
@@ -66,33 +84,36 @@
             <div>
                 <div class="heading">
                     <div class="col-lg-12">
-                        <h1>Map</h1>
                     </div>
                 </div>
             </div>
+            <div style="width:65%; text-align: center;margin-left:17.5%">
+            	**<b>99 points remain to be mapped. 49 do not have any location data. If you were to zoom out on the map, some points are wrongly mapped. If you chose a particular state, e.g. Karnataka, you'd see that a few points lie within India, but are outside Karnataka. This data will be cleaned soon.</b>
+            </div>
             <div class="inner-flex">
-                <div class="row-dropdown">
-                    <h4>Filter projects by:</h4>
-                    <div class="dropdown-prop">
-                        <h5>Project Category</h5>
-                        <select id="cat" class="selectpicker" multiple data-live-search="true" data-actions-box="true" data-size="3" data-width="auto">
-        				</select>
-                    </div>
-                    <div class="dropdown-prop">
-                        <h5>Project State</h5>
-        				<select id="state" class="selectpicker" multiple data-live-search="true" data-actions-box="true" data-size="3">
-        				</select>
-                    </div>
-                    <div class="dropdown-prop">
-                        <h5>Project Grant Year</h5>
-                        <select id="year" class="selectpicker" multiple data-live-search="true" data-actions-box="true" data-size="3">
-                        </select>
-                    </div>
-    			</div>
                 <div>
                     <div id="map">
                     </div>
                 </div>
+                <div class="row-dropdown">
+                    <div class="dropdown-prop">
+                        <h5>Project Category</h5>
+                        <select id="cat" class="selectpicker" multiple data-live-search="true" data-actions-box="true" data-width="379">
+        				</select>
+                    </div>
+    				<div class="dropdown-prop">
+                        <h5>Project Grant Year</h5>
+                        <select id="year" class="selectpicker" multiple data-live-search="true" data-actions-box="true" data-width="379">
+                        </select>
+                    </div>
+    			</div>
+    			<div class="row-dropdown">
+    				<div class="dropdown-prop">
+                        <h5>Project State</h5>
+        				<select id="state" class="selectpicker" multiple data-live-search="true" data-actions-box="true" data-width="379">
+        				</select>
+                    </div>
+    			</div>
             </div>
         </div>
     </section>
@@ -103,6 +124,21 @@
             <div class="heading">
                 <div class="col-lg-12">
                     <h1>Reporting</h1>
+                    <p><i>There can be more or less sections. This one is currently called reporting, but houses the charts. The colour of the charts, and their type/formatting can be changed. The last two charts are the same data presented in different ways, we can pick just one of them.</i></p>
+                    <img src="data/category_chart.png" alt="Category-wise Pattern">
+                    <p>Category-wise breakdown of the data (total=2139 projects)</p>
+                    <br>
+                    <br>
+                    <img src="data/year_chart.png" alt="Year-wise Pattern">
+                    <p>Year-wise breakdown of the data (total=2139 projects)</p>
+                    <br>
+                    <br>
+                    <img src="data/year_category_chart.png" alt="Category-wise Pattern across Years">
+                    <p>The categories of projects that have been granted over the years (total=2139 projects)</p>
+                    <br>
+                    <br>
+                    <img src="data/category_year_chart.png" alt="Year-wise Pattern across Categories">
+                    <p>The year-wise trend of projects that are granted from different categories (total=2139 projects)</p>
                 </div>
             </div>
         </div>
