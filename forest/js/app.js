@@ -7,7 +7,7 @@ function mapFunction() {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // colors = ["#8CC739", "#192B5E", "#99B3CC"];
     // pointColors = ["#EE4540", "#C72C41", "#801336", "#510A32", "#2D142C"]
-    colors = ["#8CC739", "#FF0000", "#FF5A00", "#FF9A00", "#FFCE00"]
+    colors = ["#00E600", "#FF0000", "#FF5A00", "#FF9A00", "#FFCE00"]
     labels = ["Protected Land", "Projects <= 10km away", "Projects <= 50km away", "Projects <= 100km away", "Projects > 100km away"];
     var m = L.map('map').setView([22.59, 82.22], 5);
     L.tileLayer('https://api.mapbox.com/styles/v1/pankhurikumar/cjuni6e1k2xlm1fo61xw8tdv5/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicGFua2h1cmlrdW1hciIsImEiOiJjamZwbnV2OTcxdXB1MzBudnViY2p3aDEzIn0.Zf9ZkY05gz_Zsyen1W1FbA', {
@@ -210,9 +210,10 @@ function mapFunction() {
       "Punjab", "Orissa", "Uttar Pradesh", "Andhra Pradesh", "Delhi", "Karnataka", "Gujarat", "West Bengal", "Chhattisgarh", "Mizoram",
       "Jharkhand", "Assam", "Haryana", "Madhya Pradesh", "Manipur", "Bihar", "Andaman and Nicobar", "Dadra and Nagar Haveli", "Arunachal Pradesh",
       "Puducherry", "Uttarakhand", "Goa", "Daman and Diu", "Meghalaya", "Sikkim"];
-    var years = ["2006", "2014", "2015", "2016", "2017", "2018", "2019", "Unavailable"];
-    var colours = ["1: < 10km", "2: 10 - 50km", "3: 50 - 100km", "4: > 100km"]
-    let selected_features = [categories, states, years, colours];
+    var years = ["2004", "2006", "2014", "2015", "2016", "2017", "2018", "2019", "Unavailable"];
+    var colourLabels = ["Less than 10km", "10 - 50km", "50 - 100km", "More than 100km"]
+    var colourOptions = [1, 2, 3, 4]
+    let selected_features = [categories, states, years, colourOptions];
 
     $(document).ready(function() {  
         var cat = document.getElementById("cat");
@@ -232,7 +233,7 @@ function mapFunction() {
 
         var c = document.getElementById("colour");
         for (i in years) {
-            c.innerHTML += "<option>" + colours[i] + "</option>";
+            c.innerHTML += "<option>" + colourLabels[i] + "</option>";
         }
 
         $('#cat').on('change', function () { 
@@ -261,11 +262,12 @@ function mapFunction() {
 
         $('#colour').on('change', function () {
             selected_features[3] = []
-            for (var opt in $(this).val()) {
-                selected_features[3].push(parseInt($(this).val()[opt].split(':')[0]));
-            }
             if (!$(this).val()) {
                 selected_features[3] = [1, 2, 3, 4];
+            }
+            for (var opt in $(this).val()) {
+                var i = colourLabels.indexOf($(this).val()[opt])
+                selected_features[3].push(i+1)
             }
             showLayer();
         });
