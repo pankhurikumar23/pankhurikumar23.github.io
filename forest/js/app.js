@@ -5,12 +5,15 @@ function mapFunction() {
 //  BASIC MAP SETUP
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    colors = ["#8CC739", "#192B5E", "#99B3CC"];
-    labels = ["Protected Land", "Projects"];
+    // colors = ["#8CC739", "#192B5E", "#99B3CC"];
+    // pointColors = ["#EE4540", "#C72C41", "#801336", "#510A32", "#2D142C"]
+    colors = ["#8CC739", "#FF0000", "#FF5A00", "#FF9A00", "#FFCE00"]
+    labels = ["Protected Land", "Projects <= 10km away", "Projects <= 50km away", "Projects <= 100km away", "Projects > 100km away"];
     var m = L.map('map').setView([22.59, 82.22], 5);
     L.tileLayer('https://api.mapbox.com/styles/v1/pankhurikumar/cjuni6e1k2xlm1fo61xw8tdv5/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicGFua2h1cmlrdW1hciIsImEiOiJjamZwbnV2OTcxdXB1MzBudnViY2p3aDEzIn0.Zf9ZkY05gz_Zsyen1W1FbA', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            maxZoom: 18
+            maxZoom: 12,
+            minZoom: 3
         }).addTo(m);
 
     function getColor(i) {
@@ -20,7 +23,7 @@ function mapFunction() {
     var legend = L.control({position: 'topright'});
     legend.onAdd = function (m) {
         var div = L.DomUtil.create('div', 'info legend'),
-            grades = [0, 1];
+            grades = [0, 1, 2, 3, 4];
 
         for (var i = 0; i < grades.length; i++) {
             div.innerHTML +=
@@ -66,11 +69,7 @@ function mapFunction() {
         },
         pointToLayer: function(feature, latlng) {
             return L.circleMarker(latlng, {
-                opacity: 1,
-                fillOpacity: 0.7,
-                radius: 5,
-                weight: 0,
-                color: colors[0]
+                radius: 5
             });
         }
     });
@@ -81,18 +80,18 @@ function mapFunction() {
 //  PROJECTS JSON PROCESSING
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    var filters = ['Category', 'State', 'Grant Year']; 
-    let allLayers = [];
+    var filters = ['Category', 'State', 'Grant Year', 'colour']; 
+    let allProjectLayers = [];
     let jsonFeatures = [];
     let count = [0, 0];
     // let allCategories = [];
     // let allStates = [];
     // let allYears = [];
-    $.getJSON("data/AmAustCorrect.json", function(data) {
+    $.getJSON("data/AmAustColour.json", function(data) {
         data.forEach(function(item){
             let feature;
             var t = item.type;
-            if (t === null) {
+            if (t === 'None') {
                 // || t === 'Point' || t === 'Polygon') {
                 count[0] = count[0] + 1;
                 return
@@ -166,22 +165,20 @@ function mapFunction() {
                 layer._popup._content = "<strong>PROJECT</strong><br />" + layer._popup._content;
                 layer._popup._content = layer._popup._content.replace(/,/g, '');
                 layer._popup._content = layer._popup._content.replace(/;/g, ',');
-                allLayers.push(layer);
+                allProjectLayers.push(layer);
                 m.addLayer(layer);
             },
-            style: function() {
+            style: function(feature) {
                 return {
                     opacity: 1,
                     fillOpacity: 0.7,
                     weight: 0,
-                    color: colors[1]
+                    color: colors[feature.properties['colour']]
                 }
             },
             pointToLayer: function (feature, latlng) {
                 return new L.CircleMarker(latlng, {
-                    radius: 5,
-                    fillOpacity: 0.7,
-                    color: colors[1]
+                    radius: 5
                 });
             }
         })
@@ -193,11 +190,12 @@ function mapFunction() {
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     function showLayer() {
-        allLayers.forEach(function(layer) {
+        allProjectLayers.forEach(function(layer) {
             var properties = layer.feature.properties;
             if (selected_features[0].includes(properties[filters[0]]) 
                 && selected_features[1].includes(properties[filters[1]])
-                && selected_features[2].includes(properties[filters[2]])) {
+                && selected_features[2].includes(properties[filters[2]])
+                && selected_features[3].includes(properties[filters[3]])) {
                     m.addLayer(layer);
             } else {
                     m.removeLayer(layer);
@@ -213,9 +211,10 @@ function mapFunction() {
       "Jharkhand", "Assam", "Haryana", "Madhya Pradesh", "Manipur", "Bihar", "Andaman and Nicobar", "Dadra and Nagar Haveli", "Arunachal Pradesh",
       "Puducherry", "Uttarakhand", "Goa", "Daman and Diu", "Meghalaya", "Sikkim"];
     var years = ["2006", "2014", "2015", "2016", "2017", "2018", "2019", "Unavailable"];
-    let selected_features = [categories, states, years];
+    var colours = ["1: < 10km", "2: 10 - 50km", "3: 50 - 100km", "4: > 100km"]
+    let selected_features = [categories, states, years, colours];
 
-    $(document).ready(function() {        
+    $(document).ready(function() {  
         var cat = document.getElementById("cat");
         for (i in categories) {
             cat.innerHTML += "<option>" + categories[i] + "</option>";
@@ -231,12 +230,17 @@ function mapFunction() {
             yr.innerHTML += "<option>" + years[i] + "</option>";
         }
 
-        $('#cat').on('change', function () {
+        var c = document.getElementById("colour");
+        for (i in years) {
+            c.innerHTML += "<option>" + colours[i] + "</option>";
+        }
+
+        $('#cat').on('change', function () { 
             selected_features[0] = $(this).val();
             if (!selected_features[0]) {
                 selected_features[0] = categories;
             }
-            showLayer();
+            showLayer(); 
         });
 
         $('#state').on('change', function () {
@@ -251,6 +255,17 @@ function mapFunction() {
             selected_features[2] = $(this).val();
             if (!selected_features[2]) {
                 selected_features[2] = years;
+            }
+            showLayer();
+        });
+
+        $('#colour').on('change', function () {
+            selected_features[3] = []
+            for (var opt in $(this).val()) {
+                selected_features[3].push(parseInt($(this).val()[opt].split(':')[0]));
+            }
+            if (!$(this).val()) {
+                selected_features[3] = [1, 2, 3, 4];
             }
             showLayer();
         });
