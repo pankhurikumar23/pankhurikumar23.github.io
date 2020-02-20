@@ -56,23 +56,30 @@
             <div class="heading">
                 <div class="col-lg-12">
                     <h1>Environmental Clearances in India</h1>
-                    <div style="text-align:left">
-                    	<br>
-                    	<br>
-	                    ECs are required for certain categories of development and infrastructure projects. The aim of an EC is to assess what impact a project will have and suggest ways to minimize the damage. Depending on the type of the project, the clearance is either granted by the centre or the state.
-	                    <br>
-	                    <br>
-	                    Over the past few years, clearances for environmental projects have increased, this project by Indiaspend seeks to highlight the...<b> need to complete this.</b>
-	                    <br>
-	                    <br>
-	                    The data displayed below has been manually collected between August and October 2019 for projects approved between 2014 and 2019. Out of the 2139 projects that were collected, 49 of them could not be represented on the map due to lack of location data. For approximately 680 projects, coordinates were not explicitly available, so they have been mapped by the tehsil provided in the data. <b> more info about data TK </b>
-	                    <br>
-	                    <br>
-	                    The project data was collected from the <a href="http://environmentclearance.nic.in/onlinesearch_parivesh.aspx">Parivesh</a> portal maintained by the Ministry of Environment, Forest and Climate Change, while the 672 protected areas in India were obtained from data available on the <a href="https://www.protectedplanet.net/search?q=India">Protected Planet</a> website.
-	                    <br>
-	                    <br>
-	                    <br>
-	                    <i>Note: All efforts have been made to collect and map the data accurately. However, these efforts are manual and there could be errors. Kindly reach out to us know if you see a datapoint in the wrong place - please clearly mention the <b>Proposal Name</b> as mentioned in the popup box to help us identify the project.</i>
+                    <div class="row" style="text-align:left">
+                        <div class="col-xs-8">
+                        	<br>
+                        	<br>
+    	                    ECs are required for certain categories of development and infrastructure projects. The aim of an EC is to assess what impact a project will have and suggest ways to minimize the damage. Depending on the type of the project, the clearance is either granted by the centre or the state.
+    	                    <br>
+    	                    <br>
+    	                    Over the past few years, clearances for environmental projects have increased, this project by Indiaspend seeks to highlight the...<b> need to complete this.</b>
+    	                    <br>
+    	                    <br>
+    	                    The data displayed below has been manually collected between August and October 2019 for projects approved between 2014 and 2019. Out of the 2139 projects that were collected, 49 of them could not be represented on the map due to lack of location data. For approximately 680 projects, coordinates were not explicitly available, so they have been mapped by the tehsil provided in the data. <b> more info about data TK </b>
+    	                    <br>
+    	                    <br>
+    	                    The project data was collected from the <a href="http://environmentclearance.nic.in/onlinesearch_parivesh.aspx">Parivesh</a> portal maintained by the Ministry of Environment, Forest and Climate Change, while the 672 protected areas in India were obtained from data available on the <a href="https://www.protectedplanet.net/search?q=India">Protected Planet</a> website.
+    	                    <br>
+    	                    <br>
+    	                    <br>
+    	                    <i>Note: All efforts have been made to collect and map the data accurately. However, these efforts are manual and there could be errors. Kindly reach out to us know if you see a datapoint in the wrong place - please clearly mention the <b>Proposal Name</b> as mentioned in the popup box to help us identify the project.</i>
+                        </div>
+                        <div class="col-xs-4" style="border:1px solid black">
+                            <p style="text-align:center">
+                                T<br>i<br>m<br>e<br>l<br>i<br>n<br>e<br><br>a<br>p<br>p<br>e<br>a<br>r<br>s<br><br>h<br>e<br>r<br>e<br>(Dimensions can be changed)
+                            </p>
+                        </div>
 	                </div>
                 </div>
             </div>
@@ -87,28 +94,38 @@
                     <div id="map">
                     </div>
                 </div>
-                <div class="col-xs-4 col-lg-3" id="menu">
-                    <div>
-                        <select id="state" class="selectpicker" title="State" multiple data-live-search="true" 
-                            data-actions-box="true" data-width="100%" data-size="20">
-                        </select>
+                <div class="col-xs-4">
+                    <div class="row" style="height: 25%">
+                        <div class="col-xs-12 col-lg-9" id="menu">
+                            <div>
+                                <select id="state" class="selectpicker" title="State" multiple data-live-search="true" 
+                                    data-actions-box="true" data-width="100%" data-size="20">
+                                </select>
+                            </div>
+                            <div>
+                                <select id="cat" class="selectpicker" title="Project Category" multiple data-live-search="true" 
+                                    data-actions-box="true" data-width="100%">
+                				</select>
+                            </div>
+            				<div>
+                                <select id="year" class="selectpicker" title="Grant Year" multiple data-live-search="true" 
+                                    data-actions-box="true" data-width="100%">
+                                </select>
+                            </div>
+                            <div>
+                                <select id="colour" class="selectpicker" title="Distance from Protected Area" multiple 
+                                    data-live-search="true" data-actions-box="true" data-width="100%" data-size="4">
+                                </select>
+                            </div>
+            			</div>
                     </div>
-                    <div>
-                        <select id="cat" class="selectpicker" title="Project Category" multiple data-live-search="true" 
-                            data-actions-box="true" data-width="100%">
-        				</select>
+                    <div class="row" style="border:1px solid black">
+                        <div class="col-xs-12">
+                            <p style="text-align:center">T<br>i<br>m<br>e<br>l<br>i<br>n<br>e<br><br>c<br>a<br>n<br><br>a<br>l<br>s<br>o<br><br>b<br>e<br><br>h<br>e<br>r<br>e,</p> 
+                            <p style="text-align:left">though it will be obstructed by dropdown.</p>
+                        </div>
                     </div>
-    				<div>
-                        <select id="year" class="selectpicker" title="Grant Year" multiple data-live-search="true" 
-                            data-actions-box="true" data-width="100%">
-                        </select>
-                    </div>
-                    <div>
-                        <select id="colour" class="selectpicker" title="Distance from Protected Area" multiple 
-                            data-live-search="true" data-actions-box="true" data-width="100%" data-size="4">
-                        </select>
-                    </div>
-    			</div>
+                </div>
             </div>
             <div style="width:65%; text-align: center;margin-left:17.5%">
                 **<b>99 points remain to be mapped. 49 do not have any location data. If you were to zoom out on the map, some points are wrongly mapped. If you chose a particular state, e.g. Karnataka, you'd see that a few points lie within India, but are outside Karnataka. This data will be cleaned soon.</b>
@@ -122,7 +139,7 @@
             <div class="heading">
                 <div class="col-lg-12">
                     <h1>Reporting</h1>
-                    
+                    A good place to list and summarize all of Disha's and Tish's work on the series, along with images, additional data and any charts we may decide to add.
             </div>
         </div>
     </section>
@@ -133,6 +150,7 @@
             <div class="heading">
                 <div class="col-lg-12">
                     <h1>About Us</h1>
+                    An introduction and thanks to all involved in the project, including a mention of the grant.
                 </div>
             </div>
         </div>
