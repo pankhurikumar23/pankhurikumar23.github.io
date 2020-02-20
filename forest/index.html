@@ -5,19 +5,20 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="canonical" href="https://html5-templates.com/" />
-    <title>IndiaSpend: Forest Clearance Project</title>
+    <title>IndiaSpend: Environmental Clearance Project</title>
     <meta name="description" content="Demo for Forest Clearance Project">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/sticky-menu.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/sticky-menu.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet-src.js"></script>
     <script src="js/catiline.js"></script>
     <script src="js/leaflet.shpfile.js"></script>
@@ -27,7 +28,7 @@
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" onload="mapFunction()">
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <div class="navbar-collapse navbar-ex1-collapse">
 	            <div class="page-title">
 	        		Environmental Clearances
 	        	</div>
@@ -80,45 +81,37 @@
 
     <!-- Map -->
     <section id="maps" class="map-section">
-        <div class="flex-container">
-            <div>
-                <div class="heading">
-                    <div class="col-lg-12">
-                    </div>
-                </div>
-            </div>
-            <div style="width:65%; text-align: center;margin-left:17.5%">
-            	**<b>99 points remain to be mapped. 49 do not have any location data. If you were to zoom out on the map, some points are wrongly mapped. If you chose a particular state, e.g. Karnataka, you'd see that a few points lie within India, but are outside Karnataka. This data will be cleaned soon.</b>
-            </div>
-            <div class="inner-flex">
-                <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-8">
                     <div id="map">
                     </div>
                 </div>
-                <div class="row-dropdown">
-                    <div class="dropdown-prop">
-                        <h5>Project Category</h5>
-                        <select id="cat" class="selectpicker" multiple data-live-search="true" data-actions-box="true" data-width="379">
+                <div class="col-xs-4 col-lg-3" id="menu">
+                    <div>
+                        <select id="state" class="selectpicker" title="State" multiple data-live-search="true" 
+                            data-actions-box="true" data-width="100%" data-size="20">
+                        </select>
+                    </div>
+                    <div>
+                        <select id="cat" class="selectpicker" title="Project Category" multiple data-live-search="true" 
+                            data-actions-box="true" data-width="100%">
         				</select>
                     </div>
-    				<div class="dropdown-prop">
-                        <h5>Grant Year</h5>
-                        <select id="year" class="selectpicker" multiple data-live-search="true" data-actions-box="true" data-width="379">
+    				<div>
+                        <select id="year" class="selectpicker" title="Grant Year" multiple data-live-search="true" 
+                            data-actions-box="true" data-width="100%">
+                        </select>
+                    </div>
+                    <div>
+                        <select id="colour" class="selectpicker" title="Distance from Protected Area" multiple 
+                            data-live-search="true" data-actions-box="true" data-width="100%" data-size="4">
                         </select>
                     </div>
     			</div>
-    			<div class="row-dropdown">
-    				<div class="dropdown-prop">
-                        <h5>State</h5>
-        				<select id="state" class="selectpicker" multiple data-live-search="true" data-actions-box="true" data-width="379" data-size="9">
-        				</select>
-                    </div>
-                    <div class="dropdown-prop">
-                        <h5>Closeness to Protected Area</h5>
-                        <select id="colour" class="selectpicker" multiple data-live-search="true" data-actions-box="true" data-width="379" data-size="4">
-                        </select>
-                    </div>
-    			</div>
+            </div>
+            <div style="width:65%; text-align: center;margin-left:17.5%">
+                **<b>99 points remain to be mapped. 49 do not have any location data. If you were to zoom out on the map, some points are wrongly mapped. If you chose a particular state, e.g. Karnataka, you'd see that a few points lie within India, but are outside Karnataka. This data will be cleaned soon.</b>
             </div>
         </div>
     </section>
@@ -129,22 +122,7 @@
             <div class="heading">
                 <div class="col-lg-12">
                     <h1>Reporting</h1>
-                    <p><i>There can be more or less sections. This one is currently called reporting, but houses the charts. The colour of the charts, and their type/formatting can be changed. The last two charts are the same data presented in different ways, we can pick just one of them.</i></p>
-                    <img src="data/category_chart.png" alt="Category-wise Pattern">
-                    <p>Category-wise breakdown of the data (total=2139 projects)</p>
-                    <br>
-                    <br>
-                    <img src="data/year_chart.png" alt="Year-wise Pattern">
-                    <p>Year-wise breakdown of the data (total=2139 projects)</p>
-                    <br>
-                    <br>
-                    <img src="data/year_category_chart.png" alt="Category-wise Pattern across Years">
-                    <p>The categories of projects that have been granted over the years (total=2139 projects)</p>
-                    <br>
-                    <br>
-                    <img src="data/category_year_chart.png" alt="Year-wise Pattern across Categories">
-                    <p>The year-wise trend of projects that are granted from different categories (total=2139 projects)</p>
-                </div>
+                    
             </div>
         </div>
     </section>

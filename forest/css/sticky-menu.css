@@ -51,18 +51,20 @@ html {
 .map-section,
 .stories-section,
 .about-section {
-    height: 100%;
-    padding-top: 100px;
+    /*border: 1px solid red;*/
+    height: 70%;
+    padding-top: 60px;
     text-align: center;
     background: #FFFFFF;
 }
 
 .welcome-section {
-    height: 44.5%;
+    padding-top: 110px;
 }
 
-.stories-section {
-    height: 255%;
+.map-section {
+    max-height: 1000px;
+    height: 98%;
 }
 
 .navbar-default .navbar-nav > li > a:hover {

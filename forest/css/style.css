@@ -1,17 +1,17 @@
 .container {
-	max-width: 100%;
-	width: 65%;
+	max-width: 98%;
+	width: 100%;
 }
 
 .nav navbar-nav,
 .navbar-default .navbar-nav > li > a {
 	display: flex;
-    justify-content:space-around;
-    list-style-type:none;
+    justify-content: space-around;
 }
 
 .navbar-nav {
-	display: inline;
+	display: flex;
+	flex-direction: row;
 	float: right;
 }
 
@@ -34,29 +34,15 @@
 
 .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
 	margin-right: 15px;
+	display: inline-block !important;
 }
 
-.flex-container {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-}
-
-.inner-flex {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-}
-
-.row-dropdown {
-	margin-bottom: 15px;
-	display: flex;
-	flex-direction: column;
-	margin-left: 20px;
-}
-
-.dropdown-prop {
-	height: 400px;
+.dropdown-menu.show {
+	top: -40px !important;
+	left: 45% !important;
+	width: 100%;
+	max-width: 90%;
+	min-width: 80%;
 }
 
 .dropdown {
@@ -65,8 +51,13 @@
 
 #map {
   border-radius: 8px;
-  height: 800px;
-  width: 800px;
+  height: 100%;
+  width: 100%;
+  max-height: 742px;
+}
+
+#menu {
+	height: 740px;
 }
 
 .legend {

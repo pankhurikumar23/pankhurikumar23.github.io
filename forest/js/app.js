@@ -9,11 +9,11 @@ function mapFunction() {
     // pointColors = ["#EE4540", "#C72C41", "#801336", "#510A32", "#2D142C"]
     colors = ["#00E600", "#FF0000", "#FF5A00", "#FF9A00", "#FFCE00"]
     labels = ["Protected Land", "Projects <= 10km away", "Projects <= 50km away", "Projects <= 100km away", "Projects > 100km away"];
-    var m = L.map('map').setView([22.59, 82.22], 5);
+    var m = L.map('map').setView([22.59, 80.22], 4.6);
     L.tileLayer('https://api.mapbox.com/styles/v1/pankhurikumar/cjuni6e1k2xlm1fo61xw8tdv5/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicGFua2h1cmlrdW1hciIsImEiOiJjamZwbnV2OTcxdXB1MzBudnViY2p3aDEzIn0.Zf9ZkY05gz_Zsyen1W1FbA', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             maxZoom: 12,
-            minZoom: 3
+            minZoom: 4.6
         }).addTo(m);
 
     function getColor(i) {
