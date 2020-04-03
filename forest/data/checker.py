@@ -5,7 +5,7 @@ import pandas as pd
 import json
 import googlemaps
 
-with open('AmAustCorrect.json') as json_file:
+with open('project_protected.geojson') as json_file:
     data = json.load(json_file)
 print(len(data))
 
@@ -44,13 +44,13 @@ gmaps = googlemaps.Client(key='AIzaSyAqFRxrM4dksboE4GJoEAhR_iB1yC5MQKc')
 # Others Corrector
 #
 
-# for item in data:
-# 	if item['type'] == 'Point':
-# 		# print(item)
-# 		if float(item['lat']) < 8 or float(item['lat']) > 38 or float(item['lng']) < 68 or float(item['lng']) > 98:
-# 			count += 1
-# 			print(item['lat'], item['lng'])
-# 			print(item['Location'])
-# 			print(item['Location Coordinates'])
-# 			print('\n')
-# print(count)
+for item in data:
+	if item['type'] == 'Point':
+		# print(item)
+		if float(item['lat']) < 8 or float(item['lat']) > 38 or float(item['lng']) < 68 or float(item['lng']) > 98:
+			count += 1
+			print(item['lat'], item['lng'])
+			print(item['Location'])
+			print(item['Location Coordinates'])
+			print('\n')
+print(count)
