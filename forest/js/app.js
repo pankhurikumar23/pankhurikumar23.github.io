@@ -7,12 +7,12 @@ function mapFunction() {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // colors = ["#8CC739", "#192B5E", "#99B3CC"];
     // pointColors = ["#EE4540", "#C72C41", "#801336", "#510A32", "#2D142C"]
-    colors = ["#00E600", "#000000", "#FF0000", "#FF5A00", "#FF9A00", "#FFCE00"]
+    colors = ["#00C600", "#000000", "#FF0000", "#FF5A00", "#FF9A00", "#FFCE00"]
     labels = ["Protected Land", "Projects Within Protected Areas", "Projects <= 10km away", "Projects <= 50km away", "Projects <= 100km away", "Projects > 100km away"];
     var m = L.map('map').setView([23, 80.22], 4.5);
     L.tileLayer('https://api.mapbox.com/styles/v1/pankhurikumar/cjuni6e1k2xlm1fo61xw8tdv5/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicGFua2h1cmlrdW1hciIsImEiOiJjamZwbnV2OTcxdXB1MzBudnViY2p3aDEzIn0.Zf9ZkY05gz_Zsyen1W1FbA', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            maxZoom: 12,
+            maxZoom: 14,
             minZoom: 5,
             maxBoundsViscosity: 1.0
         }).addTo(m);
@@ -21,10 +21,6 @@ function mapFunction() {
     function getColor(i) {
         return colors[i];
     }
-
-    m.on('click', function(e) {
-        console.log(e.latlng);
-    })
 
     var legend = L.control({position: 'topright'});
     legend.onAdd = function (m) {
@@ -86,14 +82,13 @@ function mapFunction() {
 //  PROJECTS JSON PROCESSING
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    var filters = ['Category', 'State', 'Grant Year', 'colour']; 
     let allProjectLayers = [];
     var allStateLayers = [];
     let jsonFeatures = [];
     let count = [0, 0];
     var state_mid = [];
     var projectPopupFeatures = ["Category", "Proposal Name", "EC Grant Date", "Location", "Company Name", "Project Type", "Closest PP"];
-    $.getJSON("data/projects_data.geojson", function(geo) {
+    $.getJSON("data/all_data.geojson", function(geo) {
         L.geoJson(geo, {
             onEachFeature: function (feature, layer) {
                 if (feature.properties) {
@@ -113,11 +108,9 @@ function mapFunction() {
             },
             style: function(feature) {
                 return {
-                    opacity: 1,
-                    fillOpacity: 0.7,
+                    fillOpacity: 0.4,
                     weight: 0,
                     color: colors[feature.properties['colour']]
-                    // color: "black"
                 }
             },
             pointToLayer: function (feature, latlng) {
@@ -137,6 +130,7 @@ function mapFunction() {
 //  FILTERING LOGIC
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    var filters = ['Category', 'State', 'Grant Year', 'colour']; 
     function zoomToState() {
         if (selected_features[1].length == 1) {
             state = selected_features[1][0];
@@ -168,7 +162,7 @@ function mapFunction() {
       "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", 
       "Meghalaya", "Mizoram", "Odisha", "Punjab", "Puducherry", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", 
       "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal"]
-    var years = ["2004", "2006", "2014", "2015", "2016", "2017", "2018", "2019", "Unavailable"];
+    var years = [2006, 2014, 2015, 2016, 2017, 2018, 2019, "Unavailable"];
     var colourLabels = ["Within Protected Area", "Less than 10km", "10 - 50km", "50 - 100km", "More than 100km"]
     var colourOptions = [1, 2, 3, 4, 5]
     let selected_features = [categories, states, years, colourOptions];
@@ -193,11 +187,12 @@ function mapFunction() {
             c.innerHTML += "<option>" + colourLabels[i] + "</option>";
         }
 
-        $('#cat').on('change', function () { 
+        $('#cat').on('change', function () {
             selected_features[0] = $(this).val();
             if (!selected_features[0]) {
                 selected_features[0] = categories;
             }
+            zoomToState();
             showLayer(); 
         });
 
@@ -215,6 +210,7 @@ function mapFunction() {
             if (!selected_features[2]) {
                 selected_features[2] = years;
             }
+            zoomToState();
             showLayer();
         });
 
@@ -227,6 +223,7 @@ function mapFunction() {
                 var i = colourLabels.indexOf($(this).val()[opt])
                 selected_features[3].push(i+1)
             }
+            zoomToState();
             showLayer();
         });
     });

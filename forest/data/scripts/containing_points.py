@@ -18,7 +18,7 @@ shapely.speedups.enable()
 
 # Find Containing!
 #
-fp3 = "project_data.geojson"
+fp3 = "all_data.geojson"
 projects = gpd.read_file(fp3, driver='GeoJSON')
 print(projects.shape)
 
@@ -26,7 +26,7 @@ projects["Closest PP"] = ""
 projects["minDist"] = 0
 projects["colour"] = 0
 
-count = 0
+count = [0, 0, 0, 0, 0]
 for  idx, row in poly.iterrows():
 	# if row["geometry"] == None:
 	# 	print(row)
@@ -34,16 +34,29 @@ for  idx, row in poly.iterrows():
 	poly_data = projects.loc[poly_mask]
 	if len(poly_data) > 0:
 		for i, r in poly_data.iterrows():
-			count += 1
+			count[0] += 1
 			projects.loc[i, "Closest PP"] = row["NAME"]
 			projects.loc[i, "colour"] = 1
 			projects.loc[i, "minDist"] = -1
 print(count)
-projects.to_file("projects_containing.geojson", driver='GeoJSON')
+
+for  idx, row in projects.iterrows():
+	# if row["geometry"] == None:
+	# 	print(row)
+	poly_mask = points.within(row['geometry'])
+	poly_data = points.loc[poly_mask]
+	if len(poly_data) > 0:
+		count[0] += 1
+		projects.loc[idx, "colour"] = 1
+		projects.loc[idx, "minDist"] = -1
+		for i, r in poly_data.iterrows():
+			projects.loc[idx, "Closest PP"] += poly_data.loc[i, "NAME"] + '; '
+print(count)
+projects.to_file("all_data_containing.geojson", driver='GeoJSON')
 
 # Find closest
-#
-fp3 = "projects_containing.geojson"
+
+fp3 = "all_data_containing.geojson"
 projects = gpd.read_file(fp3, driver='GeoJSON')
 print(projects.shape)
 
@@ -51,9 +64,8 @@ projects.to_crs(epsg=3310,inplace=True)
 points.to_crs(epsg=3310,inplace=True)
 poly.to_crs(epsg=3310,inplace=True)
 
-count = [0, 0, 0, 0]
 for idx1, row1 in projects.iterrows():
-	if idx1%20 == 0:
+	if idx1%200 == 0:
 		print(idx1)
 	if row1["colour"] > 0:
 		continue
@@ -76,22 +88,26 @@ for idx1, row1 in projects.iterrows():
 	projects.loc[idx1, "minDist"] = minDist/1000
 	if minDist <= 10000:
 		projects.loc[idx1, "colour"] = 2
-		count[0] += 1
+		count[1] += 1
 	elif minDist <= 50000:
 		projects.loc[idx1, 'colour'] = 3
-		count[1] += 1
+		count[2] += 1
 	elif minDist <= 100000:
 		projects.loc[idx1, 'colour'] = 4
-		count[2] += 1
+		count[3] += 1
 	else:
 		projects.loc[idx1, 'colour'] = 5
-		count[3] += 1
+		count[4] += 1
 
 projects.to_crs(epsg=4326,inplace=True)
-projects.to_file("project_protected.geojson", driver='GeoJSON')
+projects.to_file("all_data_overlap.geojson", driver='GeoJSON')
 
-print("<10, 10-50, 50-100, >100")
+print("Containing, <10, 10-50, 50-100, >100")
 print(count)
 # Containing, <10, 10-50, 50-100, >100
 # [41,		  219, 1114,  565, 	  123]
+# With India corrected (not resolved)
+# Containing, <10, 10-50, 50-100, >100
+# [41, 		  229, 1161,  585,    31]
+
 
