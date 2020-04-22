@@ -48,6 +48,7 @@ html {
     color: #FFF;
 }
 
+.heading-section,
 .welcome-section,
 .map-section,
 .stories-section,
@@ -58,9 +59,15 @@ html {
     background: #FFFFFF;
 }
 
-.welcome-section {
+.heading-section {
     padding-top: 110px;
+    padding-bottom: 10px;
 }
+
+.welcome-section {
+    padding-top: 0px;
+}
+
 .navbar-default .navbar-nav > li > a:hover {
 	color: #000000;
 }

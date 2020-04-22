@@ -27,7 +27,7 @@
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" onload="mapFunction()">
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
+        <div class="container-nav">
             <div class="navbar-collapse navbar-ex1-collapse">
 	            <div class="page-title">
 	        		Environmental Clearances
@@ -50,76 +50,82 @@
         </div>		<!-- .container -->
     </nav>
 
+    <section id="heading" class="heading-section">
+        <div class="container">
+            <h1>Environmental Clearances in India</h1>
+        </div>
+    </section>
+
     <!-- Welcome   -->
+    <div class="welcome-div">
     <section id="welcome" class="welcome-section">
         <div class="container">
-            <div class="heading">
-                <div class="col-lg-12">
-                    <h1>Environmental Clearances in India</h1>
-                    <br>
-                    <br>
-                    <h2>What you see on the map</h2>
-                    <div class="row" style="text-align:left">
-                        <div>
-                        	In this map we have plotted Environment Clearances granted by the Centre between 2014 and March 2020. We have also mapped 
-                            <a href="http://www.wiienvis.nic.in/Database/Protected_Area_854.aspx">India’s Protected Areas (PAs)</a> -- national parks, 
-                            wildlife sanctuaries, conservation reserves and community reserves.
-                            <br>
-                            <br>
-                            Protected Areas are areas in which human occupation is limited under the law and home to many endangered species. They are 
-                            meant to be conserved, but can be opened up for infrastructure projects under special circumstances, with permission from 
-                            the government and where the wildlife involved is set to benefit. 
-                            <br>
-                            <br>
-                            Certain categories of infrastructure projects which could damage the environment require environment clearances (ECs) before 
-                            they can go ahead. Some projects could also need forest and wildlife clearance in addition to ECs, depending on their location. 
-                            <br>
-                            <br>
-                            Projects that stand to cause excessive damage to the environment could be denied a clearance, while others are allowed to 
-                            proceed only after meeting certain conditions. Depending on the type of the project, the clearance is either granted by the 
-                            centre or the state. 
-                            <br>
-                            <br>
-                            Out of the 2115 projects that were collected, 2058 have been represented on the map. 57 of them could not be represented on 
-                            the map due to lack of location data or because data was incorrectly entered at source. For approximately 680 projects, 
-                            coordinates were either not explicitly available, or they mapped to places outside of India. These have been mapped by the 
-                            tehsil provided in the data.
-                            <br>
-                            <br>
-                            As data for this project was manually collected from the Parivesh website, there could be some errors in the data represented 
-                            in this map. For example, certain projects map outside of the state they are supposed to be in. 
-                            <br>
-                            We have followed the process of relying on location coordinates wherever possible. If these coordinates were unavailable, 
-                            or noticeably wrong (outside India), we have defaulted to mapping these projects to the provided tehsil. Due to this, 
-                            certain tehsils will see a large number of overlapping projects.
-                            <br>
-                            If location coordinates as well as tehsil information was unavailable, the projects are not shown on this map. 57 such 
-                            projects exist. 
-                            <br>
-                            <br>
-                            47 out of the 2058 projects where data was able to be collected are located within PAs. A further 275 are located within 10km 
-                            of a PA boundary, or the ‘buffer zone’ - an area where human activity is supposed to be limited. 
-                            <br>
-                            <br>
-                            The project data was collected from the <a href="http://environmentclearance.nic.in/onlinesearch_parivesh.aspx">Parivesh</a> 
-                            portal maintained by the <a href="http://moef.gov.in">Ministry of Environment, Forest and Climate Change (MoEFCC)</a>, while 
-                            the 672 protected areas in India were obtained from data available on the <a href="https://www.protectedplanet.net/search?q=India">
-                            Protected Planet</a> website, supported by the UN. 
-                            <br>
-                            <br>
-                            <i>
-                                Note: All efforts have been made to collect and map the data accurately. However, these efforts are manual and there could 
-                                be errors. Kindly reach out to us to know if you see a datapoint in the wrong place - please include the <b>Proposal 
-                                Name</b> as given in the popup box to help us identify the project.
-                            </i>
-                        </div>
-	                </div>
+            <div class="col-lg-12">
+                <br>
+                <br>
+                <h2>What you see on the map</h2>
+                <div class="intro" style="text-align:justify">
+                    <div>
+                        In this map we have plotted Environment Clearances granted by the Centre between 2014 and March 2020. We have also mapped 
+                        <a href="http://www.wiienvis.nic.in/Database/Protected_Area_854.aspx">India’s Protected Areas (PAs)</a> -- national parks, 
+                        wildlife sanctuaries, conservation reserves and community reserves.
+                        <br>
+                        <br>
+                        Protected Areas are areas in which human occupation is limited under the law and home to many endangered species. They are 
+                        meant to be conserved, but can be opened up for infrastructure projects under special circumstances, with permission from 
+                        the government and where the wildlife involved is set to benefit. 
+                        <br>
+                        <br>
+                        Certain categories of infrastructure projects which could damage the environment require environment clearances (ECs) before 
+                        they can go ahead. Some projects could also need forest and wildlife clearance in addition to ECs, depending on their location. 
+                        <br>
+                        <br>
+                        Projects that stand to cause excessive damage to the environment could be denied a clearance, while others are allowed to 
+                        proceed only after meeting certain conditions. Depending on the type of the project, the clearance is either granted by the 
+                        centre or the state. 
+                        <br>
+                        <br>
+                        Out of the 2115 projects that were collected, 2058 have been represented on the map. 57 of them could not be represented on 
+                        the map due to lack of location data or because data was incorrectly entered at source. For approximately 680 projects, 
+                        coordinates were either not explicitly available, or they mapped to places outside of India. These have been mapped by the 
+                        tehsil provided in the data.
+                        <br>
+                        <br>
+                        As data for this project was manually collected from the Parivesh website, there could be some errors in the data represented 
+                        in this map. For example, certain projects map outside of the state they are supposed to be in. 
+                        <br>
+                        We have followed the process of relying on location coordinates wherever possible. If these coordinates were unavailable, 
+                        or noticeably wrong (outside India), we have defaulted to mapping these projects to the provided tehsil. Due to this, 
+                        certain tehsils will see a large number of overlapping projects.
+                        <br>
+                        If location coordinates as well as tehsil information was unavailable, the projects are not shown on this map. 57 such 
+                        projects exist. 
+                        <br>
+                        <br>
+                        47 out of the 2058 projects where data was able to be collected are located within PAs. A further 275 are located within 10km 
+                        of a PA boundary, or the ‘buffer zone’ - an area where human activity is supposed to be limited. 
+                        <br>
+                        <br>
+                        The project data was collected from the <a href="http://environmentclearance.nic.in/onlinesearch_parivesh.aspx">Parivesh</a> 
+                        portal maintained by the <a href="http://moef.gov.in">Ministry of Environment, Forest and Climate Change (MoEFCC)</a>, while 
+                        the 672 protected areas in India were obtained from data available on the <a href="https://www.protectedplanet.net/search?q=India">
+                        Protected Planet</a> website, supported by the UN. 
+                        <br>
+                        <br>
+                        <i>
+                            Note: All efforts have been made to collect and map the data accurately. However, these efforts are manual and there could 
+                            be errors. Kindly reach out to us to know if you see a datapoint in the wrong place - please include the <b>Proposal 
+                            Name</b> as given in the popup box to help us identify the project.
+                        </i>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+    </div>
 
     <!-- Map -->
+    <div class="map-div">
     <section id="maps" class="map-section">
         <div class="container">
             <div class="row">
@@ -156,14 +162,16 @@
             </div>
         </div>
     </section>
+    </div>
 
     <!-- Stories -->
+    <div class="stories-div">
     <section id="stories" class="stories-section">
         <div class="container">
             <div class="heading">
                 <div class="col-lg-12">
                     <h2>Reporting</h2>
-                    <div class="row" style="text-align:left">
+                    <div class="row" style="text-align:justify">
                         <div>
                             Reporting for this project was done between the second half of 2019 and early 2020. IndiaSpend travelled across the country 
                             for four months, reporting from Uttar Pradesh to Karnataka, as a part of a year-long investigation on how some of India’s 
@@ -181,8 +189,10 @@
             </div>
         </div>
     </section>
+    </div>
 
     <!-- About -->
+    <div class="about-div">
     <section id="about" class="about-section">
         <div class="container">
             <div class="heading">
@@ -190,14 +200,13 @@
                     <h2>About Us</h2>
                     <div class="row" style="text-align:left">
                         Reporting for the project was done by Tish Sanghera, an independent journalist, and Disha Shetty, a journalist with IndiaSpend. 
-                        The map and this website was created with the help of Pankhuri Kumar, visualization contributor. 
+                        The map and this website was created by Pankhuri Kumar, individual contributor. 
                     </div>
                 </div>
             </div>
         </div>
     </section>
-	
-	<a id="back2Top" title="Back to top" href="#">&#10148;</a>
+	</div>
 	
     <!-- jQuery -->
     <script src="js/jquery.js"></script>

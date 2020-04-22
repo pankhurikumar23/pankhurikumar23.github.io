@@ -16,6 +16,7 @@ function mapFunction() {
             minZoom: 5,
             maxBoundsViscosity: 1.0
         }).addTo(m);
+    console.log(m.getBounds());
     m.setMaxBounds(m.getBounds());
 
     function getColor(i) {
