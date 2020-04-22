@@ -37,9 +37,41 @@
 	display: inline-block !important;
 }
 
+.colp-8, .colmap-8 {
+  width: 66.67%;
+  float: left;
+  padding: 15px;
+}
+
+.colp-4, .colmap-4 {
+  width: 33.33%;
+  float: left;
+  padding: 15px;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  [class*="colp-"] {
+    width: 100%;
+  }
+  [class*="colmap-"] {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+	/* all except mobile phones: */
+	.dropdown-menu.show {
+		top: -40px !important;
+		left: 45% !important;
+		width: 100%;
+		max-width: 90%;
+		min-width: 80%;
+	}
+}
+
 .dropdown-menu.show {
 	top: -40px !important;
-	left: 45% !important;
 	width: 100%;
 	max-width: 90%;
 	min-width: 80%;
@@ -55,10 +87,6 @@
   width: 100%;
   max-height: 742px;
 }
-
-/*#menu {
-	height: 740px;
-}*/
 
 .legend {
 	line-height: 25px;
