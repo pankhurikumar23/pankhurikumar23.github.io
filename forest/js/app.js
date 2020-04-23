@@ -7,17 +7,20 @@ function mapFunction() {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // colors = ["#8CC739", "#192B5E", "#99B3CC"];
     // pointColors = ["#EE4540", "#C72C41", "#801336", "#510A32", "#2D142C"]
-    colors = ["#00C600", "#000000", "#FF0000", "#FF5A00", "#FF9A00", "#FFCE00"]
+    colors = ["#00A100", "#000000", "#FF0000", "#FF5A00", "#FF9A00", "#FFCE00"]
     labels = ["Protected Land", "Projects Within Protected Areas", "Projects <= 10km away", "Projects <= 50km away", "Projects <= 100km away", "Projects > 100km away"];
-    var m = L.map('map').setView([23, 80.22], 4.5);
+    var m = L.map('map').setView([23, 82.72], 4.5);
+    // https://api.mapbox.com/styles/v1/pankhurikumar/ck9bwfsbu0b571iqgnudrdsr0/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicGFua2h1cmlrdW1hciIsImEiOiJjamZwbnV2OTcxdXB1MzBudnViY2p3aDEzIn0.Zf9ZkY05gz_Zsyen1W1FbA
     L.tileLayer('https://api.mapbox.com/styles/v1/pankhurikumar/cjuni6e1k2xlm1fo61xw8tdv5/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicGFua2h1cmlrdW1hciIsImEiOiJjamZwbnV2OTcxdXB1MzBudnViY2p3aDEzIn0.Zf9ZkY05gz_Zsyen1W1FbA', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             maxZoom: 14,
             minZoom: 5,
             maxBoundsViscosity: 1.0
         }).addTo(m);
-    console.log(m.getBounds());
-    m.setMaxBounds(m.getBounds());
+    var southwest = L.latLng(7.36246686553575, 67.71972656250001),
+        northeast = L.latLng(37.020098201368114, 97.73437500000001),
+        bounds = L.latLngBounds(southwest, northeast);
+    m.setMaxBounds(bounds);
 
     function getColor(i) {
         return colors[i];
@@ -77,6 +80,52 @@ function mapFunction() {
         }
     });
     m.addLayer(protectedfile);
+
+    $.getJSON("data/himalaya.geojson", function(himalaya) {
+        L.geoJson(himalaya, {
+            onEachFeature: function(feature, layer) {
+                layer.bindPopup(Object.keys(feature.properties).map(function(k) {
+                    if (k == "DisplayName") {
+                        return ("<strong>"+ feature.properties[k] + "</strong>");
+                    }
+                }));
+                layer._popup._content = "" + layer._popup._content;
+                layer._popup._content = layer._popup._content.replace(/,/g, '');
+                m.addLayer(layer);
+            },
+            style: function() {
+                return {
+                    opacity: 1,
+                    fillOpacity: 0.4,
+                    weight: 0,
+                    color: colors[0]
+                } 
+            }
+        });
+    });
+
+    $.getJSON("data/westernghats.geojson", function(ghats) {
+        L.geoJson(ghats, {
+            onEachFeature: function(feature, layer) {
+                layer.bindPopup(Object.keys(feature.properties).map(function(k) {
+                    if (k == "DisplayName") {
+                        return ("<strong>"+ feature.properties[k] + "</strong>: ");
+                    }
+                }));
+                layer._popup._content = "" + layer._popup._content;
+                layer._popup._content = layer._popup._content.replace(/,/g, '');
+                m.addLayer(layer);
+            },
+            style: function() {
+                return {
+                    opacity: 1,
+                    fillOpacity: 0.4,
+                    weight: 0,
+                    color: colors[0]
+                } 
+            }
+        });
+    });
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //

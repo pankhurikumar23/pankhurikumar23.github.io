@@ -4,6 +4,10 @@
 	width: 50%;
 }
 
+#map-width {
+	width: 70%;
+}
+
 .nav navbar-nav,
 .navbar-default .navbar-nav > li > a {
 	display: flex;
@@ -54,6 +58,9 @@
   		width: 90%;
   	}
   	.container-nav {
+  		width: 90%;
+  	}
+  	#map-width {
   		width: 90%;
   	}
 }
