@@ -4,10 +4,6 @@
 	width: 50%;
 }
 
-#map-width {
-	width: 80%;
-}
-
 .nav navbar-nav,
 .navbar-default .navbar-nav > li > a {
 	display: flex;
@@ -58,17 +54,6 @@ h1, h3 {
     color: #1d3557;
 }
 
-.colp-8, .colmap-8 {
-  width: 66.67%;
-  float: left;
-  padding: 15px;
-}
-
-.colp-4, .colmap-4 {
-  width: 33.33%;
-  float: left;
-  padding: 15px;
-}
 @media only screen and (max-width: 1050px) {
 	.container {
   		width: 90%;
@@ -78,6 +63,9 @@ h1, h3 {
   	}
   	#map-width {
   		width: 90%;
+  	}
+  	[class*="colmap-"] {
+		width: 100%;
   	}
 }
 @media only screen and (max-width: 768px) {
@@ -106,21 +94,31 @@ h1, h3 {
 	.dropdown-menu.show {
 		top: -40px !important;
 		left: 45% !important;
-		width: 100%;
 		max-width: 90%;
-		min-width: 80%;
+		min-width: 60%;
+		z-index:1100;
 	}
 	.legend-label {
 		text-align: left;
 		width: 205px;
 	}
+
+	[class*="colmap-"] {
+		width: 100%;
+  	}
+	.container {
+	  	display: flex;
+	  	flex-flow: column;
+    }
+    .colmap-4 { order: 1; }
+    .colmap-8 { order: 2; }
 }
 
 .dropdown-menu.show {
 	top: -40px !important;
-	width: 100%;
 	max-width: 90%;
-	min-width: 80%;
+	min-width: 60%;
+	z-index: 1100;
 }
 
 .dropdown {
@@ -146,6 +144,9 @@ h1, h3 {
 	height: 25px;
 	float: left;
 	margin-right: 8px;
+}
+.leaflet-control {
+	z-index: 0;
 }
 
 .hotspot {
