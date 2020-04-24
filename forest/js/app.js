@@ -5,10 +5,8 @@ function mapFunction() {
 //  BASIC MAP SETUP
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // colors = ["#8CC739", "#192B5E", "#99B3CC"];
-    // pointColors = ["#EE4540", "#C72C41", "#801336", "#510A32", "#2D142C"]
-    colors = ["#00A100", "#000000", "#FF0000", "#FF5A00", "#FF9A00", "#FFCE00"]
-    labels = ["Protected Land", "Projects Within Protected Areas", "Projects <= 10km away", "Projects <= 50km away", "Projects <= 100km away", "Projects > 100km away"];
+    colors = ["#00A100", "#BD0026", "#F03B20", "#FD8D3C", "#FECC5C", "#faae7b"]
+    labels = ["Protected Area", "Projects Within Protected Areas", "Projects =< 10km away", "Projects =< 50km away", "Projects =< 100km away", "Projects > 100km away"];
     var m = L.map('map').setView([23, 82.72], 4.5);
     // https://api.mapbox.com/styles/v1/pankhurikumar/ck9bwfsbu0b571iqgnudrdsr0/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicGFua2h1cmlrdW1hciIsImEiOiJjamZwbnV2OTcxdXB1MzBudnViY2p3aDEzIn0.Zf9ZkY05gz_Zsyen1W1FbA
     L.tileLayer('https://api.mapbox.com/styles/v1/pankhurikumar/cjuni6e1k2xlm1fo61xw8tdv5/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicGFua2h1cmlrdW1hciIsImEiOiJjamZwbnV2OTcxdXB1MzBudnViY2p3aDEzIn0.Zf9ZkY05gz_Zsyen1W1FbA', {
@@ -158,7 +156,7 @@ function mapFunction() {
             },
             style: function(feature) {
                 return {
-                    fillOpacity: 0.4,
+                    fillOpacity: 0.8,
                     weight: 0,
                     color: colors[feature.properties['colour']]
                 }
