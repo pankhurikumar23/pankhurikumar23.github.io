@@ -5,7 +5,7 @@
 }
 
 #map-width {
-	width: 70%;
+	width: 80%;
 }
 
 .nav navbar-nav,
@@ -122,5 +122,6 @@
 	width: 25px;
 	height: 25px;
 	float: left;
+	text-align: left;
 	margin-right: 8px;
 }

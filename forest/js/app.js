@@ -16,7 +16,7 @@ function mapFunction() {
             minZoom: 5,
             maxBoundsViscosity: 1.0
         }).addTo(m);
-    var southwest = L.latLng(5.36246686553575, 67.71972656250001),
+    var southwest = L.latLng(5.36246686553575, 63.71972656250001),
         northeast = L.latLng(37.020098201368114, 102.73437500000001),
         bounds = L.latLngBounds(southwest, northeast);
     m.setMaxBounds(bounds);
