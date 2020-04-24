@@ -5,7 +5,8 @@ function mapFunction() {
 //  BASIC MAP SETUP
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    colors = ["#00A100", "#BD0026", "#F03B20", "#FD8D3C", "#FECC5C", "#FAAE7B", "#0088AA"]
+    // colors = ["#00A100", "#BD0026", "#F03B20", "#FD8D3C", "#FECC5C", "#FAAE7B", "#0088AA"]
+    colors = ["#00A100", "#540b0e", "#f15152", "#e09f3e", "#FAAE7B", "#335c67", "#0088AA"]
     labels = ["Protected Area", "Projects Within Protected Areas", "Projects =< 10km away", "Projects =< 50km away", "Projects =< 100km away", "Projects > 100km away"];
     var m = L.map('map').setView([23, 82.72], 4.5);
     // https://api.mapbox.com/styles/v1/pankhurikumar/ck9bwfsbu0b571iqgnudrdsr0/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicGFua2h1cmlrdW1hciIsImEiOiJjamZwbnV2OTcxdXB1MzBudnViY2p3aDEzIn0.Zf9ZkY05gz_Zsyen1W1FbA
@@ -15,8 +16,8 @@ function mapFunction() {
             minZoom: 5,
             maxBoundsViscosity: 1.0
         }).addTo(m);
-    var southwest = L.latLng(7.36246686553575, 67.71972656250001),
-        northeast = L.latLng(37.020098201368114, 97.73437500000001),
+    var southwest = L.latLng(5.36246686553575, 67.71972656250001),
+        northeast = L.latLng(37.020098201368114, 102.73437500000001),
         bounds = L.latLngBounds(southwest, northeast);
     m.setMaxBounds(bounds);
 
@@ -94,7 +95,7 @@ function mapFunction() {
             style: function() {
                 return {
                     opacity: 1,
-                    fillOpacity: 0.3,
+                    fillOpacity: 0.2,
                     weight: 0,
                     color: colors[6]
                 } 
@@ -117,7 +118,7 @@ function mapFunction() {
             style: function() {
                 return {
                     opacity: 1,
-                    fillOpacity: 0.3,
+                    fillOpacity: 0.2,
                     weight: 0,
                     color: colors[0]
                 } 
@@ -210,7 +211,7 @@ function mapFunction() {
       "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", 
       "Meghalaya", "Mizoram", "Odisha", "Punjab", "Puducherry", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", 
       "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal"]
-    var years = [2006, 2014, 2015, 2016, 2017, 2018, 2019, "Unavailable"];
+    var years = [2014, 2015, 2016, 2017, 2018, 2019, "Unavailable"];
     var colourLabels = ["Within Protected Area", "Less than 10km", "10 - 50km", "50 - 100km", "More than 100km"]
     var colourOptions = [1, 2, 3, 4, 5]
     let selected_features = [categories, states, years, colourOptions];
