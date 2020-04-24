@@ -40,14 +40,21 @@ function mapFunction() {
     };
     legend.addTo(m);
 
-    // var pLegend = L.control({position: 'bottomleft'});
-    // var visibleProjectsCount = 2030;
-    // legend.onAdd = function (m) {
-    //     var div = L.DomUtil.create('div', 'proj legend')
-    //     div.innerHTML += '<br><b>' + visibleProjectsCount + ' projects displayed.</b>';
-    //     return div;
-    // };
-    // legend.addTo(m);
+    var ghat = new L.marker([14.5, 75.3], { opacity: 0.0 }); //opacity may be set to zero
+    ghat.bindTooltip("Western Ghats Biodiversity Hotspot", {permanent: true, className: "hotspot", offset: [0, 0], direction: "left" });
+    ghat.addTo(m);
+
+    var him = new L.marker([28, 80.5], { opacity: 0.0 }); //opacity may be set to zero
+    him.bindTooltip("Himalayas Biodiversity Hotspot", {permanent: true, className: "hotspot", offset: [0, 0], direction: "right" });
+    him.addTo(m);
+
+    var burma = new L.marker([20, 92.5], { opacity: 0.0 }); //opacity may be set to zero
+    burma.bindTooltip("Indo-Burma Biodiversity Hotspot", {permanent: true, className: "hotspot", offset: [0, 0], direction: "right" });
+    burma.addTo(m);
+
+    var sun = new L.marker([8, 92.5], { opacity: 0.0 }); //opacity may be set to zero
+    sun.bindTooltip("Sundaland Biodiversity Hotspot", {permanent: true, className: "hotspot", offset: [0, 0], direction: "right" });
+    sun.addTo(m);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -119,7 +126,7 @@ function mapFunction() {
             onEachFeature: function(feature, layer) {
                 layer.bindPopup(Object.keys(feature.properties).map(function(k) {
                     if (k == "NAME") {
-                        return ("<strong>"+ feature.properties[k] + "</strong>: ");
+                        return ("<strong>"+ feature.properties[k] + "</strong>");
                     }
                 }));
                 layer._popup._content = "" + layer._popup._content;

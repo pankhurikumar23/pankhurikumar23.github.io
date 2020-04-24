@@ -131,3 +131,14 @@
 	float: left;
 	margin-right: 8px;
 }
+
+.hotspot {
+    width:250px;
+    font-size:15px;
+}
+.leaflet-tooltip-left.hotspot::before {
+	border-left-color: transparent;
+}
+.leaflet-tooltip-right.hotspot::before {
+	border-right-color: transparent;
+}
