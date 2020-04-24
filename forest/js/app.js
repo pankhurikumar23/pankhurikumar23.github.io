@@ -125,6 +125,52 @@ function mapFunction() {
         });
     });
 
+    $.getJSON("data/indo-burma.geojson", function(ghats) {
+        L.geoJson(ghats, {
+            onEachFeature: function(feature, layer) {
+                layer.bindPopup(Object.keys(feature.properties).map(function(k) {
+                    if (k == "DisplayName") {
+                        return ("<strong>"+ feature.properties[k] + "</strong>: ");
+                    }
+                }));
+                layer._popup._content = "" + layer._popup._content;
+                layer._popup._content = layer._popup._content.replace(/,/g, '');
+                m.addLayer(layer);
+            },
+            style: function() {
+                return {
+                    opacity: 1,
+                    fillOpacity: 0.3,
+                    weight: 0,
+                    color: colors[0]
+                } 
+            }
+        });
+    });
+
+    $.getJSON("data/sundaland.geojson", function(ghats) {
+        L.geoJson(ghats, {
+            onEachFeature: function(feature, layer) {
+                layer.bindPopup(Object.keys(feature.properties).map(function(k) {
+                    if (k == "DisplayName") {
+                        return ("<strong>"+ feature.properties[k] + "</strong>: ");
+                    }
+                }));
+                layer._popup._content = "" + layer._popup._content;
+                layer._popup._content = layer._popup._content.replace(/,/g, '');
+                m.addLayer(layer);
+            },
+            style: function() {
+                return {
+                    opacity: 1,
+                    fillOpacity: 0.3,
+                    weight: 0,
+                    color: colors[0]
+                } 
+            }
+        });
+    });
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 //  PROJECTS JSON PROCESSING

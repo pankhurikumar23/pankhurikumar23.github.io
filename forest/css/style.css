@@ -66,15 +66,6 @@
 }
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
-  body {
-  	display: flex;
-  	flex-flow: column;
-  }
-  .map-div { order: 1; }
-  .welcome-div { order: 2; }
-  .stories-div { order: 3; }
-  .about-div { order: 4; }
-
   [class*="colmap-"] {
 		width: 100%;
   }
