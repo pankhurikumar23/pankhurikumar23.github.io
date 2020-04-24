@@ -26,17 +26,28 @@ function mapFunction() {
     }
 
     var legend = L.control({position: 'topright'});
+    var visibleProjectsCount = 2030;
     legend.onAdd = function (m) {
         var div = L.DomUtil.create('div', 'info legend'),
             grades = [0, 1, 2, 3, 4, 5];
 
         for (var i = 0; i < grades.length; i++) {
             div.innerHTML +=
-                '<i style="background:' + getColor(grades[i]) + '"></i> ' + labels[i] + '<br>';
+                '<i style="background:' + getColor(grades[i]) + '"></i><div class="legend-label">' + labels[i] + '</div>';
         }
+        div.innerHTML += '<br><div style="font-size:18px;color:#00008B"><b>' + visibleProjectsCount + ' projects displayed.</b></div>';
         return div;
     };
     legend.addTo(m);
+
+    // var pLegend = L.control({position: 'bottomleft'});
+    // var visibleProjectsCount = 2030;
+    // legend.onAdd = function (m) {
+    //     var div = L.DomUtil.create('div', 'proj legend')
+    //     div.innerHTML += '<br><b>' + visibleProjectsCount + ' projects displayed.</b>';
+    //     return div;
+    // };
+    // legend.addTo(m);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -190,17 +201,20 @@ function mapFunction() {
     }
 
     function showLayer() {
+        visibleProjectsCount = 0;
         allProjectLayers.forEach(function(layer) {
             var properties = layer.feature.properties;
             if (selected_features[0].includes(properties[filters[0]]) 
                 && selected_features[1].includes(properties[filters[1]])
                 && selected_features[2].includes(properties[filters[2]]) 
                 && selected_features[3].includes(properties[filters[3]])) {
+                    visibleProjectsCount += 1;
                     m.addLayer(layer);
             } else {
                     m.removeLayer(layer);
             }
         });
+        legend.addTo(m);
     }
 
     var categories = ["Coal Mining", "Industrial Projects - 1", "Industrial Projects - 2", "Industrial Projects - 3", 

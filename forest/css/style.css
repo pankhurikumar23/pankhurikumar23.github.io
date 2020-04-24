@@ -76,20 +76,27 @@
   }
   .colmap-4 { order: 1; }
   .colmap-8 { order: 2; }
+
+  .heading-section {
+   	padding-top: 200px;
+  }
+  .legend-label {
+  	width: 150px;
+  }
 }
 
 @media only screen and (min-width: 768px) {
 	/* all except mobile phones: */
-	.heading-section {
-    	padding-top: 150px;
-    }
-
 	.dropdown-menu.show {
 		top: -40px !important;
 		left: 45% !important;
 		width: 100%;
 		max-width: 90%;
 		min-width: 80%;
+	}
+	.legend-label {
+		text-align: left;
+		width: 205px;
 	}
 }
 
@@ -122,6 +129,5 @@
 	width: 25px;
 	height: 25px;
 	float: left;
-	text-align: left;
 	margin-right: 8px;
 }
