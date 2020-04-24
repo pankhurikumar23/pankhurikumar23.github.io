@@ -26,7 +26,7 @@ function mapFunction() {
     }
 
     var legend = L.control({position: 'topright'});
-    var visibleProjectsCount = 2030;
+    var visibleProjectsCount = 2053;
     legend.onAdd = function (m) {
         var div = L.DomUtil.create('div', 'info legend'),
             grades = [0, 1, 2, 3, 4, 5];
@@ -198,9 +198,10 @@ function mapFunction() {
         } else {
             m.setView([22.59, 80.22], 5);
         }
-    }
+    }    
 
     function showLayer() {
+        console.log(Object.keys(m._layers).length);
         visibleProjectsCount = 0;
         allProjectLayers.forEach(function(layer) {
             var properties = layer.feature.properties;
@@ -219,13 +220,13 @@ function mapFunction() {
 
     var categories = ["Coal Mining", "Industrial Projects - 1", "Industrial Projects - 2", "Industrial Projects - 3", 
       "Infrastructure and Miscellaneous Projects + CRZ", "New Construction Projects and Industrial Estates",
-      "Non-Coal Mining", "River Valley and Hydroelectric Projects", "Thermal Projects"];
+      "Non-Coal Mining", "River Valley and Hydroelectric Projects", "Thermal Projects", "Unavailable"];
     var states = ["Andaman and Nicobar", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", 
       "Dadra and Nagar Haveli", "Daman and Diu", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", 
       "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", 
-      "Meghalaya", "Mizoram", "Odisha", "Punjab", "Puducherry", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", 
+      "Meghalaya", "Mizoram", "Odisha", "Puducherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", 
       "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal"]
-    var years = [2014, 2015, 2016, 2017, 2018, 2019, "Unavailable"];
+    var years = ["2014", "2015", "2016", "2017", "2018", "2019", "Unavailable"];
     var colourLabels = ["Within Protected Area", "Less than 10km", "10 - 50km", "50 - 100km", "More than 100km"]
     var colourOptions = [1, 2, 3, 4, 5]
     let selected_features = [categories, states, years, colourOptions];
@@ -269,6 +270,7 @@ function mapFunction() {
         });
 
         $('#year').on('change', function () {
+            console.log($(this).val());
             selected_features[2] = $(this).val();
             if (!selected_features[2]) {
                 selected_features[2] = years;
