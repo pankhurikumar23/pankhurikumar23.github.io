@@ -26,15 +26,12 @@ html {
 .map-section,
 .reporting-section,
 .about-section {
-    padding-top: 50px;
-    padding-bottom: 30px;
     text-align: center;
     background: #FFFFFF;
 }
 
 .heading-section {
     padding-top: 130px;
-    padding-bottom: 10px;
 }
 
 .welcome-section {
@@ -42,7 +39,7 @@ html {
 }
 
 .map-section {
-    padding-top: 70px;
+    padding-top: 40px;
 }
 
 .navbar-default .navbar-nav > li > a:hover {
