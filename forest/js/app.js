@@ -154,7 +154,7 @@ function mapFunction() {
     let count = [0, 0];
     var state_mid = [];
     var projectPopupFeatures = ["Category", "Proposal Name", "EC Grant Date", "Location", "Company Name", "Project Type", "Closest PP"];
-    $.getJSON("data/all_data.geojson", function(geo) {
+    $.getJSON("data/all_data_points.geojson", function(geo) {
         L.geoJson(geo, {
             onEachFeature: function (feature, layer) {
                 if (feature.properties) {
