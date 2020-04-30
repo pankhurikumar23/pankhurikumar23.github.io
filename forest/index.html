@@ -9,15 +9,15 @@
     <meta name="description" content="Demo for Forest Clearance Project">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/sticky-menu.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
 
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet-src.js"></script>
     <script src="js/catiline.js"></script>
@@ -29,9 +29,9 @@
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container-nav">
             <div class="navbar-collapse navbar-ex1-collapse">
-	            <div class="page-title">
-	        		Man vs. Wild
-	        	</div>
+                <div class="page-title">
+                    Man vs. Wild
+                </div>
                 <ul class="nav navbar-nav">
                     <li>
                         <a class="page-scroll" href="#page-top">Home</a>
@@ -46,8 +46,8 @@
                         <a class="page-scroll" href="#about">About Us</a>
                     </li>
                 </ul>
-            </div>	<!-- .navbar-collapse -->
-        </div>		<!-- .container -->
+            </div>  <!-- .navbar-collapse -->
+        </div>      <!-- .container -->
     </nav>
 
     <section id="heading" class="heading-section">
@@ -70,27 +70,19 @@
                 <br>
                 <div class="text">
                     <div>
-                        The map shows the location of 2,053 projects out of a total of 2,115 projects that the <a href="http://moef.gov.in">Ministry</a> 
-                        of Environment, Forest and Climate Change (MoEFCC) granted Environment Clearances to between July 2014 and March 2020. 
+                        Certain categories of large projects in India require environment clearances (ECs) from the government. This map shows the location of 2,053 projects out of a total of 2,115 projects that the <a href="http://moef.gov.in">Ministry</a> of Environment, Forest and Climate Change (MoEFCC) granted Environment Clearances (ECs) to between July 2014 and March 2020.
+                        <br> 
+                        <br>
+                        Human activity is legally limited within Protected Areas (PAs) in India i.e. areas that enjoy a higher degree of protection to preserve their biodiversity (flora, fauna, ecosystems, etc). National parks, wildlife sanctuaries and conservation reserves are all examples of PAs. It is up to the ministry to allow projects in such areas. Our map features such PAs across India and highlights overlaps.
                         <br>
                         <br>
-                        The map also shows Protected Areas (PAs) i.e. areas that enjoy a higher degree of protection to preserve their biodiversity 
-                        (flora, fauna, ecosystems, etc) and for which human occupation is legally limited. National parks, wildlife sanctuaries, 
-                        and conservation reserves are all examples of PAs. 
+                        India’s four biodiversity hotspots - Himalayas, Western Ghats, Indo-Burma and Sundaland - also feature on the map. These are recognised as being among the Earth’s 36 most biologically rich regions.
                         <br>
                         <br>
-                        India’s four biodiversity hotspots are also shown on the map for reference; these are internationally recognised as being among 
-                        the Earth’s 36 most biologically rich regions.
+                        <b>What is an EC:</b> An Environment Clearance is an approval required before an organisation can start any infrastructure, mining, processing or manufacturing undertaking that may be potentially detrimental to the environment. The clearance is granted either by the Centre or the states depending on the type of project it is. In addition to an EC, some projects may require wildlife and forest clearances. 
                         <br>
                         <br>
-                        <b>What is an EC:</b> An Environment Clearance (EC) is an approval required before an organisation can start any infrastructure, 
-                        mining, processing or manufacturing undertaking that may be potentially detrimental to the environment. The clearance is granted 
-                        either by the Centre or the state depending on the type of project it is. In addition to an EC, some projects may require 
-                        wildlife and forest clearances.
-                        <br>
-                        <br>
-                        <b>How to use the map:</b> Use the filters alongside the map to discover which projects have been approved in each state, as 
-                        per year in which approval was granted, type of project and distance from nearby PAs.
+                        <b>How to use the map:</b> Use the filters alongside the map to discover which projects have been approved in each state, as per year in which approval was granted, type of project and distance from nearby PAs.
                     </div>
                 </div>
             </div>
@@ -114,9 +106,9 @@
                             <div>
                                 <select id="cat" class="selectpicker" title="Project Category" multiple data-live-search="true" 
                                     data-actions-box="true" data-width="100%">
-                				</select>
+                                </select>
                             </div>
-            				<div>
+                            <div>
                                 <select id="year" class="selectpicker" title="Grant Year" multiple data-live-search="true" 
                                     data-actions-box="true" data-width="100%">
                                 </select>
@@ -126,7 +118,7 @@
                                     data-live-search="true" data-actions-box="true" data-width="100%">
                                 </select>
                             </div>
-            			</div>
+                        </div>
                     </div>
                 </div>
                 <div class="colmap">
@@ -140,16 +132,6 @@
                 <div class="col-lg-12">
                     <div class="text">
                         <div>
-                            <h3>About the data</h3>
-                            <br>
-                            Location coordinates have been used to map locations for 1,378 of the 2,053 projects that received ECs. Location coordinates were 
-                            unavailable, or noticeably inaccurate (outside India, for example) for 675 projects. These have been plotted as per the provided 
-                            tehsil information. Certain tehsils will therefore appear to have a large number of overlapping projects. 
-                            <br>
-                            <br>
-                            The remaining 62 projects have not been plotted on the map. These are projects for which location coordinates and tehsil information
-                             is missing in the Parivesh data.
-                            <br>
                             <br>
                             <b>Sources:</b> We collected primary data from the <a href="https://parivesh.nic.in">Parivesh portal</a> maintained by the MoEFCC. The 
                             672 PAs were mapped based on information available on the UN-supported <a href="https://www.protectedplanet.net/search?q=India">
@@ -158,10 +140,18 @@
                             <a href="https://hub.arcgis.com/datasets/Story::biodiversity-hotspots-2016-feature-layer">ArcGIS Hub</a>.
                             <br>
                             <br>
-                            <i><b>Note:</b> All efforts have been made to collect and map the data accurately. The primary data from Parivesh is frequently 
-                            riddled with errors. For instance, certain projects are mapped in a neighbouring state and not the state in which it is supposed 
-                            to be. Each project has been manually copied from the website and there could be inaccuracies. Kindly let us know if you see a 
-                            data point in the wrong place. Please include the <b>Proposal Name</b> as given in the pop-up box to help us identify the project.
+                            <h3>About the data</h3>
+                            <br>
+                            We combed through data of 2,115 projects of which we were able to map 2,053 projects. We were unable to plot 62 projects for which neither the location coordinates nor the tehsil information was available in the Parivesh dataset.
+                            <br>
+                            <br>
+                            Of the 2,053 projects, location coordinates were used to map 1,256 projects. An additional 797 projects were mapped as per the tehsil information provided, since the given location coordinates for these projects were either unavailable, or noticeably inaccurate (e.g. outside India). Certain tehsils will therefore appear to have a large number of overlapping projects. 
+                            <br>
+                            <br>
+                            Some projects are also mapped in a neighbouring state, and not the state in which they are supposed to be. This is because the location coordinates for these projects have been entered incorrectly in the Parivesh database. There were 122 such points, and they are included in the projects mapped according to tehsil.
+                            <br>
+                            <br>
+                            <i><b>Note:</b> All efforts have been made to collect and map the data accurately. The primary data from Parivesh is riddled with errors, as our investigation found. Each project has been manually copied from the website and there could be inaccuracies. Kindly let us know if you see an incorrectly placed data point. Please include the <b>Proposal Name</b> as given in the pop-up box to help us identify the project.
                             <br>
                             You can reach us at: <a href="mailto:respond@indiaspend.org">respond@indiaspend.org</a></i>
                             <br>
@@ -184,9 +174,7 @@
                         <div>
                             <h3>Reporting</h3>
                             <br>
-                            Reporting for this project was done between the second half of 2019 and early 2020. IndiaSpend travelled across the country for 
-                            four months, reporting from Uttar Pradesh to Karnataka, as a part of a year-long investigation on how some of India’s infrastructure 
-                            projects are imperilling the environment. 
+                            Reporting for this project was done between the second half of 2019 and early 2020. IndiaSpend travelled across the country for four months, reporting from Uttar Pradesh to Karnataka, as a part of a year-long investigation on how some of India’s infrastructure projects are imperilling the environment.  
                             <br>
                             <br>
                             Our ground reports will be added to the map and as and when they are published at <a href="https://www.indiaspend.com/">IndiaSpend.com</a>
@@ -206,16 +194,16 @@
                 <img src="img/Belgaum, Western Ghats.jpg" style="width:100%">
             </div>
             <div class="photo-column">
-                <img src="img/Singrauli, Madhya Pradesh.JPG" style="width:100%">
+                <img src="img/River Ken, Bundelkhand.jpg" style="width:100%">
                 <img src="img/Singrauli, Madhya Pradesh(1).jpg" style="width:100%">
             </div>  
             <div class="photo-column">
-                <img src="img/River Ken, Bundelkhand.jpg" style="width:100%">
                 <img src="img/Panna, Madhya Pradesh.jpg" style="width:100%">
+                <img src="img/Singrauli, Madhya Pradesh.JPG" style="width:100%">
             </div>
             <div class="photo-column">
-                <img src="img/Karwar, Karnataka.jpg" style="width:100%">
                 <img src="img/Singrauli, Madhya Pradesh(2).JPG" style="width:100%">
+                <img src="img/Karwar, Karnataka.jpg" style="width:100%">
             </div>
         </div>
     </section>
@@ -231,15 +219,14 @@
                         <div>
                             <h3>About Us</h3>
                             <br>
-                            Tish Sanghera and Disha Shetty reported on the series. Sanghera tweets <a href="https://twitter.com/TishSanghera">@TishSanghera</a> 
-                            and Shetty <a href="https://twitter.com/dishashetty20">@dishashetty20</a>.
+                            <a href="https://www.indiaspend.com/author/tish-sanghera/">Tish Sanghera</a> and <a href="https://www.indiaspend.com/author/disha_shetty/">Disha Shetty</a>reported on the series. You can find them tweeting <a href="https://twitter.com/tishsanghera?lang=en">@TishSanghera</a> and <a href="https://twitter.com/dishashetty20">@dishashetty20</a>. 
                             <br>
                             <br>
-                            Individual contributor <a href="http://pankhurikumar23.github.io">Pankhuri Kumar</a> built the map and helped create the website.**  
+                            Individual contributor <a href="http://pankhurikumar23.github.io">Pankhuri Kumar</a> built the map and helped create the website. 
                             <br>
                             <br>
                             Samar Halarnkar and Madhur Singh helped conceptualize and shape the series, along with Marisha Karwa, who is also the series editor. 
-                            Karwa tweets at <a href="https:twitter.com/MarishaThakur">@MarishaThakur</a>.
+                            She tweets <a href="https:twitter.com/MarishaThakur">@MarishaThakur</a>.
                             <br>
                             <br>
                             <i>**We hired additional help to manually enter data</i>
@@ -251,8 +238,8 @@
             </div>
         </div>
     </section>
-	</div>
-	
+    </div>
+    
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
 

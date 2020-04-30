@@ -47,11 +47,11 @@ function mapFunction() {
     him.bindTooltip("Himalayas Biodiversity Hotspot", {permanent: true, className: "hotspot", offset: [0, 0], direction: "right" });
     him.addTo(m);
 
-    var burma = new L.marker([20, 92.5], { opacity: 0.0 }); //opacity may be set to zero
+    var burma = new L.marker([18, 88.5], { opacity: 0.0 }); //opacity may be set to zero
     burma.bindTooltip("Indo-Burma Biodiversity Hotspot", {permanent: true, className: "hotspot", offset: [0, 0], direction: "right" });
     burma.addTo(m);
 
-    var sun = new L.marker([8.5, 92.5], { opacity: 0.0 }); //opacity may be set to zero
+    var sun = new L.marker([8.5, 87.5], { opacity: 0.0 }); //opacity may be set to zero
     sun.bindTooltip("Sundaland Biodiversity Hotspot", {permanent: true, className: "hotspot", offset: [0, 0], direction: "right" });
     sun.addTo(m);
 
@@ -154,7 +154,7 @@ function mapFunction() {
     let count = [0, 0];
     var state_mid = [];
     var projectPopupFeatures = ["Category", "Proposal Name", "EC Grant Date", "Location", "Company Name", "Project Type", "Closest PP"];
-    $.getJSON("data/all_data_points.geojson", function(geo) {
+    $.getJSON("data/states_overlap.geojson", function(geo) {
         L.geoJson(geo, {
             onEachFeature: function (feature, layer) {
                 if (feature.properties) {
