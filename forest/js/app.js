@@ -39,7 +39,7 @@ function mapFunction() {
     };
     legend.addTo(m);
 
-    var ghat = new L.marker([14.5, 75.3], { opacity: 0.0 }); //opacity may be set to zero
+    var ghat = new L.marker([14.5, 76], { opacity: 0.0 }); //opacity may be set to zero
     ghat.bindTooltip("Western Ghats Biodiversity Hotspot", {permanent: true, className: "hotspot", offset: [0, 0], direction: "left" });
     ghat.addTo(m);
 
