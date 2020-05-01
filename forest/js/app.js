@@ -5,7 +5,7 @@ function mapFunction() {
 //  BASIC MAP SETUP
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    colors = ["#00A100", "#540B0E", "#ff006e", "#E09F3E", "#B2967D", "#FAAE7B", "#0088AA"]
+    colors = ["#00A100", "#540B0E", "#ff006e", "#E09F3E", "#FFCA3A", "#FAAE7B", "#0088AA"]
     labels = ["Protected Areas", "Projects Within Protected Areas", "Projects =< 10km away", "Projects =< 50km away", "Projects =< 100km away", "Projects > 100km away"];
     var m = L.map('map').setView([23, 82.72], 4.5);
     // https://api.mapbox.com/styles/v1/pankhurikumar/ck9bwfsbu0b571iqgnudrdsr0/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicGFua2h1cmlrdW1hciIsImEiOiJjamZwbnV2OTcxdXB1MzBudnViY2p3aDEzIn0.Zf9ZkY05gz_Zsyen1W1FbA
@@ -121,6 +121,8 @@ function mapFunction() {
     });
 
     $.getJSON("data/Biodiversity_Hotspots_2016.geojson", function(ghats) {
+        // ensure projects load after hotspots
+        loadProjects();
         L.geoJson(ghats, {
             onEachFeature: function(feature, layer) {
                 layer.bindPopup(Object.keys(feature.properties).map(function(k) {
@@ -149,43 +151,43 @@ function mapFunction() {
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     let allProjectLayers = [];
-    var allStateLayers = [];
-    let jsonFeatures = [];
-    let count = [0, 0];
     var state_mid = [];
     var projectPopupFeatures = ["Category", "Proposal Name", "EC Grant Date", "Location", "Company Name", "Project Type", "Closest PP"];
-    $.getJSON("data/states_overlap.geojson", function(geo) {
-        L.geoJson(geo, {
-            onEachFeature: function (feature, layer) {
-                if (feature.properties) {
-                    layer.bindPopup(Object.keys(feature.properties).map(function (k) {
-                        if (projectPopupFeatures.includes(k)) {
-                            return ("<strong>" + k + "</strong>: " + feature.properties[k]
-                                + "<br />");
-                        }
-                    }));
+    function loadProjects() {
+        $.getJSON("data/states_overlap.geojson", function(geo) {
+            L.geoJson(geo, {
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties) {
+                        layer.bindPopup(Object.keys(feature.properties).map(function (k) {
+                            if (projectPopupFeatures.includes(k)) {
+                                return ("<strong>" + k + "</strong>: " + feature.properties[k]
+                                    + "<br />");
+                            }
+                        }));
+                    }
+                    layer._popup._content = "<strong>PROJECT</strong><br />" + layer._popup._content;
+                    layer._popup._content = layer._popup._content.replace(/,/g, '');
+                    layer._popup._content = layer._popup._content.replace(/;/g, ',');
+                    layer._popup._content = layer._popup._content.replace('Closest PP', 'Closest Protected Area');
+                    allProjectLayers.push(layer);
+                    m.addLayer(layer);
+                },
+                style: function(feature) {
+                    return {
+                        fillOpacity: 0.8,
+                        weight: 0,
+                        color: colors[feature.properties['colour']]
+                    }
+                },
+                pointToLayer: function (feature, latlng) {
+                    return new L.CircleMarker(latlng, {
+                        radius: 5
+                    });
                 }
-                layer._popup._content = "<strong>PROJECT</strong><br />" + layer._popup._content;
-                layer._popup._content = layer._popup._content.replace(/,/g, '');
-                layer._popup._content = layer._popup._content.replace(/;/g, ',');
-                layer._popup._content = layer._popup._content.replace('Closest PP', 'Closest Protected Area');
-                allProjectLayers.push(layer);
-                m.addLayer(layer);
-            },
-            style: function(feature) {
-                return {
-                    fillOpacity: 0.8,
-                    weight: 0,
-                    color: colors[feature.properties['colour']]
-                }
-            },
-            pointToLayer: function (feature, latlng) {
-                return new L.CircleMarker(latlng, {
-                    radius: 5
-                });
-            }
-        })
-    });
+            })
+            createCounts();
+        });
+    }
 
     $.getJSON("data/statebounds.json", function(states) {
         state_mid = states;
@@ -196,7 +198,21 @@ function mapFunction() {
 //  FILTERING LOGIC
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    var filters = ['Category', 'State', 'Grant Year', 'colour']; 
+    var filters = ['Category', 'State', 'Grant Year', 'colour'];
+    var allCounts = {};
+    function createCounts() {
+        allProjectLayers.forEach(function(layer) {
+            var properties = layer.feature.properties;
+            for (i = 0; i < 4; i++) {
+                if (properties[filters[i]] in allCounts) {
+                    allCounts[properties[filters[i]]] += 1;
+                } else {
+                    allCounts[properties[filters[i]]] = 1;
+                }
+            }
+        });
+    }
+
     function zoomToState() {
         if (selected_features[1].length == 1) {
             state = selected_features[1][0];
@@ -207,7 +223,6 @@ function mapFunction() {
     }    
 
     function showLayer() {
-        console.log(Object.keys(m._layers).length);
         visibleProjectsCount = 0;
         allProjectLayers.forEach(function(layer) {
             var properties = layer.feature.properties;
@@ -237,16 +252,17 @@ function mapFunction() {
     var colourOptions = [1, 2, 3, 4, 5]
     let selected_features = [categories, states, years, colourOptions];
 
-    $(document).ready(function() {        
+    $(document).ready(function() {    
+        var st = document.getElementById("state");
+        for (i in states) {
+            st.innerHTML += "<option>" + states[i] + "</option>";
+        }
+
         var cat = document.getElementById("cat");
         for (i in categories) {
             cat.innerHTML += "<option>" + categories[i] + "</option>";
         }
 
-        var st = document.getElementById("state");
-        for (i in states) {
-            st.innerHTML += "<option>" + states[i] + "</option>";
-        }
         var yr = document.getElementById("year");
         for (i in years) {
             yr.innerHTML += "<option>" + years[i] + "</option>";
@@ -276,7 +292,6 @@ function mapFunction() {
         });
 
         $('#year').on('change', function () {
-            console.log($(this).val());
             selected_features[2] = $(this).val();
             if (!selected_features[2]) {
                 selected_features[2] = years;
