@@ -12,16 +12,14 @@
     <script>
         const maxCount = 160000;
         const profession = 0;
-        const male = 1;
-        const female = 2;
-        const total = 3;
-        const y = 4;
-        const transgender = 5;
-        const perc = 6;
-        profLabels = ['House Wife', 'Farming/Agriculture', 'Daily Wage Earner', 'Total']
-        yearLabels = ['1997-2002', '2003-2008', '2009-2013', '2014-2020']
+        const female = 1;
+        const total = 2;
+        const y = 3;
+        profLabels = ['House Wife', 'Farming/Agriculture', 'Daily Wage Earner', 'All Women Suicides', 'All Suicides'];
+        colourLabels = ['#386FC8', '#80A9DE', '#747474', '#E0C500', '#B39D00']; //'#2C2728': black
+        yearLabels = ['1996-2001', '2002-2007', '2008-2013', '2014-2020'];
         yearChoice = -1;
-        profChoice = -1;
+        // profChoice = -1;
 
         function preload() {
             data = loadTable('farmersuicidedata.csv', 'csv', 'header');
@@ -38,37 +36,51 @@
             midW = maxWidth/2;
             midH = maxHeight/2;
 
+            bottomLine = midH+4*marginH;
+            leftLine = 1.5*marginW;
+            topLine = midH-8.5*marginH;
+
             var canvas = createCanvas(maxWidth-20, maxHeight-20);
             canvas.parent('canvasForHTML');
             background(255);
             noLoop();
 
             createBackdrop();
-            createDropdowns(leftLine, midH-7.5*marginH);
+            createDropdowns(leftLine, topLine+2*marginH);
         }
 
         function draw() {
             background(255);
             createBackdrop();
             displayData();
+            // console.log(mouseX, mouseY);
         }
 
         function createBackdrop() {
             push();
             // chart
-            bottomLine = midH+5*marginH;
-            leftLine = 2*marginW;
             stroke(0);
             line(leftLine, midH-8*marginH, leftLine, bottomLine);
             maxBar = dist(leftLine, midH-8*marginH, leftLine, bottomLine);
             line(leftLine, bottomLine, maxWidth-marginW, bottomLine);
             // labels
-            textSize(marginW/2);
+            textSize(marginH*0.75);
             // markers
             textAlign(RIGHT, CENTER);
+            fill(0);
             for (i = 1; i < 16; i++) {
                 line(leftLine-2, bottomLine-i*10000/maxCount*maxBar, leftLine+2, bottomLine-i*10000/maxCount*maxBar);
                 text(i*10000, leftLine-5, bottomLine-i*10000/maxCount*maxBar);
+            }
+            // legend
+            noStroke();
+            textAlign(LEFT, CENTER);
+            for (i = 0; i < colourLabels.length; i++) {
+                fill(colourLabels[i]);
+                rect(marginW, bottomLine+marginH+i*17, 15, 15);
+                fill(0);
+                textSize(marginH*0.5);
+                text(profLabels[i], marginW + 17, bottomLine+marginH+10+i*17);
             }
         }
 
@@ -80,45 +92,45 @@
             for(i = 0; i < yearLabels.length; i++) {
                 yearDrop.option(yearLabels[i]);
             }
+            yearDrop.changed(updateChart);
 
             //profession dropdown
-            profDrop = createSelect().id('prof');
-            profDrop.position(x+170, y);
-            profDrop.option('Select a profession', -1);
-            for(i = 0; i < profLabels.length; i++) {
-                profDrop.option(profLabels[i]);
-            }
-            yearDrop.changed(updateChart);
-            profDrop.changed(updateChart);
+            // profDrop = createSelect().id('prof');
+            // profDrop.position(x+170, y);
+            // profDrop.option('Select a profession', -1);
+            // for(i = 0; i < profLabels.length; i++) {
+            //     profDrop.option(profLabels[i]);
+            // }
+            // profDrop.changed(updateChart);
         }
 
         function updateChart() {
-            profChoice = profDrop.value();
+            // profChoice = profDrop.value();
             yearChoice = yearDrop.value();
             // console.log(yearChoice, profChoice);
 
             minYear = yearChoice.split('-')[0];
             maxYear = yearChoice.split('-')[1];
             // console.log(minYear, maxYear);
-            profFlags = [];
-            if (profChoice == -1) {
-                profFlags = [...Array(79).keys()];
-            } else {
-                for(i = 0; i < 79; i++) {
-                    if (profChoice == data.getRow(i).getString(profession)) {
-                        profFlags.push(i);
-                    }
-                }
-            }
+            // profFlags = [];
+            // if (profChoice == -1) {
+            //     profFlags = [...Array(82).keys()];
+            // } else {
+            //     for(i = 0; i < 82; i++) {
+            //         if (profChoice == data.getRow(i).getString(profession)) {
+            //             profFlags.push(i);
+            //         }
+            //     }
+            // }
             // console.log(profFlags);
             displayFlags = [];
             if (yearChoice == -1) {
-                displayFlags = profFlags;
+                displayFlags = [...Array(82).keys()];
             } else {
-                for(i = 0; i < profFlags.length; i++) {
+                for(i = 0; i < 82; i++) {
                     // console.log(data.getRow(profFlags[i]));
-                    if (minYear <= data.getRow(profFlags[i]).getString(y) & data.getRow(profFlags[i]).getString(y) <= maxYear) {
-                        displayFlags.push(profFlags[i]);
+                    if (minYear <= data.getRow(i).getString(y) & data.getRow(i).getString(y) <= maxYear) {
+                        displayFlags.push(i);
                     }
                 }
             }
@@ -127,38 +139,53 @@
         }
 
         function displayData() {
-            if (yearChoice == -1 | profChoice == -1)
+            if (yearChoice == -1) //| profChoice == -1)
                 return
             // console.log(displayFlags);
             noStroke();
             start = leftLine + marginW;
-            colWidth = (maxWidth-leftLine-3*marginW)/13;
-            textAlign(CENTER, BOTTOM);
-            textSize(marginW/2);
+            colWidth = (maxWidth-leftLine-3*marginW)/55;
+            
             for (i = 0; i < displayFlags.length; i++) {
-                stat = data.getRow(displayFlags[i]).getString(total);
+                textAlign(CENTER, BOTTOM);
+                textSize(marginH*0.5);
+                thisRow = data.getRow(displayFlags[i]);
+
+                //draw totals bar
+                stat = thisRow.getString(total);
                 colLength = stat/maxCount * maxBar;
                 // console.log(stat, colLength);
-                fill(221, 181, 80);
+                if (thisRow.getString(profession) == 'Total') {
+                    fill(colourLabels[4]);
+                } else {
+                    fill(colourLabels[3]);
+                }
                 rect(start+2*i*colWidth, bottomLine-1, colWidth, -1*colLength);
                 fill(0)
                 text(stat, start+(1+4*i)*colWidth/2, bottomLine-colLength-10);
-            }
 
-            for (i = 0; i < displayFlags.length; i++) {
-                stat = data.getRow(displayFlags[i]).getString(female);
+                //draw females bar
+                stat = thisRow.getString(female);
                 colLength = stat/maxCount * maxBar;
                 // console.log(stat, colLength);
-                fill(55, 120, 184);
+                for (j = 0; j < 4; j++){
+                    if (j == 3) {
+                        fill(colourLabels[3]);
+                        break;
+                    }
+                    if (thisRow.getString(profession) == profLabels[j]) {
+                        fill(colourLabels[j]);
+                        break;
+                    }
+                }
                 rect(start+2*i*colWidth, bottomLine-1, colWidth, -1*colLength);
                 fill(0);
-                text(stat, start+(1+4*i)*colWidth/2, bottomLine-10);
-            }
+                if (thisRow.getString(profession) != 'Total')
+                    text(stat, start+(1+4*i)*colWidth/2, bottomLine-5);
 
-            for (i = 0; i < displayFlags.length; i++) {
-                textSize(marginW/2+2);
+                //write year axis
                 textAlign(CENTER, TOP);
-                text(data.getRow(displayFlags[i]).getString(y), start+(1+4*i)*colWidth/2, midH+5.5*marginH);
+                text(thisRow.getString(y), start+(1+4*i)*colWidth/2, midH+4.5*marginH);
             }
         }
     </script>
@@ -173,10 +200,10 @@
     <p> Data Details: </p>
     <ol>
         <li> The visualization here plots (selected) profession-wise suicide data across years. The yellow bars are the totals across all genders for that profession, while the blue bars are the count of the women. Legend will be added.
-        <li> There is a total of 24 years worth of data available: 1997-2020. Data from 1996 is on state-level, so if there is time, I will try to add it, giving us 25 years.
+        <li> There is a total of 25 years worth of data available: 1996-2020. <s>Data from 1996 is on state-level, so if there is time, I will try to add it, giving us 25 years.</s>
         <li> I have separated the above into sections of 6 years for better readability.
-        <li> However, years 2014-2020 (7 years) have data for Daily Wage Earners, while the other 17 years do not. Thus, these 7 years have been clubbed together, even though they are more than 6.
-        <li> Consequently, years 2009-2013 have only 5 years clubbed together.
+        <li> However, years 2014-2020 (7 years) have data for Daily Wage Earners, while the other 18 years do not. Thus, these 7 years have been clubbed together.
+        <li><s> Consequently, years 2009-2013 have only 5 years clubbed together.</li></s>
         <li> The option of 'Daily Wage Earners' shows up for the other years, but no chart is displayed. I am working on greying out this option for the other years.
     </ol>
     <p> Code Details: </p>
