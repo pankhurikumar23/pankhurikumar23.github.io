@@ -63,7 +63,7 @@
             maxBar = dist(leftLine, midH-8*marginH, leftLine, bottomLine);
             line(leftLine, bottomLine, maxWidth-marginW, bottomLine);
             // labels
-            textSize(18);
+            textSize(marginW/2);
             // markers
             textAlign(RIGHT, CENTER);
             for (i = 1; i < 16; i++) {
@@ -130,11 +130,11 @@
             if (yearChoice == -1 | profChoice == -1)
                 return
             // console.log(displayFlags);
-            textAlign(CENTER, BOTTOM);
             noStroke();
             start = leftLine + marginW;
             colWidth = (maxWidth-leftLine-3*marginW)/13;
-            textSize(18);
+            textAlign(CENTER, BOTTOM);
+            textSize(marginW/2);
             for (i = 0; i < displayFlags.length; i++) {
                 stat = data.getRow(displayFlags[i]).getString(total);
                 colLength = stat/maxCount * maxBar;
@@ -156,7 +156,7 @@
             }
 
             for (i = 0; i < displayFlags.length; i++) {
-                textSize(20);
+                textSize(marginW/2+2);
                 textAlign(CENTER, TOP);
                 text(data.getRow(displayFlags[i]).getString(y), start+(1+4*i)*colWidth/2, midH+5.5*marginH);
             }
