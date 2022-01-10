@@ -10,7 +10,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
     <script>
-        const maxCount = 150000;
+        const maxCount = 160000;
         const profession = 0;
         const male = 1;
         const female = 2;
@@ -44,7 +44,7 @@
             noLoop();
 
             createBackdrop();
-            createDropdowns(midW/2, 2*marginH);
+            createDropdowns(marginW, midH-7.5*marginH);
         }
 
         function draw() {
@@ -56,12 +56,20 @@
         function createBackdrop() {
             push();
             // chart
+            bottomLine = midH+5*marginH;
+            leftLine = 2*marginW;
             stroke(0);
-            line(marginW, midH-8*marginH, marginW, midH+5*marginH);
-            maxBar = dist(marginW, midH-8*marginH, marginW, midH+5*marginH);
-            line(marginW, midH+5*marginH, maxWidth-marginW, midH+5*marginH);
+            line(leftLine, midH-8*marginH, leftLine, bottomLine);
+            maxBar = dist(leftLine, midH-8*marginH, leftLine, bottomLine);
+            line(leftLine, bottomLine, maxWidth-marginW, bottomLine);
             // labels
-            textSize(marginW*0.5);
+            textSize(18);
+            // markers
+            textAlign(RIGHT, CENTER);
+            for (i = 1; i < 16; i++) {
+                line(leftLine-2, bottomLine-i*10000/maxCount*maxBar, leftLine+2, bottomLine-i*10000/maxCount*maxBar);
+                text(i*10000, leftLine-5, bottomLine-i*10000/maxCount*maxBar);
+            }
         }
 
         function createDropdowns(x, y) {
@@ -119,31 +127,38 @@
         }
 
         function displayData() {
-            if (yearChoice == -1 | profChoice == -1) {
-                // console.log('early term');
+            if (yearChoice == -1 | profChoice == -1)
                 return
-            }
             // console.log(displayFlags);
             textAlign(CENTER, BOTTOM);
             noStroke();
+            start = leftLine + marginW;
+            colWidth = (maxWidth-leftLine-3*marginW)/13;
+            textSize(18);
             for (i = 0; i < displayFlags.length; i++) {
                 stat = data.getRow(displayFlags[i]).getString(total);
                 colLength = stat/maxCount * maxBar;
                 // console.log(stat, colLength);
                 fill(221, 181, 80);
-                rect(marginW+marginW*(2*i+1), midH+5*marginH-1, marginW, -1*colLength);
+                rect(start+2*i*colWidth, bottomLine-1, colWidth, -1*colLength);
                 fill(0)
-                text(data.getRow(displayFlags[i]).getString(y), marginW+marginW*(2*i+1)+marginW/2, midH+6*marginH);
-                text(stat, marginW+marginW*(2*i+1)+marginW/2, midH+5*marginH-colLength-10);
+                text(stat, start+(1+4*i)*colWidth/2, bottomLine-colLength-10);
             }
+
             for (i = 0; i < displayFlags.length; i++) {
                 stat = data.getRow(displayFlags[i]).getString(female);
                 colLength = stat/maxCount * maxBar;
                 // console.log(stat, colLength);
                 fill(55, 120, 184);
-                rect(marginW+marginW*(2*i+1), midH+5*marginH-1, marginW, -1*colLength);
+                rect(start+2*i*colWidth, bottomLine-1, colWidth, -1*colLength);
                 fill(0);
-                text(stat, marginW+marginW*(2*i+1)+marginW/2, midH+5*marginH-10);
+                text(stat, start+(1+4*i)*colWidth/2, bottomLine-10);
+            }
+
+            for (i = 0; i < displayFlags.length; i++) {
+                textSize(20);
+                textAlign(CENTER, TOP);
+                text(data.getRow(displayFlags[i]).getString(y), start+(1+4*i)*colWidth/2, midH+5.5*marginH);
             }
         }
     </script>
