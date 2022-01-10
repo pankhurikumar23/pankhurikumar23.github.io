@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="canonical" href="https://html5-templates.com/" />
+    <title>Farmer Suicide Viz</title>
+    <meta name="description" content="Demo for Farmer Suicides Project">
+
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
+    <script>
+        const maxCount = 150000;
+        const profession = 0;
+        const male = 1;
+        const female = 2;
+        const total = 3;
+        const y = 4;
+        const transgender = 5;
+        const perc = 6;
+        profLabels = ['House Wife', 'Farming/Agriculture', 'Daily Wage Earner', 'Total']
+        yearLabels = ['1997-2002', '2003-2008', '2009-2013', '2014-2020']
+        yearChoice = -1;
+        profChoice = -1;
+
+        function preload() {
+            data = loadTable('dataset_complete.csv', 'csv', 'header');
+            console.log(data);
+        }
+
+        function setup() {
+            //createCanvas
+            var canvasDiv = document.getElementById('canvasForHTML');
+            maxWidth = canvasDiv.offsetWidth;
+            maxHeight = canvasDiv.offsetHeight;
+            marginW = maxWidth/20;
+            marginH = maxHeight/20;
+            midW = maxWidth/2;
+            midH = maxHeight/2;
+
+            var canvas = createCanvas(maxWidth-20, maxHeight-20);
+            canvas.parent('canvasForHTML');
+            background(255);
+            noLoop();
+
+            createBackdrop();
+            createDropdowns(midW/2, 2*marginH);
+        }
+
+        function draw() {
+            background(255);
+            createBackdrop();
+            displayData();
+        }
+
+        function createBackdrop() {
+            push();
+            // chart
+            stroke(0);
+            line(marginW, midH-8*marginH, marginW, midH+5*marginH);
+            maxBar = dist(marginW, midH-8*marginH, marginW, midH+5*marginH);
+            line(marginW, midH+5*marginH, maxWidth-marginW, midH+5*marginH);
+            // labels
+            textSize(marginW*0.5);
+        }
+
+        function createDropdowns(x, y) {
+            //year dropdown
+            yearDrop = createSelect().id('yearRange');
+            yearDrop.position(x, y);
+            yearDrop.option('Select a year range', -1);
+            for(i = 0; i < yearLabels.length; i++) {
+                yearDrop.option(yearLabels[i]);
+            }
+
+            //profession dropdown
+            profDrop = createSelect().id('prof');
+            profDrop.position(x+170, y);
+            profDrop.option('Select a profession', -1);
+            for(i = 0; i < profLabels.length; i++) {
+                profDrop.option(profLabels[i]);
+            }
+            yearDrop.changed(updateChart);
+            profDrop.changed(updateChart);
+        }
+
+        function updateChart() {
+            profChoice = profDrop.value();
+            yearChoice = yearDrop.value();
+            // console.log(yearChoice, profChoice);
+
+            minYear = yearChoice.split('-')[0];
+            maxYear = yearChoice.split('-')[1];
+            // console.log(minYear, maxYear);
+            profFlags = [];
+            if (profChoice == -1) {
+                profFlags = [...Array(79).keys()];
+            } else {
+                for(i = 0; i < 79; i++) {
+                    if (profChoice == data.getRow(i).getString(profession)) {
+                        profFlags.push(i);
+                    }
+                }
+            }
+            // console.log(profFlags);
+            displayFlags = [];
+            if (yearChoice == -1) {
+                displayFlags = profFlags;
+            } else {
+                for(i = 0; i < profFlags.length; i++) {
+                    // console.log(data.getRow(profFlags[i]));
+                    if (minYear <= data.getRow(profFlags[i]).getString(y) & data.getRow(profFlags[i]).getString(y) <= maxYear) {
+                        displayFlags.push(profFlags[i]);
+                    }
+                }
+            }
+            // console.log(displayFlags);
+            draw();
+        }
+
+        function displayData() {
+            if (yearChoice == -1 | profChoice == -1) {
+                // console.log('early term');
+                return
+            }
+            // console.log(displayFlags);
+            textAlign(CENTER, BOTTOM);
+            noStroke();
+            for (i = 0; i < displayFlags.length; i++) {
+                stat = data.getRow(displayFlags[i]).getString(total);
+                colLength = stat/maxCount * maxBar;
+                // console.log(stat, colLength);
+                fill(221, 181, 80);
+                rect(marginW+marginW*(2*i+1), midH+5*marginH-1, marginW, -1*colLength);
+                fill(0)
+                text(data.getRow(displayFlags[i]).getString(y), marginW+marginW*(2*i+1)+marginW/2, midH+6*marginH);
+                text(stat, marginW+marginW*(2*i+1)+marginW/2, midH+5*marginH-colLength-10);
+            }
+            for (i = 0; i < displayFlags.length; i++) {
+                stat = data.getRow(displayFlags[i]).getString(female);
+                colLength = stat/maxCount * maxBar;
+                // console.log(stat, colLength);
+                fill(55, 120, 184);
+                rect(marginW+marginW*(2*i+1), midH+5*marginH-1, marginW, -1*colLength);
+                fill(0);
+                text(stat, marginW+marginW*(2*i+1)+marginW/2, midH+5*marginH-10);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Canvas for visualization</h1>
+    <div style="height:500px;" id="canvasForHTML"></div>
+</body>
+</html>
