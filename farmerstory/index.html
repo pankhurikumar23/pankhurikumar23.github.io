@@ -7,7 +7,7 @@
     <link rel="canonical" href="https://html5-templates.com/" />
     <title>Farmer Suicide Viz</title>
     <meta name="description" content="Demo for Farmer Suicides Project">
-
+    <!-- COPY ALL CODE BELOW -->
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
     <script>
         const maxCount = 160000;
@@ -24,8 +24,8 @@
         profChoice = -1;
 
         function preload() {
-            data = loadTable('dataset_complete.csv', 'csv', 'header');
-            console.log(data);
+            data = loadTable('farmersuicidedata.csv', 'csv', 'header');
+            // console.log(data);
         }
 
         function setup() {
@@ -44,7 +44,7 @@
             noLoop();
 
             createBackdrop();
-            createDropdowns(marginW, midH-7.5*marginH);
+            createDropdowns(leftLine, midH-7.5*marginH);
         }
 
         function draw() {
@@ -162,10 +162,30 @@
             }
         }
     </script>
+    <!-- COPY UNTIL ABOVE -->
 </head>
 
 <body>
-    <h1>Canvas for visualization</h1>
+    <h1>Farmer Suicide among Women</h1>
+    <!-- ADD LINE BELOW AT CHART LOCATION -->
     <div style="height:500px;" id="canvasForHTML"></div>
+    <!-- ONLY LINE ABOVE -->
+    <p> Data Details: </p>
+    <ol>
+        <li> The visualization here plots (selected) profession-wise suicide data across years. The yellow bars are the totals across all genders for that profession, while the blue bars are the count of the women. Legend will be added.
+        <li> There is a total of 24 years worth of data available: 1997-2020. Data from 1996 is on state-level, so if there is time, I will try to add it, giving us 25 years.
+        <li> I have separated the above into sections of 6 years for better readability.
+        <li> However, years 2014-2020 (7 years) have data for Daily Wage Earners, while the other 17 years do not. Thus, these 7 years have been clubbed together, even though they are more than 6.
+        <li> Consequently, years 2009-2013 have only 5 years clubbed together.
+        <li> The option of 'Daily Wage Earners' shows up for the other years, but no chart is displayed. I am working on greying out this option for the other years.
+    </ol>
+    <p> Code Details: </p>
+    <ol>
+        <li> Please visit <a href="https://github.com/pankhurikumar23/pankhurikumar23.github.io/tree/master/farmerstory">https://github.com/pankhurikumar23/pankhurikumar23.github.io/tree/master/farmerstory</a> for the code
+        <li> The CSV file will need to be stored in the same folder as the story's HTML file.
+        <li> Lines that need to be copied are marked in file 'index.html' - namely, lines 11-164, and line 171.
+        <li> Lines 11-164 can be added in the "head" portion of the HTML, while line 171 will be added to the "body" in HTML code where we want the chart to appear.
+        <li> In line 171, changing the size of the element will allow the size of the chart to change.
+    </ol>
 </body>
 </html>
