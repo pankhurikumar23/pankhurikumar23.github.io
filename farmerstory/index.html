@@ -9,17 +9,19 @@
     <meta name="description" content="Demo for Farmer Suicides Project">
     <!-- COPY ALL CODE BELOW -->
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.js"></script>
     <script>
-        const maxCount = 160000;
-        const profession = 0;
-        const female = 1;
-        const total = 2;
-        const y = 3;
-        profLabels = ['House Wife', 'Farming/Agriculture', 'Daily Wage Earner', 'All Women Suicides', 'All Suicides'];
-        colourLabels = ['#386FC8', '#80A9DE', '#747474', '#E0C500', '#B39D00']; //'#2C2728': black
+        const maxCount = 55000;
+        const y = 0;
+        const hWife = 1;
+        const farmer = 2;
+        const dWage = 3;
+        const allWomen = 4;
+        const allTotal = 5;
+        profLabels = ['House Wife Suicides', 'Women Farming/Agriculture Suicide', 'Women Daily Wage Earner Suicide', 'Total Women Suicides']//, 'All Suicides'];
+        colourLabels = ['#386FC8', '#80A9DE', '#747474', '#E0C500']//, '#B39D00']; //'#2C2728'
         yearLabels = ['1996-2001', '2002-2007', '2008-2013', '2014-2020'];
-        yearChoice = -1;
-        // profChoice = -1;
+        var displayFlags = [];
 
         function preload() {
             data = loadTable('farmersuicidedata.csv', 'csv', 'header');
@@ -31,45 +33,46 @@
             var canvasDiv = document.getElementById('canvasForHTML');
             maxWidth = canvasDiv.offsetWidth;
             maxHeight = canvasDiv.offsetHeight;
-            marginW = maxWidth/20;
-            marginH = maxHeight/20;
             midW = maxWidth/2;
             midH = maxHeight/2;
 
-            bottomLine = midH+4*marginH;
-            leftLine = 1.5*marginW;
-            topLine = midH-8.5*marginH;
-
-            var canvas = createCanvas(maxWidth-20, maxHeight-20);
+            canvas = createCanvas(maxWidth, maxHeight);
             canvas.parent('canvasForHTML');
-            background(255);
             noLoop();
 
-            createBackdrop();
-            createDropdowns(leftLine, topLine+2*marginH);
+            canvasX = (maxWidth - width) / 2;
+            canvasY = (maxHeight - height) / 2;
+            marginW = width/20;
+            marginH = height/20;
+
+            leftLine = 1.5*marginW;
+            rightLine = width-marginW;
+            topLine = marginH;
+            bottomLine = height-5*marginH;
         }
 
         function draw() {
             background(255);
             createBackdrop();
             displayData();
-            // console.log(mouseX, mouseY);
         }
 
         function createBackdrop() {
             push();
             // chart
             stroke(0);
-            line(leftLine, midH-8*marginH, leftLine, bottomLine);
-            maxBar = dist(leftLine, midH-8*marginH, leftLine, bottomLine);
-            line(leftLine, bottomLine, maxWidth-marginW, bottomLine);
-            // labels
-            textSize(marginH*0.75);
+            line(leftLine, topLine, leftLine, bottomLine);
+            maxBar = dist(leftLine, topLine, leftLine, bottomLine);
+            line(leftLine, bottomLine, rightLine, bottomLine);
+
+            chartFontSize = marginW*0.15+marginH*0.15;
+            textSize(chartFontSize);
             // markers
             textAlign(RIGHT, CENTER);
-            fill(0);
-            for (i = 1; i < 16; i++) {
-                line(leftLine-2, bottomLine-i*10000/maxCount*maxBar, leftLine+2, bottomLine-i*10000/maxCount*maxBar);
+            stroke('#949494');
+            for (i = 1; i < 6; i++) {
+                line(leftLine, bottomLine-i*10000/maxCount*maxBar, rightLine, bottomLine-i*10000/maxCount*maxBar);
+                fill(0);
                 text(i*10000, leftLine-5, bottomLine-i*10000/maxCount*maxBar);
             }
             // legend
@@ -77,142 +80,177 @@
             textAlign(LEFT, CENTER);
             for (i = 0; i < colourLabels.length; i++) {
                 fill(colourLabels[i]);
-                rect(marginW, bottomLine+marginH+i*17, 15, 15);
+                rect(marginW/2, bottomLine+1.5*marginH+i*30, 30, 20);
                 fill(0);
-                textSize(marginH*0.5);
-                text(profLabels[i], marginW + 17, bottomLine+marginH+10+i*17);
+                text(profLabels[i], marginW/2+35, bottomLine+1.5*marginH+10+i*30);
             }
         }
 
-        function createDropdowns(x, y) {
-            //year dropdown
-            yearDrop = createSelect().id('yearRange');
-            yearDrop.position(x, y);
-            yearDrop.option('Select a year range', -1);
-            for(i = 0; i < yearLabels.length; i++) {
-                yearDrop.option(yearLabels[i]);
-            }
-            yearDrop.changed(updateChart);
-
-            //profession dropdown
-            // profDrop = createSelect().id('prof');
-            // profDrop.position(x+170, y);
-            // profDrop.option('Select a profession', -1);
-            // for(i = 0; i < profLabels.length; i++) {
-            //     profDrop.option(profLabels[i]);
-            // }
-            // profDrop.changed(updateChart);
-        }
-
-        function updateChart() {
-            // profChoice = profDrop.value();
-            yearChoice = yearDrop.value();
-            // console.log(yearChoice, profChoice);
+        function updateChart(yearChoice) {
+            console.log(yearChoice);
 
             minYear = yearChoice.split('-')[0];
             maxYear = yearChoice.split('-')[1];
-            // console.log(minYear, maxYear);
-            // profFlags = [];
-            // if (profChoice == -1) {
-            //     profFlags = [...Array(82).keys()];
-            // } else {
-            //     for(i = 0; i < 82; i++) {
-            //         if (profChoice == data.getRow(i).getString(profession)) {
-            //             profFlags.push(i);
-            //         }
-            //     }
-            // }
-            // console.log(profFlags);
+            
             displayFlags = [];
-            if (yearChoice == -1) {
-                displayFlags = [...Array(82).keys()];
-            } else {
-                for(i = 0; i < 82; i++) {
-                    // console.log(data.getRow(profFlags[i]));
-                    if (minYear <= data.getRow(i).getString(y) & data.getRow(i).getString(y) <= maxYear) {
-                        displayFlags.push(i);
-                    }
+            for(i = 0; i < 25; i++) {
+                if (minYear <= data.getRow(i).getString(y) & data.getRow(i).getString(y) <= maxYear) {
+                    displayFlags.push(i);
                 }
             }
-            // console.log(displayFlags);
+            
             draw();
         }
 
         function displayData() {
-            if (yearChoice == -1) //| profChoice == -1)
-                return
-            // console.log(displayFlags);
+
             noStroke();
             start = leftLine + marginW;
-            colWidth = (maxWidth-leftLine-3*marginW)/55;
-            
+            colWidth = (width-leftLine-3*marginW)/19;
+
             for (i = 0; i < displayFlags.length; i++) {
-                textAlign(CENTER, BOTTOM);
-                textSize(marginH*0.5);
-                thisRow = data.getRow(displayFlags[i]);
+                currentRow = data.getRow(displayFlags[i]);
+                colX = start+3*i*colWidth;
+                colY = bottomLine-1;
 
-                //draw totals bar
-                stat = thisRow.getString(total);
-                colLength = stat/maxCount * maxBar;
-                // console.log(stat, colLength);
-                if (thisRow.getString(profession) == 'Total') {
-                    fill(colourLabels[4]);
-                } else {
-                    fill(colourLabels[3]);
-                }
-                rect(start+2*i*colWidth, bottomLine-1, colWidth, -1*colLength);
-                fill(0)
-                text(stat, start+(1+4*i)*colWidth/2, bottomLine-colLength-10);
-
-                //draw females bar
-                stat = thisRow.getString(female);
-                colLength = stat/maxCount * maxBar;
-                // console.log(stat, colLength);
-                for (j = 0; j < 4; j++){
-                    if (j == 3) {
-                        fill(colourLabels[3]);
-                        break;
-                    }
-                    if (thisRow.getString(profession) == profLabels[j]) {
-                        fill(colourLabels[j]);
-                        break;
-                    }
-                }
-                rect(start+2*i*colWidth, bottomLine-1, colWidth, -1*colLength);
-                fill(0);
-                if (thisRow.getString(profession) != 'Total')
-                    text(stat, start+(1+4*i)*colWidth/2, bottomLine-5);
-
-                //write year axis
+                // year axis
                 textAlign(CENTER, TOP);
-                text(thisRow.getString(y), start+(1+4*i)*colWidth/2, midH+4.5*marginH);
+                fill(0);
+                text(currentRow.getString(y), colX+colWidth/2, bottomLine+10);
+
+                textAlign(CENTER, BOTTOM);
+                // all women suicides
+                womenStat = currentRow.getString(allWomen);
+                colLength = womenStat/maxCount * maxBar;
+                fill(colourLabels[3]);
+                rect(colX, colY, colWidth, -1*colLength);
+                fill(0);
+                text(womenStat, colX+colWidth/2, colY-colLength-10);
+
+                // house wife
+                stat = currentRow.getString(hWife);
+                colLengthH = stat/maxCount * maxBar;
+                fill(colourLabels[0]);
+                rect(colX, colY, colWidth, -1*colLengthH);
+                fill(0);
+                text(stat, colX+colWidth/2, colY-10);
+
+                // farming/agriculture
+                stat = currentRow.getString(farmer);
+                colLengthF = stat/maxCount * maxBar;
+                colY = colY - colLengthH;
+                fill(colourLabels[1]);
+                rect(colX, colY, colWidth, -1*colLengthF);
+                fill(0);
+                text(stat, colX+colWidth/2, colY+chartFontSize+10);
+
+                if (minYear != 2014) {
+                    continue;
+                }
+                // daily wage earner
+                stat = currentRow.getString(dWage);
+                colLengthD = stat/maxCount * maxBar;
+                colY = colY - colLengthF;
+                fill(colourLabels[2]);
+                rect(colX, colY, colWidth, -1*colLengthD);
+                fill(0);
+                text(stat, colX+colWidth/2, colY-colLengthD-5);
             }
         }
     </script>
     <!-- COPY UNTIL ABOVE -->
 </head>
 
-<body>
-    <h1>Farmer Suicide among Women</h1>
-    <!-- ADD LINE BELOW AT CHART LOCATION -->
-    <div style="height:500px;" id="canvasForHTML"></div>
-    <!-- ONLY LINE ABOVE -->
-    <p> Data Details: </p>
-    <ol>
-        <li> The visualization here plots (selected) profession-wise suicide data across years. The yellow bars are the totals across all genders for that profession, while the blue bars are the count of the women. Legend will be added.
-        <li> There is a total of 25 years worth of data available: 1996-2020. <s>Data from 1996 is on state-level, so if there is time, I will try to add it, giving us 25 years.</s>
-        <li> I have separated the above into sections of 6 years for better readability.
-        <li> However, years 2014-2020 (7 years) have data for Daily Wage Earners, while the other 18 years do not. Thus, these 7 years have been clubbed together.
-        <li><s> Consequently, years 2009-2013 have only 5 years clubbed together.</li></s>
-        <li> The option of 'Daily Wage Earners' shows up for the other years, but no chart is displayed. I am working on greying out this option for the other years.
-    </ol>
-    <p> Code Details: </p>
-    <ol>
-        <li> Please visit <a href="https://github.com/pankhurikumar23/pankhurikumar23.github.io/tree/master/farmerstory">https://github.com/pankhurikumar23/pankhurikumar23.github.io/tree/master/farmerstory</a> for the code
-        <li> The CSV file will need to be stored in the same folder as the story's HTML file.
-        <li> Lines that need to be copied are marked in file 'index.html' - namely, lines 11-164, and line 171.
-        <li> Lines 11-164 can be added in the "head" portion of the HTML, while line 171 will be added to the "body" in HTML code where we want the chart to appear.
-        <li> In line 171, changing the size of the element will allow the size of the chart to change.
-    </ol>
+<body style="font-family:lato,sans-serif;">
+    <style>
+        div {margin:auto; width:60%;line-height: 1.8;}
+        .divText {padding-left:100px; background-color: #AAA;}
+    </style>
+    <div><h2 style="text-align:center;">TK: Title</h2></div>
+    <div>
+        <p>
+            <strong>Nagpur and Yavatmal, Maharashtra:</strong> Orange, blue, red and green. The women sat draped in sarees of various hues. They wore bindis on their forehead, red bangles over their wrists and a mangalsutra around their neck–all markers that indicate their status as married women. These are farm widows whose husbands have died by suicide over the past decade in Maharashtra’s north-eastern Vidarbha region–a cotton producing belt. Some of them attempted to take their own lives but failed. 
+        </p>
+        <p>
+            Alka Ingle, 43, was in her early 20s when she attempted to die by suicide. Already a mother of two young boys, she was fed up of enduring regular beatings by her farmer husband and triggered after a particularly traumatic incident when he inserted a cigarette butt in her eye. For Sarita Vairale, 36, who also attempted to die by suicide, it was the allegation of having an affair with her brother-in-law after her husband died by suicide that acted as the trigger. Her 15-year-old son came to her rescue. 
+        </p>
+        <p>
+            In 2020, 10,677 individuals engaged in the farming sector died by suicide. Of these around a tenth (721) were women, according to the National Crime Records Bureau (NCRB). Overall there were 1,53,052 deaths by suicides in 2020 in India, a 10% rise compared to 2019.
+        </p>
+        <p>
+            In interviews that Article 14 conducted in person in Nagpur and Yavatmal districts of Maharashtra, women farmers provided insight into the reasons that are driving them to the breaking point. While increasing crop failure driven by environmental stressors is a factor, there are others that are specifically linked to their gender and the inability of the system to see women as farmers in their own right as we will explore in detail in this piece.
+        </p>
+        <p>
+            One in every three (36.6%) women who dies by suicide globally is an Indian woman, according to a 2018 Lancet study. The majority of deaths by suicide among Indian women when broken down by professions are registered under the category of “housewives”. While three in every four (75.7%) rural women are engaged in agriculture, according to the 2020 Periodic Labour Force Survey report, most are neither seen as farmers by their communities nor consider themselves as farmers, as earlier stories published with Article 14 have unpacked. Among farmers that own land, only an estimated 14% are women. 
+        </p>
+        <p>
+            “Even in death they are invisibilized and we don’t really see them accounted [for],” said Seema Kulkarni, a member of the national facilitation team of MAKAAM, which is a national coalition of women farmers advocating for women farmers rights. “Because we do not have data on ‘housewives’ in terms of professions and also in terms of the geography–urban or rural–we do not really know the different types of stressors and reasons that may have led to women committing [dying by] suicide,” she said.
+        </p>
+        <p>
+            According to MAKAAM’s research, women farmers, particularly landless labourers, are under intense distress as crops fail due to the changing climate. They fall through the cracks and are disproportionately left off the records, according to Kulkarni. There is also an effort at the local level to not register deaths as ‘farmer suicides’ when poor families or those from vulnerable castes with limited social capital to push back are involved, according to Kulkarni. This, she explained, is an effort to improve a state’s overall numbers and reduce any potential political blowback for the ruling party.
+        </p>
+    </div>
+    <!-- COPY CODE BELOW -->
+    <style>
+        canvas {margin:auto; top:12.5%;}
+        #canvasForHTML {margin:auto; width:60%;height:700px;}
+        #yearRadio {text-align: center;}
+    </style>
+    <div id="yearRadio">
+        <input type="radio" name="yearRadio" id="r1" value="1996-2001" onclick="updateChart(value)"/>
+        <label for="r1">1996-2001</label>
+        <input type="radio" name="yearRadio" id="r2" value="2002-2007" onclick="updateChart(value)"/>
+        <label for="r2">2002-2007</label>
+        <input type="radio" name="yearRadio" id="r3" value="2008-2013" onclick="updateChart(value)"/>
+        <label for="r3">2008-2013</label>
+        <input type="radio" name="yearRadio" id="r4" value="2014-2020" onclick="updateChart(value)"/>
+        <label for="r4">2014-2020</label>
+    </div>
+    <div id="canvasForHTML"></div>
+    <div><h3>TK: Chart Title</h3></div>
+    <!-- ONLY CODE ABOVE -->
+
+    <div class="divText">
+        <p> Code Details: (NOT PART OF ARTICLE)</p>
+        <ol>
+            <li> Please visit <a href="https://github.com/pankhurikumar23/pankhurikumar23.github.io/tree/master/farmerstory">https://github.com/pankhurikumar23/pankhurikumar23.github.io/tree/master/farmerstory</a> for the code </li>
+            <li> The CSV file will need to be stored in the same folder as the story's HTML file. </li>
+            <li> Lines that need to be copied are marked in file 'index.html' - namely, lines 11-160, and lines 194-210. </li>
+            <li> Lines 11-160 can be added in the "head" portion of the HTML, while lines 194-198 can be added to the CSS and 199-210 will be added to the "body" in HTML code where we want the chart to appear. </li>
+        </ol>
+    </div>
+    <div>
+        <p>
+            In addition to financial challenges, widows of male farmers are also blamed for death by suicide of their husbands, sexually harassed by money lenders and are vulnerable to character assasination by the members of their community. Moving around in their communities with obvious signs of matrimony like red bangles and bindis allows them to blend in and protect themselves to some extent.
+        </p>
+        <p>
+            <strong>Domestic violence, sexual harassment and loan recovery agents</strong><br>
+            Sitting in chairs arranged in a semicircle at the office of NGO Prakriti–a women’s resource centre in the outskirts of the central Indian city of Nagpur, women farmers first speak hesitantly and soon speak animatedly over each other when asked about how climate change was affecting their crops. There are stories of how unseasonal and excessive rainfall, pest attacks as well attacks by wild pigs and deer from nearby jungles are affecting the produce.
+        </p>
+        <p>
+            After her husband died by suicide, Vairale was routinely given tur dal by her family to cook from her their produce but not a share of her husband’s property. On much pestering, this year she was allowed to cultivate half an acre of land out of the two acre land the family owns. She planted two crops–moong dal and tur dal. Her moong crop is now rotten due to excessive rainfall. 
+        </p>
+        <p>
+            Women farmers are also uniquely vulnerable in a social set-up where men are decision makers, according to Suvarna Damle, executive director of Prakriti. “When their husbands are alive, mostly all the decisions are taken by the husband or the male members of the family,” she said. Women’s role is restricted to providing the labour. Once her husband dies by suicide or migrates, the woman is baffled and often doesn’t know basics like how much land her husband owned and where, according to Damle.  
+        </p>
+        <p>
+            What complicates this further is that the land is often in the name of the family patriarch so the path to getting her share of the property transferred to her name is riddled with conflict with family members. Without this documentation, getting credit from the market to invest in agriculture is difficult. Women farmers also struggle to sell their produce in the absence of paperwork–with the system failing to respond to their distress at every step.  
+        </p>
+        <p>
+            The changing climate has only made this worse. 
+        </p>
+        <p>
+            Chetna Sinha, founder of Mann Deshi bank, a rural women’s bank whose clients are mainly women farmers, said that for years they have noticed the distress due to climate change. Women are already on the periphery of the farm sector with access to very little cash, so climatic fluctuations that affect crop production or animal husbandry hits their liquidity hard, Sinha said. “She builds her assets and with the uncertainty of the climate, she loses the assets. Then she comes to us.”   
+        </p>
+        <p>
+            That is when women turn to gold mortgages. “If we see our data, we can clearly see that during the drought years our gold mortgages went up,” Sinha shared. To her, this is also an indication of the failure at financial inclusion. “There is no ecosystem for the poor people where in the emergency she will get immediate money.”
+        </p>
+        <p>
+            This lack of financial inclusion makes women farmers particularly vulnerable to harassment from private money lenders and micro financiers who Makaam has documented are also known to ask for sexual favours in return of doing their jobs. 
+        </p>
+        <p>
+            Our interviews with women farmers also found that despite the overwhelming evidence of India’s changing climate and its impact on agriculture, no one from the government has spoken to women farmers about climate change and ways to cope. 
+        </p>
+    </div>
 </body>
 </html>
