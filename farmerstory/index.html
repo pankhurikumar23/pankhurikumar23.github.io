@@ -18,7 +18,7 @@
         const dWage = 3;
         const allWomen = 4;
         const allTotal = 5;
-        profLabels = ['Housewives', 'Farmers/Agricultural Labourers', 'Daily Wage Earners', 'Total Number of Death by Suicide Among Women in India']//, 'All Suicides'];
+        profLabels = ['Housewives', 'Farmers/Agricultural Labourers', 'Daily Wage Earners', 'Other Professions']//, 'All Suicides'];
         colourLabels = ['#80A9DE', '#041B15', '#136F64', '#E0C500']//, '#B39D00']; //'#2C2728' THIS:'#396FC5', '#444',
         yearLabels = ['1996-2001', '2002-2007', '2008-2013', '2014-2020'];
         var displayFlags = [];
@@ -70,12 +70,17 @@
             line(leftLine, topLine, leftLine, bottomLine);
             maxBar = dist(leftLine, topLine, leftLine, bottomLine);
             line(leftLine, bottomLine, rightLine, bottomLine);
+            // year label
+            fill(0);
+            noStroke();
+            textAlign(LEFT, TOP);
+            text("Year", leftLine+5, bottomLine+5);
 
             chartFontSize = marginW*0.15+marginH*0.15;
             textSize(chartFontSize);
             // markers
-            textAlign(RIGHT, CENTER);
             stroke('#949494');
+            textAlign(RIGHT, CENTER);
             numberLabels = ['10,000', '20,000', '30,000', '40,000', '50,000'];
             for (i = 1; i < 6; i++) {
                 line(leftLine, bottomLine-i*10000/maxCount*maxBar, rightLine, bottomLine-i*10000/maxCount*maxBar);
@@ -93,7 +98,7 @@
             }
             // disclaimer
             textStyle(ITALIC);
-            text("*The categories and methodology of classification has changed over the years.", marginW/2, bottomLine+4*marginH);
+            text("*The categories and methodology of classification have changed over the years.", marginW/2, bottomLine+4*marginH);
             textStyle(NORMAL);
         }
 
@@ -127,17 +132,21 @@
                 fill(0);
                 text(currentRow.getString(y), colX+colWidth/2, bottomLine+5);
 
+                // other profession suicides: this stat is actually all women suicides
+                // but shows up as other-professions since below
+                // professions cover up the lower part of the bar
                 textAlign(CENTER, BOTTOM);
-                // all women suicides
                 stat = currentRow.getString(allWomen);
+                other = stat
                 colLength = stat/maxCount * maxBar;
                 fill(colourLabels[3]);
                 rect(colX, colY, colWidth, -1*colLength);
                 fill(0);
-                text(nfc(stat), colX+colWidth/2, colY-colLength+chartFontSize+5);
+                text(nfc(stat), colX+colWidth/2, colY-colLength-10);
 
                 // house wife
                 stat = currentRow.getString(hWife);
+                other = other-stat;
                 colLengthH = stat/maxCount * maxBar;
                 fill(colourLabels[0]);
                 rect(colX, colY, colWidth, -1*colLengthH);
@@ -146,24 +155,37 @@
 
                 // farming/agriculture
                 stat = currentRow.getString(farmer);
+                other = other-stat;
                 colLengthF = stat/maxCount * maxBar;
-                colY = colY - colLengthH;
+                newColY = colY - colLengthH;
                 fill(colourLabels[1]);
-                rect(colX, colY, colWidth, -1*colLengthF);
-                fill(0);
-                text(nfc(stat), colX+colWidth/2, colY+chartFontSize+5);
+                rect(colX, newColY, colWidth, -1*colLengthF);
 
                 if (minYear != 2014) {
+                    textAlign(CENTER, CENTER);
+                    fill(255);
+                    text(nfc(stat), colX+colWidth/2, newColY-colLengthF/2);
+                    fill(0);
+                    textAlign(CENTER, BOTTOM);
+                    text(nfc(other), colX+colWidth/2, colY-colLength+chartFontSize+10);
                     continue;
                 }
+                fill(0);
+                textAlign(CENTER, BOTTOM);
+                text(nfc(stat), colX+colWidth/2, newColY+chartFontSize+5);
+
                 // daily wage earner
                 stat = currentRow.getString(dWage);
+                other = other-stat;
                 colLengthD = stat/maxCount * maxBar;
-                colY = colY - colLengthF;
+                newColY = newColY - colLengthF;
                 fill(colourLabels[2]);
-                rect(colX, colY, colWidth, -1*colLengthD);
+                rect(colX, newColY, colWidth, -1*colLengthD);
                 fill(0);
-                text(nfc(stat), colX+colWidth/2, colY-colLengthD+chartFontSize+3);
+                text(nfc(other), colX+colWidth/2, colY-colLength+chartFontSize+10);
+                fill(255);
+                textAlign(CENTER, CENTER);
+                text(nfc(stat), colX+colWidth/2, newColY-colLengthD/2);
             }
         }
     </script>
@@ -193,8 +215,9 @@
         #canvasForHTML {margin:auto; width:60%;height:700px;}
         #yearRadio {text-align: center;}
     </style>
-    <div><h3>Death by suicides among women in India</h3></div>
+    <div><h3>Death by suicide among women in India</h3></div>
     <div id="yearRadio">
+        <strong>Years: </strong>
         <input type="radio" name="yearRadio" id="r1" value="1996-2001" onclick="updateChart(value)"/>
         <label for="r1">1996-2001</label>
         <input type="radio" name="yearRadio" id="r2" value="2002-2007" onclick="updateChart(value)"/>
@@ -205,7 +228,7 @@
         <label for="r4">2014-2020</label>
     </div>
     <div id="canvasForHTML"></div>
-    <div>Source: National Crime Records Bureau (NCRB data) <a href="https://ncrb.gov.in/en/adsi-reports-of-previous-years">1996-2018</a>, <a href="https://ncrb.gov.in/en/accidental-deaths-suicides-india-2019">2019</a> and <a href="https://ncrb.gov.in/en/ADSI-2020">2020</a>
+    <div>Source: National Crime Records Bureau (NCRB) <a href="https://ncrb.gov.in/en/adsi-reports-of-previous-years">1996-2018</a>, <a href="https://ncrb.gov.in/en/accidental-deaths-suicides-india-2019">2019</a> and <a href="https://ncrb.gov.in/en/ADSI-2020">2020</a>
     <h4>TK: Chart Title</h4></div>
     <!-- ONLY CODE ABOVE -->
 
@@ -214,8 +237,8 @@
         <ol>
             <li> Please visit <a href="https://github.com/pankhurikumar23/pankhurikumar23.github.io/tree/master/farmerstory">https://github.com/pankhurikumar23/pankhurikumar23.github.io/tree/master/farmerstory</a> for the code </li>
             <li> The CSV file will need to be stored in the same folder as the story's HTML file. </li>
-            <li> Lines that need to be copied are marked in file 'index.html' - namely, lines 11-169, and lines 191-209. </li>
-            <li> Lines 11-169 can be added in the "head" portion of the HTML, while lines 191-195 can be added to the CSS and 196-209 will be added to the "body" in HTML code where we want the chart to appear. </li>
+            <li> Lines that need to be copied are marked in file 'index.html' - namely, lines 11-191, and lines 213-232. </li>
+            <li> Lines 11-191 can be added in the "head" portion of the HTML, while lines 213-217 can be added to the CSS and 218-232 will be added to the "body" in HTML code where we want the chart to appear. </li>
         </ol>
     </div>
     <div>
