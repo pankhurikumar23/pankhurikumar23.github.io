@@ -29,41 +29,6 @@
             // console.log(data);
         }
 
-        function setup() {
-            //createCanvas
-            var canvasDiv = document.getElementById('canvasForHTML');
-            maxWidth = canvasDiv.offsetWidth;
-            maxHeight = canvasDiv.offsetHeight;
-            midW = maxWidth/2;
-            midH = maxHeight/2;
-
-            canvas = createCanvas(maxWidth, maxHeight);
-            canvas.parent('canvasForHTML');
-            noLoop();
-
-            canvasX = (maxWidth - width) / 2;
-            canvasY = (maxHeight - height) / 2;
-            marginW = width/20;
-            marginH = height/20;
-
-            leftLine = 2*marginW;
-            rightLine = width-marginW;
-            topLine = marginH;
-            bottomLine = height-5*marginH;
-
-            document.getElementById('r1').checked = false;
-            document.getElementById('r2').checked = false;
-            document.getElementById('r3').checked = false;
-            document.getElementById('r4').checked = true;
-            updateChart("2014-2020");
-        }
-
-        function draw() {
-            background(255);
-            createBackdrop();
-            displayData();
-        }
-
         function createBackdrop() {
             push();
             // chart
@@ -103,22 +68,9 @@
             noStroke();
         }
 
-        function updateChart(yearChoice) {
-            minYear = yearChoice.split('-')[0];
-            maxYear = yearChoice.split('-')[1];
-            
-            displayFlags = [];
-            for(i = 0; i < 25; i++) {
-                if (minYear <= data.getRow(i).getString(y) & data.getRow(i).getString(y) <= maxYear) {
-                    displayFlags.push(i);
-                }
-            }
-            
-            draw();
-        }
-
         function displayData() {
-
+            colXSet = [];
+            colYSet = [];
             noStroke();
             start = leftLine + marginW;
             colWidth = (width-leftLine-3*marginW)/19;
@@ -127,6 +79,7 @@
             for (i = 0; i < displayFlags.length; i++) {
                 currentRow = data.getRow(displayFlags[i]);
                 colX = start+3*i*colWidth;
+                colXSet.push([colX, colX+colWidth]);
                 colY = bottomLine-1;
 
                 // year axis
@@ -169,9 +122,9 @@
                     textAlign(CENTER, CENTER);
                     fill(labelColour);
                     text(nfc(stat), colX+colWidth/2, newColY-colLengthF/2);
-                    // fill(0);
                     textAlign(CENTER, BOTTOM);
                     text(nfc(other), colX+colWidth/2, colY-colLength+chartFontSize+10);
+                    colYSet.push([colY, newColY, newColY-colLengthF, newColY-colLengthF, colY-colLength]);
                     continue;
                 }
                 fill(labelColour);
@@ -190,7 +143,72 @@
                 // fill(255);
                 textAlign(CENTER, CENTER);
                 text(nfc(stat), colX+colWidth/2, newColY-colLengthD/2);
+                colYSet.push([colY, newColY+colLengthF, newColY, newColY-colLengthD, colY-colLength]);
             }
+        }
+
+        function checkBubble() {
+            for (i = 0; i < colXSet.length; i++) {
+                if (colXSet[i][0] < mouseX & mouseX < colXSet[i][1]) {  
+                    for (j = 0; j < colYSet[i].length-1; j++) {
+                        if (colYSet[i][j] > mouseY & mouseY > colYSet[i][j+1]) {
+                            fill(0);
+                            // textAlign(LEFT);
+                            text(profLabels[j], mouseX, mouseY - 15);
+                        }
+                    }
+                }
+            }
+        }
+
+        function draw() {
+            background(255);
+            createBackdrop();
+            displayData();
+            checkBubble();
+        }
+
+        function updateChart(yearChoice) {
+            minYear = yearChoice.split('-')[0];
+            maxYear = yearChoice.split('-')[1];
+            
+            displayFlags = [];
+            for(i = 0; i < 25; i++) {
+                if (minYear <= data.getRow(i).getString(y) & data.getRow(i).getString(y) <= maxYear) {
+                    displayFlags.push(i);
+                }
+            }
+            
+            draw();
+        }
+
+        function setup() {
+            //createCanvas
+            var canvasDiv = document.getElementById('canvasForHTML');
+            maxWidth = canvasDiv.offsetWidth;
+            maxHeight = canvasDiv.offsetHeight;
+            midW = maxWidth/2;
+            midH = maxHeight/2;
+
+            canvas = createCanvas(maxWidth, maxHeight);
+            canvas.parent('canvasForHTML');
+            // noLoop();
+
+            canvasX = (maxWidth - width) / 2;
+            canvasY = (maxHeight - height) / 2;
+            marginW = width/20;
+            marginH = height/20;
+
+            leftLine = 2*marginW;
+            rightLine = width-marginW;
+            topLine = marginH;
+            bottomLine = height-5*marginH;
+
+            document.getElementById('r1').checked = false;
+            document.getElementById('r2').checked = false;
+            document.getElementById('r3').checked = false;
+            document.getElementById('r4').checked = true;
+            updateChart("2014-2020");
         }
     </script>
     <!-- COPY UNTIL ABOVE /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
@@ -221,8 +239,8 @@
         <ol>
             <li> Code can be found <a href="https://github.com/pankhurikumar23/pankhurikumar23.github.io/tree/master/farmerstory">here.</a></li>
             <li> The CSV file will need to be stored in the same folder as the story's HTML file. </li>
-            <li> Lines that need to be copied are marked in file 'index.html' - namely, lines 11-195, and lines 229-249. </li>
-            <li> Lines 11-195 can be added in the "head" portion of the HTML, while lines 229-234 can be added to the CSS and 235-249 will be added to the "body" in HTML code where we want the chart to appear. </li>
+            <li> Lines that need to be copied are marked in file 'index.html' - namely, lines 11-213, and lines 247-267. </li>
+            <li> Lines 11-213 can be added in the "head" portion of the HTML, while lines 247-252 can be added to the CSS and 253-267 will be added to the "body" in HTML code where we want the chart to appear. </li>
         </ol>
     </div>
     <!-- COPY CODE BELOW /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
