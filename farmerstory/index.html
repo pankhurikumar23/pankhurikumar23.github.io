@@ -198,7 +198,13 @@
 
 <body style="font-family:lato,sans-serif;font-weight:400;font-size:1.1em;">
     <style>
-        div {margin:auto; width:50%;line-height: 2;}
+        @media only screen and (max-width: 960px) {
+            div {width:95%;}
+        }
+        @media only screen and (min-width: 960px) {
+            div {width:50%;}
+        }
+        div {margin:auto; line-height: 2;}
         .divText {padding-left:100px; background-color: #AAA;}
     </style>
     <div><h2 style="text-align:center;">Demo</h2></div>
@@ -216,7 +222,7 @@
     <!-- COPY CODE BELOW -->
     <style>
         canvas {margin:auto; top:12.5%;}
-        #canvasForHTML {margin:auto; width:60%;height:700px;}
+        #canvasForHTML {margin:auto; height:700px;}
         #yearRadio {text-align: center;}
     </style>
     <div><h3>Death by suicide among women in India</h3></div>
