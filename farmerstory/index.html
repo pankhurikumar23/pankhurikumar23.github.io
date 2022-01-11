@@ -36,14 +36,15 @@
             line(leftLine, topLine, leftLine, bottomLine);
             maxBar = dist(leftLine, topLine, leftLine, bottomLine);
             line(leftLine, bottomLine, rightLine, bottomLine);
+
+            textStyle(BOLD);
+            chartFontSize = marginW*0.15+marginH*0.15;
+            textSize(chartFontSize);
             // year label
             fill(0);
             noStroke();
             textAlign(LEFT, TOP);
             text("Year", leftLine+5, bottomLine+5);
-
-            chartFontSize = marginW*0.15+marginH*0.15;
-            textSize(chartFontSize);
             // markers
             stroke('#949494');
             textAlign(RIGHT, CENTER);
@@ -56,15 +57,22 @@
             // legend
             noStroke();
             textAlign(LEFT, CENTER);
+            textLabelX = midW-45-textWidth(profLabels[1]);
+            count = 0
             for (i = 0; i < colourLabels.length; i++) {
+                if (i == 2) {
+                    textLabelX = textLabelX + textWidth(profLabels[1]) + 45;
+                    count = 0;
+                }
                 fill(colourLabels[i]);
-                rect(leftLine, bottomLine+1.25*marginH+i*30, 30, 20);
+                rect(textLabelX, bottomLine+1.25*marginH+count*30, 30, 20);
                 fill(0);
-                text(profLabels[i], leftLine+35, bottomLine+1.25*marginH+10+i*30);
+                text(profLabels[i], textLabelX+35, bottomLine+1.25*marginH+12+count*30);
+                count += 1;
             }
             // end line
             stroke('#AAA');
-            line(marginW, bottomLine+4.75*marginH, rightLine+marginH, bottomLine+4.75*marginH);
+            line(marginW, bottomLine+1.25*marginH+60, rightLine+marginH, bottomLine+1.25*marginH+60);
             noStroke();
         }
 
@@ -84,8 +92,10 @@
 
                 // year axis
                 textAlign(CENTER, TOP);
+                textStyle(BOLD);
                 fill(0);
                 text(currentRow.getString(y), colX+colWidth/2, bottomLine+5);
+                textStyle(NORMAL);
 
                 // other profession suicides: this stat is actually all women suicides
                 // but shows up as other-professions since below
@@ -192,7 +202,6 @@
 
             canvas = createCanvas(maxWidth, maxHeight);
             canvas.parent('canvasForHTML');
-            // noLoop();
 
             canvasX = (maxWidth - width) / 2;
             canvasY = (maxHeight - height) / 2;
@@ -202,7 +211,7 @@
             leftLine = 2*marginW;
             rightLine = width-marginW;
             topLine = marginH;
-            bottomLine = height-5*marginH;
+            bottomLine = height-1.25*marginH-65;
 
             document.getElementById('r1').checked = false;
             document.getElementById('r2').checked = false;
@@ -239,8 +248,8 @@
         <ol>
             <li> Code can be found <a href="https://github.com/pankhurikumar23/pankhurikumar23.github.io/tree/master/farmerstory">here.</a></li>
             <li> The CSV file will need to be stored in the same folder as the story's HTML file. </li>
-            <li> Lines that need to be copied are marked in file 'index.html' - namely, lines 11-213, and lines 247-267. </li>
-            <li> Lines 11-213 can be added in the "head" portion of the HTML, while lines 247-252 can be added to the CSS and 253-267 will be added to the "body" in HTML code where we want the chart to appear. </li>
+            <li> Lines that need to be copied are marked in file 'index.html' - namely, lines 11-222, and lines 256-276. </li>
+            <li> Lines 11-222 can be added in the "head" portion of the HTML, while lines 256-261 can be added to the CSS and 262-276 will be added to the "body" in HTML code where we want the chart to appear. </li>
         </ol>
     </div>
     <!-- COPY CODE BELOW /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
