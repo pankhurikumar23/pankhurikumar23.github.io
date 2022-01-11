@@ -93,14 +93,14 @@
             textAlign(LEFT, CENTER);
             for (i = 0; i < colourLabels.length; i++) {
                 fill(colourLabels[i]);
-                rect(leftLine, bottomLine+1.5*marginH+i*30, 30, 20);
+                rect(leftLine, bottomLine+1.25*marginH+i*30, 30, 20);
                 fill(0);
-                text(profLabels[i], leftLine+35, bottomLine+1.5*marginH+10+i*30);
+                text(profLabels[i], leftLine+35, bottomLine+1.25*marginH+10+i*30);
             }
-            // disclaimer
-            textStyle(ITALIC);
-            // text("*The categories and methodology of classification have changed over the years.", marginW/2, bottomLine+4*marginH);
-            textStyle(NORMAL);
+            // end line
+            stroke('#AAA');
+            line(marginW, bottomLine+4.75*marginH, rightLine+marginH, bottomLine+4.75*marginH);
+            noStroke();
         }
 
         function updateChart(yearChoice) {
@@ -216,11 +216,21 @@
             Orange, blue, red and green. The women sat draped in sarees of various hues. They wore bindis on their forehead, red bangles over their wrists and a mangalsutra around their neck–all markers that indicate their status as married women. These are farm widows whose husbands have died by suicide over the past decade in Maharashtra’s north-eastern Vidarbha region–a cotton producing belt. Some of them attempted to take their own lives but failed. 
         </p>
     </div>
+    <div class="divText">
+        <p> Instructions for code: (NOT PART OF ARTICLE)</p>
+        <ol>
+            <li> Please visit <a href="https://github.com/pankhurikumar23/pankhurikumar23.github.io/tree/master/farmerstory">https://github.com/pankhurikumar23/pankhurikumar23.github.io/tree/master/farmerstory</a> for the code </li>
+            <li> The CSV file will need to be stored in the same folder as the story's HTML file. </li>
+            <li> Lines that need to be copied are marked in file 'index.html' - namely, lines 11-195, and lines 229-249. </li>
+            <li> Lines 11-195 can be added in the "head" portion of the HTML, while lines 229-234 can be added to the CSS and 235-249 will be added to the "body" in HTML code where we want the chart to appear. </li>
+        </ol>
+    </div>
     <!-- COPY CODE BELOW /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
     <style>
         canvas {margin:auto; top:12.5%;}
         #canvasForHTML {margin:auto; height:700px;}
         #yearRadio {text-align: center;}
+        #notes {padding-left:5%; font-size: 0.8em; color: #222; line-height: 1.2em;}
     </style>
     <div><h3>Death by suicide among women in India</h3></div>
     <div id="yearRadio">
@@ -235,19 +245,9 @@
         <label for="r4">2014-2020</label>
     </div>
     <div id="canvasForHTML"></div>
-    <div>Source: National Crime Records Bureau (NCRB) <a href="https://ncrb.gov.in/en/adsi-reports-of-previous-years">1996-2018</a>, <a href="https://ncrb.gov.in/en/accidental-deaths-suicides-india-2019">2019</a> and <a href="https://ncrb.gov.in/en/ADSI-2020">2020</a><br>
-    <i>*The categories and methodology of classification have changed over the years.</i></div>
-    <!-- ONLY CODE ABOVE /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-
-    <div class="divText">
-        <p> Instructions for code: (NOT PART OF ARTICLE)</p>
-        <ol>
-            <li> Please visit <a href="https://github.com/pankhurikumar23/pankhurikumar23.github.io/tree/master/farmerstory">https://github.com/pankhurikumar23/pankhurikumar23.github.io/tree/master/farmerstory</a> for the code </li>
-            <li> The CSV file will need to be stored in the same folder as the story's HTML file. </li>
-            <li> Lines that need to be copied are marked in file 'index.html' - namely, lines 11-195, and lines 220-239. </li>
-            <li> Lines 11-195 can be added in the "head" portion of the HTML, while lines 220-224 can be added to the CSS and 225-239 will be added to the "body" in HTML code where we want the chart to appear. </li>
-        </ol>
+    <div id="notes">Source: National Crime Records Bureau (NCRB) <a href="https://ncrb.gov.in/en/adsi-reports-of-previous-years">1996-2018</a>, <a href="https://ncrb.gov.in/en/accidental-deaths-suicides-india-2019">2019</a> and <a href="https://ncrb.gov.in/en/ADSI-2020">2020</a><br><i>*The categories and methodology of classification have changed over the years.</i><br>Data collection and visualization by Pankhuri Kumar.
     </div>
+    <!-- ONLY CODE ABOVE /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
     <div>
         <p>
             Orange, blue, red and green. The women sat draped in sarees of various hues. They wore bindis on their forehead, red bangles over their wrists and a mangalsutra around their neck–all markers that indicate their status as married women. These are farm widows whose husbands have died by suicide over the past decade in Maharashtra’s north-eastern Vidarbha region–a cotton producing belt. Some of them attempted to take their own lives but failed. 
