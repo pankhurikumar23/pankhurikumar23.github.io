@@ -18,8 +18,8 @@
         const dWage = 3;
         const allWomen = 4;
         const allTotal = 5;
-        profLabels = ['House Wife Suicides', 'Women Farming/Agriculture Suicide', 'Women Daily Wage Earner Suicide', 'Total Women Suicides']//, 'All Suicides'];
-        colourLabels = ['#80A9DE', '#386FC8', '#747474', '#E0C500']//, '#B39D00']; //'#2C2728'
+        profLabels = ['Housewives', 'Farmers/Agricultural Labourers', 'Daily Wage Earners', 'Total number of Death by Suicide among Women in India']//, 'All Suicides'];
+        colourLabels = ['#80A9DE', '#041B15', '#136F64', '#E0C500']//, '#B39D00']; //'#2C2728' THIS:'#396FC5', '#444',
         yearLabels = ['1996-2001', '2002-2007', '2008-2013', '2014-2020'];
         var displayFlags = [];
 
@@ -49,6 +49,8 @@
             rightLine = width-marginW;
             topLine = marginH;
             bottomLine = height-5*marginH;
+
+            updateChart("2014-2020");
         }
 
         function draw() {
@@ -70,25 +72,28 @@
             // markers
             textAlign(RIGHT, CENTER);
             stroke('#949494');
+            numberLabels = ['10,000', '20,000', '30,000', '40,000', '50,000'];
             for (i = 1; i < 6; i++) {
                 line(leftLine, bottomLine-i*10000/maxCount*maxBar, rightLine, bottomLine-i*10000/maxCount*maxBar);
                 fill(0);
-                text(i*10000, leftLine-5, bottomLine-i*10000/maxCount*maxBar);
+                text(numberLabels[i-1], leftLine-5, bottomLine-i*10000/maxCount*maxBar);
             }
             // legend
             noStroke();
             textAlign(LEFT, CENTER);
             for (i = 0; i < colourLabels.length; i++) {
                 fill(colourLabels[i]);
-                rect(marginW/2, bottomLine+1.5*marginH+i*30, 30, 20);
+                rect(marginW/2, bottomLine+0.75*marginH+i*25, 30, 15);
                 fill(0);
-                text(profLabels[i], marginW/2+35, bottomLine+1.5*marginH+10+i*30);
+                text(profLabels[i], marginW/2+35, bottomLine+0.75*marginH+10+i*25);
             }
+            // disclaimer
+            textStyle(ITALIC);
+            text("*The categories and methodology of classification has changed since 2014.", marginW/2, bottomLine+4*marginH);
+            textStyle(NORMAL);
         }
 
         function updateChart(yearChoice) {
-            console.log(yearChoice);
-
             minYear = yearChoice.split('-')[0];
             maxYear = yearChoice.split('-')[1];
             
@@ -116,16 +121,16 @@
                 // year axis
                 textAlign(CENTER, TOP);
                 fill(0);
-                text(currentRow.getString(y), colX+colWidth/2, bottomLine+10);
+                text(currentRow.getString(y), colX+colWidth/2, bottomLine+5);
 
                 textAlign(CENTER, BOTTOM);
                 // all women suicides
-                womenStat = currentRow.getString(allWomen);
-                colLength = womenStat/maxCount * maxBar;
+                stat = currentRow.getString(allWomen);
+                colLength = stat/maxCount * maxBar;
                 fill(colourLabels[3]);
                 rect(colX, colY, colWidth, -1*colLength);
                 fill(0);
-                text(womenStat, colX+colWidth/2, colY-colLength-10);
+                text(nfc(stat), colX+colWidth/2, colY-colLength+chartFontSize+5);
 
                 // house wife
                 stat = currentRow.getString(hWife);
@@ -133,7 +138,7 @@
                 fill(colourLabels[0]);
                 rect(colX, colY, colWidth, -1*colLengthH);
                 fill(0);
-                text(stat, colX+colWidth/2, colY-10);
+                text(nfc(stat), colX+colWidth/2, colY-10);
 
                 // farming/agriculture
                 stat = currentRow.getString(farmer);
@@ -142,7 +147,7 @@
                 fill(colourLabels[1]);
                 rect(colX, colY, colWidth, -1*colLengthF);
                 fill(0);
-                text(stat, colX+colWidth/2, colY+chartFontSize+10);
+                text(nfc(stat), colX+colWidth/2, colY+chartFontSize+5);
 
                 if (minYear != 2014) {
                     continue;
@@ -154,16 +159,16 @@
                 fill(colourLabels[2]);
                 rect(colX, colY, colWidth, -1*colLengthD);
                 fill(0);
-                text(stat, colX+colWidth/2, colY-colLengthD-5);
+                text(nfc(stat), colX+colWidth/2, colY-colLengthD+chartFontSize+3);
             }
         }
     </script>
     <!-- COPY UNTIL ABOVE -->
 </head>
 
-<body style="font-family:lato,sans-serif;">
+<body style="font-family:lato,sans-serif;font-weight:400;font-size:1.1em;">
     <style>
-        div {margin:auto; width:60%;line-height: 1.8;}
+        div {margin:auto; width:50%;line-height: 2;}
         .divText {padding-left:100px; background-color: #AAA;}
     </style>
     <div><h2 style="text-align:center;">TK: Title</h2></div>
@@ -196,6 +201,7 @@
         #canvasForHTML {margin:auto; width:60%;height:700px;}
         #yearRadio {text-align: center;}
     </style>
+    <div><h3>Death by suicides among women in India</h3></div>
     <div id="yearRadio">
         <input type="radio" name="yearRadio" id="r1" value="1996-2001" onclick="updateChart(value)"/>
         <label for="r1">1996-2001</label>
@@ -203,10 +209,11 @@
         <label for="r2">2002-2007</label>
         <input type="radio" name="yearRadio" id="r3" value="2008-2013" onclick="updateChart(value)"/>
         <label for="r3">2008-2013</label>
-        <input type="radio" name="yearRadio" id="r4" value="2014-2020" onclick="updateChart(value)"/>
-        <label for="r4">2014-2020</label>
+        <input type="radio" name="yearRadio" id="r4" value="2014-2020" checked="checked" onclick="updateChart(value)"/>
+        <label for="r4">2014-2020*</label>
     </div>
     <div id="canvasForHTML"></div>
+    <div>Source: National Crime Records Bureau (NCRB data) <a href="https://ncrb.gov.in/en/adsi-reports-of-previous-years">1996-2018</a>, <a href="https://ncrb.gov.in/en/accidental-deaths-suicides-india-2019">2019</a> and <a href="https://ncrb.gov.in/en/ADSI-2020">2020</a></div>
     <div><h3>TK: Chart Title</h3></div>
     <!-- ONLY CODE ABOVE -->
 
