@@ -1,0 +1,610 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=yes, minimum-scale=1, maximum-scale=1">
+
+    <title> Climate Change Makes The Hard Life Of India’s Invisible Women Farmers Harder  &mdash; Article 14</title>
+    <meta name="description" content="Suicide&nbsp;is a serious public health problem; however,&nbsp;suicides&nbsp;are&nbsp;preventable with timely, evidence-based and often low-cost intervent[...]">
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@Article14live" />
+    <meta name="twitter:creator" content="@Article14live" />
+
+    <meta property="og:title" content=" Climate Change Makes The Hard Life Of India’s Invisible Women Farmers Harder  &mdash; Article 14">
+    <meta property="og:description" content="Suicide&nbsp;is a serious public health problem; however,&nbsp;suicides&nbsp;are&nbsp;preventable with timely, evidence-based and often low-cost intervent[...]">
+    <meta property="og:image" content="https://article-14.com/uploads/2022/01-January/26-Wed/md/IMG_20211223_121312.jpg">
+
+    <link rel="icon" type="image/png" href="/theme/assets/img/favicon.png">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://use.typekit.net/avg7bik.css">
+    <!-- START: Styles -->
+    <!-- Swiper -->
+    <link rel="stylesheet" href="/theme/assets/themebau/assets/vendor/swiper/dist/css/swiper.min.css" />
+    <!-- Fancybox -->
+    <link rel="stylesheet" href="/theme/assets/themebau/assets/vendor/fancybox/dist/jquery.fancybox.min.css" />
+    <!-- Themebau -->
+    <link rel="stylesheet" href="/theme/assets/themebau/assets/css/themebau.min.css">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/theme/assets/themebau/assets/css/custom.css">
+    <link href="/vendor/wildfire/admin/plugins/fontawesome/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.9/plyr.css" />
+
+    <link href="/theme/assets/css/custom.css" rel="stylesheet">
+    <!-- END: Styles -->
+
+    <!-- jQuery -->
+    <script src="/theme/assets/themebau/assets/vendor/jquery/dist/jquery.min.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-164575929-2"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-164575929-2');
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.js"></script>
+    <script>
+    const maxCount = 55000;
+    const y = 0;
+    const hWife = 1;
+    const farmer = 2;
+    const dWage = 3;
+    const allWomen = 4;
+    const allTotal = 5;
+    profLabels = ['Housewives', 'Farmers/Agricultural Labourers', 'Daily Wage Earners', 'Other Professions']
+    // colourLabels = ['#80A9DE', '#F7C88B', '#B3ACA2', '#E0C500'] // pastel set
+    colourLabels = ['#2E829E', '#EF3E36', '#8F4F13', '#D6C3C9'] // dull: #F0A202, orange: #FFB100, purple: #D6C3C9
+    yearLabels = ['1996-2001', '2002-2007', '2008-2013', '2014-2020'];
+    var displayFlags = [];
+
+    function preload() {
+        data = loadTable('farmersuicidedata.csv', 'csv', 'header');
+        // console.log(data);
+    }
+
+    function createBackdrop() {
+        push();
+        // chart
+        stroke(0);
+        line(leftLine, topLine, leftLine, bottomLine);
+        maxBar = dist(leftLine, topLine, leftLine, bottomLine);
+        line(leftLine, bottomLine, rightLine, bottomLine);
+
+        textStyle(BOLD);
+        chartFontSize = marginW * 0.15 + marginH * 0.15;
+        textSize(chartFontSize);
+        // year label
+        fill(0);
+        noStroke();
+        textAlign(RIGHT, TOP);
+        text("Year", leftLine + 5, bottomLine + 5);
+        // markers
+        stroke('#949494');
+        textAlign(RIGHT, CENTER);
+        numberLabels = ['10,000', '20,000', '30,000', '40,000', '50,000'];
+        for (i = 1; i < 6; i++) {
+            line(leftLine, bottomLine - i * 10000 / maxCount * maxBar, rightLine, bottomLine - i * 10000 / maxCount *
+                maxBar);
+            fill(0);
+            text(numberLabels[i - 1], leftLine - 5, bottomLine - i * 10000 / maxCount * maxBar);
+        }
+        // legend
+        noStroke();
+        textAlign(LEFT, CENTER);
+        textLabelX = midW - 45 - textWidth(profLabels[1]);
+        count = 0
+        for (i = 0; i < colourLabels.length; i++) {
+            if (i == 2) {
+                textLabelX = textLabelX + textWidth(profLabels[1]) + 45;
+                count = 0;
+            }
+            fill(colourLabels[i]);
+            rect(textLabelX, bottomLine + 1.25 * marginH + count * 30, 30, 20);
+            fill(0);
+            text(profLabels[i], textLabelX + 35, bottomLine + 1.25 * marginH + 12 + count * 30);
+            count += 1;
+        }
+        // end line
+        stroke('#AAA');
+        line(marginW, bottomLine + 1.25 * marginH + 60, rightLine + marginH, bottomLine + 1.25 * marginH + 60);
+        noStroke();
+    }
+
+    function displayData() {
+        colXSet = [];
+        colYSet = [];
+        noStroke();
+        start = leftLine + marginW;
+        colWidth = (width - leftLine - 3 * marginW) / 19;
+        labelColour = 0;
+
+        for (i = 0; i < displayFlags.length; i++) {
+            currentRow = data.getRow(displayFlags[i]);
+            colX = start + 3 * i * colWidth;
+            colXSet.push([colX, colX + colWidth]);
+            colY = bottomLine - 1;
+
+            // year axis
+            textAlign(CENTER, TOP);
+            textStyle(BOLD);
+            fill(0);
+            text(currentRow.getString(y), colX + colWidth / 2, bottomLine + 5);
+            textStyle(NORMAL);
+
+            // other profession suicides: this stat is actually all women suicides
+            // but shows up as other-professions since below
+            // professions cover up the lower part of the bar
+            textAlign(CENTER, BOTTOM);
+            stat = currentRow.getString(allWomen);
+            other = stat
+            colLength = stat / maxCount * maxBar;
+            fill(colourLabels[3]);
+            rect(colX, colY, colWidth, -1 * colLength);
+            fill(0);
+            textStyle(BOLD);
+            text(nfc(stat), colX + colWidth / 2, colY - colLength - 10);
+            textStyle(NORMAL);
+
+            // house wife
+            stat = currentRow.getString(hWife);
+            other = other - stat;
+            colLengthH = stat / maxCount * maxBar;
+            fill(colourLabels[0]);
+            rect(colX, colY, colWidth, -1 * colLengthH);
+            fill(labelColour);
+            text(nfc(stat), colX + colWidth / 2, colY - 10);
+
+            // farming/agriculture
+            stat = currentRow.getString(farmer);
+            other = other - stat;
+            colLengthF = stat / maxCount * maxBar;
+            newColY = colY - colLengthH;
+            fill(colourLabels[1]);
+            rect(colX, newColY, colWidth, -1 * colLengthF);
+
+            if (minYear != 2014) {
+                textAlign(CENTER, CENTER);
+                fill(labelColour);
+                text(nfc(stat), colX + colWidth / 2, newColY - colLengthF / 2);
+                textAlign(CENTER, BOTTOM);
+                text(nfc(other), colX + colWidth / 2, colY - colLength + chartFontSize + 10);
+                colYSet.push([colY, newColY, newColY - colLengthF, newColY - colLengthF, colY - colLength]);
+                continue;
+            }
+            fill(labelColour);
+            textAlign(CENTER, BOTTOM);
+            text(nfc(stat), colX + colWidth / 2, newColY + chartFontSize + 5);
+
+            // daily wage earner
+            stat = currentRow.getString(dWage);
+            other = other - stat;
+            colLengthD = stat / maxCount * maxBar;
+            newColY = newColY - colLengthF;
+            fill(colourLabels[2]);
+            rect(colX, newColY, colWidth, -1 * colLengthD);
+            fill(labelColour);
+            text(nfc(other), colX + colWidth / 2, colY - colLength + chartFontSize + 10);
+            // fill(255);
+            textAlign(CENTER, CENTER);
+            text(nfc(stat), colX + colWidth / 2, newColY - colLengthD / 2);
+            colYSet.push([colY, newColY + colLengthF, newColY, newColY - colLengthD, colY - colLength]);
+        }
+    }
+
+    function checkBubble() {
+        for (i = 0; i < colXSet.length; i++) {
+            if (colXSet[i][0] < mouseX & mouseX < colXSet[i][1]) {
+                for (j = 0; j < colYSet[i].length - 1; j++) {
+                    if (colYSet[i][j] > mouseY & mouseY > colYSet[i][j + 1]) {
+                        fill(0);
+                        // textAlign(LEFT);
+                        text(profLabels[j], mouseX, mouseY - 15);
+                    }
+                }
+            }
+        }
+    }
+
+    function draw() {
+        background(255);
+        createBackdrop();
+        displayData();
+        checkBubble();
+    }
+
+    function updateChart(yearChoice) {
+        minYear = yearChoice.split('-')[0];
+        maxYear = yearChoice.split('-')[1];
+
+        displayFlags = [];
+        for (i = 0; i < 25; i++) {
+            if (minYear <= data.getRow(i).getString(y) & data.getRow(i).getString(y) <= maxYear) {
+                displayFlags.push(i);
+            }
+        }
+
+        draw();
+    }
+
+    function setup() {
+        //createCanvas
+        var canvasDiv = document.getElementById('canvasForHTML');
+        maxWidth = canvasDiv.offsetWidth;
+        maxHeight = canvasDiv.offsetHeight;
+        midW = maxWidth / 2;
+        midH = maxHeight / 2;
+
+        canvas = createCanvas(maxWidth, maxHeight);
+        canvas.parent('canvasForHTML');
+
+        canvasX = (maxWidth - width) / 2;
+        canvasY = (maxHeight - height) / 2;
+        marginW = width / 20;
+        marginH = height / 20;
+
+        leftLine = 2 * marginW;
+        rightLine = width - marginW;
+        topLine = marginH;
+        bottomLine = height - 1.25 * marginH - 65;
+
+        document.getElementById('r1').checked = false;
+        document.getElementById('r2').checked = false;
+        document.getElementById('r3').checked = false;
+        document.getElementById('r4').checked = true;
+        updateChart("2014-2020");
+    }
+    </script>
+
+</head>
+
+<body>
+    
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes, minimum-scale=1, maximum-scale=1">
+
+        <title> Climate Change Makes The Hard Life Of India’s Invisible Women Farmers Harder  &mdash; Article 14</title>
+        <meta name="description" content="Suicide&nbsp;is a serious public health problem; however,&nbsp;suicides&nbsp;are&nbsp;preventable with timely, evidence-based and often low-cost intervent[...]">
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@Article14live" />
+        <meta name="twitter:creator" content="@Article14live" />
+
+        <meta property="og:title" content=" Climate Change Makes The Hard Life Of India’s Invisible Women Farmers Harder  &mdash; Article 14">
+        <meta property="og:description" content="Suicide&nbsp;is a serious public health problem; however,&nbsp;suicides&nbsp;are&nbsp;preventable with timely, evidence-based and often low-cost intervent[...]">
+        <meta property="og:image" content="https://article-14.com/uploads/2022/01-January/26-Wed/md/IMG_20211223_121312.jpg">
+
+        <link rel="icon" type="image/png" href="/theme/assets/img/favicon.png">
+        <!-- Google Fonts -->
+        <link rel="stylesheet" href="https://use.typekit.net/avg7bik.css">
+        <!-- START: Styles -->
+        <!-- Swiper -->
+        <link rel="stylesheet" href="/theme/assets/themebau/assets/vendor/swiper/dist/css/swiper.min.css" />
+        <!-- Fancybox -->
+        <link rel="stylesheet" href="/theme/assets/themebau/assets/vendor/fancybox/dist/jquery.fancybox.min.css" />
+        <!-- Themebau -->
+        <link rel="stylesheet" href="/theme/assets/themebau/assets/css/themebau.min.css">
+        <!-- Custom Styles -->
+        <link rel="stylesheet" href="/theme/assets/themebau/assets/css/custom.css">
+        <link href="/vendor/wildfire/admin/plugins/fontawesome/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+        <link rel="stylesheet" href="https://cdn.plyr.io/3.6.9/plyr.css" />
+
+        <link href="/theme/assets/css/custom.css" rel="stylesheet">
+        <!-- END: Styles -->
+
+        <!-- jQuery -->
+        <script src="/theme/assets/themebau/assets/vendor/jquery/dist/jquery.min.js"></script>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-164575929-2"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-164575929-2');
+        </script>
+
+    </head>
+    <body>
+    
+        <header class="navbar navbar-top navbar-expand-lg navbar-fixed navbar-dark bg-dark">
+            <div class="container p-20">
+                <a class="navbar-brand pt-2" href="/">
+                    <img width="154" src="https://article-14.com/theme/assets/img/logo-dark.png" alt="" class="pt-3"><span style="margin-top:9px; display:block; font-size: 0.50em; letter-spacing: 1px; font-weight: 300;">Justice. Constitution. Democracy.</span>
+                </a>
+                <a class="navbar-toggle" href="#navbar-mobile-style-2" data-fancybox data-base-class="fancybox-navbar" data-keyboard="false" data-auto-focus="false" data-touch="false" data-close-existing="true" data-small-btn="false" data-toolbar="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </a>
+                <ul class="nav navbar-nav">
+                    <li class="nav-item">
+                        <a href="/category/5eee7193d21ede00174f7247" class="nav-link px-10">COVID-19</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/category/5e469eb1e7af2200172907fa" class="nav-link px-10">Reportage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/category/5e75bc18708ce6001764d931" class="nav-link px-10">Research</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/page/investigations" class="nav-link px-10">Investigations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/category/5e7515b531899e0017728290" class="nav-link px-10">Repartee</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/video" class="nav-link px-10">Video</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/page/about" class="nav-link px-10">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/page/contact" class="nav-link px-10">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a data-toggle="modal" href="#search-box" class="search-button nav-link px-10"><span class="fal fa-search"></span></a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        <!-- style 2 -->
+        <div class="navbar navbar-mobile navbar-mobile-style-2 navbar-dark bg-dark" id="navbar-mobile-style-2">
+            <div class="shape justify-content-end">
+                <svg data-rellax-speed="0" width="544" height="362" viewBox="0 0 544 362" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="320.5" cy="41.5" r="320.5" fill="#e4b436" />
+                </svg>
+            </div>
+            <div class="navbar-head">
+                <div class="container p-20">
+                    <a class="navbar-brand" href="/">
+                        <img width="120" src="https://article-14.com/theme/assets/img/logo-dark.png">
+                    </a>
+                    <a class="navbar-toggle fancybox-close" href="#" data-fancybox-close>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+            <div class="container p-20">
+                <div class="row gh-1 justify-content-center">
+                    <div class="col-12 col-md-7 col-lg-5 col-xl-4">
+                        <div class="navbar-body">
+                            <ul class="nav navbar-nav navbar-nav-collapse">
+                    <li class="nav-item">
+                        <a href="/category/5eee7193d21ede00174f7247" class="nav-link">COVID-19</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/category/5e469eb1e7af2200172907fa" class="nav-link">Reportage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/category/5e75bc18708ce6001764d931" class="nav-link">Research</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/page/investigations" class="nav-link">Investigations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/category/5e7515b531899e0017728290" class="nav-link">Repartee</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/video" class="nav-link">Video</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/page/about" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/page/contact" class="nav-link">Contact</a>
+                    </li>
+                    <li class="nav-item pt-10">
+                        <a data-toggle="modal" href="#search-box" class="search-button nav-link"><span class="fal fa-search"></span></a>
+                    </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-1 d-none d-md-block"></div>
+                    <div class="col-12 col-md-4 col-lg-4 col-xl-3">
+                        <div class="navbar-footer">
+                            <div class="mb-60">
+                                <p class="lead mb-17 font-weight-medium">Write to us<br><a href="mailto:reacharticle14@gmail.com?subject=Hello">reacharticle14@gmail.com</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="search-box" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body p-10">
+                <form method="get" action="/search"><div class="input-group mb-3"><input class="fas search-query form-control pb-0" style="font-weight: 400; font-family:Lato, sans-serif;" type="text" name="q" id="q" placeholder="Search" value=""><div class="input-group-append"><button class="btn btn-sm btn-primary" type="submit" id="button-addon2">Go</button></div></div></form>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+    <div class="content-wrap single-post">
+        <div class="pt-60 mt-60 pb-10">
+            <div class="container p-10 text-center">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-10 mx-auto">
+                        <h3 class="my-10 " data-show-duration="500" data-show-distance="10"> Climate Change Makes The Hard Life Of India’s Invisible Women Farmers Harder </h3>
+                        <div class="mb-10 mt-20 small ">
+                            <span class="golden-text mx-10"> DISHA SHETTY</span>                            <div class="d-block d-lg-none">&nbsp;</div>
+                            <span
+                                class="text-primary mx-10">26 Jan 2022</span>
+                            <span
+                                class="text-muted mx-10">13                                min read</span>
+                            <span class="mx-10">
+                                <a class="text-muted" href="#share-633" data-toggle="modal"
+                                    title="Share"><span style="font-size: 1.3em;"
+                                        class="fas fa-share-alt"></span>&nbsp;Share</a>
+                            </span>
+                        </div>
+
+                        <p style="font-size: 1.2em; font-weight: 300;" class="mt-20  lead" data-show-duration="500"
+                            data-show-distance="10" data-show-delay="150">Death by suicide among women farmers in India is substantially underreported, as the labour of women on farms is often invisible even to their own communities. As global temperatures rise, we report how India’s beleaguered women farmers now battle climate change along with enduring stigmas and harassment.                        </p>
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+         <div class="show-on-scroll" data-show-duration="500" data-show-distance="10" data-show-delay="300"><img src="https://article-14.com/uploads/2022/01-January/26-Wed/lg/IMG_20211223_121312.jpg" alt="" class="img-fluid mx-auto w-100"></div><div class="mx-auto mt-10 text-muted text-center">Nagpur-based farmers (left to right) Sarita Wairale, Gayatri Raut, Sagar Pore and Jayshree Bole say changing rainfall has led to more crop failures and added to their vulnerability/PHOTOGRAPHS BY DISHA SHETTY</div>
+        <div class="pt-60 pb-60">
+            <div class="container p-20">
+                <div class="row gh-5 gv-3 justify-content-center">
+                    <div class="col-12 col-lg-10 " data-show-duration="500" data-show-distance="10"
+                        data-show-delay="50">
+                        <div class="row justify-content-between">
+                            <div class="col-12 replace_body_on_load single-post-body" data-id="633">
+                                <p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;"><i>Suicide&nbsp;is a <a href="https://www.who.int/news-room/fact-sheets/detail/suicide" style="text-decoration:none;">serious public health problem</a>; however,&nbsp;suicides&nbsp;are&nbsp;preventable with timely, evidence-based and often low-cost interventions. If you or your loved ones are showing signs of distress you can call iCALL run by TISS at 9152987821.</i></p><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;"><b>Nagpur &amp; Yavatmal (Maharashtra):&nbsp;</b> Draped in saris of orange, blue, red and green hues, the women wore every marker of marital status, indicators of a husband well and alive—<i>bindis</i> on their forehead, red bangles clinking on their wrists and <i>mangalsutras</i> around their necks.&nbsp;</p><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">They were, in fact, farm widows whose husbands died by suicide over the past decade in Maharashtra’s north-eastern Vidarbha region—a cotton-producing swathe of land larger than the state of Bihar.&nbsp;</p><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">Some of them had attempted to take their own lives.&nbsp;</p><br><h4 dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">Alka Ingle, 43, was in her early 20s when she tried to end her life.&nbsp; Already a mother of two young boys, she could no longer endure the regular beatings by her farmer husband. After a particularly traumatic incident, when he inserted a cigarette butt in her eye, she did not see the point of living, she said.&nbsp;</h4><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">For Sarita Wairale, 36, the tipping point came with her sister-in-law’s allegation that she was having an affair with her brother-in-law after her farmer husband had died by suicide. Her 15-year-old son rescued her. <br><br></p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">In 2020, across India, 10,677 individuals engaged in the farming sector died by suicide. Of these, a little less than 7% (721) were women, according to the <a href="https://ncrb.gov.in/en" style="text-decoration:none;">National Crime Records Bureau</a> (NCRB). <br></p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;"><br></p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">[[https://article-14.com/uploads/2022/01-January/26-Wed/deathbysuicide_gender.png]]</p><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">One in every three (36.6%) women who dies by suicide globally is an Indian woman, according to a <a href="https://www.thelancet.com/journals/lanpub/article/PIIS2468-2667(18)30138-5/fulltext" style="text-decoration:none;">2018 Lancet study</a>. The majority of these, when broken down by profession, are registered under the category of ‘housewives’.&nbsp;&nbsp;</p><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">There is a likely underreporting in data on women farmers who die by suicide in India, for rural women are neither seen as farmers by their communities nor consider themselves farmers, as earlier reports published by <b>Article 14</b> have <a href="https://www.article-14.com/post/no-one-knows-about-me-india-s-left-behind-women" style="text-decoration:none;">unpacked</a>. This is despite the fact that <a href="https://www.mospi.gov.in/documents/213904/301563/Annual_Report_PLFS_2019_20m1627036454797.pdf/18afb74a-3980-ab83-0431-1e84321f75af" style="text-decoration:none;">three of every four </a>(75.7%) rural women are engaged in agriculture, according to the <a href="https://www.mospi.gov.in/documents/213904/301563/Annual_Report_PLFS_2019_20m1627036454797.pdf/18afb74a-3980-ab83-0431-1e84321f75af" style="text-decoration:none;">2020 Periodic Labour Force Survey report</a>. Also, only about <a href="http://hummedia.manchester.ac.uk/institutes/gdi/publications/workingpapers/GDI/gdi-working-paper-202043-agarwal-anthwal-mahesh.pdf" style="text-decoration:none;">14% </a>of land-owning Indian farmers are women.<br><br></p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">“Even in death they are invisibilized and we don’t really see them accounted (for),” said Seema Kulkarni, a member of the national facilitation team of <a href="https://makaam.in" style="text-decoration:none;">MAKAAM</a>, a national coalition of women farmers advocating for women farmers’ rights. In the absence of data on the professions of ‘housewives’ or regarding the geography (urban or rural) of the housewives who die each year by sucide, there is inadequate information on the particular stressors and reasons for women farmers in agrarian communities to take their lives, she said.<br><br></p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">In interviews that<b> Article 14</b> conducted in Nagpur and Yavatmal districts of Maharashtra, women farmers provided insights into the reasons driving them to contemplate taking a drastic step.&nbsp;</p><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">Hemmed in by absent policy measures to tackle their unique experience of agrarian distress and more frequent crop failures caused by extreme weather events or unpredictable rainfall patterns, the women faced challenges at every stage of cultivating the land. From gaining control over family-owned land to accessing credit, repaying loans after a failed crop, negotiating rural social mores, finding work as labourers — the gendered impact of the climate crisis was felt acutely.</p><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">According to MAKAAM’s research, women farmers, particularly landless labourers, are under intense distress as changing climate patterns cause more frequent crop failure. There is also an effort among local police and revenue department officers to not register their deaths as ‘farmer suicides’, according to Kulkarni, especially when cases involve poor families or those from vulnerable castes with limited social capital to push back.</p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">&nbsp;</p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">This, she said, is an effort to improve the state’s overall numbers and reduce potential political blowback for the ruling party. The result is that instances of women farmers’ death by suicide are disproportionately left off the records. <br></p>
+                                    <style>
+        canvas {margin:auto; top:12.5%;}
+        #canvasForHTML {margin:auto; height:500px;}
+        #yearRadio {text-align: center;}
+        #notes {padding-left:5%; font-size: 0.8em; color: #222; line-height: 1.2em;}
+    </style>
+    <div><h3>Death by suicide broken down by gender in India</h3></div>
+    <div id="yearRadio">
+        <strong>Select Years: </strong>
+        <input type="radio" name="yearRadio" id="r1" value="1996-2001" onclick="updateChart(value)"/>
+        <label for="r1">1996-2001</label>
+        <input type="radio" name="yearRadio" id="r2" value="2002-2007" onclick="updateChart(value)"/>
+        <label for="r2">2002-2007</label>
+        <input type="radio" name="yearRadio" id="r3" value="2008-2013" onclick="updateChart(value)"/>
+        <label for="r3">2008-2013</label>
+        <input type="radio" name="yearRadio" id="r4" value="2014-2020" checked="checked" onclick="updateChart(value)"/>
+        <label for="r4">2014-2020</label>
+    </div>
+    <div id="canvasForHTML"></div>
+    <div id="notes">Data collection and visualization by Pankhuri Kumar.<br><i>*Death by suicide by transgender persons is not visible due to the low numbers, however the statistic is represented in the graph in the same colour.</i><br>Source: National Crime Records Bureau (NCRB) 1996-2018, 2019 and 2020
+    </div>
+                                <p></p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">In addition, farm widows are also blamed for their husbands’ death by suicide, sexually harassed by money lenders and unable to interact with male farmers without setting off rumours. Moving around in their communities with obvious signs of matrimony like red bangles and bindis allows them to blend in and protect themselves to some extent.&nbsp;</p><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;"><b>Coping With Climate Change, Crop Loss, Poor Access To Cash&nbsp;</b></p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">Jayshree Bole, a farmer in Nagpur district, said her crop has been damaged repeatedly by wild animals. “Our fields are being destroyed by wild boar and deer, something that was not very frequent a few years back,” she said.&nbsp;</p><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">At the office of non-governmental organisation <a href="http://www.prakritiwomen.in" style="text-decoration:none;">Prakriti</a>, a women’s resource centre on the outskirts of the central Indian city of Nagpur, women farmers spoke about how climate change was affecting their crops. Hesitantly at first, they soon spoke animatedly about unseasonal and excessive rainfall, pest infestations and attacks by wild animals affected by the shrinking forests. <br><br>After her husband died by suicide, Wairale’s family regularly gave her tur dal (split pigeon pea) from their produce, but not a share of her husband’s property. After much pestering, in 2021, they allowed her to cultivate half an acre of land of their 2-acre landholding. She first planted <i>moong </i>(green gram) which was damaged by excessive rainfall during the monsoon. Her winter <i>tur</i> crop fared better. <br><br>Women farmers are also uniquely vulnerable in a social set-up where men are decision-makers, according to Suvarna Damle, executive director of <a href="http://www.prakritiwomen.in" style="text-decoration:none;">Prakriti</a>, who spoke from her experience of interacting with women farmers in the Vidarbha region.&nbsp;</p><br><h4 dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">“When their husbands are alive, mostly all the decisions are taken by the husband or the male members of the family,” she said. Women’s role is restricted to providing labour.&nbsp;</h4><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">When her husband dies by suicide or migrates, the woman often struggles to understand even basics such as how much land her husband owned and where, according to Damle.&nbsp; <br><br></p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">What complicates this further is that the land is often in the name of the family patriarch so the path to getting her share of the property transferred to her name is riddled with conflict with family members. Without this documentation, getting credit from the market to invest in agriculture is difficult. Women farmers also struggle to sell their produce in the absence of paperwork–with the system failing to respond to their distress at every step. In many cases even the money that the government gave as compensation on the death of their husbands didn’t reach the widows.&nbsp;</p><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">The changing climate made this worse in recent years.&nbsp;</p><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">Chetna Sinha, founder of <a href="https://manndeshibank.com" style="text-decoration:none;">Mann Deshi bank</a>, a rural women’s bank, said that for years they have noticed the distress due to climate change. Women, already on the periphery of the farm sector, enjoyed low access to cash, so climatic fluctuations that affect crop production or animal husbandry hit their liquidity hard, Sinha said. “She builds her assets and with the uncertainty of the climate, she loses the assets. Then she comes to us.”&nbsp;&nbsp;&nbsp;</p><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">Women in these circumstances often turn to gold mortgages. “If we see our data, we can clearly see that during the drought years our gold mortgages went up,” Sinha said. To her, this was also an indication of the state’s failure at financial inclusion of rural women. “There is no ecosystem for the poor people where in an emergency she will get immediate money.”&nbsp; <br><br></p><h4 dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">Women farmers have been particularly vulnerable to harassment from private money lenders and representatives of microfinance institutions who, according to MAKAAM’s <a href="https://makaam.in/updated-policy-notes/" style="text-decoration:none;">documentation</a> are also known to ask for sexual favours in exchange for processing their loans.&nbsp;&nbsp;</h4><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;"><br>Our interviews with women farmers also found that despite the <a href="https://germanwatch.org/sites/default/files/Global%20Climate%20Risk%20Index%202021_2.pdf" style="text-decoration:none;">overwhelming evidence</a> of India’s changing climate and its impact on agriculture, no one from the government has spoken to women farmers about climate change and ways to cope.&nbsp;</p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;"><br></p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">[[https://article-14.com/uploads/2022/01-January/26-Wed/IMG_20211224_155118.jpg]]<br><br></p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;"><b>Health Impact Of India's Changing Climate</b></p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">India's climate has been changing, along with the rest of the world's, driven by rising global temperatures. The world is already 1.1 deg C hotter than the average temperature of the pre-industrial era (1850-1900).</p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;"><br></p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">There is no doubt that the climate has significantly changed in terms of temperature,” said <a href="https://iitgn.ac.in/faculty/civil/fac-vimal" style="text-decoration:none;">Vimal Mishra</a>, a climate scientist at the <a href="https://iitgn.ac.in" style="text-decoration:none;">Indian Institute of Technology (IIT)-Gandhinagar</a>. “And that has several implications in terms of the frequency and impacts of extreme extreme events like extreme rainfall, heat waves, floods, droughts, hydrologic (related to water) or hydroclimatic (related to water and climate) extremes.”<br><br>A recent <a href="https://www.nature.com/articles/s41612-021-00219-1" style="text-decoration:none;">study</a> Mishra was a part of found that while India is unlikely to see a rise in megadroughts, within a given monsoon season there are periods of extreme rainfall followed by unusual dry periods. This, farmers said, is ravaging their crops and leading to a crash in incomes.&nbsp;&nbsp;</p><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">Then there are other changes including more frequent and more serious pest attacks and uncertainty around how crops respond to changing climate.&nbsp;</p><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">By current projections, the world is headed towards average temperatures that are at least <a href="https://climateactiontracker.org/global/temperatures/" style="text-decoration:none;">2.5-3</a> deg C hotter than the pre-industrial era. “A 3-degree warming world looks very, very different even compared to where we are now and that is the biggest danger,” said Mishra. For farmers, this would broadly translate into more crop damage from erratic rains and more extreme weather events. <br><br></p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">When <b>Article 14 </b>visited Nagpur in December 2021, for days the district witnessed unusually low temperatures. Fog and excess humidity had destroyed the latest crop of tur dal casting a pall of gloom among the farmers. Women described the cotton produced this season as being “blackish” and of bad quality.&nbsp;</p><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">Changing climate has huge health impacts on communities engaged in <a href="https://www.sipri.org/sites/default/files/2018-09/sipriinsight1804.pdf" style="text-decoration:none;">fishing and agriculture</a>. For example, a crop failure takes a toll on a farming family’s mental health. When water becomes scarce, women in rural areas where homes do not have running water have to walk longer to fill it, and this takes a toll on their bodies. More complex linkages exist between, for example, greater salinity in drinking water supply to coastal communities on account of sea level rise, and higher rates of <a href="https://ehp.niehs.nih.gov/doi/full/10.1289/ehp.1002804" style="text-decoration:none;">hypertension</a>, <a href="https://www.researchgate.net/profile/Sorif-Hossain/publication/337478463_Salinity_and_Miscarriage_Is_There_a_Link_Impact_of_Climate_Change_in_Coastal_Areas_of_Bangladesh_-_A_Systematic_Review/links/60115a50299bf1b33e297a06/Salinity-and-Miscarriage-Is-There-a-Link-Impact-of-Climate-Change-in-Coastal-Areas-of-Bangladesh-A-Systematic-Review.pdf" style="text-decoration:none;">miscarriages and pregnancy complications</a> in coastal communities.&nbsp;</p><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">This intersection of climate and health remains under-researched, said <a href="https://www.yorku.ca/dighr/person/byomkesh-talukder/" style="text-decoration:none;">Byomkesh Talukder</a>, a planetary health fellow at the Dahdaleh Institute for Global Health Research in Canada.&nbsp;</p><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">Talukder was among researchers who documented the <a href="https://www.sciencedirect.com/science/article/pii/S2352771421000483#!" style="text-decoration:none;">health impacts of changing climate on small landholders</a> in India, Bangladesh and Malawi whose mental health is particularly vulnerable to the vagaries of weather.&nbsp; “While agricultural universities, as well as other universities, are doing excellent research about food and agricultural systems, the health of the smallholder farmers is still less investigated, especially in the climate change scenarios.”</p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;"><br>Other <a href="https://www.sciencedirect.com/science/article/abs/pii/S0013935120308641?fbclid=IwAR3k4Jl0-ysOfwrVIcl5FHCDDQWOBu9vA8XUdRrcUc5nc92b9uEhJJ3Ixy8" style="text-decoration:none;">studies</a> predictes a rise in death by suicide among farmers in India due to the changing climate. For women farmers in India, the climatic woes were worsened by Covid-19 restrictions and lockdowns.</p><div><br></div><div>[[https://article-14.com/uploads/2022/01-January/26-Wed/IMG_20211224_134814.jpg]]<br></div><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;"><b><br></b></p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;"><b>‘I Have Daughters, So They Said I Don’t Need Land’ <br></b></p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">Varsha Karluke, 32, a mother of three daughters, lives in Zadgaon village of Yavatmal district’s Ralegaon block. After her husband’s death by suicide in 2014, her family refused to give her the one acre of land that was her legal share.&nbsp;</p><br><h4 dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">“They said I have daughters who will eventually go to their own homes,” she said, “so I don’t need the land.” Her eldest daughter who is enrolled at&nbsp; a local government college has told her that sons and daughters are viewed as equal by the law.&nbsp;</h4><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">For Karluke, however, police complaints and a serious family feud were not an option—she has to continue living in the same village, she said.&nbsp;</p><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">In her two-room mud home painted bluish green was a bed, and little else. Seated on a mat on the floor, Karluke said she was tired of drudgery. As a farm labourer, she would get paid Rs 150, on days when work was&nbsp; available. With crop damage and crop failure more frequent, and with the cotton harvest reducing, days when work is available are fewer, she said.&nbsp;</p><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">During the non-farming season, five months a year, she sold glass bangles, making barely enough for the family of four to get by. &nbsp; <br><br>The Covid-19 lockdowns also affected women farmers disproportionately, she said. Local public transport was suspended, blocking timely access to seeds and fertilisers for her — the men, however, managed to go on two-wheelers.</p><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">[[https://article-14.com/uploads/2022/01-January/26-Wed/IMG_20211224_153928.jpg]]<br><br></p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">Her legs drawn to her chest, Vaishali Devtale, 35, spoke of the struggle to survive as a young widow with two children while continuing to till their land. Her husband died by suicide in 2009, four years after they were married.</p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;"><br></p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">Her family threw her out of her marital home in Yavatmal’s Tirzada village when her husband died, but after much pushback and a brief court case, they agreed to convert their cowshed into a makeshift home, allowing her to live there with her young children. They also handed over the four acres of land her husband owned.&nbsp;</p><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">Devtale took a crop loan of Rs 70,000 in 2021, but excessive rainfall followed by a pink bollworm attack all but destroyed her cotton and soybean crops.</p><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">“Some years there is no rain at all and on others it rains too much,” she said. “We are at the mercy of nature.”&nbsp;</p><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">Pointing to this writer’s phone kept on the floor to record the conversation, she asked, “How can a woman like me afford to buy that for my children and pay for the internet for their studies?”</p><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">Kusum Aglave, 55, who also lives in Tirzada, said the stress from the debt that she cannot afford to repay kept her up at night. She owed Rs 60,000 to the bank. An adult son had a long-standing ailment that required&nbsp; regular medication.&nbsp;</p><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">“If 10 people ask you for their money back, it is so humiliating,” she said. She said she thinks sometimes, “jasa manasaane atmahatya keli, tasa karu (I should attempt to die by suicide the way so others have.")</p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">&nbsp;</p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">For women farmers like Devtale and Aglave already negotiating a precarious existence, a failed crop meant additional loans they cannot afford to repay.</p><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">“What we saw when we started our bank is that when women were not able to repay, they would come to us and say that I won't be able to repay,” said Sinha of Mann Deshi. “If you don't listen to her, then you are pushing her to default.” <br><br>Sinha said the key is to not harass a woman when she is transparent about her inability to pay back but instead to be flexible in terms of her payback schedule.. “You have a client who is not running away…” said Sinha. “And why she will not run away is because she cannot leave her kids.”&nbsp; <br><br></p><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;">Madhuri Khadse of the Prerna Gram Vikas Sanstha in Ralegaon who works closely with women farmers said women farmers face barriers at every level of trying to access finance. “Women are forced to turn to microfinance when they have no option,” she said. While this sometimes works effectively, there are cases where women were driven to their death due to harassment by loan recovery agents, she said. “... and that doesn’t make news as a death by suicide of a farmer due to crop failure does.”<br><br>Echoing the thought that policymakers need to pay particular attention to women farmers, Damle of the NGO Prakriti said adding women as joint owners along with their husbands in land records is one way to ensure their visibility. “Women's labour in the farming sector should be recognized.”&nbsp;</p><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;"><i>Suicide&nbsp;is a <a href="https://www.who.int/news-room/fact-sheets/detail/suicide" style="text-decoration:none;">serious public health problem</a>; however,&nbsp;suicides&nbsp;are&nbsp;preventable with timely, evidence-based and often low-cost interventions. If you or your loved ones are showing signs of distress you can call iCALL run by TISS at 9152987821.</i></p><br><p dir="ltr" style="line-height:1.7999999999999998;margin-top:0pt;margin-bottom:0pt;"><i><b>Disha Shetty is an independent journalist who writes on health, environment and gender. Reporting for this story was supported by a grant from the <a href="https://www.prb.org/" style="text-decoration:none;">Population Reference Bureau</a> for women journalists.</b></i></p><br class="Apple-interchange-newline">                            </div>
+                            <div class="col-lg-auto d-none d-lg-block">
+                                <hr class="mt-25 mb-0 width-70px">
+                            </div>
+                                                    </div>
+                    </div>
+
+                    <div class="col-12 col-lg-10  mb-120">
+                        <span class="mr-20">
+                            <a href="#share-633" data-toggle="modal" title="Share"
+                                class="btn btn-dark btn-sm"><span
+                                    class="fas fa-share-alt"></span>&nbsp;&nbsp;&nbsp;Share this story</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div class="modal fade" id="share-633" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content bg-light text-primary"><div class="modal-header"><h5 class="modal-title">Share this story</h5><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="text-primary" aria-hidden="true">&times;</span></button></div><div class="modal-body"><div><a href="https://www.facebook.com/sharer/sharer.php?u=https://article-14.com/post/-climate-change-makes-the-hard-life-of-india-s-invisible-women-farmers-harder--61f0c2328a5be" target="new"><span class="text-primary mr-10 fa-2x fab fa-facebook"></span></a><a href="https://api.whatsapp.com/send?text=https://article-14.com/post/-climate-change-makes-the-hard-life-of-india-s-invisible-women-farmers-harder--61f0c2328a5be" target="new"><span class="text-primary mr-10 fa-2x fab fa-whatsapp"></span></a><a href="https://www.twitter.com/share?url=https://article-14.com/post/-climate-change-makes-the-hard-life-of-india-s-invisible-women-farmers-harder--61f0c2328a5be" target="new"><span class="text-primary mr-10 fa-2x fab fa-twitter"></span></a><a href="https://t.me/share/url?url=https://article-14.com/post/-climate-change-makes-the-hard-life-of-india-s-invisible-women-farmers-harder--61f0c2328a5be" target="new"><span class="text-primary mr-10 fa-2x fab fa-telegram"></span></a></div></div></div></div></div>
+    
+        <footer class="footer small bg-dark text-white shape-parent overflow-hidden pb-20 pt-20">
+            <div class="col-4 col-md-3 col-lg-2 mx-auto text-center">
+                <a href="https://twitter.com/article14live" class="text-white">
+                    <span class="fab fa-2x fa-twitter"></span>
+                </a>&nbsp;&nbsp;
+                <a href="https://www.instagram.com/article14live/" class="text-white">
+                    <span class="fab fa-2x fa-instagram"></span>
+                </a>&nbsp;&nbsp;
+                <a href="https://www.facebook.com/article14live" class="text-white">
+                    <span class="fab fa-2x fa-facebook"></span>
+                </a>
+            </div>
+            <hr class="my-10 border-secondary">
+            <div class="text-center text-white">Article 14. All Rights Reserved.</div>
+            <div class="text-center text-white my-10"><a href="/"><img width="100" src="https://article-14.com/theme/assets/img/logo-dark.png"></a></div>
+            <div class="text-center text-white">
+                <a href="/page/archive" class="text-white">
+                    Archive
+                </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="/page/grievance-redressal" class="text-white">
+                    Grievance Redressal
+                </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="/page/about" class="text-white">
+                    About
+                </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="/page/privacy-statement" class="text-white">
+                    Privacy Statement
+                </a><br>
+                <a href="/page/terms-of-use" class="text-white">
+                    Terms of use
+                </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="/page/cancellation-policy" class="text-white">
+                    Cancellation Policy
+                </a>
+            </div>
+
+        </footer>    
+        <!-- START: Scripts -->
+        <!-- Object Fit Polyfill -->
+        <script src="/theme/assets/themebau/assets/vendor/object-fit-images/dist/ofi.min.js"></script>
+        <!-- Popper -->
+        <script src="/theme/assets/themebau/assets/vendor/popper.js/dist/umd/popper.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="/theme/assets/themebau/assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+        <!-- Bootstrap Validator -->
+        <script src="/theme/assets/themebau/assets/vendor/bootstrap-validator/dist/validator.min.js"></script>
+        <!-- ImagesLoaded -->
+        <script src="/theme/assets/themebau/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+        <!-- Swiper -->
+        <script src="/theme/assets/themebau/assets/vendor/swiper/dist/js/swiper.min.js"></script>
+        <!-- Animejs -->
+        <script src="/theme/assets/themebau/assets/vendor/animejs/lib/anime.min.js"></script>
+        <!-- Rellax -->
+        <script src="/theme/assets/themebau/assets/vendor/rellax/rellax.min.js"></script>
+        <!-- Countdown -->
+        <script src="/theme/assets/themebau/assets/vendor/jquery-countdown/dist/jquery.countdown.min.js"></script>
+        <!-- Moment.js -->
+        <script src="/theme/assets/themebau/assets/vendor/moment/min/moment.min.js"></script>
+        <script src="/theme/assets/themebau/assets/vendor/moment-timezone/builds/moment-timezone-with-data.min.js"></script>
+        <!-- Isotope -->
+        <script src="/theme/assets/themebau/assets/vendor/isotope-layout/dist/isotope.pkgd.min.js"></script>
+        <script src="/theme/assets/themebau/assets/vendor/isotope-packery/packery-mode.pkgd.min.js"></script>
+        <!-- Jarallax -->
+        <script src="/theme/assets/themebau/assets/vendor/jarallax/dist/jarallax.min.js"></script>
+        <script src="/theme/assets/themebau/assets/vendor/jarallax/dist/jarallax-video.min.js"></script>
+        <!-- Fancybox -->
+        <script src="/theme/assets/themebau/assets/vendor/fancybox/dist/jquery.fancybox.min.js"></script>
+        <!-- Themebau -->
+        <script src="/theme/assets/themebau/assets/js/themebau.min.js"></script>
+        <!-- END: Scripts -->
+        <script src="/vendor/wildfire/admin/plugins/keymaster.js"></script>
+        <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+        <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
+        <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <script src="https://cdn.plyr.io/3.6.9/plyr.js"></script>
+
+        <script src="/theme/assets/js/custom.js"></script>
+        <script src="/theme/assets/js/scroll.js"></script>
+    </body>
+</html>
