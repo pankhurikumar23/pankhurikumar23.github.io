@@ -1,0 +1,90 @@
+body {font-family: lato, sans-serif;}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {font-family: playfair-display, serif; font-weight: 700;}
+.nav-item a {text-transform: uppercase; font-size: 0.7em;}
+.golden-text {color: #e4b436;}
+.lead {font-weight: 500; font-size: 1.6em;}
+h4, blockquote {color: #333; border-left: solid 4px #e4b436; padding-left: 15px;font-size: 1.3em; font-family: playfair-display; font-weight: bold;}
+p {line-height: 1.8em; margin-bottom: 1em; font-size: 1.2em;}
+
+.single-post a {color: #1878bd !important;}
+
+.single-post {font-size: 0.9em;}
+
+.img-hover-zoom {
+	overflow: hidden;
+}
+
+.d-block-lg .img-hover-zoom {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.img-hover-zoom img {
+	transition: transform 2.4s ease;
+	max-height: 100%;
+}
+
+.swiper-wrapper, .swiper-container, .d-block .swiper-container {
+	width: 100%;
+}
+
+.d-lg-block .swiper-slide, .d-block .swiper-slide {
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.d-lg-block .img-hover-zoom, .d-lg-block .swiper-wrapper, .d-lg-block .swiper-container, .d-lg-block .swiper-slide {
+	height: 100vh !important;
+}
+
+.d-block .img-hover-zoom {
+	height: 40vh !important;
+}
+
+.d-block .swiper-wrapper {
+	height: 60vh !important;
+}
+
+.d-block .swiper-slide {
+	width: 100%;
+	height: 100%;
+}
+
+.card-blog.card-vertical .card-date, .card-date {
+    background-color: rgba(255,255,255,0.7);
+}
+
+.card-text {line-height: 1.3em; font-size: 1em;}
+
+.nav-item .nav-link {letter-spacing: 1.5px; font-weight: 200 !important;}
+
+
+.card-blog .card-img img {
+	height: 70% !important;
+}
+
+.display-card-md .card-body {
+	margin-top: -80px
+}
+
+.nav-item .nav-link:hover {color:#e4b436 !important;}
+
+footer {font-weight: 200 !important; font-size: 0.7em !important;}
+
+.border-sp {border: 3px solid #e4b436;}
+
+.card-sp {min-height: 100%;}
+
+.single-post-body img {max-width: 600px; width: 100%; margin: 0 auto;}
+
+[data-hook="imageViewer"] {
+	max-width: 100%;
+	margin-bottom: 20px;
+}
+
+[data-hook="imageViewer"] img {
+	max-width: 600px;
+}
